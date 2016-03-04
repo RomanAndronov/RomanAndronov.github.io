@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Extender
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Extender</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicbehave.html">prev</a>
+     <a href="ryapdpic.html">next</a>
+    </p>
+
+    <h1>Extender</h1>
+
+    <p>
+    The Extender pattern may be used to extend a behavior of an existing data
+    type via its code reuse at compile time.
+    </p>
+
+    <p>
+    Let us agree that:
+    </p>
+
+    <p>
+    - an existing data type whose behavior is being extended is called an
+    <dfn>ancestor</dfn>
+    </p>
+
+    <p>
+    - a new data type that implements that extension is called a
+    <dfn>descendant</df>
+    </p>
+
+    <p>
+    - when a descendant's behavior is extended it becomes an ancestor
+    </p>
+
+    <p>
+    - such an arrangement of descendants and ancestors forms a
+    <dfn>hierarchy</dfn>
+    </p>
+
+    <p>
+    - an immediate ancestor is called a <dfn>parent</dfn>
+    </p>
+
+    <p>
+    - an immediate descendant is called a <dfn>child</dfn>
+    </p>
+
+    <p>
+    - within any given hierarchy any participating data type has at most one
+    parent and an arbitrary (finite) number of children
+    </p>
+
+    <p>
+    - a hierarchy is a tree - a structure with no cycles
+    </p>
+
+    <p>
+    - a descendant exhibits all the fundamental traits of all of its ancestors
+    but the opposite is not true
+    </p><br>
+
+    <img src="imgs/extender.png" class="center">
+
+    <p>
+    In the above hierarchy \(T\) is an abstract data type that defines a certain
+    interface and suggests certain behavioral traits.
+    </p>
+
+    <p>
+    By being the first concrete data type to implement \(T\)'s interface \(T_1\)
+    originates a new hierarchical branch, looks like \(T\) to a side observer and
+    establishes a certain type of \(T\)-like behavior. \(T_1\) does not have any
+    concrete ancestors but it does have one child, \(T_2\).
+    </p>
+
+    <p>
+    \(T_2\)'s parent is \(T_1\). As a data type \(T_2\) looks like \(T\) and
+    behaves like \(T\) and \(T_1\) but the opposite is not true - \(T_1\) does
+    not behave like \(T_2\) because the sole purpose of \(T_2\)'s existence is
+    to augment \(T_1\)'s behavior in some way. To be sure, \(T_2\) does preserve
+    the fundamental behavioral traits of \(T\) and \(T_1\) but it also introduces
+    a certain extension to these traits. Symbolically:
+    </p>
+
+$$T_2 - T_1 = \Delta > 0$$
+
+    <p>
+    \(T_2\) has two children, \(T_3\) and \(\tau_3\), each of which has only one
+    (and the same) parent, \(T_2\). Both types, \(T_3\) and \(\tau_3\), differ
+    somehow from each other and both augment \(T_2\)'s behavior in some \(T_3\)-
+    and \(\tau_3\)-specific ways and so on.
+    </p>
+
+    <p>
+    Hierarchies comprised of an arbitrary finite number of branches each of which
+    is of an arbitrary finite length may be constructed that way as long as the
+    resulting structure remains to be a tree - a formation of nodes with no cycles.
+    </p>
+
+    <p>
+    By comparison, as defined Factory provides implementational width while
+    Extender provides the corresponding depth.
+    </p>
+
+    <p>
+    In practice, for example, <span id="inlncode">ed</span> is a line-oriented
+    text editor that provides certain basic text-editing functionality.
+    <span id="inlncode">ex</span> extends <span id="inlncode">ed</span> by making
+    text editing more visual or screen-oriented. <span id="inlncode">vi</span>
+    extends <span id="inlncode">ex</span> by taking full advantage of
+    <span id="inlncode">ex</span>'s display editing capabilities.
+    <span id="inlncode">vim</span> extends <span id="inlncode">vi</span> with
+    colorful syntax and a more dynamic on-screen text manipulation with a
+    peripheral device other than keyboard - mouse.
+    </p>
+
+    <p>
+    The Extender pattern consequences:
+    </p>
+
+    <ul>
+     <li>Behavior's extension is fixed at compile time</li><br>
+
+     <li>Common interface constancy throughout the hierarchy - all the
+         descendants must implement their immediate ancestor's interface in
+         its entirely - they can neither reduce nor expand it</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Implement a hierarchy of the following geometric shapes: oval, ellipse and
+    circle by capturing the extension of ancestors' behavior by descendants in
+    <span id="inlncode">shapeDescribe()</span> function:
+    </p>
+
+    <p>
+    - an abstract geometric shape should print the string
+    <span id="inlncode">"I am a geometric shape"</span> to
+    <span id="inlncode">stdout</span>
+    </p>
+
+    <p>
+    - an oval should augment the behavior of an abstract geometric shape by
+    adding its own <span id="inlncode">"I am an oval"</span> part to the printout
+    </p>
+
+    <p>
+    - an ellipse should add its own
+    <span id="inlncode">"I am an ellipse"</span> part to the printout
+    </p>
+
+    <p>
+    - a circle should add its own <span id="inlncode">"I am a circle"</span> part to
+    the printout
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Originate a hierarchy with a data type implemented as Factory.
+    </p>
+
+    <p>
+    2) Make a parent of each child its integral or a non-integral owned part.
+    </p>
+
+    <p>
+    3) As appropriate extend parent's behavior in the child for each function
+    of the interface.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    Implement the generic geometric shape data type as Factory, see Factory
+    chapter for details:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">libshape.h</span></li>
+     <li><span id="inlncode">libshape.c</span></li>
+     <li><span id="inlncode">libshapeoval.c</span></li>
+     <li><span id="inlncode">libshapeellipse.c</span></li>
+     <li><span id="inlncode">libshapecircle.c</span></li>
+    </ul>
+
+    <p>
+    <span id="inlncode">libshape.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct shape
+{
+	void		( *describe )( struct shape* );
+
+	void		( *destruct )( struct shape* );
+} shape_t;
+
+extern shape_t*		shapeNew( const char* );
+extern void		shapeDelete( shape_t** );
+extern shape_t*		shapeConstruct( void*, const char* );
+extern void		shapeDestruct( shape_t* );
+extern size_t		shapeSizeOf( const char* );
+
+extern void		shapeDescribe( shape_t* );</p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Make a parent an integral part of its child.  Borrow the corresponding
+    functions from Integral Parts chapter and add their prototypes to
+    <span id="inlncode">libshape.h:</span>
+    </p>
+
+    <p id="srccode">extern size_t		logicalSize( size_t, size_t );
+extern size_t		paddingAmount( size_t, size_t );
+extern void*		nextAddress( void*, size_t, size_t );</p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Implement the geometric shape Factory proper yourself, consult Factory
+    chapter if needed.
+    </p>
+
+    <p>
+    Below we highlight our version of <span id="inlncode">shapeDescribe()</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libshape.c:</span>
+    </p>
+
+    <p id="srccode">extern void
+shapeDescribe( shape_t* shape )
+{
+	printf( "%s.%d: shapeDescribe(): I am a geometric shape.\n",
+		__FILE__, __LINE__ );
+
+	shape->describe( shape );
+}</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Implement an oval geometric shape.
+    </p>
+
+    <p>
+    An oval is the very first geometric shape in this particular branch - it does
+    not have a parent as per above definition. As such, implement this data type
+    as described in Factory chapter, there is no need to take any special action.
+    </p>
+
+    <p>
+    Below we highlight our version of oval's
+    <span id="inlncode">shapeDescribe()</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libshapeoval.c:</span>
+    </p>
+
+    <p id="srccode">static void
+shapeDescribeOval( shape_t* shape )
+{
+	shapeoval_t*	oval = ( shapeoval_t* )shape;
+
+	printf( " %s.%d: shapeDescribeOval(): I am an oval.\n",
+		__FILE__, __LINE__ );
+}</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Implement an ellipse geometric shape.
+    </p>
+
+    <p>
+    An ellipse is the second geometric shape in this particular branch. As such,
+    make an oval - an ellipse's parent - an integral part of the ellipse's
+    implementation data type.
+    </p>
+
+    <p>
+    Observe that when a variable of data type <span id="inlncode">ellipse</span>
+    is created then effectively one extra variable is created also - of data
+    type <span id="inlncode">oval</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libshapeellipse.c:</span>
+    </p>
+
+    <p id="srccode">extern size_t
+shapeSizeOfellipse()
+{
+	size_t		rv;
+
+	rv = sizeof( shapeellipse_t ) +
+
+		paddingAmount( sizeof( shapeellipse_t ), shapeSizeOf( "oval" ) ) +
+
+		shapeSizeOf( "oval" );
+
+	return rv;
+}
+
+extern shape_t*
+shapeConstructellipse( void* mem )
+{
+	void*			adrs;
+	shapeellipse_t*		ellipse = ( shapeellipse_t* )mem;
+
+	ellipse->shapeadt = ellipseAdt;
+
+	adrs = nextAddress( mem, sizeof( shapeellipse_t ), shapeSizeOf( "oval" ) );
+
+	<strong>ellipse->oval = shapeConstruct( adrs, "oval" );</strong>
+
+	return &ellipse->shapeadt;
+}</p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Being an ellipse's integral part, an oval must be destructed when an ellipse
+    is destructed. Observe that to destruct an oval we invoke the oval-specific
+    destruction function - not its generic equivalent,
+    <span id="inlncode">shapeDestruct()</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libshapeellipse.c:</span>
+    </p>
+
+    <p id="srccode">static void
+shapeDestructEllipse( shape_t* shape )
+{
+	shapeellipse_t*		ellipse = ( shapeellipse_t* )shape;
+
+	<strong>ellipse->oval->destruct( ellipse->oval );</strong>
+
+	printf( "  %s.%d: shapeDestructEllipse()\n",
+		__FILE__, __LINE__ );
+}</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Extend oval's behavior in the ellipse's version of
+    <span id="inlncode">shapeDescribe()</span>.
+    </p>
+
+    <p>
+    We observe that a child can augment its parent's behavior by acting before,
+    after or before and after invoking the corresponding behavior of its parent.
+    A child may also choose to not invoke its parent corresponding behavior at
+    all.
+    </p>
+
+    <p>
+    In our case we first invoke parent's behavior and then we augment it. Observe
+    that to exercise the oval-specific behavior we invoke the oval-specific
+    function - not its generic equivalent,
+    <span id="inlncode">shapeDescribe()</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libshapeellipse.c:</span>
+    </p>
+
+    <p id="srccode">static void
+shapeDescribeEllipse( shape_t* shape )
+{
+	shapeellipse_t*		ellipse = ( shapeellipse_t* )shape;
+
+	<strong>ellipse->oval->describe( ellipse->oval );</strong>
+
+	printf( "  %s.%d: shapeDescribeEllipse(): I am an ellipse.\n",
+		__FILE__, __LINE__ );
+}</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Implement a circle geometric shape.
+    </p>
+
+    <p>
+    A circle is the third geometric shape in this particular branch of geometric
+    shapes. Make an ellipse - the circle's parent - an integral part of the
+    circle's implementation data type.
+    </p>
+
+    <p>
+    Observe that when a variable of data type <span id="inlncode">circle</span>
+    is created then effectively two extra variables are created also - one of
+    data type <span id="inlncode">ellipse</span> and one of data type
+    <span id="inlncode">circle</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libshapecircle.c:</span>
+    </p>
+
+    <p id="srccode">extern size_t
+shapeSizeOfcircle()
+{
+	size_t		rv;
+
+	rv = sizeof( shapecircle_t ) +
+
+		paddingAmount( sizeof( shapecircle_t ), shapeSizeOf( "ellipse" ) ) +
+
+		shapeSizeOf( "ellipse" );
+
+	return rv;
+}
+
+extern shape_t*
+shapeConstructcircle( void* mem )
+{
+	void*			adrs;
+	shapecircle_t*		circle = ( shapecircle_t* )mem;
+
+	circle->shapeadt = circleAdt;
+
+	adrs = nextAddress( mem, sizeof( shapecircle_t ), shapeSizeOf( "ellipse" ) );
+
+	<strong>circle->ellipse = shapeConstruct( adrs, "ellipse" );</strong>
+
+	return &circle->shapeadt;
+}
+
+static void
+shapeDestructCircle( shape_t* shape )
+{
+	shapecircle_t*	circle = ( shapecircle_t* )shape;
+
+	<strong>circle->ellipse->destruct( circle->ellipse );</strong>
+
+	printf( "   %s.%d: shapeDestructCircle()\n",
+		__FILE__, __LINE__ );
+}</p>
+
+    <p>
+    <br><strong>Step 9</strong>
+    </p>
+
+    <p>
+    Extend ellipse's behavior by adding circle-specific actions to it in the
+    circle's version of <span id="inlncode">shapeDescribe()</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libshapecircle.c:</span>
+    </p>
+
+    <p id="srccode">static void
+shapeDescribeCircle( shape_t* shape )
+{
+	shapecircle_t*	circle = ( shapecircle_t* )shape;
+
+	<strong>circle->ellipse->describe( circle->ellipse );</strong>
+
+	printf( "   %s.%d: shapeDescribeCircle(): I am a circle.\n",
+		__FILE__, __LINE__ );
+}</p>
+
+    <p>
+    <br><strong>Step 10</strong>
+    </p>
+
+    <p>
+    Build the Geometric Shapes Extender, <strong>GSE</strong>.
+    </p>
+
+    <p>
+    <strong>SLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libshape.c
+gcc -g -c -fPIC -I . libshapeoval.c
+gcc -g -c -fPIC -I . libshapeellipse.c
+gcc -g -c -fPIC -I . libshapecircle.c
+
+gcc -g -shared -o libshape.so \
+	libshape.o \
+	libshapeoval.o \
+	libshapeellipse.o \
+	libshapecircle.o -ldl</p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libshape.c
+gcc -g -shared -o libshape.so libshape.o -ldl
+
+gcc -g -c -fPIC -I . libshapeoval.c
+gcc -g -shared -o libshapeoval.so libshapeoval.o 
+
+gcc -g -c -fPIC -I . libshapeellipse.c
+gcc -g -shared -o libshapeellipse.so libshapeellipse.o
+
+gcc -g -c -fPIC -I . libshapecircle.c
+gcc -g -shared -o libshapecircle.so libshapecircle.o</p>
+
+    <p>
+    <br><strong>MLRTF:</strong>
+    </p>
+
+    <p>
+    Add the <span id="inlncode">-DGSE_MLRTF</span> option to the
+    <span id="inlncode">libshape.so</span> library's build line:
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -DGSE_MLRTF -g -c -fPIC -I . libshape.c</p>
+
+    <p>
+    <br><strong>Step 11</strong>
+    </p>
+
+    <p>
+    Write a sample application to exercise the Extender pattern.
+    </p>
+
+    <p>
+    Our version accepts a concrete name of a geometric shape as a command line
+    argument and exercises its behavior.
+    </p>
+
+    <p>
+    <span id="inlncode">shape.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "libshape.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	shape_t*	shape;
+
+	if ( argc < 2 )
+	{
+		return -1;
+	}
+
+	shape = shapeNew( argv[ 1 ] );
+
+	shapeDescribe( shape );
+
+	shapeDelete( &shape );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 12</strong>
+    </p>
+
+    <p>
+    Build the sample application:
+    </p>
+
+    <p>
+    <strong>SLBTF</strong> and <strong>MLRTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . shape.c
+gcc -g -L . -o shape shape.o -lshape</p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . shape.c
+gcc -g -L . -o shape shape.o -lshape \
+	-lshapeoval \
+	-lshapeellipse \
+	-lshapecircle</p>
+
+    <p>
+    <br><strong>Step 13</strong>
+    </p>
+
+    <p>
+    Run the sample program with various inputs:
+    </p>
+
+    <p id="cmdln">./shape oval
+<span class="italic">libshape.c.83: shapeDescribe(): I am a geometric shape.
+ libshapeoval.c.40: shapeDescribeOval(): I am an oval.
+ libshapeoval.c.49: shapeDestructOval()</span>
+
+./shape ellipse
+<span class="italic">libshape.c.83: shapeDescribe(): I am a geometric shape.
+ libshapeoval.c.40: shapeDescribeOval(): I am an oval.
+  libshapeellipse.c.61: shapeDescribeEllipse(): I am an ellipse.
+ libshapeoval.c.49: shapeDestructOval()
+  libshapeellipse.c.72: shapeDestructEllipse()</span>
+
+./shape circle
+<span class="italic">libshape.c.83: shapeDescribe(): I am a geometric shape.
+ libshapeoval.c.40: shapeDescribeOval(): I am an oval.
+  libshapeellipse.c.61: shapeDescribeEllipse(): I am an ellipse.
+   libshapecircle.c.61: shapeDescribeCircle(): I am a circle.
+ libshapeoval.c.49: shapeDestructOval()
+  libshapeellipse.c.72: shapeDestructEllipse()
+   libshapecircle.c.72: shapeDestructCircle()</span></p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Explain the sequence of function calls produced in the output of the
+    sample program.
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/extender/libshape.h" download target="_blank">libshape.h</a>
+    <a href="src/extender/libshape.c" download target="_blank">libshape.c</a>
+    <a href="src/extender/libshapeoval.c" download target="_blank">libshapeoval.c</a>
+    <a href="src/extender/libshapeellipse.c" download target="_blank">libshapeellipse.c</a>
+    <a href="src/extender/libshapecircle.c" download target="_blank">libshapecircle.c</a>
+    <a href="src/extender/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/extender/shape.c" download target="_blank">shape.c</a>
+    <a href="src/extender/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicbehave.html">prev</a>
+     <a href="ryapdpic.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

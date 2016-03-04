@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Integral Parts
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Integral Parts</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpiccomposition.html">prev</a>
+     <a href="ryapdpicnonintegralparts.html">next</a>
+    </p>
+
+    <h1>Integral Parts</h1>
+
+    <p>
+    An integral is a part that is permanently embedded in its whole. An integral
+    part's life time is equal to that of it containing whole. A whole and all of
+    its integral parts exist in one contiguous memory block. They are created,
+    constructed, destructed and deleted as one and at the same time.
+    </p>
+
+    <p>
+    An integral part may be implemented as a Handle or as an ADT. A whole
+    containing such integral parts can also be implemented as a Handle or as an
+    ADT. However, because we will use ADTs exclusively in the rest of this text
+    we will only look at the integral parts that are ADTs. You are encouraged to
+    experiment with Handles yourself.
+    </p>
+
+    <p>
+    The integral parts consequences:
+    </p>
+
+    <ul>
+     <li>The whole and its integral parts remain encapsulated</li>
+
+     <li>All the seed information required to create all the integral parts has
+    to be passed to the whole's <span id="inlncode">New()</span> and
+    <span id="inlncode">Construct()</span> functions</li>
+
+     <li>Integral part(s) require more maintenance than non-integral parts for
+    the same level of functionality</li>
+    </ul>
+
+    <p>
+    <br><strong>Commentary</strong>
+    </p>
+
+    <p>
+    An ADT whole and all of its integral ADT parts should be placed in one
+    contiguous memory block. For ADT mechanism to work a whole has to be placed
+    in this memory block first. All the integral parts should be placed in a
+    non-overlapping sequence at memory addresses that follow the address of the
+    whole. If a given processor architecture requires a proper alignment then
+    the parts should be placed at the appropriate addresses, see below.
+    </p>
+
+    <p>
+    An ADT implementation as a C structure guarantees the presence of at least
+    one pointer to a function in it as the first member. If all the integral
+    parts of an encapsulated whole are exclusively ADTs it may be argued that
+    there <dfn>may</dfn> be no need for manual alignment - placing ADTs one
+    after another in a given memory block <dfn>may</dfn> work because several
+    function pointers as first members of a C structure are a strong alignment
+    requirement as is and it <dfn>may</dfn> provide ample room and proper
+    alignment for the consecutive ADTs.
+    </p>
+
+    <p>
+    If the above statement is not true and manual alignment of parts can not be
+    avoided then the reasoning for one practical way to proceed runs as
+    follows.
+    </p>
+
+    <p>
+    We observe that a given C compiler possesses all the alignment knowledge
+    needed to assemble fully functional code for a given operating system
+    and for the given processor type. When such compiler builds and sizes a
+    C structure it has to consider one of the requirements of the host programming
+    language that:
+    </p>
+
+    <p>
+    <dfn>any complete data type - whether native or custom - may be used in a C
+    array which may not have unused space - holes - in between its elements</dfn>
+    </p>
+
+    <p>
+    From the above observation we infer that after a C compiler is done with a
+    C structure its size:
+    </p>
+
+    <p>
+    - is minimal in order to not waste space
+    </p>
+
+    <p>
+    - accommodates the placement of structure's members at such addresses that a
+    given processor can read from and write to any of them
+    <dfn>in any structure</dfn> - regardless of this structure's position within
+    the array
+    </p>
+
+    <p>
+    It follows then that the above behavior may be used to build up an array-like
+    formation of integral parts within the memory block associated with the whole.
+    The C structure that is placed first - a whole - does not need to be aligned
+    manually since <span id="inlncode">calloc()</span> guarantees to always return
+    a properly aligned address. For brevity let us call this structure "current".
+    </p>
+
+    <p>
+    The first integral part that follows this "current" structure must be aligned
+    manually. Let us call that structure "next". To properly align the "next"
+    structure relative to the "current" one we shall adjust the logical size of
+    the "current" structure to be an exact "just greater" multiple of the size of
+    the "next" one.
+    </p>
+
+    <p>
+    The above size adjustment is done entirely at run time by the
+    <span id="inlncode">typeSizeOf()</span> function associated with the "current"
+    structure and is thus purely logical - not physical. Artificially sized that
+    way the "current/next" pair of structures simulates a C array of "next"
+    structures and should always work regardless of compiler, operating system and
+    processor types.
+    </p>
+
+    <p>
+    For a hypothetical example let us assume that the "current" structure is
+    \(20\) bytes long and that the "next" structure is \(8\) bytes long. We
+    logically inflate the size of the "current" structure at run time to look
+    like it is \(8\times 3 = 24\) bytes long. We then place the \(8\)-byte
+    structure right after the "\(24\)-byte structure". This placement emulates a
+    C array of four \(8\)-byte elements. The first three elements are fake and
+    in sum they are large enough to accommodate the "current" structure in its
+    entirety. The next element - number four - is somewhat real:
+    </p>
+
+    <img src="imgs/chlnk.png" class="center">
+
+    <p>
+    It should be understood that even though we refer to the above structures as
+    elements of C arrays in reality these structures will not be referenced as such.
+    We use the C array notation here solely as a vehicle to justify and explain
+    this alignment technique.
+    </p>
+
+    <p>
+    Now that we know how to align two structures we can extend the described
+    approach to an arbitrary number of them. To align the consequent integral part
+    we make the just aligned "next" structure "current" and repeat the above
+    process for that part. And the next. And the next. Until all the integral
+    parts are aligned.
+    </p>
+
+    <p>
+    The consequences of this alignment approach, which should pass the ANSI C
+    muster, are:
+    </p>
+
+    <p>
+    1) There is no need to write processor-specific alignment code.
+    </p>
+
+    <p>
+    2) Because sizes of C structures are for the most part arbitrary and can not
+    be controlled gaps in a memory block around the integral parts are all but
+    inevitable. Exaggerating for demonstration purposes, placing a
+    \(199\)-byte structure after a \(3\)-byte structure wastes \(196\) bytes.
+    Switching these structures around, if at all possible, wastes \(2\) bytes.
+    </p>
+
+    <p>
+    It is tempting to programmatically sort the integral parts on their size in
+    descending order. However, the <span id="inlncode">SizeOf()</span> and
+    <span id="inlncode">Construction()</span> functions for all the integral parts
+    in this case must follow some uniform convention. We will shy away from
+    this approach here.
+    </p>
+
+    <p>
+    3) If an integral part is a variable of some type of Factory (see the
+    creational patterns chapters) and there is a need to change this variable's
+    type at run time - during the life of a whole - then, theoretically, the
+    only safe way to do so is to replace the existing Factory-like variable with
+    a new one of smaller or equal size to avoid the resizing of the memory block
+    containing the whole.
+    </p>
+
+    <p>
+    This, however, is not practical. So for all practical purposes if there is
+    a need to change the type of an integral Factory-like variable at run time
+    a whole containing it must be deleted from memory and a new one created.
+    Consider the non-integral types of parts if this is an issue (see the next
+    chapter).
+    </p>
+
+    <p>
+    To deduce the formula for the size adjustment the following assumptions
+    are taken to be true. The sizes of C structures are whole positive non-zero
+    integers. Because of the way ADT works the C structure that implements it is
+    guaranteed to have at least one member - a pointer to a function. Consequently,
+    an ADT's smallest size is the size of one function pointer.
+    </p>
+
+    <p>
+    By definition an integer \(M\) is a multiple of another integer
+    \(I \neq 0\) if there exists yet another integer \(n\) such that:
+    </p>
+
+    $$M = n \times I$$
+
+    <p>
+    In number theoretic parlance we would say that \(M\) is divisible by \(I\)
+    or that \(I\) divides \(M\), symbolically \(I | M\). Solving the above
+    equation for \(n\) we obtain:
+    </p>
+
+    $$n = \frac {M}{I}$$
+
+    <p>
+    To translate this equation into the structure size adjustment we replace
+    \(M\) with \(CurrSz\) and \(I\) with \(NextSz\) since the current size has
+    to be made a "just greater" multiple of the next size:
+    </p>
+
+    $$n = \frac {CurrSz}{NextSz}$$
+
+    <p>
+    The above formula yields the number of times \(NextSz\) folds into \(CurrSz\),
+    where \(CurrSz\) is the size of the "current" structure in need of logical
+    adjustment and \(NextSz\) is the size of the "next" structure in need of
+    alignment.
+    </p>
+
+    <p>
+    Since the above arithmetic division translates conveniently into integer
+    division in computing, to find the "just less" multiple \(jlm\) of \(NextSz\)
+    with respect to \(CurrSz\) we multiply \(n\) by \(NextSz\):
+    </p>
+
+    $$jlm = n \times NextSz = \frac {CurrSz}{NextSz} \times NextSz$$
+
+    <p>
+    To find the "just greater" multiple \(jgm\) we add \(NextSz\) to \(jlm\):
+    </p>
+
+    $$jgm = jlm + NextSz = \frac {CurrSz}{NextSz} \times NextSz + NextSz$$
+
+    <p>
+    The reason a multiple in "just greater" must be "greater" is to make sure
+    that structures do not overlap in memory at run time. The reason this
+    multiple is "just" is to make sure that memory is not wasted beyond bare
+    minimum.
+    </p>
+
+    <p>
+    The above formula is implementable in C already. However, there is one
+    optimization we can make. We observe that when \(CurrSz \equiv NextSz =
+    K\)
+    the gap between the adjacent structures is \(K\). To eliminate that gap we
+    want the first term of the formula to vanish exactly when \(CurrSz \equiv
+    NextSz\). We achieve this by subtracting one from \(CurrSz\) which is
+    permissible because of the original assumptions - C structures are at least
+    one byte long and for ADTs that number (size) will be more than one:
+    </p>
+
+    $$jgm = \frac{CurrSz - 1}{NextSz} \times NextSz + NextSz$$
+
+    <p>
+    To make the above symbols more readable we replace \(jgm\) with
+    <span id="inlncode">logicalSize()</span> in C. The current address is the
+    address of the current structure. The current size is its size. The next
+    size is the size of the structure to be aligned:
+    </p>
+
+    <p id="srccode">extern size_t
+logicalSize( size_t currsz, size_t nextsz )
+{
+	size_t		logicalsz = ( ( currsz - 1 ) / nextsz ) * nextsz + nextsz;
+
+	return logicalsz;
+}
+
+extern size_t
+paddingAmount( size_t currsz, size_t nextsz )
+{
+	size_t		logicalsz = logicalSize( currsz, nextsz );
+
+	size_t		pad = logicalsz - currsz;
+
+	return pad;
+}
+
+extern void*
+nextAddress( void* curradrs, size_t currsz, size_t nextsz )
+{
+	size_t			logicalsz = logicalSize( currsz, nextsz );
+
+	void*			na = ( unsigned char* )curradrs + logicalsz;
+
+	return na;
+}</p>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Make <span id="inlncode">str_t</span> ADT - book's title - a private integral
+    part of <span id="inlncode">book_t</span> ADT.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Implement a whole as suggested in ADT chapter. Add one pointer to an
+    integral part for each and all such parts in the whole's implementation data
+    type.
+    </p>
+
+    <p>
+    2) Create the whole and all of its integral parts in one memory block at the
+    same time. Place the whole in memory first. Place the integral parts after
+    the whole in an order you wish, aligning these parts if needed.
+    </p>
+
+    <p>
+    3) Modify the whole's <span id="inlncode">SizeOf(), Construct()</span>
+    and <span id="inlncode">Destruct()</span> functions to size, construct and
+    destruct all the integral parts absorbed by this whole.
+    </p>
+
+    <p>
+    4) In the whole's <span id="inlncode">SizeOf()</span> function account for
+    the size of the whole, the sizes of all of the integral parts and the size
+    of the extra space needed to align each integral part, if any.
+    </p>
+
+    <p>
+    5) In the whole's <span id="inlncode">Construct()</span> function place that
+    whole in memory first. Place all the integral parts after the whole in a
+    non-overlapping sequence aligning them if needed. Set the pointers to all of
+    the integral parts and call a construction function for each part.
+    </p>
+
+    <p>
+    6) In the whole's <span id="inlncode">Destruct()</span> function call a
+    destruction function for each integral part first and then destruct the whole
+    itself.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution Implementation</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    Borrow <span id="inlncode">str_t</span> ADT from the corresponding chapter
+    by copying the <span id="inlncode">libstr.h</span> header file and the
+    <span id="inlncode">libstr.so</span> shared library into the current
+    working directory, for example.
+    </p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Implement <span id="inlncode">book_t</span> ADT in a
+    <span id="inlncode">libbook.[hc]</span> pair of files.
+    </p>
+
+    <p>
+    We will give <span id="inlncode">book_t</span> the ability to print information
+    about itself that is relevant to the current discussion.
+    </p>
+
+    <p>
+    <span id="inlncode">libbook.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct book
+{
+	void		( *info )( struct book* );
+} book_t;
+
+extern book_t*		bookNew( const char* );
+extern void		bookDelete( book_t** );
+
+extern book_t*		bookConstruct( void*, const char* );
+extern void		bookDestruct( book_t* );
+
+extern size_t		bookSizeOf();
+
+extern void		bookInfo( book_t* );</p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Define the book's implementation data type <span id="inlncode">bookimpl_t</span>
+    in a private implementation file <span id="inlncode">libbook.c</span> adding
+    one pointer to <span id="inlncode">str_t</span> to that data type.
+    </p>
+
+    <p>
+    <span id="inlncode">libbook.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "libbook.h"
+<strong>#include "libstr.h"</strong>
+
+typedef struct
+{
+	book_t		bookadt;
+
+	<strong>str_t*		title;</strong> /* Pointer to an integral part. */
+} bookimpl_t;
+
+static void		bookInfoImpl( book_t* );
+
+static book_t	bookAdt = 
+{ 
+	bookInfoImpl
+};</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    In practice <span id="inlncode">logicalSize(), paddingAmount()</span> and
+    <span id="inlncode">nextAddress()</span> family of functions will normally
+    be packaged into a separate reusable library. However, for demonstration
+    purposes and to avoid the clutter we will place these functions into the
+    <span id="inlncode">libbook.c</span> file.
+    </p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    In <span id="inlncode">bookSizeOf()</span> calculate and return a size big
+    enough for the whole and for all of its integral parts. Include: the size
+    of the <span id="inlncode">bookimpl_t</span> structure plus the size of
+    <span id="inlncode">str_t</span> as returned by
+    <span id="inlncode">strSizeOf()</span> plus an extra space to align one
+    <span id="inlncode">str_t</span> properly.
+    </p>
+
+    <p>
+    <span id="inlncode">libbook.c:</span>
+    </p>
+
+    <p id="srccode">extern size_t
+bookSizeOf()
+{
+	size_t		rv;
+
+	rv = sizeof( bookimpl_t ) +
+	
+		paddingAmount( sizeof( bookimpl_t ), strSizeOf() ) +
+
+		strSizeOf();
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    In <span id="inlncode">bookNew()</span> allocate enough space to hold the
+    entire encapsulated whole with all of its integral parts and then call
+    <span id="inlncode">bookConstruct()</span>.
+    </p>
+
+    <p>
+    Make <span id="inlncode">bookNew()</span> and
+    <span id="inlncode">bookConstruct()</span> accept all the information required
+    to create its integral part - book's title - in addition to any information
+    needed to create the book variable itself, if any.
+    </p>
+
+    <p>
+    <span id="inlncode">libbook.c:</span>
+    </p>
+
+    <p id="srccode">extern book_t*
+bookNew( const char* <strong>title</strong> )
+{
+	book_t*		book = ( book_t* )NULL;
+	void*		mem = calloc( 1, <strong>bookSizeOf()</strong> );
+
+	book = bookConstruct( mem, <strong>title</strong> );
+
+	return book;
+}</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    In <span id="inlncode">bookConstruct()</span> place an integral part in the
+    memory block allocated by <span id="inlncode">bookNew()</span> at the
+    appropriate address by calling <span id="inlncode">nextAddress()</span> with
+    correct arguments.
+    </p>
+
+    <p>
+    The first argument to <span id="inlncode">nextAddress()</span> in this case
+    is where <span id="inlncode">bookimpl_t</span> is placed or
+    <span id="inlncode">mem</span>.
+    </p>
+
+    <p>
+    The second argument is the size of <span id="inlncode">bookimpl_t</span> as
+    returned by C's unary operator <span id="inlncode">sizeof</span> - not the
+    return value of <span id="inlncode">bookSizeOf()</span>.
+    </p>
+
+    <p>
+    The third argument is the size of <span id="inlncode">str_t</span> as returned
+    by <span id="inlncode">strSizeOf()</span>.
+    </p>
+
+    <p>
+    Model <span id="inlncode">bookConstruct()</span> after
+    <span id="inlncode">bookSizeOf()</span>. Assign the addresses to the integral
+    parts in the same order <span id="inlncode">bookSizeOf()</span> uses them to
+    calculate the amount of space needed for the whole.
+    </p>
+
+    <p>
+    <span id="inlncode">libbook.c:</span>
+    </p>
+
+    <p id="srccode">extern book_t*
+bookConstruct( void* mem, const char* <strong>title</strong> )
+{
+	void*			adrs;
+	bookimpl_t*		bimpl = ( bookimpl_t* )mem;
+
+	bimpl->bookadt = bookAdt;
+
+	<strong>adrs = nextAddress( mem, sizeof( bookimpl_t ), strSizeOf() );</strong>
+
+	/*
+	   Construct the integral part. It is possible because
+	   str_t's construction is a public interface.
+	 */
+	<strong>bimpl->title = strConstruct( adrs, title );</strong>
+
+	/*
+	   Construct the whole and return it.
+	 */
+	return &bimpl->bookadt;
+}</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    In <span id="inlncode">bookDestruct()</span> dismantle all the integral
+    parts first, then destruct the whole.
+    </p>
+
+    <p>
+    <span id="inlncode">libbook.c:</span>
+    </p>
+
+    <p id="srccode">extern void
+bookDestruct( book_t* book )
+{
+	bookimpl_t*		bimpl = ( bookimpl_t* )book;
+
+	/*
+	   Destruct the integral part first. It is possible
+	   because str_t's destruction interface is public.
+	 */
+	<strong>strDestruct( bimpl->title );</strong>
+
+	/*
+	   Then - destruct the whole.
+	 */
+}</p>
+
+    <p>
+    <br><strong>Step 9</strong>
+    </p>
+
+    <p>
+    Implement <span id="inlncode">bookDelete()</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libbook.c:</span>
+    </p>
+
+    <p id="srccode">extern void
+bookDelete( book_t** book )
+{
+	if ( !book && !*book )
+	{
+		return;
+	}
+
+	bookDestruct( *book );
+
+	free( *book );
+
+	*book = ( book_t* )NULL;
+}</p>
+
+    <p>
+    <br><strong>Step 10</strong>
+    </p>
+
+    <p>
+    Implement <span id="inlncode">bookInfo()</span> and
+    <span id="inlncode">bookInfoImpl()</span> to print the information of interest.
+    </p>
+
+    <p>
+    <span id="inlncode">libbook.c:</span>
+    </p>
+
+    <p id="srccode">extern void
+bookInfo( book_t* book )
+{
+	book->info( book );
+}
+
+static void
+bookInfoImpl( book_t* book )
+{
+	bookimpl_t*	bimpl = ( bookimpl_t* )book;
+
+	printf( "%s:%d: bookInfoImpl()\n", __FILE__, __LINE__ );
+
+	printf( " bookSizeOf() = %zu\n", bookSizeOf() );
+	printf( " sizeof( bookimpl_t ) = %zu\n", sizeof( bookimpl_t ) );
+	printf( " sizeof( book_t ) = %zu\n", sizeof( book_t ) );
+	printf( " sizeof( title ) = %zu\n", sizeof( str_t* ) );
+	printf( " logical size of bookimpl_t = %zu\n",
+		logicalSize( sizeof( bookimpl_t ), strSizeOf() ) );
+	printf( " strSizeOf() = %zu\n", strSizeOf() );
+	printf( "  &book = %p\n", ( void* )book );
+	printf( "  &bookadt = %p\n", ( void* )( &bimpl->bookadt ) );
+	printf( "  padding amount = %zu\n",
+		paddingAmount( sizeof( bookimpl_t ), strSizeOf() ) );
+	printf( "  &title = %p\n", ( void* )( bimpl->title ) );
+	printf( "  &title - &book = %zu\n",
+		( void* )( bimpl->title ) - ( void* )book );
+}</p>
+
+    <p>
+    <br><strong>Step 11</strong>
+    </p>
+
+    <p>
+    Since we are not exposing the implementation details of this book's title
+    to the world this is where we apply the Chained Linking pattern by specifying
+    <span id="inlncode">libstr.so</span> as <span id="inlncode">book_t</span>'s
+    dependency:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libbook.c
+gcc -g -L . -shared -o libbook.so libbook.o -lstr</p>
+
+    <p>
+    <br><strong>Step 12</strong>
+    </p>
+
+    <p>
+    Write a sample program to manipulate a whole consisting of integral parts.
+    </p>
+
+    <p>
+    <span id="inlncode">book.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libbook.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	book_t*		book = bookNew( "The C Programming Language" );
+
+	bookInfo( book );
+
+	bookDelete( &book );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 13</strong>
+    </p>
+
+    <p>
+    To build <span id="inlncode">book</span> we only need to specify its dependency
+    on <span id="inlncode">libbook.so</span>:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . book.c
+gcc -g -L . -o book book.o -lbook</p>
+
+    <p>
+    Observe that the above build lines do not include the
+    <span id="inlncode">libstr.so</span> library. The reason why this works is
+    explained in Chained Linking chapter.
+    </p>
+
+    <p>
+    <br><strong>Step 14</strong>
+    </p>
+
+    <p>
+    Run <span id="inlncode">book</span> in a debugger and step into all the
+    interesting functions:
+    </p>
+
+    <p id="cmdln">./book
+<span class="italic">libbook.c:137: bookInfoImpl()
+ bookSizeOf() = 80
+ sizeof( bookimpl_t ) = 16
+ sizeof( book_t ) = 8
+ sizeof( title ) = 8
+ logical size of bookimpl_t = 40
+ strSizeOf() = 40
+  &book = 0x1e0f010
+  &bookadt = 0x1e0f010
+  padding amount = 24
+  &title = 0x1e0f038
+  &title - &book = 40</span></p>
+
+    <p>
+    <br><strong>From Here</strong>
+    <p>
+
+    <p>
+    To add author's name to <span id="inlncode">book_t</span> follow these steps:
+    </p>
+
+    <p>
+    - Add an extra argument to <span id="inlncode">bookNew()</span> and
+    <span id="inlncode">bookConstruct()</span> in
+    <span id="inlncode">libbook.h</span>:
+    </p>
+
+    <p id="srccode">extern book_t*		bookNew( const char*<strong>, const char*</strong> );
+extern book_t*		bookConstruct( void*, const char*<strong>, const char*</strong> );</p>
+
+    <p>
+    - Add an extra pointer to <span id="inlncode">str_t</span> to the book's
+    implementation structure <span id="inlncode">bookimpl_t</span> in
+    <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">typedef struct
+{
+	book_t		bookadt;
+
+	str_t*		title;
+	<strong>str_t*		authors;</strong> /* Another integral part. */
+} bookimpl_t;</p>
+
+    <p>
+    - Allocate enough space for the new integral part in
+    <span id="inlncode">bookSizeOf()</span> in
+    <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">extern size_t
+bookSizeOf()
+{
+	size_t		rv;
+
+	rv = sizeof( bookimpl_t ) +
+
+	paddingAmount( sizeof( bookimpl_t ), strSizeOf() ) +
+
+	strSizeOf() +
+
+	<strong>paddingAmount( strSizeOf(), strSizeOf() ) +
+
+	strSizeOf();</strong>
+
+	return rv;
+}</p>
+
+    <p>
+    - Add an extra argument to <span id="inlncode">bookNew()</span> and
+    <span id="inlncode">bookConstruct()</span> in
+    <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">extern book_t*
+bookNew( const char* title, <strong>const char* authors</strong> )
+{
+	book_t*		book = ( book_t* )NULL;
+	void*		mem = calloc( 1, bookSizeOf() );
+
+	book = bookConstruct( mem, title, <strong>authors</strong> );
+
+	return book;
+}</p>
+
+    <p>
+    - Construct the new integral part in
+    <span id="inlncode">bookConstruct()</span> in
+    <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">extern book_t*
+bookConstruct( void* mem, const char* title, <strong>const char* authors</strong> )
+{
+	void*			adrs;
+	bookimpl_t*		bimpl = ( bookimpl_t* )mem;
+
+	bimpl->bookadt = bookAdt;
+
+	adrs = nextAddress( mem, sizeof( bookimpl_t ), strSizeOf() );
+
+	bimpl->title = strConstruct( adrs, title );
+
+	<strong>adrs = nextAddress( bimpl->title, strSizeOf(), strSizeOf() );
+
+	bimpl->authors = strConstruct( adrs, authors );</strong>
+
+	/*
+	   Construct the whole and return it.
+	 */
+	return &bimpl->bookadt;
+}</p>
+
+    <p>
+    - Destruct the new integral part in <span id="inlncode">bookDestruct()</span>
+    in <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">extern void
+bookDestruct( book_t* book )
+{
+	bookimpl_t*		bimpl = ( bookimpl_t* )book;
+
+	strDestruct( bimpl->title );
+
+	<strong>strDestruct( bimpl->authors );</strong>
+}</p>
+
+    <p>
+    - Add the relevant details to <span id="inlncode">bookInfoImpl()c</span> in
+    <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">static void
+bookInfoImpl( book_t* book )
+{
+	bookimpl_t*		bimpl = ( bookimpl_t* )book;
+
+	printf( "%s:%d: bookInfoImpl()\n", __FILE__, __LINE__ );
+
+	printf( " bookSizeOf() = %zu\n", bookSizeOf() );
+	printf( " sizeof( bookimpl_t ) = %zu\n", sizeof( bookimpl_t ) );
+	printf( " sizeof( book_t ) = %zu\n", sizeof( book_t ) );
+	printf( " sizeof( title ) = %zu\n", sizeof( str_t* ) );
+	<strong>printf( " sizeof( authors ) = %zu\n", sizeof( str_t* ) );</strong>
+	printf( " logical size of bookimpl_t = %zu\n",
+		logicalSize( sizeof( bookimpl_t ), strSizeOf() ) );
+	printf( " strSizeOf() = %zu\n", strSizeOf() );
+	printf( "  &book = %p\n", ( void* )book );
+	printf( "  &bookadt = %p\n", ( void* )( &bimpl->bookadt ) );
+	printf( "  padding amount = %zu\n",
+		paddingAmount( sizeof( bookimpl_t ), strSizeOf() ) );
+	printf( "  &title = %p\n", ( void* )( bimpl->title ) );
+	printf( "  &title - &book = %zu\n",
+		( void* )( bimpl->title ) - ( void* )book );
+	<strong>printf( "  &authors = %p\n", ( void* )( bimpl->authors ) );
+	printf( "  &authors - &title = %zu\n",
+		( void* )( bimpl->authors ) - ( void* )( bimpl->title ) );</strong>
+}</p>
+
+    <p>
+    - Rebuild <span id="inlncode">libbook.so</span>:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libbook.c
+gcc -g -L . -shared -o libbook.so libbook.o -lstr</p>
+
+    <p>
+    - Adjust <span id="inlncode">bookNew()</span> in
+    <span id="inlncode">book.c</span> to accept the book's author(s):
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libbook.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	book_t*		book = bookNew( "The C programming language", <strong>"K & R"</strong> );
+
+	bookInfo( book );
+
+	bookDelete( &book );
+
+	return 0;
+}</p>
+
+    <p>
+    - Rebuild <span id="inlncode">book</span>:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . book.c
+gcc -g -L . -o book book.o -lbook</p>
+
+    <p>
+    Exercise the new functionality:
+    </p>
+
+    <p id="cmdln">./book
+<span class="italic">libbook.c:148: bookInfoImpl()
+ bookSizeOf() = 120
+ sizeof( bookimpl_t ) = 24
+ sizeof( book_t ) = 8
+ sizeof( title ) = 8
+ sizeof( authors ) = 8
+ logical size of bookimpl_t = 40
+ strSizeOf() = 40
+  &book = 0x1486010
+  &bookadt = 0x1486010
+  padding amount = 16
+  &title = 0x1486038
+  &title - &book = 40
+  &authors = 0x1486060
+  &authors - &title = 40</span></p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/intprts/libbook.h" download target="_blank">libbook.h</a>
+    <a href="src/intprts/libbook.c" download target="_blank">libbook.c</a>
+    <a href="src/intprts/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/intprts/book.c" download target="_blank">book.c</a>
+    <a href="src/intprts/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpiccomposition.html">prev</a>
+     <a href="ryapdpicnonintegralparts.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

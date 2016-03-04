@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. ADT
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  ADT</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpichandle.html">prev</a>
+     <a href="ryapdpicchainedlinking.html">next</a>
+    </p>
+    
+    <h1>ADT (Abstract Data Type)</h1>
+
+    <p>
+    In addition to encapsulating a data type by separating its interface from
+    implementation and making the former public and the latter private the
+    ADT pattern may be used to also bind the data type's state to its public
+    interface.
+    </p>
+
+    <p>
+    A variable of a data type encapsulated as ADT can be manipulated via its
+    interface only. ADT is packaged into a header file and a shared library.
+    </p>
+
+    <p>
+    By binding the data type's state and its interface into one whole it becomes
+    possible to:
+    </p>
+
+    <p>
+    - attach multiple similar but different implementations to a single interface
+    (subject of Factory chapter)
+    </p>
+
+    <p>
+    - modify the names of functions that implement the data type's public interface
+    without affecting its end users (the proof is below)
+    </p>
+
+    <p>
+    As we remember, Handle's incomplete data type is an opaque pointer to a sole
+    entity - variable's state completely void of any in-place knowledge about its
+    interface. The only physical connection between the two is prototype. Handle's
+    variables (data types) and functions learn about each other's existence only
+    by virtue of the former being passed in as an arguments (parameters) to the
+    latter.
+    </p>
+
+    <p>
+    In contrast, ADT is a complete and fully functional C data type because it
+    has a set of pointers to functions constituting what we would call an
+    "interface". The names of functions that implement that interface may be
+    changed by either the one and the only implementation (ADT) or, with a bit
+    of extra work (Factory), by a multitude of similar but different
+    implementations leaving its users unaware of that process in both cases.
+    </p>
+
+    <p>
+    The ADT pattern consequences:
+    </p>
+
+    <ul>
+     <li>Data type's interface is separated from its implementation at compile
+         and run times</li>
+     <li>Changes to the names of functions that implement the data type's public
+         interface do not affect its users</li>
+     <li>Multiple similar but different implementations may eventually be attached
+         to the same interface</li>
+     <li>Short of <span id="inlncode">alloca()</span> the traditional stack frame
+          variables of this data type can not be created</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Implement a custom string data type.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) In a public header file define a public abstract data type whose sole
+    members are pointers to functions that describe <dfn>what</dfn> can be done
+    with that data type:
+    </p>
+
+    <p id="srccode">typedef struct adt
+{
+	int		( *dothis )( struct adt* );
+	int		( *dothat )( struct adt* );
+} adt_t;</p>
+
+    <p>
+    Consequently, ADT's functionality can be exercised via the explicit pointer
+    to a function syntax:
+    </p>
+
+    <p id="srccode">var->dothis( var );
+var->dothat( var );</p>
+
+    <p>
+    Alternatively, ADT's author(s) may wrap the above calls into convenience functions:
+    </p>
+
+    <p id="srccode">extern int
+adtDoThis( adt_t* adt )
+{
+	return adt->dothis( adt );
+}
+
+extern int
+adtDoThat( adt_t* adt )
+{
+	return adt->dothat( adt );
+}</p>
+
+    <p>
+    which will allow their users to achieve the same results using a more
+    traditional syntax:
+    </p>
+
+    <p id="srccode">adtDoThis( var );
+adtDoThat( var );</p>
+
+    <p>
+    2) In the corresponding private implementation <span id="inlncode">.c</span>
+    file(s) define a private implementation data type which we will abbreviate
+    as IDT.
+    </p>
+
+    <p>
+    Bind the two data types - ADT and IDT - together using the ANSI C Standard
+    requirement that there can be no space between the very first member of a
+    structure and the beginning of that structure itself. Envelope the IDT
+    around the ADT by making the ADT the very first member of the IDT as a full
+    structure and not a pointer:
+    </p>
+
+    <p id="srccode">typedef struct
+{
+	<strong>adt_t		adt; /* Full structure, not a pointer. Very first member. */</strong>
+
+	int		implState; /* State implementation goes here. */
+} <strong>adtimpl_t</strong>;</p>
+
+    <p>
+    3) Make all the data type's public functions accept a pointer to ADT as a
+    parameter. Implement these functions in the corresponding
+    <span id="inlncode">.c</span> file(s).
+    </p>
+
+    <p>
+    When accepting an ADT variable as input <dfn>from</dfn> the outside world
+    <dfn>into</dfn> the host library typecast it from ADT to IDT to gain
+    access to its private state variables.
+    </p>
+
+    <p>
+    When returning an ADT variable as output <dfn>to</dfn> the outside world
+    <dfn>from</dfn> the host library, inside which the variable was acted upon
+    as if it were of type IDT, return either the address of its ADT
+    portion or typecast it to look like a pointer to ADT and then return that
+    address (see code and comments below).
+    </p>
+
+    <p>
+    4) Package all the ADT implementation files into a shared library.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution Implementation</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    In a public header file <span id="inlncode">libstr.h</span> define an
+    abstract data type <span id="inlncode">str_t</span> that has only
+    pointers to functions as its members. We will start with string comparison:
+    </p>
+
+    <p>
+    <span id="inlncode">libstr.h:</span>
+    </p>
+
+    <p id="srccode"><strong>#include &lt;sys/types.h&gt;
+
+typedef struct str
+{
+	int		( *cmp )( struct str*, struct str*, int );
+} str_t;</strong></p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Add the prototypes of the public life cycle functions:
+    </p>
+
+    <p>
+    <span id="inlncode">libstr.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct str
+{
+	int		( *cmp )( struct str*, struct str*, int );
+} str_t;
+
+<strong>extern str_t*		strNew( const char* );
+extern void		strDelete( str_t** );
+
+extern str_t*		strConstruct( void*, const char* );
+extern void		strDestruct( str_t* );
+
+extern size_t		strSizeOf();</strong></p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Add the prototype of the public string comparison convenience function:
+    </p>
+
+    <p>
+    <span id="inlncode">libstr.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct str
+{
+	int		( *cmp )( struct str*, struct str*, int );
+} str_t;
+
+extern str_t*		strNew( const char* );
+extern void		strDelete( str_t** );
+
+extern str_t*		strConstruct( void*, const char* );
+extern void		strDestruct( str_t* );
+
+extern size_t		strSizeOf();
+
+<strong>extern int		strCmp( str_t*, str_t*, int );</strong></p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    In the file <span id="inlncode">libstr.c</span> define a private string
+    implementation data type <span id="inlncode">strimpl_t</span> (IDT) which
+    will be visible only inside this file.
+    </p>
+
+    <p>
+    If <span id="inlncode">strimpl_t</span> has to be shared among several
+    implementation <span id="inlncode">.c</span> files then put it into a
+    separate private header file, <span id="inlncode">libstrimpl.h</span>
+    perhaps, and do not share this file with anyone else.
+    </p>
+
+    <p>
+    To bind <span id="inlncode">str_t</span> (ADT) to
+    <span id="inlncode">strimpl_t</span> (IDT) define
+    <span id="inlncode">strimpl_t</span> in such a way that
+    <span id="inlncode">str_t</span> is its very first member. Make sure that
+    <span id="inlncode">str_t</span> is a full structure - not a pointer.
+    </p>
+
+    <p>
+    <br><strong>Commentary</strong>
+    </p>
+
+    <p>
+    The ANSI C Standard states that no space, or padding, is allowed between
+    the beginning of a structure and its very first member. Padding is allowed
+    between the consequent members <dfn>within</dfn> a structure for architectural
+    reasons, to align these members on the needed address boundaries for example.
+    However, there should be no padding between the first member and the beginning
+    of a structure.
+    </p>
+
+    <p>
+    Because of this rule it becomes possible to associate two items with one
+    memory address - the public ADT and the private IDT. We will make this address
+    to be an address of an ADT when releasing it <dfn>into</dfn> the wild
+    <dfn>from</dfn> the host library. Conversely, we will make this address to
+    be an address of an IDT when accepting it back <dfn>from</dfn> the wild
+    <dfn>into</dfn> the host library. The mechanism for changing the relevant
+    data types back and forth is, again, typecasting.
+    </p>
+
+    <p>
+    As a consequence we achieve the desired separation of labor between the
+    interface and its implementation - the former remains public while the latter
+    - private:
+    </p>
+
+    <img src="imgs/adt.png" class="center">
+
+    <p>
+    <span id="inlncode">libstr.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;strings.h&gt;
+#include "libstr.h"
+
+typedef struct
+{
+	<strong>/*
+	   String's ADT - not a pointer, full structure.
+	   Make it the very first member.
+	   This passes the ANSI C Standard muster.
+	   Public: users only see this member's address (which
+	   happens to be the entire structure's address also).
+	 */
+	str_t		stradt;</strong>
+
+	/*
+	   Implementation details.
+	   Private: users will not see this.
+	 */
+	size_t		bufsz;
+	char*		buf;
+} strimpl_t;
+
+static int		strCmpImpl( str_t*, str_t*, int );
+
+/* 
+   This structure is used to initialize many
+   functions at once.
+   Add more functions here as string library is developed.
+   Used by strConstruct(), see below.
+ */
+static str_t	strAdt = 
+{ 
+	strCmpImpl 
+};
+
+extern size_t
+strSizeOf()
+{
+	return sizeof( strimpl_t );
+}
+
+extern str_t*
+strNew( const char* istr )
+{
+	void*		simpl = calloc( 1, strSizeOf() );
+
+	str_t*		s = strConstruct( simpl, istr );
+
+	return s;
+}
+
+extern str_t*
+strConstruct( void* smem, const char* istr )
+{
+	strimpl_t*	simpl = ( strimpl_t* )smem;
+
+	<strong>/*
+	   This initializes string's public interface.
+	 */
+	simpl->stradt = strAdt;</strong>
+
+
+	/*
+	   This initializes string's private state (implementation).
+	 */
+	if ( istr && *istr )
+	{
+		simpl->bufsz = strlen( istr );
+	}
+	else
+	{
+		simpl->bufsz = 32;
+	}
+	simpl->bufsz += sizeof( char );
+
+	simpl->buf = calloc( simpl->bufsz, sizeof( char ) );
+
+	if ( istr && *istr )
+	{
+		memcpy( simpl->buf, istr, simpl->bufsz );
+	}
+	else
+	{
+		simpl->buf[ 0 ] = '\0';
+	}
+
+
+	<strong>/*
+	   This is what users see - the public portion
+	   of the bound IDT + ADT whole: ADT only.
+	 */
+	return &simpl->stradt;</strong>
+}
+
+extern void
+strDestruct( str_t* str )
+{
+	strimpl_t*	simpl;
+
+	if ( !str )
+	{
+		return;
+	}
+
+
+	<strong>/*
+	   This is what ADT's authors see - public and
+	   private portions - interface and implementation.
+	 */
+	simpl = ( strimpl_t* )str;</strong>
+
+	if ( simpl->buf )
+	{
+		/*
+		   Balances calloc() in strConstruct().
+		 */
+		free( simpl->buf );
+	}
+
+	memset( simpl, 0, sizeof( strimpl_t ) );
+}
+
+extern void
+strDelete( str_t** str )
+{
+	if ( !str && !*str )
+	{
+		return;
+	}
+
+	strDestruct( *str );
+
+	/*
+	   Balances calloc() in strNew().
+	 */
+	free( *str );
+
+	*str = ( str_t* )NULL;
+}
+
+<strong>/*
+   Public convenience function.
+*/</strong>
+extern int
+strCmp( str_t* s1, str_t* s2, int caseSensitive )
+{
+	int		rv;
+
+	rv = s1->cmp( s1, s2, caseSensitive );
+
+	return rv;
+}
+
+<strong>/*
+   Private implementation of string comparison.
+*/</strong>
+static int
+strCmpImpl( str_t* s1, str_t* s2, int caseSensitive )
+{
+	int		rv;
+	int		( *scmp )( const char*, const char*, size_t );
+
+	<strong>/*
+	   ANSI C Standard rule makes this possible.
+	 */
+	strimpl_t*	simpl1 = ( strimpl_t* )s1;
+	strimpl_t*	simpl2 = ( strimpl_t* )s2;</strong>
+
+	printf( "%s:%d: strCmpImpl( \"%s\", \"%s\", %d )\n",
+		__FILE__, __LINE__, simpl1->buf, simpl2->buf, caseSensitive );
+
+	scmp = caseSensitive ? strncmp : strncasecmp;
+
+	rv = scmp( simpl1->buf, simpl2->buf, strlen( simpl1->buf ) );
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Package the string files into a shared library:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libstr.c
+gcc -g -shared -o libstr.so libstr.o</p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Write a sample application to use the ADT pattern:
+    </p>
+
+    <p>
+    <span id="inlncode">str.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libstr.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	str_t*		s1;
+	str_t*		s2;
+
+	if ( argc != 3 )
+	{
+		return 1;
+	}
+
+	s1 = strNew( argv[ 1 ] );
+	s2 = strNew( argv[ 2 ] );
+
+	printf( "Strings s1 and s2 are %s equal.\n",
+		strCmp( s1, s2, 1 ) ? "not" : "" );
+
+	strDelete( &s1 );
+	strDelete( &s2 );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Build the sample ADT application. We will link the string library in explicitly:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . str.c
+gcc -g -L . -o str str.o -lstr</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Run the sample program with various inputs:
+    </p>
+
+    <p id="cmdln">./str hello world
+<span class="italic">libstr.c:188: strCmpImpl( "hello", "world", 1 )
+Strings s1 and s2 are not equal.</span>
+
+./str hello hello
+<span class="italic">libstr.c:188: strCmpImpl( "hello", "hello", 1 )
+Strings s1 and s2 are   equal.</span></p>
+
+    <p>
+    <br><strong>Cost Analysis</strong>
+    </p>
+
+    <p>
+    The sum total of all the files that must be modified to accommodate a change
+    to <span id="inlncode">strimpl_t</span> is equal to three:
+    </p>
+
+    <p>
+    1) <span id="inlncode">libstr.c</span><br>
+    2) <span id="inlncode">libstr.o</span><br>
+    3) <span id="inlncode">libstr.so</span><br>
+    </p>
+
+    <p>
+    Proof:
+    </p>
+
+    <p>
+    Let us assume that to improve the performance of our string library we want
+    to add an extra state variable that will store the actual length of the
+    current string at all times, <span id="inlncode">slen</span>. This state
+    variable is not to be confused with the already existing state variable that
+    stores the size of the allocated buffer, <span id="inlncode">bufsz</span>.
+    </p>
+
+    <p>
+    The steps required to implement the above change are:
+    </p>
+
+    <p>
+    - Add <span id="inlncode">size_t slen</span> to
+    <span id="inlncode">strimpl_t</span> in <span id="inlncode">libstr.c</span>:
+    </p>
+
+    <p id="srccode">typedef struct
+{
+	str_t		stradt;
+
+	size_t		bufsz;
+	char*		buf;
+	<strong>size_t		slen;</strong>
+} strimpl_t;</p>
+
+    <p>
+    - Addjust <span id="inlncode">strConstruct()</span> and
+    <span id="inlncode">strCmpImpl()</span> in <span id="inlncode">libstr.c</span>:
+    </p>
+
+    <p id="srccode">extern str_t*
+strConstruct( void* smem, const char* istr )
+{
+	...
+
+	s->buf = calloc( s->bufsz, sizeof( char ) );
+
+	if ( istr && *istr )
+	{
+		memcpy( s->buf, istr, s->bufsz );
+		<strong>s->slen = s->bufsz - sizeof( char );</strong>
+	}
+	else
+	{
+		s->buf[ 0 ] = '\0';
+		<strong>s->slen = 0;</strong>
+	}
+
+	return ( str_t* )s;
+}
+
+static int
+strCmpImpl( str_t* s1, str_t* s2, int caseSensitive )
+{
+	int		rv;
+	int		( *scmp )( const char*, const char*, size_t );
+	strimpl_t*	str1 = ( strimpl_t* )s1;
+	strimpl_t*	str2 = ( strimpl_t* )s2;
+
+	printf( "%s:%d: strCmp( \"%s\", \"%s\", %d )\n",
+		__FILE__, __LINE__, str1->buf, str2->buf, caseSensitive );
+
+	scmp = caseSensitive ? strncmp : strncasecmp;
+
+	rv = scmp( str1->buf, str2->buf, <strong>str1->slen</strong> );
+
+	return rv;
+}</p>
+
+    <p>
+    - Rebuild the <span id="inlncode">libstr.o</span> file:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libstr.c</p>
+
+    <p>
+    - Rebuild the <span id="inlncode">libstr.so</span> file:
+    </p>
+
+    <p id="cmdln">gcc -g -shared -o libstr.so libstr.o</p>
+
+    <p>
+    The <span id="inlncode">str</span> application is impervious to the above
+    change.
+    </p>
+
+    <p>
+    Let us now present the proof of the previously made statement that the names
+    of functions that implement our string's public interface can be changed
+    without affecting their users.
+    </p>
+
+    <p>
+    In the current state of its implementation <span id="inlncode">str_t</span>
+    has only one worker function: <span id="inlncode">cmp()</span>. Consequently,
+    it is required to prove that if the name <span id="inlncode">strCmpImpl</span>
+    is changed it will not affect its users - their code will work <dfn>without
+    recompilation</dfn>.
+    </p>
+
+    <p>
+    Even though <span id="inlncode">cmp()</span> in <span id="inlncode">str_t</span>
+    is a public entity, it is a pointer that must be initialized prior to its use.
+    The two distinct operations of <dfn>"initialization"</dfn> and <dfn>"use"</dfn>
+    or <dfn>"invocation"</dfn> are separated in space and time by the virtue of our
+    string ADT being packaged into a shared library.
+    </p>
+
+    <p>
+    These operations are separated in space because
+    <span id="inlncode">cmp()</span> is initialized inside
+    <span id="inlncode">libstr.so</span>, in <span id="inlncode">libstr.c</span>
+    by <span id="inlncode">strConstruct()</span> to a library-private name
+    <span id="inlncode">strCmpImpl</span>, while it is being used inside
+    <span id="inlncode">str</span>, in the <span id="inlncode">str.c</span> file.
+    </p>
+
+    <p>
+    These operations are separated in time because
+    <span id="inlncode">libstr.so</span> must be compiled before the
+    <span id="inlncode">str</span> (or any other) application can use it.
+    </p>
+
+    <p>
+    As such, the private name attached to <span id="inlncode">cmp()</span> can
+    be changed between the invocations of <span id="inlncode">str</span> without
+    affecting that program. The qualifier <span id="inlncode">static</span> in
+    the prototype of <span id="inlncode">strCmpImpl()</span> ensures that that
+    name is visible only inside the <span id="inlncode">libstr.c</span> file.
+    </p>
+
+    <p>
+    <br><strong>From Here</strong>
+    </p>
+
+    <p>
+    Using string length as a sample new public function here is how to add it to
+    our string's interface:
+    </p>
+
+
+    <p>
+    - Add the new function pointer to <span id="inlncode">str_t</span> in the
+    public header file, <span id="inlncode">libstr.h</span>:
+    </p>
+
+    <p id="srccode">typedef struct str
+{
+	int		( *cmp )( struct str*, struct str*, int );
+	<strong>size_t		( *length )( struct str* );</strong>
+} str_t;</p>
+
+    <p>
+    - Add the function prototype of the convenience function in the public header
+    file <span id="inlncode">libstr.h</span>:
+    </p>
+
+    <p id="srccode">extern size_t	strLength( str_t* );</p>
+
+    <p>
+    - Add the new function name to the ADT initializer in the
+    <span id="inlncode">libstr.c</span> file:
+    </p>
+
+    <p id="srccode">static int		strCmpImpl( str_t*, str_t*, int );
+<strong>static size_t		strLengthImpl( str_t* );</strong>
+
+static str_t	strAdt = 
+{ 
+	strCmpImpl,
+	<strong>strLengthImpl</strong>
+};</p>
+
+    <p>
+    - Implement the new convenience and the actual functions in the
+    <span id="inlncode">libstr.c</span> file:
+    </p>
+
+    <p id="srccode">extern size_t
+strLength( str_t* s )
+{
+	size_t		sl;
+
+	sl = s->length( s );
+
+	return sl;
+}
+
+static size_t
+strLengthImpl( str_t* s )
+{
+	strimpl_t* 	si = ( strimpl_t* )s;
+
+	return si->slen;
+}</p>
+
+    <p>
+    - Rebuild the string library:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libstr.c
+gcc -g -shared -o libstr.so libstr.o</p>
+
+    <p>
+    - Rebuild the relevant dependencies on the string library only if they have
+    been modified to reflect the changes in <span id="inlncode">str_t</span>'s
+    public interface. Observe here that the dependencies that wish to ignore
+    these changes do not have to be rebuilt. For example, if we have added
+    <span id="inlncode">strLength()</span> to our string library then without
+    any further changes, as is, our sample program <span id="inlncode">str</span>
+    will work without recompilation.
+    </p>
+
+    <p>
+    <br><strong>Automation</strong>
+    </p>
+
+    <p>
+    To eliminate the repetitive typing it is possible to automate the initial
+    ADT's implementation process. Below is a sample template consisting of
+    two files, <span id="inlncode">libadt.h</span> and
+    <span id="inlncode">libadt.c</span>, which contain the name
+    <span id="inlncode">TYPE</span> as a stand in for the name of the data
+    type of your choice, the initial set of life cycle functions and one sample
+    data type manipulation function.
+    </p>
+
+    <p>
+    <span id="inlncode">libadt.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct TYPE
+{
+	int		( *func )( struct TYPE* );
+} TYPE_t;
+
+extern TYPE_t*		TYPENew();
+extern void		TYPEDelete( TYPE_t** );
+
+extern TYPE_t*		TYPEConstruct( void* );
+extern void		TYPEDestruct( TYPE_t* );
+
+extern size_t		TYPESizeOf();
+
+extern int		TYPEFunc( TYPE_t* );</p>
+
+    <p>
+    <span id="inlncode">libadt.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;strings.h&gt;
+#include "libTYPE.h"
+
+typedef struct
+{
+	TYPE_t		TYPEadt;
+
+
+	/*
+	   State variables go here.
+	 */
+} TYPEimpl_t;
+
+extern int	TYPEFunc( TYPE_t* );
+
+static TYPE_t	TYPEAdt = 
+{ 
+	TYPEFunc 
+};
+
+extern size_t
+TYPESizeOf()
+{
+	return sizeof( TYPEimpl_t );
+}
+
+extern TYPE_t*
+TYPENew()
+{
+	void*	impl = calloc( 1, sizeof( TYPEimpl_t ) );
+
+	return TYPEConstruct( impl );
+}
+
+extern TYPE_t*
+TYPEConstruct( void* mem )
+{
+	TYPEimpl_t*	impl = ( TYPEimpl_t* )mem;
+
+	impl->TYPEadt = TYPEAdt;
+
+	/*
+	   Construction code goes here.
+	 */
+
+	return &impl->TYPEadt;
+}
+
+extern void
+TYPEDestruct( TYPE_t* TYPE )
+{
+	TYPEimpl_t*	impl;
+
+	if ( !TYPE )
+	{
+		return;
+	}
+
+
+	impl = ( TYPEimpl_t* )TYPE;
+
+	/*
+	   Destruction code goes here.
+	 */
+
+}
+
+extern void
+TYPEDelete( TYPE_t** TYPE )
+{
+	if ( !TYPE && !*TYPE )
+	{
+		return;
+	}
+
+	TYPEDestruct( *TYPE );
+
+	free( *TYPE );
+
+	*TYPE = ( TYPE_t* )NULL;
+}
+
+extern int
+TYPEFunc( TYPE_t* TYPE )
+{
+	TYPEimpl_t*	impl = ( TYPEimpl_t* )TYPE;
+
+	return 0;
+}</p>
+
+    <p>
+    A sample Korn shell script below accepts a name of a custom data type as an
+    argument, copies the ADT's template files into the new ones named after
+    the given type and replaces the name <span id="inlncode">TYPE</span> with the
+    given one.
+    </p>
+
+    <p>
+    <span id="inlncode">mkadt.sh:</span>
+    </p>
+
+    <p id="srccode">#!/bin/ksh
+
+TP="$1"
+cat libadt.h | sed "s/TYPE/"${TP}"/g" > lib${TP}.h
+cat libadt.c | sed "s/TYPE/"${TP}"/g" > lib${TP}.c
+</p>
+
+    <p>
+    Run this script as follows:
+    </p>
+
+    <p id="cmdln">./mkadt.sh str</p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Compare this (ADT) string implementation with its Handle counterpart from
+    the previous chapter. Make sure you understand the differences.
+    </p>
+
+    <p>
+    2) Implement the four popular container types - an array, a list, a binary
+    tree and a hash table - as ADTs.
+    </p>
+
+    <p>
+    3) Implement the ADT versions of <span id="inlncode">strToBytes()</span> and
+    <span id="inlncode">strFromBytes()</span> functions.
+    </p>
+
+    <p>
+    4) Write a sample program that:
+    </p>
+
+    <p>
+    - converts a string variable into an array of bytes<br>
+    - converts the above array of bytes into a new string variable<br>
+    - compares the original and the new string variables
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/adt/libstr.h" download target="_blank">libstr.h</a>
+    <a href="src/adt/libstr.c" download target="_blank">libstr.c</a>
+    <a href="src/adt/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/adt/str.c" download target="_blank">str.c</a>
+    <a href="src/adt/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    <a href="src/adt/libadt.h" download target="_blank">libadt.h</a>
+    <a href="src/adt/libadt.c" download target="_blank">libadt.c</a>
+    <a href="src/adt/mkadt.sh" download target="_blank">mkadt.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpichandle.html">prev</a>
+     <a href="ryapdpicchainedlinking.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

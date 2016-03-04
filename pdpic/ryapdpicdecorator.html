@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Decorator
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Decorator</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicadapter.html">prev</a>
+     <a href="ryapdpicbridge.html">next</a>
+    </p>
+
+    <h1>Decorator</h1>
+
+    <p>
+    Decorator may be used to add responsibilities to a data type without changing
+    its interface.
+    </p>
+
+    <p>
+    Let us name a data type that is given additional responsibilities a
+    <dfn>component</dfn>.
+    </p>
+
+    <p>
+    Let us name a data type that implements the additional responsibilities
+    a <dfn>decorator</dfn>.
+    </p>
+
+    <p>
+    As a data type, component should possess the ability to attach multiple
+    similar but different implementations to a single interface (see Factory
+    chapter) which, in turn, should provide the ability to implement a multitude
+    of decorators.
+    </p>
+
+    <p>
+    Collectively the number, order and type of decorators that may be attached
+    to a component at either compile or run time are arbitrary.
+    </p>
+
+    <p>
+    A decorator should implement its component's interface in its entirety so
+    that to a side observer a decorator <dfn>looks like</dfn> a component.
+    However, underneath a decorator may exhibit an arbitrary behavior which may
+    be totally unrelated to component's functionality. It follows then that
+    Decorator allows multiple unrelated tasks to be performed through a single
+    interface.
+    </p>
+
+    <p>
+    Decorator's operation is based on chaining concrete decorators together at
+    compile or run time via author-supplied interface. In such a chain a
+    component may be located at its either extremity or anywhere inside it. The
+    nature of a component or operation applied to a component determines the
+    appropriate formation. We will examine component-terminated and
+    component-originated chains.
+    </p>
+
+    <p>
+    To support the above chaining each decorator maintains a pointer to the next
+    decorator/component as its state variable. An arbitrary number of decorators
+    thus connected, in memory at run time, resembles a singly-linked list.
+    Further, each decorator, while implementing a given function of its
+    component, has an opportunity to:
+    </p>
+
+    <p>
+    - perform an arbitrary task before invoking a function of the next
+    decorator/component in a chain that has the same name
+    </p>
+
+    <p>
+    - invoke a function of the next decorator/component in a chain that has
+    the same name
+    </p>
+
+    <p>
+    - perform an arbitrary task after invoking a function of the next
+    decorator/component in a chain that has the same name
+    </p>
+
+    <p>
+    - perform an arbitrary task that is totally unrelated to the current
+    functionality thus completely overriding its behavior
+    </p>
+
+    <p>
+    The invocation of a function that has the same name by a multitude of
+    decorators in a chain triggers a form of recursion which may be terminated
+    either by a decorator/component whose pointer to the next decorator/component
+    is null or by a decorator/component that will explicitly not invoke the
+    corresponding function of the next decorator/component in a chain.
+    </p>
+
+    <p>
+    For the following demonstration assume that:
+    </p>
+
+    <p>
+    1) \(C\) is a component
+    </p>
+
+    <p>
+    2) \(D_1, D_2, \dots, D_N\) are decorators of \(C\) and, for consistency sake,
+    \(D_0 \equiv C\)
+    </p>
+
+    <p>
+    3) each decorator/component stores the address of the next decorator/component
+    in a <span id="inlncode">nextDecorator</span> state variable initialized to
+    null at creation time
+    </p>
+
+    <p>
+    4) <span id="inlncode">setNextDecorator( \(V_1\), \(V_2\) )</span> acts
+    relative to \(V_1\) by recording the address of \(V_2\) in a state variable
+    of \(V_1\)
+    </p>
+
+    <p>
+    5) component \(C\) has a <span id="inlncode">Print()</span> function (in
+    pseudo-code):
+    </p>
+
+    <p id="srccode">Print( \(C\) )
+{
+	printf( "Anterior work of \(C\)\n" );
+
+	if ( \(C \rightarrow \) nextDecorator )
+	{
+		Print( \(C \rightarrow \) nextDecorator );
+	}
+
+	printf( "Posterior work of \(C\)\n" );
+}</p>
+
+    <p>
+    6) decorators \(D_i, i \in [1, N],\) implement their versions of
+    <span id="inlncode">Print()</span> as follows:
+    </p>
+
+    <p id="srccode">Print( \(D_i\) )
+{
+	printf( "Anterior work of \(D_i\)\n" );
+
+	if ( \(D_i \rightarrow \) nextDecorator )
+	{
+		Print( \(D_i \rightarrow \) nextDecorator );
+	}
+
+	printf( "Posterior work of \(D_i\)\n" );
+}</p>
+
+    <p>
+    <br><strong>Component-Terminated Chains</strong>
+    </p>
+
+    <p>
+    To form a component-terminated chain invoke
+    <span id="inlncode">setNextDecorator()</span> as follows:
+    </p>
+
+$$setNextDecorator(\; D_{k+1},\; D_k \;)$$
+
+    <p>
+    where \(k \in [0, N[\).
+    </p>
+
+    <p>
+    Since the order of invocations of <span id="inlncode">setNextDecorator()</span>
+    does not matter, only the order of parameters to that function does, let us
+    construct a \(C\)-terminated chain of decorators by first attaching \(C\)
+    to \(D_1\):
+    </p>
+
+$$setNextDecorator(\; D_1,\; C \;)$$
+
+    <p>
+    Technically \(C\) is an actual component - not a decorator but for consistency
+    sake, semantically, we treat it as such.
+    </p>
+
+    <p>
+    After the above function call, \(D_1\) will record \(C\)'s address and the
+    two will form the following chain (in memory at run time):
+    </p>
+
+    <img src="imgs/dcrtr1.png" class="center">
+
+    <p>
+    To exercise just \(C\)'s functionality invoke
+    <span id="inlncode">Print()</span> as follows:
+    </p>
+
+$$Print(\; C \;)$$
+
+    <p>
+    which will generate one function call to <span id="inlncode">Print()</span>
+    producing the following output:
+    </p>
+
+    <p id="srccode">Anterior work of \(C\)
+Posterior work of \(C\)</p>
+
+    <p>
+    To exercise the decorated functionality of the entire chain invoke
+    <span id="inlncode">Print()</span> as follows:
+    </p>
+
+$$Print(\; D_1 \;)$$
+
+    <p>
+    which will generate two function calls to <span id="inlncode">Print()</span>
+    producing the following output:
+    </p>
+
+    <p id="srccode">Anterior work of\(D_1\)
+Anterior work of \(C\)
+Posterior work of \(C\)
+Posterior work of\(D_1\)</p>
+
+    <p>
+    To make \(D_1\) the next decorator of \(D_2\) invoke
+    <span id="inlncode">setNextDecorator()</span> as follows:
+    </p>
+
+$$setNextDecorator(\; D_2,\; D_1 \;)$$
+
+    <p>
+    After the above function call, \(D_2\) will record \(D_1\)'s address extending
+    the existing chain (in memory at run time) as follows:
+    </p>
+
+    <img src="imgs/dcrtr2.png" class="center">
+
+    <p>
+    To exercise the decorated functionality of the entire chain invoke
+    <span id="inlncode">Print()</span> as follows:
+    </p>
+
+$$Print(\; D_2 \;)$$
+
+    <p>
+    and so on. Consequently, after \(N\) invocations of
+    <span id="inlncode">setNextDecorator()</span> in the above fashion decorators
+    will form the following chain (in memory at run time):
+    </p>
+
+    <img src="imgs/dcrtrn.png" class="center">
+
+    <p>
+    To exercise the decorated functionality of the entire chain invoke
+    <span id="inlncode">Print()</span> as follows:
+    </p>
+
+$$Print(\; D_N \;)$$
+
+    <p>
+    To exercise the decorated functionality of a partial chain starting at an
+    arbitrary position \(i\) inside the chain invoke
+    <span id="inlncode">Print()</span> as follows:
+    </p>
+
+$$Print(\; D_i \;)$$
+
+    <p>
+    <br><strong>Component-Originated Chains</strong>
+    </p>
+
+    <p>
+    To form a component-originated chain invoke
+    <span id="inlncode">setNextDecorator()</span> as follows:
+    </p>
+
+$$setNextDecorator(\; D_k,\; D_{k+1} \;)$$
+
+    <p>
+    where \(k \in [0, N[\).
+    </p>
+
+    <p>
+    Since the order of invocations of <span id="inlncode">setNextDecorator()</span>
+    does not matter, one way to construct a \(C\)-originated chain of decorators
+    is as follows:
+    </p>
+
+$$setNextDecorator(\; C,\; D_1 \;)$$
+$$setNextDecorator(\; D_1,\; D_2 \;)$$
+$$setNextDecorator(\; D_2,\; D_3 \;)$$
+$$setNextDecorator(\; D_k,\; D_{k+1} \;)$$
+$$setNextDecorator(\; D_{N-1},\; D_N \;)$$
+
+    <p>
+    The above sequence of function calls will generate the following chain of
+    decorators (in memory at run time):
+    </p>
+
+    <img src="imgs/dcrtrr.png" class="center">
+
+    <p>
+    To exercise the functionality of this type of chain invoke
+    <span id="inlncode">Print()</span> as follows:
+    </p>
+
+$$Print(\; C \;)$$
+
+    <p>
+    <br>
+    We observe in passing that another way to form the above types of chains is
+    to construct an arbitrary chain of decorators only and then attach the actual
+    component to that chain as its head or tail.
+    </p>
+
+    <p>
+    <br>The Decorator pattern consequences:
+    </p>
+
+    <ul>
+     <li>Additional responsibilities may be given to a data type without
+         changing its interface</li></br>
+
+     <li>Multiple unrelated tasks may be performed via a single interface</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Add the ability to rotate strings to <span id="inlncode">bio_t</span> from
+    Factory chapter.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Implement a component as a data type that possesses the ability to
+    attach a multitude of similar but different implementations to a single
+    interface (see Factory chapter).
+    </p>
+
+    <p>
+    2) Add <span id="inlncode">setNextDecorator()</span> and
+    <span id="inlncode">getNextDecorator()</span> functions to component's
+    public interface.
+    </p>
+
+    <p>
+    3) Implement a decorator as a data type of a component.
+    </p>
+
+    <p>
+    4) Implement the above <span id="inlncode">set/get</span> functions across
+    all the component's concrete data types including those that represent
+    decorators.
+    </p>
+
+    <p>
+    5) Choose the appropriate action to take in the decorator's version of the
+    corresponding component's function.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    Borrow the relevant files from Factory chapter.
+    </p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Add <span id="inlncode">set/getNextDecorator()</span> functions to I/O
+    Factory's public <span id="inlncode">libbio.h</span> header file:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct bio
+{
+	int		( *open )( struct bio*, const char* );
+	ssize_t		( *read )( struct bio*, void*, size_t );
+	ssize_t		( *write )( struct bio*, void*, size_t );
+	int		( *close )( struct bio* );
+	const char*	( *name )();
+	size_t		( *sizeOf )();
+
+	<strong>struct bio*	( *setNextDecorator )( struct bio*, struct bio* );
+	struct bio*	( *getNextDecorator )( struct bio* );</strong>
+
+	void		( *destruct )( struct bio* );
+} bio_t;
+
+extern bio_t*		bioNew( const char* );
+extern void		bioDelete( bio_t** );
+extern bio_t*		bioConstruct( void*, const char* );
+extern void		bioDestruct( bio_t* );
+extern size_t		bioSizeOf( const char* );
+
+extern int		bioOpen( bio_t*, const char* );
+extern ssize_t		bioRead( bio_t*, void*, size_t );
+extern ssize_t		bioWrite( bio_t*, void*, size_t );
+extern int		bioClose( bio_t* );
+extern const char*	bioName( bio_t* );
+extern size_t		biosizeof( bio_t* );
+
+<strong>extern bio_t*		bioSetNextDecorator( bio_t*, bio_t* );
+extern bio_t*		bioGetNextDecorator( bio_t* );</strong></p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Implement the new pair of functions in <span id="inlncode">libbio.c:</span>
+    </p>
+
+    <p id="srccode">extern bio_t*
+bioSetNextDecorator( bio_t* bio, bio_t* nextDecorator )
+{
+	bio_t*		rv;
+
+	rv = bio->setNextDecorator( bio, nextDecorator );
+
+	return rv;
+}
+
+extern bio_t*
+bioGetNextDecorator( bio_t* bio )
+{
+	bio_t*		rv;
+
+	rv = bio->getNextDecorator( bio );
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Implement the corresponding pair of new functions for all the existing I/O
+    data types: <span id="inlncode">file, tcpipv4</span> and
+    <span id="inlncode">tcpipv6</span> by adding an extra state variable
+    <span id="inlncode">nextDecorator</span> of type
+    <span id="inlncode">bio_t*</span> to each implementation data type treating
+    it as a non-integral rented part (see Non-integral Parts chapter).   
+    </p>
+
+    <p>
+    Our sample <span id="inlncode">bioSetNextDecoratorFile()</span> version below
+    returns the address of the soon to be old next decorator.
+    </p>
+
+    <p>
+    <span id="inlncode">libbiofile.c:</span>
+    </p>
+
+    <p id="srccode">static bio_t*
+bioSetNextDecoratorFile( bio_t* bio, bio_t* nextDecorator )
+{
+	bio_t*		rv;
+	biofile_t*	file = ( biofile_t* )bio;
+
+	rv = file->nextDecorator;
+
+	file->nextDecorator = nextDecorator;
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Implement a string-rotating decorator as
+    <span id="inlncode">biosr_t</span> data type incorporated into I/O Factory.
+    </p>
+
+    <p>
+    Select this data type via <span id="inlncode">"sr"</span> human-readable
+    null-terminated C string and implement it in
+    <span id="inlncode">libbiosr.c</span> file.
+    </p>
+
+    <p>
+    Concentrating on Decorator's mechanics proper we will not show the remaining
+    details of adding a new data type to a factory - finish this step on your own,
+    consult Factory chapter if needed.
+    </p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Implement the string-rotating decorator proper.
+    </p>
+
+    <p>
+    We observe that our I/O data type has four public functions that justify its
+    existence: <span id="inlncode">open(), read(), write(), close()</span>. In
+    two of these functions, <span id="inlncode">open()</span> and
+    <span id="inlncode">close()</span>, a string rotator has no meaningful task
+    to perform.
+    </p>
+
+    <p>
+    To keep the potential flow of <span id="inlncode">open()</span> and
+    <span id="inlncode">close()</span> invocations uninterrupted make our string
+    rotator forward these function calls to their next decorator's equivalents.
+    </p>
+
+    <p>
+    <span id="inlncode">libbiosr.c:</span>
+    </p>
+
+    <p id="srccode">static int
+bioOpenSR( bio_t* bio, const char* adrs )
+{
+	int		rv = 0;
+	biosr_t*	sr = ( biosr_t* )bio;
+
+	if ( sr->nextDecorator )
+	{
+		rv = bioOpen( sr->nextDecorator, adrs );
+	}
+
+	return rv;
+}
+
+static int
+bioCloseSR( bio_t* bio )
+{
+	int		rv = 0;
+	biosr_t*	sr = ( biosr_t* )bio;
+
+	if ( sr->nextDecorator )
+	{
+		rv = bioClose( sr->nextDecorator );
+	}
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    In the remaining two public I/O functions,
+    <span id="inlncode">read()</span> and <span id="inlncode">write()</span>,
+    our string-rotating decorator has a meaningful task to perform.
+    </p>
+
+    <p>
+    Exactly where in reference to the next decorator's/component's
+    <span id="inlncode">read()/write()</span> such a task is performed depends
+    on the nature of the task and the type of the chain - component-terminated
+    or component-originated.
+    </p>
+
+    <p>
+    Since we do not store the chain type as a state, we will make the above
+    decision at keyboard time. For example, we will construct
+    component-terminated chains in the sample program below. From the
+    demonstration section at the beginning of this chapter it follows that
+    the string rotator's <span id="inlncode">read()</span> will be invoked
+    before the component's <span id="inlncode">read()</span>. Further, we make
+    a decision to perform the task of rotating a string <dfn>after</dfn>
+    component's <span id="inlncode">read()</span> returns delivering the bytes
+    to act upon. Purely for brevity sake we call this type of work
+    <dfn>posterior</dfn>.
+    </p>
+
+    <p>
+    <span id="inlncode">libbiosr.c:</span>
+    </p>
+
+    <p id="srccode">static ssize_t
+bioReadSR( bio_t* bio, void* b, size_t bsz )
+{
+	size_t		n = 0;
+	biosr_t*	sr = ( biosr_t* )bio;
+
+	if ( sr->nextDecorator )
+	{
+		n = bioRead( sr->nextDecorator, b, bsz );
+		<strong>rotateString( ( char* )b, n );</strong>
+	}
+
+	return n;
+}</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Implement the string rotator's version of <span id="inlncode">write()</span>
+    which we will use in the sample program later on.
+    </p>
+
+    <p>
+    You should be able to reason your way through the following implementation
+    and explain why it performs <dfn>anterior</dfn> work.
+    </p>
+
+    <p>
+    <span id="inlncode">libbiosr.c:</span>
+    </p>
+
+    <p id="srccode">static ssize_t
+bioWriteSR( bio_t* bio, void* b, size_t bsz )
+{
+	size_t		n = 0;
+	biosr_t*	sr = ( biosr_t* )bio;
+
+	if ( sr->nextDecorator )
+	{
+		<strong>rotateString( ( char* )b, bsz );</strong>
+		n = bioWrite( sr->nextDecorator, b, bsz );
+	}
+
+	return n;
+}</p>
+
+    <p>
+    <br><strong>Step 9</strong>
+    </p>
+
+    <p>
+    Implement a function that rotates a string with respect to a vertical axis
+    passing through its center such that <span id="inlncode">"ABCD"</span>,
+    for example, is transformed into <span id="inlncode">"DCBA"</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libbiosr.c:</span>
+    </p>
+
+    <p id="srccode">static void
+rotateString( char* s, size_t n )
+{
+	char		ch;
+	size_t		i;
+
+	for ( i = 0; i < ( n / 2 ); i++ )
+	{
+		ch = s[ i ];
+		s[ i ] = s[ n - i - 1 ];
+		s[ n - i - 1 ] = ch;
+	}
+}</p>
+
+    <p>
+    We observe in passing that rotating a string an even number of times restores
+    it to its original content while rotating a string an odd number of times is
+    equivalent to rotating it exactly once.
+    </p>
+
+    <p>
+    <br><strong>Step 10</strong>
+    </p>
+
+    <p>
+    Rebuild the I/O factory.
+    </p>
+
+    <p>
+    <strong>SLBTF:</strong>
+    </p>
+
+    <p id="srccode">gcc -D_GNU_SOURCE -g -c -fPIC -I . libbio.c
+gcc -g -c -fPIC -I . libbiofile.c
+gcc -g -c -fPIC -I . libbiotcpipv4.c
+gcc -g -c -fPIC -I . libbiotcpipv6.c
+<strong>gcc -g -c -fPIC -I . libbiosr.c</strong>
+gcc -g -shared -o libbio.so \
+	libbio.o \
+	libbiofile.o \
+	libbiotcpipv4.o \
+	libbiotcpipv6.o \
+	<strong>libbiosr.o</strong> -ldl</p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p id="srccode">gcc -D_GNU_SOURCE -g -c -fPIC -I . libbio.c
+gcc -g -shared -o libbio.so libbio.o -ldl
+
+gcc -g -c -fPIC -I . libbiofile.c
+gcc -g -shared -o libbiofile.so libbiofile.o
+
+gcc -g -c -fPIC -I . libbiotcpipv4.c
+gcc -g -shared -o libbiotcpipv4.so libbiotcpipv4.o
+
+gcc -g -c -fPIC -I . libbiotcpipv6.c
+gcc -g -shared -o libbiotcpipv6.so libbiotcpipv6.o
+
+<strong>gcc -g -c -fPIC -I . libbiosr.c
+gcc -g -shared -o libbiosr.so libbiosr.o</strong></p>
+
+    <p>
+    <br><strong>MLRTF:</strong>
+    </p>
+
+    <p>
+    Add the <span id="inlncode">-DIO_MLRTF</span> option to the
+    <span id="inlncode">libbio.so</span> library's build line:
+    </p>
+
+    <p id="srccode">gcc -D_GNU_SOURCE <strong>-DIO_MLRTF</strong> -g -c -fPIC -I . libbio.c</p>
+
+    <p>
+    <br><strong>Step 11</strong>
+    </p>
+
+    <p>
+    Adjust the sample program to exercise Decorator pattern.
+    </p>
+
+    <p>
+    Our version:
+    </p>
+
+    <p>
+    - accepts one extra command line argument as decorator's name
+    </p>
+
+    <p>
+    - creates two <span id="inlncode">bio_t</span> variables, one component and
+    one decorator
+    </p>
+
+    <p>
+    - invokes I/O functions with decorator as their argument
+    </p>
+
+    <p>
+    - exercises factory's <span id="inlncode">getNextDecorator()</span>
+    interface by enumerating the members of the chain
+    </p>
+
+    <p>
+    <span id="inlncode">bio.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "libbio.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	const char*	componentnm;
+	const char*	adrs;
+	const char*	decoratornm;
+	bio_t*		bio;
+	bio_t*		component;
+	bio_t*		decorator;
+	char		b[ 59 ] = { 0 };
+	size_t		bsz = sizeof( b ) - 1;
+
+	if ( argc != 4 )
+	{
+		return -1;
+	}
+
+	componentnm = argv[ 1 ];
+	adrs = argv[ 2 ];
+	decoratornm = argv[ 3 ];
+	
+	component = bioNew( componentnm );
+	decorator = bioNew( decoratornm );
+
+	bioSetNextDecorator( decorator, component );
+
+	bioOpen( <strong>decorator</strong>, adrs );
+
+	bioRead( <strong>decorator</strong>, b, bsz );
+
+	printf( "First %zu bytes:\n%s\n", bsz, b );
+
+	printf( "\nChain's members (name and address):\n" );
+
+	bio = decorator;
+	while ( bio )
+	{
+		printf( "\"%s\"\t%p\n",
+			bioName( bio ),
+			( void* )bio );
+
+		bio = bioGetNextDecorator( bio );
+	}
+
+	bioDelete( &component );
+	bioDelete( &decorator );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 12</strong>
+    </p>
+
+    <p>
+    Build the sample application:
+    </p>
+
+    <p>
+    <strong>SLBTF</strong> and <strong>MLRTF:</strong>
+    </p>
+
+    <p id="srccode">gcc -g -c -I . bio.c
+gcc -g -L . -o bio bio.o -lbio</p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p id="srccode">gcc -g -c -I . bio.c
+gcc -g -L . -o bio bio.o -lbio \
+	-lbiofile \
+	-lbiotcpipv4 \
+	-lbiotcpipv6\
+	<strong>-lsr</strong></p>
+
+    <p>
+    <br><strong>Step 13</strong>
+    </p>
+
+    <p>
+    Run the sample program with various inputs:
+    </p>
+
+<p id="cmdln">./bio file ./bio.c sr
+<span class="italic">First 58 bytes:
+"h.oibbil" edulcni#
+>h.bildts< edulcni#
+>h.oidts< edulcni#
+
+Chain's members (name and address):
+"sr"	0x129b8070
+"file"	0x129b8010</span></p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Modify the sample program to also perform
+    <span id="inlncode">write()</span>s of small arbitrary human-readable strings:
+    </p>
+
+<p id="cmdln">./bio w "Hello, world!" file ./hw sr</p>
+
+    <p>
+    where the first option, <span id="inlncode">"w"</span>, stands for writing,
+    the second option is a small arbitrary human-readable string followed by
+    I/O Factory type, followed by an address, followed by a decorator.
+    </p>
+
+    <p>
+    The sample program may perform the
+    <span id="inlncode">read()</span>s as follows:
+    </p>
+
+<p id="cmdln">./bio r 13 file ./hw sr</p>
+
+    <p>
+    where the first option, <span id="inlncode">"r"</span>, stands for reading,
+    the second option is the number of bytes to read followed by I/O Factory
+    type, followed by an address, followed by a decorator.
+    </p>
+
+    <p>
+    Run the new sample program and compare the input, written and read strings.
+    </p>
+
+    <p>
+    2) Further, modify the sample program as follows: create a second decorator
+    of the same type and construct a two-decorator:
+    </p>
+
+$$D_{sr} \rightarrow D_{sr} \rightarrow C$$
+
+    <p>
+    three-item chain.
+    </p>
+
+    <p>
+    Predict, obtain and verify the result of this modification.
+    </p>
+
+    <p>
+    3) Add the ability to change the case of an alphabetic character to its
+    opposite to <span id="inlncode">bio_t</span>. For example, when this
+    functionality is exercised <span id="inlncode">A</span> should be
+    transformed into <span id="inlncode">a</span> and
+    <span id="inlncode">z</span> should be transformed into
+    <span id="inlncode">Z</span> and so on.
+
+    <p>
+    4) Adjust the sample program to accept up to two types of decorators from
+    command line in an arbitrary order.
+    </p>
+
+    <p>
+    Vary the order of application of string-rotating and case-flipping decorators
+    to a component at run time.
+    </p>
+
+    <p>
+    5) By distributing the single-case English alphabet along the circumference
+    of a unit circle evenly it becomes possible to:
+    </p>
+
+    <p>
+    - encipher a given letter by rotating it by \(1 \leqslant k \leqslant 25\)
+    positions in one direction
+    </p>
+
+    <p>
+    - decipher a given letter by rotating it by the same \(k\) positions in
+    the opposite direction
+    </p>
+
+    <p>
+    thus preserving the letter's case while leaving the remaining input symbols
+    unmodified.
+    </p>
+
+    <p>
+    For example, let \(k = 7\) and let a clear text letter be enciphered by
+    rotating it clockwise, and let an enciphered letter be deciphered by rotating
+    it counterclockwise.
+    </p>
+
+    <p>
+    Then, <span id="inlncode">"Hello, world!"</span> should be enciphered into
+    <span id="inlncode">"Olssv, dvysk!"</span>, before writing perhaps, and
+    <span id="inlncode">"Olssv, dvysk!"</span> should be deciphered into
+    <span id="inlncode">"Hello, world!"</span>, after reading perhaps.
+    </p>
+
+    <p>
+    Pick your favorite encipher/decipher direction and a value for \(k\) and
+    incorporate the above functionality as a new decorator into I/O Factory and
+    the sample program which should now accept an arbitrary mix of up to three
+    decorators.
+    </p>
+
+    <p>
+    Vary the order of application of decorators of all three types to a component
+    at run time.
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/decorator/libbio.h" download target="_blank">libbio.h</a>
+    <a href="src/decorator/libbio.c" download target="_blank">libbio.c</a>
+    <a href="src/decorator/libbiofile.c" download target="_blank">libbiofile.c</a>
+    <a href="src/decorator/libbiotcpipv4.c" download target="_blank">libbiotcpipv4.c</a>
+    <a href="src/decorator/libbiotcpipv6.c" download target="_blank">libbiotcpipv6.c</a>
+    </p>
+
+    <p>
+    <a href="src/decorator/libbiosr.c" download target="_blank">libbiosr.c</a>
+    <a href="src/decorator/libbiocf.c" download target="_blank">libbiocf.c</a>
+    <a href="src/decorator/libbioxc.c" download target="_blank">libbioxc.c</a>
+    <a href="src/decorator/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/decorator/bio.c" download target="_blank">bio.c</a>
+    <a href="src/decorator/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicadapter.html">prev</a>
+     <a href="ryapdpicbridge.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

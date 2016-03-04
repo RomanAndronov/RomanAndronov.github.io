@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Introduction
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Introduction</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicpreface.html">prev</a>
+     <a href="ryapdpicencapsulation.html">next</a>
+    </p>
+    
+    <h1>Introduction</h1>
+
+    <p>
+    <strong>Design Patterns</strong>
+    </p>
+
+    <p>
+    The legend has it that as a coherent concept design patterns were first
+    introduced by a building architect - Christopher Alexander. In our field
+    of expertise a design pattern can be defined as a description of a generic
+    solution of a software design problem that repeats itself over and over
+    <dfn>regardless of area of application</dfn>. A design pattern is not all
+    code. It is a concept that results or materializes in code. It has its
+    fair share of similarity with a recipe.
+    </p>
+
+    <p>
+    Design patterns are programming language and operating system independent.
+    In this day and age they must be coded in afresh. If a particular pattern
+    gains enough popularity then programming languages may absorb it into their
+    core though programmers will have to write a certain amount of code to fully
+    exercise it.
+    </p>
+
+    <p>
+    Design patterns are traditionally divided into three logical categories
+    - creational, structural and behavioral. Creational patterns deal with
+    how variables are created. Structural patterns deal with how data
+    types and variables are combined to form new types and structures.
+    Behavioral patterns deal with who does what in a group of data types and
+    how their variables communicate with each other.
+    </p>
+
+    <p>
+    In addition to these categories we will look at an extra one - encapsulation
+    patterns. This category is introduced first because it will be used in
+    patterns throughout the rest of the text.
+    </p>
+
+    <p>
+    Here we interpret encapsulation as two related concepts. As the first
+    concept encapsulation means hiding information. As the second concept 
+    encapsulation means binding data and functions together <dfn>while</dfn>
+    hiding information.
+    </p>
+
+    <p>
+    Both concepts are the pivoting point of the pattern-based implementations
+    of a custom data type in C. The emphasis of these implementations is on the
+    mechanics of constructing a custom data type with C primitives only -
+    <span id="inlncode">int</span>s, <span id="inlncode">char</span>s and the
+    like.
+    </p>
+
+    <p>
+    In the chapters dedicated to composition and aggregation we will learn how
+    to create custom encapsulated data types that themselves contain custom
+    encapsulated data types which contain custom encapsulated data types which
+    contain ...
+    </p>
+
+    <p>
+    <br><strong>Terminology</strong>
+    </p>
+
+    <p>
+    <dfn>Author</dfn>
+    </p>
+
+    <p>
+    is an individual who implements a certain source code arrangement including
+    the one that can be qualified as a design pattern.
+    </p>
+
+    <p>
+    <br><dfn>Users, End Users</dfn>
+    </p>
+
+    <p>
+    are individuals who put to work a product created by authors. Quite often
+    an author and a user are the same individual.
+    </p>
+
+    <p>
+    <br><dfn>Library, Component, Package</dfn>
+    </p>
+
+    <p>
+    is a logically and physically atomic unit of work produced by authors (and
+    users). Usually, but not necessarily, it consists of one header file and
+    one shared library per entity.
+    </p>
+
+    <p>
+    <br><dfn>World, Wild</dfn>
+    </p>
+
+    <p>
+    is everything and anything else that is not a library, component or package.
+    </p>
+
+    <p>
+    Per distinct unit of software (project) component and world are the
+    compliments of each other. In set theory notation, if
+    <span id="inlncode">S</span> is a (universal) set of all software,
+    <span id="inlncode">W</span> is a world set and
+    <span id="inlncode">L</span> is a library set, then: 
+    </p>
+
+$$L^{c} = W = S \; \backslash \; L$$
+
+    <p>
+    <br><dfn>Public (adj.)</dfn>
+    </p>
+
+    <p>
+    is an entity that is visible to the world and, by its virtue, to the
+    component (library).
+    </p>
+
+    <p>
+    <br><dfn>Private</dfn>
+    </p>
+
+    <p>
+    is an entity visible only within the boundaries of its component (library)
+    and completely invisible to the world.
+    </p>
+
+    <p>
+    <br><dfn>Interface</dfn>
+    </p>
+
+    <p>
+    is a collection of C functions that reveals to the world only
+    <dfn>what</dfn> can be done with the underlying data type and nothing else. 
+    </p>
+
+    <p>
+    Interfaces are abstract. They are minimal and complete. They could be either
+    public or private.
+    </p>
+
+    <p>
+    <br><dfn>Implementation</dfn>
+    </p>
+
+    <p>
+    is everything that makes an entity usable and operational excluding its
+    interface. It is <dfn>how</dfn> the advertisement broadcast by
+    interfaces' <dfn>what</dfn> is honored materially.
+    </p>
+
+    <p>
+    If interfaces unite, eliminate and simplify then implementations do the
+    opposite. It takes both to create a usable software entity.
+    </p>
+
+    <p>
+    Calling interfaces abstract may seem a little strange. After all,
+    from a raw computer science perspective and according to its definition an
+    interface is a collection of C functions each of which has a very concrete
+    and very specific prototype and the total number of these functions is also
+    very concrete - both properties must be set at keyboard time so that both
+    are known at compile time. What gives?
+    </p>
+
+    <p>
+    When we call interfaces abstract we apply the concept of abstraction
+    to the absence of the underlying implementation details. Take the various
+    I/O mechanism types - disk files, sockets, message queues and pipes, to
+    name just a few.
+    </p>
+
+    <p>
+    To, for example, open an I/O channel message queue-based implementations may
+    use <span id="inlncode">msgget()</span>, disk file-based implementations may
+    use either the section two <span id="inlncode">open()</span> or its close
+    cousin <span id="inlncode">fopen()</span>, socket-based implementations may
+    use either <span id="inlncode">accept()</span> or
+    <span id="inlncode">connect()</span> and so on.
+    </p>
+
+    <p>
+    However, if I/O interface offers just one common public function,
+    <span id="inlncode">open()</span>, for example, then its users are shielded
+    from and are not exposed to all of these irrelevant in the large scope
+    details and in that context we call interfaces "abstract".
+    </p>
+
+    <p>
+    Borrowing the "general" or "closed form" concept from mathematics we can
+    say that <span id="inlncode">open()</span> is a closed form solution for
+    the "open various types of I/O channels" problem.
+    </p>
+
+    <p>
+    <br><dfn>Whole</dfn>
+    </p>
+
+    <p>
+    is a custom C data type used to solve a particular problem at hand.
+    Usually, but not necessarily, public. A whole consists of or has parts.
+    </p>
+
+    <p>
+    <br><dfn>Part</dfn>
+    </p>
+
+    <p>
+    is a (custom) C data type that belongs to a whole as its member - as a C
+    member variable of a structure or a union. Usually, but not necessarily,
+    a part is private (no pun intended).
+    </p>
+
+    <p>
+    In the definitions above the words <dfn>consists of, has, belongs
+    to</dfn>, etc. are interpreted very narrowly as in <dfn>members of a C
+    structure (union)</dfn>.
+    </p>
+
+    <p>
+    In this text we will distinguish three types of membership. If a part has to
+    be permanently embedded in a whole - created in the same memory block - then
+    we will call it an <dfn>integral</dfn> part. By its definition a life time of
+    an integral part equals to that of its whole.
+    </p>
+
+    <p>
+    If a part does <dfn>not</dfn> have to be permanently embedded in a whole but
+    its life time has to be equal to that of its whole nonetheless then we will
+    call it a <dfn>non-integral owned</dfn> part. "Owned" means that a whole
+    still has to manage this part's life cycle.
+    </p>
+
+    <p>
+    If a part does not have to be permanently embedded in a whole and its life
+    time is of no consequence to a whole then we will call it a
+    <dfn>non-integral rented</dfn> part. "Rented" means that a whole completely
+    ignores the fact that a pointer to some variable is embedded into its
+    definition. See Composition and the related chapters for an in-depth discussion.
+    </p>
+
+    <p>
+    A whole can and usually does employ any combination of membership types.
+    A part, on the other hand, should participate in one type of membership only.
+    It should only be an integral or a non-integral owned or a non-integral
+    rented. Requirements determine which type of ownership is appropriate.
+    </p>
+
+    <p>
+    For example. An airplane's fuselage, wings and tail should be non-integral
+    rented parts in an aircraft design software because its users would add and
+    remove these parts at will over and over - until they are happy with a final
+    product. In a flight simulation software, however, same parts should be
+    either integral or non-integral owned as its users would want to fly a fully
+    assembled plane without modifying it.
+    </p>
+
+    <p>
+    <br><dfn>Ancestor</dfn>
+    </p>
+
+    <p>
+    is an existing C data type used as a base for an extension of its functionality.
+    </p>
+
+    <p>
+    <br><dfn>Descendant</dfn>
+    </p>
+
+    <p>
+    is a new (custom) C data type that extends its ancestor's functionality. A
+    descendant may also become an ancestor if its functionality is extended.
+    </p>
+
+    <p>
+    <br><dfn>Compile, Recompile</dfn>
+    </p>
+
+    <p>
+    means convert <span id="inlncode">.[hc]</span> files into
+    <span id="inlncode">.o</span> files with a C compiler.
+    </p>
+
+    <p>
+    <br><dfn>Link, Relink</dfn>
+    </p>
+
+    <p>
+    for applications: convert <span id="inlncode">.o</span> files into an
+    executable image with a C link editor, record any explicit dependencies on
+    required libraries, if any.
+    </p>
+
+    <p>
+    for libraries: convert <span id="inlncode">.o</span> files
+    into a shared (dynamic) library with a C link editor, recording any implicit
+    dependencies on other (shared) libraries, if any (we will use only shared
+    libraries in this text).
+    </p>
+
+    <p>
+    <br><dfn>Build, Rebuild</dfn>
+    </p>
+
+    <p>
+    means first compile then link.
+    </p>
+
+    <p>
+    <br><dfn>Build Lines</dfn>
+    </p>
+
+    <p>
+    is a collective term for what in practice makes up the bulk of make files.
+    </p>
+
+    <p>
+    <br><strong>The Principle of Least Sum</strong>
+    </p>
+
+    <p>
+    The most popular activity of a long term software project maintenance is
+    keeping up with the never ending stream of requirements changes. We can
+    reduce the latter activity to three distinct operations: modification and
+    removal of existing and addition of new features. In an abbreviated form
+    we will collectively call these activities ARM for Add, Remove and Modify.
+    ARMing software's features then translates directly into ARMing
+    Implementation (encapsulation), Creation, Structure, and Behavior, ICSB
+    for short, of the relevant data types. It, in turn, means that:
+    </p>
+
+    <ul>
+     <li>some combination of data type's ICSB <dfn>must</dfn> be modified</li>
+     <li>data type's build lines <dfn>may have</dfn> to be modified</li>
+     <li>the corresponding packaging (library) <dfn>has</dfn> to be rebuilt</li>
+    </ul>
+
+    <p>
+    Further, since external software depends (explicitly or not) on a data type's
+    ICSB, then ARMing that ICSB <dfn>may</dfn> affect this external software in
+    some way because its:
+    </p>
+
+    <ul>
+     <li>source code <dfn>may</dfn> have to be modified</li>
+     <li>build lines <dfn>may</dfn> have to be modified</li>
+     <li>binaries <dfn>may</dfn> have to be rebuilt</li>
+    </ul>
+
+    <p>
+    The items in the lists above that have to be acted upon are not interesting
+    because they must be carried out and can not be avoided. Consequently, the
+    items that may be acted upon become interesting and if, for brevity sake, we
+    agree to call ARMing ICSB <dfn>refactoring</dfn>, then a question of interest
+    is:
+    </p>
+
+    <p class="center">
+    <dfn>how does component's refactoring affect its external dependencies?</dfn>
+    </p>
+
+    <p>
+    In the branch of theoretical physics called classical mechanics there is
+    the Principle of Least Action. Its Hamiltonian, and most used, formulation
+    states that the first variation of the integral of a Lagrangian of a system
+    over time vanishes. Using the mathematical apparatus of the calculus of
+    variations the principle may be stated as follows:
+    </p>
+
+$$\delta \int_{t_1}^{t_2}L(q(t), \dot q(t)) dt = 0$$
+
+    <p>
+    Here \(L\) is the system's Lagrangian, the difference between the kinetic and
+    the potential energies, \(q(t)\) is a complete set of generalized independent
+    coordinates whose number is determined by the number of the system's degrees
+    of freedom - the number of ways an independent motion in a system can occur,
+    and \(\dot q(t) = \frac {dq}{dt}\) is a set of the corresponding velocities
+    - first derivatives of coordinates over time. The integral itself is called
+    "action".
+    </p>
+
+    <p>
+    In a more plain and somewhat simplified English the above principle means
+    that out of all the possible trajectories that a system can take during motion
+    between times \(t_1\) and \(t_2\) the actual or the true ones will be those
+    for which the action is least or stationary.
+    </p>
+
+    <p>
+    C programming may not be as glorious as theoretical physics but here,
+    similarly, I propose the Principle of Least Sum:
+    </p>
+
+    <p>
+    <dfn>out of all the possible source code arrangements that one should be
+    chosen which minimizes the sum total of all the files that must be changed
+    in order to ARM ICSB:</dfn>
+    </p>
+
+$$\sum_i f_i^{\Delta} = min$$
+
+    <p>
+    Here \(\Delta\) represents a change, \(f_i^{\Delta}\) represents a file that
+    must be changed in order to accommodate the requirement(s) change and the
+    sum is called a <dfn>refactoring sum</dfn>.
+    </p>
+
+    <p>
+    Within a single human-readable source code file the principle is applied to
+    the language-specific constructs - functions, for example. Within functions
+    the principle is applied to statements, within statements - to keywords and
+    expressions, within expressions - to terms and operators, within terms - to
+    variables and so on.
+    </p>
+
+    <p>
+    A similar to Principle of Least Action but different parallel may be drawn
+    between the Principle of Least Sum and the concept of efficiency of a
+    computer science (CS) algorithm which is captured in a
+    \(O(g(n)), n \in N, n \to + \infty \) notation, where \(n\) is the number of
+    items that a given CS algorithm must process.
+    </p>
+
+    <p>
+    Between two CS algorithms performing the same task the one with the slowest
+    growing \(g(n)\) when \(n \to +\infty \) is classified as <dfn>more
+    efficient</dfn>.
+    </p>
+
+    <p>
+    Regardless of how a given source code arrangement is qualified, patterned or
+    non-patterned, it will react to refactoring in a certain way. To introduce a
+    numeric characteristic to gauge or quantify the consequences of refactoring
+    I suggest that the above sum is used.
+    </p>
+
+    <p>
+    Let us call the numeric value of a refactoring sum the <dfn>refactoring cost
+    of a given source code arrangement</dfn> or just <dfn>the cost</dfn>. Let us
+    call <dfn>cost analysis</dfn> the process of computation of the above cost.
+    In the early chapters we will do this analysis together while in the later
+    chapters you are encouraged to do it yourself even if an explicit request to
+    do so is absent.
+    </p>
+ 
+    <p>
+    Refactoring is a sweeping concept that absorbs everything from changing the
+    value of a single bit in a mask to changing a behavior of a data type. To
+    experience refactoring in its rudimentary manifestation observe the following
+    code (in <span id="inlncode">cat.c</span>):
+    </p>
+
+    <p id="srccode">extern int
+main( int argc, char* argv[] )
+{
+	ssize_t		n;
+	char		buf[ 1024 ];
+	int		fd = open( "/path/to/a/file", O_RDONLY );
+
+	while ( ( n = read( fd, buf, 1024 ) ) > 0 )
+	{
+		write( fileno( stdout ), buf, n );
+	}
+
+	close( fd );
+
+	return 0;
+}</p>
+
+    <p>
+    which works perfectly fine and does exactly what it is asked to do but carries
+    the cost of \(3\) against "cat a different disk file" requirement.
+    </p>
+
+    <p>
+    Proof: to copy a different disk file the following files must be changed:
+    1) <span id="inlncode">cat.c</span>, 2) <span id="inlncode">cat.o</span>,
+    3) <span id="inlncode">cat</span>.
+    </p>
+
+    <p>
+    In contrast, the following implementation of the same task in
+    <span id="inlncode">cat'.c</span>:
+    </p>
+
+    <p id="srccode">	...
+
+	int		fd = open( argv[ 1 ], O_RDONLY );
+
+	...
+</p>
+
+    <p>
+    carries the cost of \(0\) against the same requirement. As such,
+    <span id="inlncode">cat'.c</span> is classified as having a lower refactoring
+    cost than <span id="inlncode">cat.c</span> against the given requirement.
+    </p>
+
+    <p>
+    However, <span id="inlncode">cat'.c</span> carries the cost of \(3\) against
+    "copy output to an arbitrary disk file" requirement (prove it). Assume that
+    <span id="inlncode">cat''.c</span> addresses that issue and carries the cost
+    of \(0\) against that requirement. Still,
+    <span id="inlncode">cat''.c</span> carries a non-zero cost against "use a
+    different byte I/O mechanism" requirement as it can not be used to move bytes
+    between hosts, for example, and the list of requirements that can be imposed
+    on a given source code arrangement goes on.
+    </p>
+
+    <p>
+    The patterns presented in this text attempt to minimize the refactoring costs
+    of source code arrangements against specific requirements.
+    </p>
+
+    <p>
+    <br><strong>Prerequisites</strong>
+    </p>
+
+    <p>
+    Not much is needed to work through the code in this text. Modern IDEs and make
+    files are not required but can be used, of course, if you wish. However, a bare
+    minimum will do:
+    </p>
+
+    <ul>
+    <li>a computing device</li>
+    <li>an operating system</li>
+    <li>a text editor</li>
+    <li>an ANSI C Compiler/Linker</li>
+    <li>a debugger, optional</li>
+    <li>a command line prompt</li>
+    </ul>
+
+    <p>
+    My choices were:
+    </p>
+
+    <ul>
+    <li>a laptop</li>
+    <li>a 64-bit processor</li>
+    <li>64-bit OpenSUSE Linux distribution</li>
+    <li><span id="inlncode">vi</span></li>
+    <li><span id="inlncode">gcc</span></li>
+    <li><span id="inlncode">gdb</span></li>
+    <li><span id="inlncode">xterm</span></li>
+    </ul>
+
+    <p>
+    <br><strong>Code</strong>
+    </p>
+
+    <p>
+    Each design pattern implementation is accompanied with:
+    </p>
+
+    <ul>
+     <li>full source code in its entirety (or a description of how to get it)</li>
+     <li>compile command(s)</li>
+     <li>link command(s)</li>
+     <li>execution command(s)</li>
+     <li>output, if any</li>
+     <li>design cost analysis</li>
+    </ul>
+
+    <p>
+    For obvious reasons the code will be minimal with virtually no error handling
+    except where absolutely needed.
+    </p>
+
+    <p>
+    While putting a pattern together we will start with a bare minimum also -
+    just one function. It will quickly become evident that initially this is all
+    that is needed. Later on, after the pattern's tiny framework is in place and
+    functioning properly, you are encouraged to add more functions to it as you
+    see fit.
+    </p>
+
+    <p>
+    Lastly, I have no intention of keeping up with the quickly changing version
+    numbers of compilers and operating systems. The only thing I can guarantee is
+    that all the code presented in this book compiled without warnings at
+    publishing time.
+    </p>
+
+    <p>
+    <br><strong>Final Observations</strong>
+    </p>
+
+    <p>
+    You can read the chapters in any order you wish. However, to derive the
+    most benefit it would be most advantageous to read the encapsulation and
+    creational chapters in order first since the ADT pattern, for example,
+    is used throughout the rest of the text.
+    </p>
+
+    <p>
+    Before you start typing consult your local documentation and find out how to:
+    </p>
+
+    <ul>
+    <li>build an application that uses at least one library</li>
+    <li>build a shared library, see below</li>
+    <li>load a shared library at run time</li>
+    <li>find an address of a symbol at run time</li>
+    </ul>
+    
+    <p>
+    We will use only shared or dynamic libraries in this book and the following
+    commands to build them:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libfoo.c
+gcc -g -shared -o libfoo.so libfoo.o</p>
+
+    <p>
+    The first line above only compiles a position-independent code into an object
+    file, <span id="inlncode">libfoo.o</span>. The second line takes that object
+    file and packages it into a shared library, <span id="inlncode">libfoo.so</span>
+    </p>
+
+    <p>
+    Shared libraries on Apple traditionally carry the <span id="inlncode">.dylib</span>
+    extension. On Windows it is <span id="inlncode">.dll</span>. Find the specifics
+    for your system.
+    </p>
+
+    <p>
+    To build an application that uses a library we will use the following
+    commands:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . app.c
+gcc -g -L . -o app app.c -lfoo</p>
+
+    <p>
+    The first line above only compiles a source  file into an object file. The
+    second line packages it into an application and records the fact that it has
+    to load a certain library at start up. On UNIX/Linux you may have to set and
+    export <span id="inlncode">LD_LIBRARY_PATH</span> environment variable. Again,
+    your compiler/linker flags may differ. Find the equivalents.
+    </p>
+    
+    <p>
+    To load a library at run time UNIX/Linux uses
+    <span id="inlncode">dlopen()</span>. On  Windows it is
+    <span id="inlncode">LoadLibrary()</code>.
+    </p>
+ 
+    <p>
+    To find a symbol's address at run time UNIX/Linux uses
+    <span id="inlncode">dlsym()</span>. On Windows it is
+    <span id="inlncode">GetProcAddress()</span>.
+    </p>
+
+    <p>
+    <br>For UNIX/Linux Users
+    </p>
+
+    <p>
+    <span id="inlncode">dlopen()/dlsym()</span> functions are first used in
+    Factory chapter. Do a little bit of leg work prior. Read the man page. Vendors
+    and distributions vary on minutia. For example, OpenSUSE insisted on the
+    presence of <span id="inlncode">_GNU_SOURCE</span> symbol in order to recognize
+    <span id="inlncode">RTLD_DEFAULT</span>. It also insisted on the presence of
+    <span id="inlncode">-ldl</span>:
+    </p>
+
+    <p id="cmdln">gcc -g -D_GNU_SOURCE -c -fPIC -I . libfoo.c
+gcc -g -shared -o libfoo.so libfoo.o -ldl</p>
+
+    <p>
+    A popular UNIX derivative required neither and the following worked just fine:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libfoo.c
+gcc -g -shared -o libfoo.so libfoo.o</p>
+
+    <p>
+    Find out your system's particulars.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top"> top</a>
+     <a href="ryapdpicpreface.html">prev</a>
+     <a href="ryapdpicencapsulation.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

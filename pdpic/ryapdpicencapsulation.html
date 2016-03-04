@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Encapsulation Patterns
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Encapsulation Patterns</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicintro.html">prev</a>
+     <a href="ryapdpichandle.html">next</a>
+    </p>
+
+    <h1>Encapsulation Patterns</h1>
+
+    <p>
+    In this text encapsulation is interpreted as two related concepts. As the
+    first concept encapsulation means hiding information. As the second concept
+    encapsulation means binding data and functions together while hiding
+    information.
+    </p>
+
+    <p>
+    Both concepts are the pivoting point of the pattern-based implementations
+    of a custom data type in C. The emphasis of these implementations is on the
+    mechanics of constructing a custom data type with C primitives only -
+    <span id="inlncode">int</span>s, <span id="inlncode">char</span>s and the
+    like.
+    </p>
+
+    <p>
+    <strong>Motivation</strong>
+    </p>
+
+    <p>
+    Since its inception in the mid 1940s the entity we now call "software"
+    meaning "source code" or, even simpler, just "code" underwent quite a
+    remarkable transformation. From flipping physical switches to the zeros
+    and ones of machine code to the <span id="inlncode">mov</span> and
+    <span id="inlncode">bne</span> mnemonics of the assembly language to a more
+    easily decipherable though sometimes still rather mysterious algebraic
+    expressions of C.
+    </p>
+
+    <p>
+    We may argue that the above evolution was driven in part by the desire of
+    programmers to deal with the omnipresent necessity of change in a graceful
+    way. We may further conjecture that during this evolution it became evident
+    that software, in general, possesses a certain type of duality. On the one
+    hand, software has some number of parts that are least likely to change over
+    time. On the other hand, it has another set of parts that are more likely
+    to change as time goes by. Both types of parts must somehow coexist. 
+    </p>
+
+    <p>
+    For example, it is likely that the way a comparison instruction is encoded
+    may change even within the same line of processor types. Wouldn't it be
+    convenient to have a stand in for it that wouldn't change? A
+    <span id="inlncode">cmp</span> perhaps? May be then it would be possible
+    to use the same code on the same hardware without much revision?
+    </p>
+
+    <p>
+    Within the processors of completely different types a comparison operation
+    name, the names of registers it uses and its overall format is likely to be
+    different. Wouldn't it be convenient to have one stand in for it that will
+    not change? An <span id="inlncode">if</span> perhaps? May be then it would
+    be possible to use the same code on different types of hardware without
+    much revision?
+    </p>
+
+    <p>
+    The number and placement of and the arguments to <span id="inlncode">if</span>
+    statements may change but a logical name for this collection of statements
+    will likely stay the same - thus a function is born.
+    </p>
+
+    <p>
+    Functions will come and go but the logical name for their collection and the
+    physical envelope containing them will likely stay the same - thus a library
+    comes to be.
+    </p>
+
+    <p>
+    Libraries and applications will come and go but their logical name and what
+    they essentially do will remain the same - thus a project is conceived. And
+    so on.
+    </p>
+
+    <p>
+    <strong>Key Idea</strong>
+    </p>
+
+    <p>
+    Let us now call the part of software that is most likely to change over time
+    its <dfn>implementation</dfn> and let us call the part that is least likely
+    to change over time its <dfn>interface</dfn>.
+    </p>
+
+    <p>
+    From the practical observation of software's duality and the programmer's
+    grapevine we are now ready to put forward the following idea:
+    </p>
+
+    <p>
+    <dfn>- separate the interface from the underlying implementation by making
+    the former public and the latter private</dfn>
+    </p>
+
+    <p>
+    <dfn>- allow users to manipulate the implementation only via its
+    interface</dfn>
+    </p>
+
+    <p>
+    Let us now switch from the previously somewhat vague entity we call "software"
+    to a more concrete concept of a single custom C data type, keeping in mind
+    the fact that to some extent and in the context of this category of design
+    patterns "software" boils down to a collection of "custom C data types".
+    </p>
+
+    <p>
+    As such, we reason that an interface - a collection of public functions that
+    manipulate a given data type - is less likely to change while implementation
+    - everything else that makes this data type usable - is more likely to change.
+    </p>
+
+    <p>
+    The Handle and the ADT patterns are two similar but different implementations
+    of the suggested above separation of labor between the two portions of a
+    data type. The name "Handle" should be self-explanatory. The abbreviation
+    "ADT" stands for "Abstract Data Type".
+    </p>
+
+    <p>
+    Both patterns:
+    </p>
+
+    <p>
+    1) Establish a logical border between the data type's interface and its
+    implementation by dividing it into two distinct portions
+    </p>
+
+    <p>
+    2) Make the data type's interface public
+    </p>
+
+    <p>
+    3) Make the data type's implementation private
+    </p>
+
+    <p>
+    4) Allow the variables of the corresponding type to be manipulated only via
+    this type's interface
+    </p>
+
+    <p>
+    The difference between the two patterns will become evident soon enough but
+    for now we shall highlight the fact that while Handle just hides information,
+    ADT, in addition, combines its data and public functions into one inseparable
+    whole.
+    </p>
+
+    <p>
+    <strong>Mechanics</strong>
+    </p>
+
+    <p>
+    The encapsulation patterns are a standard-conforming combination of the C
+    language-specific and language-independent features. The Handle pattern
+    relies on the way C treats incomplete data types. The ADT pattern relies on
+    the way the C Standard governs the placement of members within a structure.
+    </p>
+
+    <p>
+    Both patterns package their final solution into a shared library.
+    </p>
+
+    <p>
+    To control the life cycle of variables of their types both patterns
+    provide four public pair-wise complimentary functions -
+    <span id="inlncode">typeNew()</span> and <span id="inlncode">typeDelete()</span>,
+    the first pair, and <span id="inlncode">typeConstruct()</span> and
+    <span id="inlncode">typeDestruct()</span>, the second pair.
+    </p>
+
+    <p>
+    <span id="inlncode">typeNew()</span>, and its complement
+    <span id="inlncode">typeDelete()</span>, operate in two stages. In the first
+    stage they allocate/free raw bytes from the default dynamic memory store
+    available to C programs - heap (or malloc arena). In the second stage they
+    initialize/destroy the allocated memory block by invoking the corresponding
+    complementary functions of the second pair before returning. In the upcoming
+    chapters we will look at the implementation of these functions in great detail.
+    This is just a highlight:
+    </p>
+
+    <p id="srccode">extern type_t*
+typeNew()
+{
+	size_t		bytesneeded = typeSizeOf();
+
+	void*		rawmemory = calloc( bytesneeded, sizeof( char ) );
+
+	type_t*		v = typeConstruct( rawmemory );
+
+	return v;
+}
+
+extern void
+typeDelete( type_t** v )
+{
+	typeDestruct( *v );
+
+	free( *v );
+
+	*v = ( type_t* )NULL;
+}</p>
+
+    <p>
+    Here <span id="inlncode">typeSizeOf()</span> is a public function that
+    returns the raw memory requirements for a variable of a given type.
+    </p>
+
+    <p>
+    Since <span id="inlncode">typeNew()</span> initializes a variable prior to
+    returning it to the user there is no need to call
+    <span id="inlncode">typeConstruct()</span> separately. Further, if a variable
+    was created with <span id="inlncode">typeNew()</span> then it should be
+    disposed of with <span id="inlncode">typeDelete()</span>, in which case a
+    separate call to <span id="inlncode">typeDestruct()</span> is not needed also:
+    </p>
+
+    <p id="srccode">type_t*		v = typeNew();
+
+typeDoSomething( v );
+
+typeDelete( &v );
+
+/*
+    Now v == ( type_t* )NULL
+ */</p>
+
+    <p>
+    Creating variables at locations whose addresses can not be specified explicitly
+    (on the heap) should accommodate a wide range of scenarios. However, with the
+    complimentary functions of the second pair variables of encapsulated data types
+    can be brought to life at arbitrary (possibly heap) addresses.
+    <span id="inlncode">typeConstruct()</span>, and its complement
+    <span id="inlncode">typeDestruct()</span>, are only concerned with turning
+    the passed in memory block into either a fully functional variable,
+    <span id="inlncode">typeConstruct()</span>, or a meaningless jungle of
+    zeros and ones, <span id="inlncode">typeDestruct()</span>:
+    </p>
+
+    <p id="srccode">extern type_t*		typeConstruct( void* );
+extern void		typeDestruct( type_t* );</p>
+
+    <p>
+    Consequently, if a variable was animated or initialized - not created - at
+    an arbitrary address via <span id="inlncode">typeConstruct()</span> it should
+    be destructed - not deleted - with <span id="inlncode">typeDestruct()</span>:
+    </p>
+
+    <p id="srccode">void*		rawmem = fromCustomMemory( typeSizeOf() );
+type_t*		v = typeConstruct( rawmem );
+
+typeDoSomething( v );
+
+typeDestruct( v );
+
+/*
+   v is not NULL, just destructed.
+ */</p>
+
+    <p>
+    <strong>Consequences</strong>
+    </p>
+
+    <p>
+    In the corresponding chapters we will examine the overall cost of each pattern
+    separately and in great detail. Here we will address a more fundamental issue
+    - encapsulation patterns hide information that at times must be exposed. In
+    that light, when it comes to actual manipulation of variables of encapsulated
+    data types is it possible to:
+    </p>
+
+    <p>
+    1) Perform pointer arithmetic on them?<br>
+    2) Create a C array of them?<br>
+    3) Copy them?<br>
+    4) Compare them?<br>
+    5) Create a composite encapsulated data type?<br>
+    6) Write/read them to/from socket or disk file?<br>
+    </p>
+
+    <p>
+    1) Encapsulated data types are either fully incomplete (Handle) or
+    partially complete (ADT). In any case they are not fully complete as far
+    as C compiler working on the user code is concerned. The traditional
+    data type-based C pointer arithmetic <dfn>for end users</dfn> is not possible.
+    Internally it can still be done.
+    </p>
+
+    <p>
+    2) For the same reasons if a C array of variables of encapsulated types is
+    needed then the only type of C array that can be created is an array of pointers
+    (to variables of encapsulated data types).
+    </p>
+
+    <p>
+    3) Copying (duplicating, cloning) variables of encapsulated data types can be
+    done via its public interface. Internally the usual C rules of structure/union
+    copying still apply.
+    </p>
+
+    <p>
+    4) Same as above.
+    </p>
+
+    <p>
+    5) A composite encapsulated data type is an encapsulated type built with
+    previously implemented encapsulated types. See Composition and
+    Aggregation chapters for implementation details.
+    </p>
+
+    <p>
+    6) In descending order of generality and/or elegance some of the choices are:
+    </p>
+
+    <p>
+    6.1) Define a public interface to convert a variable of an encapsulated data
+    type into a C array of <span id="inlncode">unsigned char</span> bytes and,
+    conversely, a C array of <span id="inlncode">unsigned char</span> bytes back
+    into a variable of an encapsulated data type:
+    </p>
+
+    <p id="srccode">extern unsigned char*		typeToBytes( type_t*, size_t* );
+extern type_t*			typeFromBytes( unsigned char*, size_t );</p>
+
+    <p>
+    Both functions will likely be symmetrical - know how the other one works. If
+    an array of bytes processed by <span id="inlncode">ToBytes()</span> is fed
+    into <span id="inlncode">FromBytes()</span> then the resulting variable
+    should be an exact copy of its original.
+    </p>
+
+    <p>
+    6.2) Use inversion: define a public interface that takes an
+    <span id="inlncode">int</span> file descriptor as an argument, for example,
+    and uses it internally with <span id="inlncode">read()/write()</span>.
+    </p>
+
+    <p>
+    6.3) Define a public function that returns a pointer to an internal variable
+    of a primitive C data type.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicintro.html">prev</a>
+     <a href="ryapdpichandle.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

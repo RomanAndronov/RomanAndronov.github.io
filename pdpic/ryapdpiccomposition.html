@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Composition
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Composition</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicchainedlinking.html">prev</a>
+     <a href="ryapdpicintegralparts.html">next</a>
+    </p>
+
+    <h1>Composition</h1>
+
+    <p>
+    In the previous chapters we have examined how Handle and ADT may be used to
+    implement an encapsulated custom C data type which consists of primitive
+    C data types only. In the upcoming chapters we will investigate how existing
+    encapsulated custom C data types may be used to assemble a new, also
+    encapsulated, custom C data type.
+    </p>
+
+    <p>
+    We will distinguish three ways in which a whole - a new encapsulated
+    custom C data type - may absorb its parts - previously constructed
+    encapsulated custom C data types:
+    </p>
+
+    <ul>
+     <li>integral</li>
+     <li>non-integral owned</li>
+     <li>non-integral rented</li>
+    </ul>
+
+    <p>
+    An <dfn>integral</dfn> is a part that must be permanently embedded in a whole
+    - created in the same block of memory. By its definition a life time of an
+    integral part is equal to that of it containing whole.
+    </p>
+
+    <p>
+    A <dfn>non-integral owned</dfn> is a part that does <dfn>not</dfn> have to be
+    permanently embedded in a whole but its life time has to be equal to that of
+    it containing whole nonetheless. In this context "owned" means that a whole
+    still has to manage this part's life cycle by creating and deleting it.
+    </p>
+
+    <p>
+    A <dfn>non-integral rented</dfn> is a part that does not have to be permanently
+    embedded in it containing whole and its life time is of no consequence to that
+    whole. In this context "rented" means that a whole completely ignores the fact
+    that a pointer to some variable is a (permanent) part of its definition.
+    </p>
+
+    <p>
+    A whole can and usually does employ any combination of the above membership
+    types. A part, on the other hand, should participate in one type of membership
+    only. Concrete requirements at hand determine the appropriate membership type.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicchainedlinking.html">prev</a>
+     <a href="ryapdpicintegralparts.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

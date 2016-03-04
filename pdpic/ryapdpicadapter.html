@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Adapter
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Adapter</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicstruct.html">prev</a>
+     <a href="ryapdpicdecorator.html">next</a>
+    </p>
+    
+    <h1>Adapter</h1>
+
+    <p>
+    Adapter is an impersonating pattern that may be used when one existing data
+    type, adaptee, must be brought into the fold of another existing data type,
+    target, while the two data types are incompatible.
+    </p>
+
+    <p>
+    In practice it is often the case that adaptee's source code either can not be
+    modified or is not available altogether.
+    </p>
+
+    <p>
+    The Adapter pattern consequences:
+    </p>
+
+    <ul>
+     <li>Target data type can modify adaptee data type's behavior</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Add <span id="inlncode">fax_t</span> to <span id="inlncode">bio_t</span>
+    from Factory chapter, assuming that the <span id="inlncode">bio_t</span> data
+    type and its dependencies existed for a long period of time.
+    </p>
+
+    <p>
+    This fax library comes with the <span id="inlncode">fax.h</span> header file,
+    <span id="inlncode">libfax.so</span> shared library and provides the following
+    functionality (not shown here, see Exercises):
+    </p>
+
+    <ul>
+     <li><span id="inlncode">initFax()</span></li><br>
+     <li><span id="inlncode">uninitFax()</span></li><br>
+     <li><span id="inlncode">dialFaxNumber()</span></li><br>
+     <li><span id="inlncode">acceptFax()</span></li><br>
+     <li><span id="inlncode">sendFax()</span></li><br>
+     <li><span id="inlncode">receiveFax()</span></li><br>
+     <li><span id="inlncode">hangupFax()</span></li><br>
+    </ul>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Add the ability to attach multiple similar but different implementations
+    to the target's data type.
+    </p>
+
+    <p>
+    2) Add the adaptee's data type to that of the target.
+    </p>
+
+    <p>
+    3) For each public adaptee's interface find the closest target's equivalent
+    and convert the former into the latter.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    The target data type, <span id="inlncode">bio_t</span>, already supports the
+    addition of multiple different but similar implementations to a common
+    interface.
+    </p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Use <span id="inlncode">"fax"</span> to select the
+    <span id="inlncode">fax_t</span>-based implementation from the I/O Factory.
+    </p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Convert <span id="inlncode">fax_t</span> to <span id="inlncode">bio_t</span>
+    in <span id="inlncode">libbiofax.c:</span>
+    </p>
+
+    <p>
+    - <span id="inlncode">initFax()</span> may or may not have an approptiate
+    <span id="inlncode">bio_t</span> equivalent. We will correlate it with
+    <span id="inlncode">bioConstruct()</span>
+    </p>
+
+    <p>
+    - <span id="inlncode">uninitFax()</span> may or may not have an approptiate
+    <span id="inlncode">bio_t</span> equivalent. We will correlate it with
+    <span id="inlncode">bioDestruct()</span>
+    </p>
+
+    <p>
+    - <span id="inlncode">dialFaxNumber()</span> and
+    <span id="inlncode">acceptFax()</span> correspond to
+    <span id="inlncode">bioOpen()</span>. We will decide on the format of the
+    address string ahead of time: <span id="inlncode">"send:(555)555-5555"</span>
+    address string, for example, will designate a variable used to send faxes
+    while <span id="inlncode">"receive:(555)555-5555"</span> address string will
+    designate a variable used to receive faxes
+    </p>
+
+    <p>
+    - <span id="inlncode">sendFax()</span> corresponds to
+    <span id="inlncode">bioWrite()</span>
+    </p>
+
+    <p>
+    - <span id="inlncode">receiveFax()</span> corresponds to
+    <span id="inlncode">bioRead()</span>
+    </p>
+
+    <p>
+    - <span id="inlncode">hangupFax()</span> corresponds to
+    <span id="inlncode">bioClose()</span>
+    </p>
+
+    <p>
+    In practice number, order and type of arguments of
+    <span id="inlncode">sendFax()</span> and
+    <span id="inlncode">receiveFax()</span> will likely differ from that of
+    <span id="inlncode">bioWrite()</span> and
+    <span id="inlncode">bioRead()</span>. Consequently,
+    <span id="inlncode">bioWriteFax()</span> and
+    <span id="inlncode">bioReadFax()</span> is where the required conversion
+    will take place.
+    </p>
+
+    <p>
+    <span id="inlncode">libbiofax.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include "libbio.h"
+<strong>#include "fax.h"</strong>
+
+typedef struct
+{
+	bio_t		bioadt;
+
+	<strong>fax_t		fax;</strong>
+} biofax_t;
+
+extern int		bioOpenFax( bio_t*, const char* );
+extern ssize_t		bioReadFax( bio_t*, void*, size_t );
+extern ssize_t		bioWriteFax( bio_t*, void*, size_t );
+extern int		bioCloseFax( bio_t* );
+extern void		bioDestructFax( bio_t* );
+
+extern size_t		bioSizeOffax();
+extern bio_t*		bioConstructfax( void* );
+
+static bio_t	faxAdt = 
+{ 
+	bioOpenFax,
+	bioReadFax,
+	bioWriteFax,
+	bioCloseFax,
+	bioDestructFax
+};
+
+
+extern size_t
+bioSizeOffax()
+{
+	return sizeof( biofax_t );
+}
+
+extern bio_t*
+bioConstructfax( void* mem )
+{
+	biofax_t*	biofax = ( biofax_t* )mem;
+
+	biofax->bioadt = faxAdt;
+
+	<strong>initFax( &biofax->fax );</strong>
+
+	return &biofax->bioadt;
+}
+
+extern void
+bioDestructFax( bio_t* bio )
+{
+	biofax_t*	biofax = ( biofax_t* )bio;
+
+	bioCloseFax( bio );
+
+	<strong>uninitFax( &biofax->fax );</strong>
+}
+
+extern int
+bioOpenFax( bio_t* bio, const char* adrs )
+{
+	int		r = 0;
+	char*		a = strchr( adrs, ':' );
+	biofax_t*	biofax = ( biofax_t* )bio;
+
+	if ( *adrs == 's' )
+	{
+		<strong>r = dialFaxNumber( &biofax->fax, a + sizeof( ':' ) );</strong>
+	}
+	else
+	{
+		<strong>r = acceptFax( &biofax->fax, a + sizeof( ':' ) );</strong>
+	}
+
+	return r;
+}
+
+extern ssize_t
+bioReadFax( bio_t* bio, void* b, size_t bsz )
+{
+	size_t		n;
+	biofax_t*	biofax = ( biofax_t* )bio;
+
+	<strong>n = receiveFax( &biofax->fax, b, bsz );</strong>
+
+	return n;
+}
+
+extern ssize_t
+bioWriteFax( bio_t* bio, void* b, size_t bsz )
+{
+	size_t		n;
+	biofax_t*	biofax = ( biofax_t* )bio;
+
+	<strong>n = sendFax( &biofax->fax b, bsz );</strong>
+
+	return n;
+}
+
+extern int
+bioCloseFax( bio_t* bio )
+{
+	biofax_t*	biofax = ( biofax_t* )bio;
+
+	<strong>hangupFax( &biofax->fax );</strong>
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Recalling Chained Linking chapter add <span id="inlncode">libfax.so</span>
+    to the I/O Factory's build instructions.
+    </p>
+
+    <p>
+    <strong>SLBTF:</strong>
+    </p>
+
+    <p id="srccode">gcc -D_GNU_SOURCE -g -shared -o libbio.so \
+	libbio.o \
+    	libbiofile.o \
+	libbiotcpv4.o \
+	libbiotcpv6.o \
+	<strong>libbiofax.o \
+	-lfax</strong> \
+	-ldl</p>
+
+    <p>
+    <strong>MLBTF</strong> and <strong>MLRTF:</strong>
+    </p>
+
+    <p id="srccode">gcc -g -shared -o libbiofax.so libbiofax.o <strong>-lfax</strong></p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Exercise the Adapter pattern with the sample program:
+    </p>
+
+    <p id="cmdln">./bio fax "receive:(555)555-5555"</p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Carry out a mock (or real) implementation of
+    <span id="inlncode">fax_t</span> as described in Sample Problem section.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicstruct.html">prev</a>
+     <a href="ryapdpicdecorator.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

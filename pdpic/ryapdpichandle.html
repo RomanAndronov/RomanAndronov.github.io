@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Handle
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Handle</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicencapsulation.html">prev</a>
+     <a href="ryapdpicadt.html">next</a>
+    </p>
+    
+    <h1>Handle</h1>
+
+    <p>
+    The Handle pattern may be used to encapsulate a data type by separating its
+    interface from implementation and by making the former public and the latter
+    private. A variable of a data type encapsulated as Handle can be manipulated
+    via its interface only. Handle is packaged into a header file and a shared
+    library.
+    </p>
+
+    <p>
+    The Handle pattern consequences:
+    </p>
+
+    <ul>
+     <li>Data type's interface is separated from its implementation at
+         compile and run times</li>
+     <li>Changes to the data type's implementation do not affect its users</li>
+     <li>Only one implementation can be attached to a given interface</li>
+     <li>Short of using <span id="inlncode">alloca()</span> the traditional stack
+         frame variables of this data type can not be created</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Implement a custom string data type.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Declare an incomplete data type in a public header file. Either forward
+    declaration, <span id="inlncode">struct type</span>, or a custom type definition,
+    <span id="inlncode">typedef void type_t</span>, can be used.
+    </p>
+
+    <p>
+    2) Make all the public functions accept a pointer to an incomplete data type.
+    </p>
+
+    <p>
+    3) Implement all the public and private functions and the incomplete data type
+    in its entirety in a <span id="inlncode">.c</span> file. If multiple
+    implementation <span id="inlncode">.c</span> files are needed then put a
+    complete data type definition in a private header file and share that file
+    only with this data type's (private) implementation files - Handle's users
+    should not include it in their code.
+    </p>
+
+    <p>
+    4) Package Handle's implementation files into a shared library.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution Implementation</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    In a public header file <span id="inlncode">libstr.h</span> define an
+    incomplete data type as <span id="inlncode">typedef void str_t</span>
+    (you are encouraged to also experiment with a forward declaration).
+    </p>
+
+    <p>
+    <span id="inlncode">libstr.h:</span>
+    </p>
+
+    <p id="srccode"><strong>#include &lt;sys/types.h&gt;
+
+typedef void str_t;</strong></p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Add the prototypes of the public life cycle functions to the public header
+    file. Because <span id="inlncode">void</span> is a special data type in C
+    make all the public functions accept a "pointer to"
+    <span id="inlncode">str_t</span>.
+    </p>
+
+    <p>
+    The following functions will be present in the form shown below in any and
+    all the data types implemented as Handle. What will most likely differ from
+    one data type to another is the seed information supplied to
+    <span id="inlncode">typeNew()</span> and
+    <span id="inlncode">typeConstruct()</span>. The concrete nature of the custom
+    data type at hand will dictate what that information should be.
+    </p>
+
+    <p>
+    In our particular case it makes sense to pass an optional pointer to a
+    null-terminated C string to <span id="inlncode">strNew()</span> and
+    <span id="inlncode">strConstruct()</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libstr.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef void str_t;
+
+<strong>/*
+   Public interface.
+
+   Life cycle functions.
+ */
+extern str_t*		strNew( const char* );
+extern void		strDelete( str_t** );
+
+extern str_t*		strConstruct( void*, const char* );
+extern void		strDestruct( str_t* );
+
+extern size_t		strSizeOf();</strong></p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    In the public header file add the prototypes of the public functions that
+    will make the custom data type functional and usable. We will start with a
+    comparison function <span id="inlncode">strCmp()</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libstr.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef void str_t;
+
+/*
+   Public interface.
+
+   Life cycle functions.
+ */
+extern str_t*		strNew( const char* );
+extern void		strDelete( str_t** );
+
+extern str_t*		strConstruct( void*, const char* );
+extern void		strDestruct( str_t* );
+
+extern size_t		strSizeOf();
+
+<strong>/*
+   Compare two strings:
+ */
+extern int		strCmp( str_t*, str_t*, int );</strong></p>
+
+    <p>
+    <br><strong>Commentary</strong>
+    </p>
+
+    <p>
+    When Handle is built into a shared library its header file is copied into and
+    expanded in place in the corresponding <span id="inlncode">.c</span> file(s)
+    by the C preprocessor as part of the execution of the
+    <span id="inlncode">#include</span> directive. The C compiler proper operates
+    only in terms of translation units - it knows nothing about the header files.
+    As such, while processing the corresponding <span id="inlncode">.c</span> file,
+    it will first encounter the Handle's incomplete data type. However, later on,
+    the C compiler should discover:
+    </p>
+
+    <p>
+    - the relevant functionality implementation in terms of a complete data type;
+    </p>
+
+    <p>
+    - a way to switch between the incomplete and complete data types;
+    </p>
+
+    <p>
+    For that to occur we will craft our string in a private,
+    <span id="inlncode">libstr.c</span>, file in terms of a private complete data
+    type <span id="inlncode">strimpl_t</span> visible only inside this private
+    implementation file. To switch between <span id="inlncode">str_t</span>
+    and <span id="inlncode">strimpl_t</span> we will use the C typecasting
+    mechanism. It follows then that <span id="inlncode">str_t</span> will play
+    the role of a handle - an opaque pointer - to the underlying data type's
+    state variables.
+    </p>
+    
+    <p>
+    The current translation unit, <span id="inlncode">libstr.c</span>, will
+    have references to two data types. The only references to the incomplete data
+    type will be of type "pointer to" or
+    <span id="inlncode">str_t*</span>. The complete data type will be referenced
+    directly, as <span id="inlncode">strimpl_t</span>, and as a "pointer to" or
+    as <span id="inlncode">strimpl_t*</span>. As such, the C compiler will have
+    no problems converting the human readable source code file,
+    <span id="inlncode">libstr.c</span>, into an object
+    file, <span id="inlncode">libstr.o</span>, and the link editor will have no
+    problems packaging that object file into a fully functional shared library,
+    <span id="inlncode">libstr.so</span>.
+    </p>
+
+    <p>
+    To exercise the functionality of our string users will first include its
+    public header file, <span id="inlncode">libstr.h</span>, in their code which
+    will go through the same motions: eventually the C preprocessor will expand
+    <span id="inlncode">libstr.h</span> and the C compiler will encounter our
+    Handle's incomplete data type definition,
+    <span id="inlncode">typedef void str_t</span>. However, because the only
+    references to <span id="inlncode">str_t</span> will be of type "pointer to"
+    or <span id="inlncode">str_t*</span>, the C compiler will have no problems
+    converting the current translation unit into the corresponding object file.
+    </p>
+
+    <p>
+    However, if the link editor is asked to construct a program - not a library
+    - then, in the absence of the incomplete data type's full definition and
+    implementation, it will first complain about the unresolved references to the
+    encountered string public functions and then it will fail.
+    </p>
+
+    <p>
+    This is where we will close the circle by instructing the link editor to
+    use the Handle's shared library via, perhaps, the
+    <span id="inlncode">-l</span> directive. Whether the path to the Handle's
+    shared library is recorded in the executable image at link time or discovered
+    dynamically at load time, the object files comprising that library will
+    supply the required definitions and the link editor will be able to assemble
+    a fully operational program.
+    </p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Implement the string functionality in a private file,
+    <span id="inlncode">libstr.c</span>, which will delineate the visibility
+    scope of the complete data type <span id="inlncode">strimpl_t</span>.
+    </p>
+
+    <p>
+    If your string library has to be split across multiple
+    <span id="inlncode">.c</span> files then define
+    <span id="inlncode">strimpl_t</span> in a private header file,
+    <span id="inlncode">libstrimpl.h</span> perhaps. Include this private header
+    file in the string's private source files only and nowhere else.
+    </p>
+
+    <p>
+    For demonstration purposes we have added an informative
+    <span id="inlncode">printf()</span> in <span id="inlncode">strCmp()</span>.
+    </p>
+
+    <p>
+    <span id="inlncode">libstr.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;strings.h&gt;
+
+<strong>#include "libstr.h"
+
+/*
+   Complete (implementation) string data type.
+   Only visible inside this (private) file.
+ */</strong>
+typedef struct
+{
+	size_t		bufsz;
+	char*		buf;
+} strimpl_t;
+
+
+extern size_t
+strSizeOf()
+{
+	return sizeof( strimpl_t );
+}
+
+extern str_t*
+strNew( const char* istr )
+{
+	void*		simpl = calloc( 1, strSizeOf() );
+
+	str_t*		s = strConstruct( simpl, istr );
+
+	return s;
+}
+
+extern str_t*
+strConstruct( void* smem, const char* istr )
+{
+	strimpl_t*	s = ( strimpl_t* )smem;
+
+	if ( istr && *istr )
+	{
+		s->bufsz = strlen( istr );
+	}
+	else
+	{
+		s->bufsz = 32;
+	}
+	s->bufsz += sizeof( char );
+
+	s->buf = calloc( s->bufsz, sizeof( char ) );
+
+	if ( istr && *istr )
+	{
+		memcpy( s->buf, istr, s->bufsz );
+	}
+	else
+	{
+		s->buf[ 0 ] = '\0';
+	}
+
+	return ( str_t* )s;
+}
+
+extern void
+strDestruct( str_t* s )
+{
+	strimpl_t*	str;
+
+	if ( !s )
+	{
+		return;
+	}
+
+	str = ( strimpl_t* )s;
+
+	if ( str->buf )
+	{
+		/*
+		   Balances calloc() in strConstruct().
+		 */
+		free( str->buf );
+	}
+
+	memset( str, 0, sizeof( strimpl_t ) );
+}
+
+extern void
+strDelete( str_t** s )
+{
+	if ( !s && !*s )
+	{
+		return;
+	}
+
+	strDestruct( *s );
+
+	/*
+	   Balances calloc() in strNew().
+	 */
+	free( *s );
+
+	*s = ( str_t* )NULL;
+}
+
+extern int
+strCmp( str_t* s1, str_t* s2, int caseSensitive )
+{
+	int		rv;
+	int		( *scmp )( const char*, const char*, size_t );
+	strimpl_t*	str1 = ( strimpl_t* )s1;
+	strimpl_t*	str2 = ( strimpl_t* )s2;
+
+	printf( "%s:%d: strCmp( \"%s\", \"%s\", %d )\n",
+		__FILE__, __LINE__, str1->buf, str2->buf, caseSensitive );
+
+	scmp = caseSensitive ? strncmp : strncasecmp;
+
+	rv = scmp( str1->buf, str2->buf, strlen( str1->buf ) );
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Package the string files into a shared library:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libstr.c
+gcc -g -shared -o libstr.so libstr.o</p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Write a sample program to exercise the Handle pattern.
+    </p>
+
+    <p>
+    <span id="inlncode">str.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libstr.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	str_t*		s1;
+	str_t*		s2;
+
+	if ( argc != 3 )
+	{
+		return 1;
+	}
+
+	s1 = strNew( argv[ 1 ] );
+	s2 = strNew( argv[ 2 ] );
+
+	printf( "Strings s1 and s2 are %s equal.\n",
+		strCmp( s1, s2, 1 ) ? "not" : "" );
+
+	strDelete( &s1 );
+	strDelete( &s2 );
+
+	return 0;
+}</p>
+
+    <p>
+    In the code above variables <span id="inlncode">s1</span> and
+    <span id="inlncode">s2</span> play the role of run time handles while the
+    data type <span id="inlncode">str_t</span> plays the role of a compile time
+    handle. In either case a handle is an opaque pointer to the entity's state
+    which exists in distinct separation from its interface.
+    </p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Build the sample application. We will link the string library in explicitly:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . str.c
+gcc -g -L . -o str str.o -lstr</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Run the sample application with various inputs:
+    </p>
+
+    <p id="cmdln">./str hello world
+<span class="italic">libstr.c:117: strCmp( "hello", "world", 1 )
+Strings s1 and s2 are not equal.</span>
+
+./str hello hello
+<span class="italic">libstr.c:117: strCmp( "hello", "hello", 1 )
+Strings s1 and s2 are  equal.</span></p>
+
+    <p>
+    <br><strong>Cost Analysis</strong>
+    </p>
+
+    <p>
+    The sum total of all the files that must be modified to accommodate a change
+    to <span id="inlncode">strimpl_t</span> is equal to three:
+    </p>
+
+    <p>
+    1) <span id="inlncode">libstr.c</span><br>
+    2) <span id="inlncode">libstr.o</span><br>
+    3) <span id="inlncode">libstr.so</span><br>
+    </p>
+
+    <p>
+    Proof:
+    </p>
+
+    <p>
+    Let us assume that to improve the performance of our string library we want
+    to add an extra state variable that will store the actual length of the
+    current string at all times, <span id="inlncode">slen</span>. This state
+    variable is not to be confused with the already existing state variable that
+    stores the size of the allocated buffer, <span id="inlncode">bufsz</span>.
+    </p>
+
+    <p>
+    The steps required to implement the above change are:
+    </p>
+
+    <p>
+    - Add <span id="inlncode">size_t slen</span> to
+    <span id="inlncode">strimpl_t</span> in <span id="inlncode">libstr.c</span>:
+    </p>
+
+    <p id="srccode">typedef struct
+{
+	size_t		bufsz;
+	char*		buf;
+	<strong>size_t		slen;</strong>
+} strimpl_t;</p>
+
+    <p>
+    - Addjust <span id="inlncode">strConstruct()</span> and
+    <span id="inlncode">strCmp()</span> in <span id="inlncode">libstr.c</span>:
+    </p>
+
+    <p id="srccode">extern str_t*
+strConstruct( void* smem, const char* istr )
+{
+	...
+
+	s->buf = calloc( s->bufsz, sizeof( char ) );
+
+	if ( istr && *istr )
+	{
+		memcpy( s->buf, istr, s->bufsz );
+		<strong>s->slen = s->bufsz - sizeof( char );</strong>
+	}
+	else
+	{
+		s->buf[ 0 ] = '\0';
+		<strong>s->slen = 0;</strong>
+	}
+
+	return ( str_t* )s;
+}
+
+extern int
+strCmp( str_t* s1, str_t* s2, int caseSensitive )
+{
+	int		rv;
+	int		( *scmp )( const char*, const char*, size_t );
+	strimpl_t*	str1 = ( strimpl_t* )s1;
+	strimpl_t*	str2 = ( strimpl_t* )s2;
+
+	printf( "%s:%d: strCmp( \"%s\", \"%s\", %d )\n",
+		__FILE__, __LINE__, str1->buf, str2->buf, caseSensitive );
+
+	scmp = caseSensitive ? strncmp : strncasecmp;
+
+	rv = scmp( str1->buf, str2->buf, <strong>str1->slen</strong> );
+
+	return rv;
+}</p>
+
+    <p>
+    - Rebuild the <span id="inlncode">libstr.o</span> file:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libstr.c</p>
+
+    <p>
+    - Rebuild the <span id="inlncode">libstr.so</span> file:
+    </p>
+
+    <p id="cmdln">gcc -g -shared -o libstr.so libstr.o</p>
+
+    <p>
+    The <span id="inlncode">str</span> application is impervious to the above
+    change.
+    </p>
+
+    <p>
+    <br><strong>From Here</strong>
+    </p>
+
+    <p>
+    Using string length as a sample new public function here is how to add it to
+    our string's interface:
+    </p>
+
+    <p>
+    - Add a new function prototype to the public header file,
+    <span id="inlncode">libstr.h</span>:
+    </p>
+
+    <p id="srccode">extern size_t	strLength( str_t* );</p>
+
+    <p>
+    - Implement the new public function in the <span id="inlncode">libstr.c</span>
+    file:
+    </p>
+
+    <p id="srccode">extern size_t
+strLength( str_t* s )
+{
+	strimpl_t*		str = ( strimpl_t* )s;
+
+	return str->slen;
+}</p>
+
+    <p>
+    - Rebuild the string library:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libstr.c
+gcc -g -shared -o libstr.so libstr.o</p>
+
+    <p>
+    - Rebuild the relevant dependencies on the string library only if they have
+    been modified to reflect the changes in <span id="inlncode">str_t</span>'s
+    public interface. Observe here that the dependencies that wish to ignore
+    these changes do not have to be rebuilt. For example, if we have added
+    <span id="inlncode">strLength()</span> to our string library then without
+    any further changes, as is, our sample program <span id="inlncode">str</span>
+    will work without recompilation.
+    </p>
+
+    <p>
+    <br><strong>Automation</strong>
+    </p>
+
+    <p>
+    To eliminate the repetitive typing it is possible to automate the initial
+    Handle's implementation process. Below is a sample template consisting of
+    two files, <span id="inlncode">libhandle.h</span> and
+    <span id="inlncode">libhandle.c</span>, which contain the name
+    <span id="inlncode">TYPE</span> as a stand in for the name of the data
+    type of your choice, the initial set of life cycle functions and one sample
+    data type manipulation function.
+    </p>
+
+    <p>
+    <span id="inlncode">libhandle.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef void TYPE_t;
+
+extern TYPE_t*		TYPENew();
+extern void		TYPEDelete( TYPE_t** );
+
+extern TYPE_t*		TYPEConstruct( void* );
+extern void		TYPEDestruct( TYPE_t* );
+
+extern size_t		TYPESizeOf();
+
+extern int		TYPEFunc( TYPE_t* );</p>
+
+    <p>
+    <span id="inlncode">libhandle.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;strings.h&gt;
+#include "libTYPE.h"
+
+typedef struct
+{
+	/*
+	   State variables go here.
+	 */
+} TYPEimpl_t;
+
+extern size_t
+TYPESizeOf()
+{
+	return sizeof( TYPEimpl_t );
+}
+
+extern TYPE_t*
+TYPENew()
+{
+	void*		impl = calloc( 1, TYPESizeOf() );
+
+	TYPE_t*		v = TYPEConstruct( impl );
+
+	return v;
+}
+
+extern TYPE_t*
+TYPEConstruct( void* mem )
+{
+	TYPEimpl_t*	t = ( TYPEimpl_t* )mem;
+
+	/*
+	   Construction code goes here.
+	 */
+
+	return ( TYPE_t* )t;
+}
+
+extern void
+TYPEDestruct( TYPE_t* t )
+{
+	TYPEimpl_t*	timpl;
+
+	if ( !t )
+	{
+		return;
+	}
+
+	/*
+	   Destruction code goes here.
+	 */
+	timpl = ( TYPEimpl_t* )t;
+}
+
+extern void
+TYPEDelete( TYPE_t** t )
+{
+	if ( !t && !*t )
+	{
+		return;
+	}
+
+	TYPEDestruct( *t );
+
+	free( *t );
+
+	*t = ( TYPE_t* )NULL;
+}
+
+extern int
+TYPEFunc( TYPE_t* t )
+{
+	TYPEimpl_t*	timpl = ( TYPEimpl_t* )t;
+
+	return 0;
+}</p>
+
+    <p>
+    A sample Korn shell script below accepts a name of a custom data type as an
+    argument, copies the Handle's template files into the new ones named after
+    the given type and replaces the name <span id="inlncode">TYPE</span> with the
+    given one.
+    </p>
+
+    <p>
+    <span id="inlncode">mkhandle.sh:</span>
+    </p>
+
+    <p id="srccode">#!/bin/ksh
+
+TP="$1"
+cat libhandle.h | sed "s/TYPE/"${TP}"/g" > lib${TP}.h
+cat libhandle.c | sed "s/TYPE/"${TP}"/g" > lib${TP}.c</p>
+
+    <p>
+    Run this script as follows:
+    <p>
+
+    <p id="cmdln">./mkhandle.sh str</p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Implement the four popular container types - an array, a list, a binary
+    tree and a hash table - as Handles.
+    </p>
+
+    <p>
+    2) A sample implementation of <span id="inlncode">strToBytes()</span> below
+    returns a C array of unsigned characters which begins with
+    <span id="inlncode">sizeof(size_t)</span> bytes containing the overall
+    size of the array, followed by the contents of the string, followed by the null
+    byte. The overall size of the returned array is equal to
+    <span id="inlncode">sizeof(size_t)</span> plus the length of the string plus
+    one for the null byte:
+    </p>
+
+    <p id="srccode">extern unsigned char*
+strToBytes( str_t* str, size_t* nb )
+{
+	unsigned char*		bytes;
+	strimpl_t*		simpl = ( strimpl_t* )str;
+	size_t			ntslen = simpl->slen + sizeof( char );
+
+	*nb = sizeof( *nb ) + ntslen;
+
+	bytes = malloc( *nb );
+
+	memcpy( bytes, nb, sizeof( *nb ) );
+
+	memcpy( bytes + sizeof( *nb ), simpl->buf, ntslen );
+
+	return bytes;
+}</p>
+
+    <p>
+    Implement its counterpart <span id="inlncode">strFromBytes()</span>:
+    </p>
+
+    <p id="srccode">extern str_t*
+strFromBytes( unsigned char* bytes, size_t nb )
+{
+}</p>    
+
+    <p>
+    3) Write a sample program that:
+    </p>
+
+    <p>
+    - converts a string variable into an array of bytes<br>
+    - converts the above array of bytes into a new string variable<br>
+    - compares the original and the new string variables
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/handle/libstr.h" download target="_blank">libstr.h</a>
+    <a href="src/handle/libstr.c" download target="_blank">libstr.c</a>
+    <a href="src/handle/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/handle/str.c" download target="_blank">str.c</a>
+    <a href="src/handle/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    <a href="src/handle/libhandle.h" download target="_blank">libhandle.h</a>
+    <a href="src/handle/libhandle.c" download target="_blank">libhandle.c</a>
+    <a href="src/handle/mkhandle.sh" download target="_blank">mkhandle.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicencapsulation.html">prev</a>
+     <a href="ryapdpicadt.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Singleton
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Singleton</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicprototype.html">prev</a>
+     <a href="ryapdpicstruct.html">next</a>
+    </p>
+
+    <h1>Singleton</h1>
+
+    <p>
+    Singleton is a restrictive pattern that may be used to limit the number of
+    instances of a given data type to one.
+    </p>
+
+    <p>
+    At run time a typical C program has access to two basic types of memory:
+    external, backed by shared memory segments or memory-mapped files for
+    example, and internal, backed by various segments: text, initialized and
+    uninitialized data, heap and stack, of which we will be interested in heap
+    and initialized data segment or simply data segment. For brevity sake, let us
+    agree to call the singletons created:
+    </p>
+
+    <ul>
+     <li>in the external memory - External Singletons or
+      <span id="inlncode">ES</span>s</li><br>
+
+     <li>on the heap (at run time) - Heap Singletons or
+      <span id="inlncode">HS</span>s</li><br>
+
+     <li>in the data segment (at compile time) - Data Segment Singletons or
+      <span id="inlncode">DSS</span>s</li><br>
+    </ul>
+
+    <p>
+    We will look at <span id="inlncode">HS</span>s together while
+    <span id="inlncode">DSS</span>s and <span id="inlncode">ES</span>s will be
+    left for your personal investigation.
+    </p>
+
+    <p>
+    The Singleton pattern consequences:
+    </p>
+
+    <ul>
+     <li>All the threads of, potentially, all the processes on a host have to
+      acquire the same lock when attaching to the single instance of a given data
+      type</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Implement the Heap Singleton pattern for <span id="inlncode">bio_t</span>
+    from Factory chapter.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Add the self-identification functionality to the public interface of a
+    given data type.
+    </p>
+
+    <p>
+    2) Make the <span id="inlncode">Construct()/Destruct()</span> functions of
+    a given data type private.
+    </p>
+
+    <p>
+    3) Remove the generic data type argument from the prototypes of this type's
+    public functions.
+    </p>
+
+    <p>
+    4) Add the instance-restricting code to the
+    <span id="inlncode">New()/Delete()</span> pair of functions.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    <span id="inlncode">bio_t</span>'s self-identification interface,
+    <span id="inlncode">bioName()</span>, should be already present in the files
+    borrowed from Factory chapter (add it if it is not, consult Factory chapter
+    for details).
+    </p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Remove <span id="inlncode">Construct()/Destruct()</span> prototypes and
+    <span id="inlncode">bio_t</span> arguments from the prototypes of public
+    functions from <span id="inlncode">libbio.h</span>:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct bio
+{
+	int		( *open )( struct bio*, const char* );
+	ssize_t		( *read )( struct bio*, void*, size_t );
+	ssize_t		( *write )( struct bio*, void*, size_t );
+	int		( *close )( struct bio* );
+
+	const char*	( *name )();
+	size_t		( *sizeOf )();
+
+	void		( *destruct )( struct bio* );
+} bio_t;
+
+extern bio_t*		bioNew( const char* );
+extern void		bioDelete();
+
+extern size_t		bioSizeOf( const char* );
+
+extern int		bioOpen( const char* );
+extern ssize_t		bioRead( void*, size_t );
+extern ssize_t		bioWrite( void*, size_t );
+extern int		bioClose();
+
+extern const char*	bioName();
+extern size_t		biosizeof();</p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    In <span id="inlncode">libbio.c</span>:
+    </p>
+
+    <p>
+    - make <span id="inlncode">bioConstruct()/bioDestruct()</span> private by
+    designating their linkage specification as <span id="inlncode">static</span>
+    </p>
+
+    <p>
+    - add a <span id="inlncode">biosingleton_t</span> structure that will maintain
+    the state of <span id="inlncode">bio_t</span>'s sole instance by recording its
+    address, number of users and a lock
+    </p>
+
+    <p>
+    - initialize a variable of type <span id="inlncode">biosingleton_t</span> to
+    "no users" state
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+<strong>#include &lt;pthread.h&gt;</strong>
+#include &lt;dlfcn.h&gt;
+#include &lt;errno.h&gt;
+#include "libbio.h"
+
+static bio_t*			bioConstruct( void*, const char* );
+static void			bioDestruct( bio_t* );
+
+typedef struct
+{
+	bio_t*			bios;
+	size_t			biosusers;
+	pthread_mutex_t		bioslock;
+} biosingleton_t;
+
+static biosingleton_t		BIOS = 
+{
+	( bio_t* )NULL,
+	0,
+	PTHREAD_MUTEX_INITIALIZER
+};</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    We will use the following single instance-attaching algorithm:
+    </p>
+
+    <p id="srccode">lock
+	if ( first user )
+	{
+		create the only bio_t instance
+		record it's address
+	}
+	else if ( requested and singleton's bio_t names do not match )
+	{
+		indicate an error
+	}
+	increment the number of users
+unlock</p>
+
+    <p>
+    Implement the above algorithm in <span id="inlncode">libbio.c</span> in
+    <span id="inlncode">bioNew():</span>
+    </p>
+
+    <p id="srccode">extern bio_t*
+bioNew( const char* bionm )
+{
+	bio_t*		rv = ( bio_t* )NULL;
+
+	pthread_mutex_lock( &BIOS.bioslock );
+
+		if ( BIOS.biosusers == 0 )
+		{
+			size_t		n = bioSizeOf( bionm );
+			void*		mem = calloc( 1, n );
+
+			BIOS.bios = bioConstruct( mem, bionm );
+		}
+		else if ( strcmp( bionm, bioName() ) )
+		{
+			printf( "%s.%d: bioNew(): %s != %s\n",
+				__FILE__, __LINE__,
+				bionm, bioName() );
+			goto unlock;
+		}
+
+		BIOS.biosusers++;
+		rv = BIOS.bios;
+		printf( "%s.%d: bioNew(): %zu BIO Singleton user(s) attached.\n",
+			__FILE__, __LINE__,
+			BIOS.biosusers );
+
+unlock:
+	pthread_mutex_unlock( &BIOS.bioslock );
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    We will use the following single instance-detaching algorithm:
+    </p>
+
+    <p id="srccode">lock
+	if ( no users )
+	{
+		ignore
+	}
+	if ( number of users is one )
+	{
+		destruct singleton
+		set its address to NULL
+	}
+	decrement the number of users
+unlock</p>
+
+    <p>
+    Implement the above algorithm in <span id="inlncode">libbio.c</span> in
+    <span id="inlncode">bioDelete():</span>
+    </p>
+
+    <p id="srccode">extern void
+bioDelete()
+{
+	pthread_mutex_lock( &BIOS.bioslock );
+
+		if ( BIOS.biosusers == 0 )
+		{
+			goto unlock;
+		}
+
+		if ( BIOS.biosusers == 1 )
+		{
+			bioDestruct( BIOS.bios );
+			free( BIOS.bios );
+			BIOS.bios = ( bio_t* )NULL;
+			printf( "%s.%d: bioDelete(): "
+				"last BIO Singleton user detaching: "
+				"deleting single instance.\n",
+				__FILE__, __LINE__ );
+		}
+
+		BIOS.biosusers--;
+		printf( "%s.%d: bioDelete(): %zu BIO Singleton user(s) attached.\n",
+			__FILE__, __LINE__,
+			BIOS.biosusers );
+
+unlock:
+	pthread_mutex_unlock( &BIOS.bioslock );
+}
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Make the remaining public I/O functions use <span id="inlncode">BIOS</span>
+    variable in <span id="inlncode">libbio.c:</span>:
+    </p>
+
+    <p id="srccode">extern int
+bioOpen( const char* adrs )
+{
+	int		rv;
+
+	rv = BIOS.bios->open( BIOS.bios, adrs );
+
+	return rv;
+}
+
+extern ssize_t
+bioRead( void* b, size_t bsz )
+{
+	ssize_t		rv;
+
+	rv = BIOS.bios->read( BIOS.bios, b, bsz );
+
+	return rv;
+}
+
+extern ssize_t
+bioWrite( void* b, size_t bsz )
+{
+	ssize_t		rv;
+
+	rv = BIOS.bios->write( BIOS.bios, b, bsz );
+
+	return rv;
+}
+
+extern int
+bioClose()
+{
+	int		rv;
+
+	rv = BIOS.bios->close( BIOS.bios );
+
+	return rv;
+}
+
+extern const char*
+bioName()
+{
+	const char*	rv;
+
+	rv = BIOS.bios->name();
+
+	return rv;
+}
+
+extern size_t
+biosizeof()
+{
+	size_t		rv;
+
+	rv = BIOS.bios->sizeOf();
+
+	return rv;
+}</p>
+
+    <p>
+    <span id="inlncode">bioSizeOf(), libbiofile.c, libbiotcpipv4.c</span> and
+    <span id="inlncode">libbiotcpipv6.c</span>, not shown here, are borrowed
+    verbatim from Factory chapter.
+    </p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Other than their linkage specification
+    <span id="inlncode">bioConstruct()/bioDestruct()</span> remain the same. We
+    have moved them to the bottom of <span id="inlncode">libbio.c:</span>
+    </p>
+
+    <p id="srccode">static bio_t*
+bioConstruct( void* mem, const char* bionm )
+{
+	bio_t*		bio;
+	bio_t*		( *biocnstrct )( void* );
+	char		fnm[ 1024 + 1 ] = { 0 };
+	size_t		fnmsz = sizeof( fnm );
+
+	snprintf( fnm, fnmsz, "bioConstruct%s", bionm );
+
+	biocnstrct = ( bio_t* ( * )( void* ) )dlsym( RTLD_DEFAULT, fnm );
+
+	bio = biocnstrct( mem );
+
+	return bio;
+}
+
+static void
+bioDestruct( bio_t* bio )
+{
+	bio->destruct( bio );
+}</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Rebuild the I/O Factory adding the corresponding threads library to its link
+    lines.
+    </p>
+
+    <p>
+    <strong>SLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libbio.c
+gcc -g -c -fPIC -I . libbiofile.c
+gcc -g -c -fPIC -I . libbiotcpipv4.c
+gcc -g -c -fPIC -I . libbiotcpipv6.c
+gcc -g -shared -o libbio.so \
+	libbio.o \
+	libbiofile.o \
+	libbiotcpipv4.o \
+	libbiotcpipv6.o -ldl -lpthread</p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libbio.c
+gcc -g -shared -o libbio.so libbio.o -ldl -lpthread
+
+gcc -g -c -fPIC -I . libbiofile.c
+gcc -g -shared -o libbiofile.so libbiofile.o
+
+gcc -g -c -fPIC -I . libbiotcpipv4.c
+gcc -g -shared -o libbiotcpipv4.so libbiotcpipv4.o
+
+gcc -g -c -fPIC -I . libbiotcpipv6.c
+gcc -g -shared -o libbiotcpipv6.so libbiotcpipv6.o</p>
+
+    <p>
+    <br><strong>MLRTF:</strong>
+    </p>
+
+    <p>
+    Add the <span id="inlncode">-DIO_MLRTF</span> option to
+    <span id="inlncode">MLBTF</span>'s
+    <span id="inlncode">libbio.c</span>  build line above:
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -DIO_MLRTF -g -c -fPIC -I . libbio.c</p>
+
+    <p>
+    <br><strong>Step 9</strong>
+    </p>
+
+    <p>
+    Adjust the sample program to exercise the Heap Singleton
+    <span id="inlncode">bio_t</span> pattern.
+    </p>
+
+    <p>
+    <span id="inlncode">bio.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "libbio.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	size_t		i;
+	const char*	bionm;
+	const char*	adrs;
+	bio_t*		bio;
+	char		b[ 59 ] = { 0 };
+	size_t		bsz = sizeof( b ) - 1;
+	bio_t*		vars[ 8 ] = { 0 };
+	size_t		nvars = sizeof( vars ) / sizeof( vars[ 0 ] );
+
+	if ( argc != 3 )
+	{
+		return -1;
+	}
+
+	bionm = argv[ 1 ];
+	adrs = argv[ 2 ];
+	
+	bio = bioNew( bionm );
+
+	printf( "I/O Singleton address: %p\n", ( void* )bio );
+
+	for ( i = 0; i < nvars; i++ )
+	{
+		vars[ i ] = bioNew( bionm );
+		printf( "&vars[ %zu ] = %p\n", i, ( void* )vars[ i ] );
+	}
+
+	bioNew( "elif" );
+
+	bioOpen( adrs );
+
+	bioRead( b, bsz );
+
+	printf( "First %zu bytes:\n%s\n", bsz, b );
+
+	for ( i = 0; i < nvars; i++ )
+	{
+		bioDelete();
+	}
+
+	bioDelete();
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 10</strong>
+    </p>
+
+    <p>
+    Build the sample Head Singleton application.
+    </p>
+
+    <p>
+    <strong>SLBTF</strong> and <strong>MLRTF</strong>:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . bio.c
+gcc -g -L . -o bio bio.o -lbio</p>
+
+    <p>
+    <strong>SLBTF</strong> and <strong>MLRTF</strong>:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . bio.c
+gcc -g -L . -o bio bio.o -lbio -lfile -ltcpipv4 -ltcpipv6</p>
+
+    <p>
+    <br><strong>Step 11</strong>
+    </p>
+
+    <p>
+    Run the sample program with various inputs:
+    </p>
+
+    <p id="cmdln">./bio file bio.c
+<span class="italic">libbio.c.72: bioNew(): 1 BIO Singleton user(s) attached.
+I/O Singleton address: 0x90e86b0
+libbio.c.72: bioNew(): 2 BIO Singleton user(s) attached.
+&vars[ 0 ] = 0x90e86b0
+libbio.c.72: bioNew(): 3 BIO Singleton user(s) attached.
+&vars[ 1 ] = 0x90e86b0
+libbio.c.72: bioNew(): 4 BIO Singleton user(s) attached.
+&vars[ 2 ] = 0x90e86b0
+libbio.c.72: bioNew(): 5 BIO Singleton user(s) attached.
+&vars[ 3 ] = 0x90e86b0
+libbio.c.72: bioNew(): 6 BIO Singleton user(s) attached.
+&vars[ 4 ] = 0x90e86b0
+libbio.c.72: bioNew(): 7 BIO Singleton user(s) attached.
+&vars[ 5 ] = 0x90e86b0
+libbio.c.72: bioNew(): 8 BIO Singleton user(s) attached.
+&vars[ 6 ] = 0x90e86b0
+libbio.c.72: bioNew(): 9 BIO Singleton user(s) attached.
+&vars[ 7 ] = 0x90e86b0
+libbio.c.64: bioNew(): elif != file
+First 58 bytes:
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "libbio.h"
+libbio.c.104: bioDelete(): 8 BIO Singleton user(s) attached.
+libbio.c.104: bioDelete(): 7 BIO Singleton user(s) attached.
+libbio.c.104: bioDelete(): 6 BIO Singleton user(s) attached.
+libbio.c.104: bioDelete(): 5 BIO Singleton user(s) attached.
+libbio.c.104: bioDelete(): 4 BIO Singleton user(s) attached.
+libbio.c.104: bioDelete(): 3 BIO Singleton user(s) attached.
+libbio.c.104: bioDelete(): 2 BIO Singleton user(s) attached.
+libbio.c.104: bioDelete(): 1 BIO Singleton user(s) attached.
+libbio.c.99: bioDelete(): last BIO Singleton user detaching: deleting single instance.
+libbio.c.104: bioDelete(): 0 BIO Singleton user(s) attached.</span></p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Implement a Data Segment <span id="inlncode">bio_t</span> Singleton.
+    </p>
+
+    <p>
+    2) Implement an External <span id="inlncode">bio_t</span> Singleton.
+    </p>
+
+    <p>
+    3) Should a data type implemented as Singleton have a cloning interface?
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/singleton/libbio.h" download target="_blank">libbio.h</a>
+    <a href="src/singleton/libbio.c" download target="_blank">libbio.c</a>
+    <a href="src/singleton/libbiofile.c" download target="_blank">libbiofile.c</a>
+    <a href="src/singleton/libbiotcpipv4.c" download target="_blank">libbiotcpipv4.c</a>
+    <a href="src/singleton/libbiotcpipv6.c" download target="_blank">libbiotcpipv6.c</a>
+    <a href="src/singleton/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/singleton/bio.c" download target="_blank">bio.c</a>
+    <a href="src/singleton/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicprototype.html">prev</a>
+     <a href="ryapdpicstruct.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

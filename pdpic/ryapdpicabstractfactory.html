@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Abstract Factory
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Abstract Factory</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicfactory.html">prev</a>
+     <a href="ryapdpicbuilder.html">next</a>
+    </p>
+
+    <h1>Abstract Factory</h1>
+
+    <p>
+    There exist entities which, while consisting of an arbitrary number of parts
+    that vary in minutia from one entity to another, are, nonetheless, united by
+    a common theme that transcends the differences among and captures the
+    commonalities of its parts.
+    </p>
+    
+    <p>
+    Collectively such parts, <dfn>members</dfn>, form a <dfn>family</dfn>.
+    </p>
+
+    <p>
+    In mathematical analysis we may form families of functions based on the type
+    of numbers of their range and domain - real vs. complex, and the number of
+    their arguments - single vs. multiple. Among the single real-variable
+    real-valued functions we may distinguish linear, power, exponential,
+    logarithmic and trigonometric families, to name a few:
+    </p>
+
+$$mx + b,\; x^{\mu},\; a^x,\; \log_a(x),\; \sin(x)$$
+
+    <p>
+    In geometry we may form families of plane curves based on their
+    characteristic shape: witch of Agnesi, astroid, lemniscate of Bernoulli,
+    cardioid, cissoid, conchoid, Lissajous curves, logarithmic spiral, etc.
+    </p>
+
+    <p>
+    In software user interfaces, or UIs for short, are an example of entities
+    that may form a family. The commonality of UIs that transcends the rendering,
+    decorative and embellishing differences of its parts across various themes
+    is the visual nature of these parts each of which carries a distinct visual
+    burden: windows - to contain, menus and lists - to choose, buttons - to act,
+    scroll bars - to move, progress bars - to measure and so on.
+    </p>
+
+    <p>
+    Recall that ADT encapsulates one custom C data type. In fact, ADT implicitly
+    delineates a Factory consisting of one concrete data type since the names
+    of its life cycle functions can not vary and, hence, they can not be used to
+    create variables of many similar but different data types.
+    </p>
+
+    <p>
+    Factory addresses ADT's shortcomings by providing a mechanism to encapsulate
+    an arbitrary number of similar but different concrete data types all of which
+    possess enough commonality to be consolidated under one interface - an
+    abstract data type. It follows then that Factory implicitly delineates an
+    Abstract Factory consisting of one concrete family which consists of one
+    abstract data type.
+    </p>
+
+    <p>
+    Abstract Factory addresses Factory's shortcomings by providing a mechanism
+    to encapsulate an arbitrary number of families each of which consists of
+    equal (arbitrary) number of commonly themed abstract data types each of
+    which consists of an arbitrary number of concrete data types.
+    </p>
+
+    <p>
+    Hence, Abstract Factory is a restrictive Factory of Factories - the only
+    variables that it allows to create are of data types that belong to the same
+    family.
+    </p>
+
+    <p>
+    To Factory's consequences Abstract Factory adds the following ones:
+    </p>
+
+    <ul>
+     <li>Out of a multitude of available families the single one of interest my be
+      selected at either compile or run time via a native C data type used as a
+      mapping key</li><br>
+     <li>Concrete data types of variables produced by a given family are
+      consistent across that family</li><br>
+     <li>The code external to Abstract Factory does not depend explicitly on
+      concrete data types representing given families</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    A car has three color-driven families:
+    <span id="inlncode">"red", "green"</span> and <span id="inlncode">"blue"</span>
+    and, initially, one part or member - a frame.
+    </p>
+
+    <p>
+    Implement an Abstract Factory to manufacture this car's parts.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Identify all the members that form a family. Implement each member
+    as a Factory that lacks <span id="inlncode">New(), Construct()</span> and
+    <span id="inlncode">SizeOf()</span> public functions. For each concrete member
+    implement the corresponding <span id="inlncode">SizeOf()</span> and
+    <span id="inlncode">Construct()</span> functions.
+    </p>
+
+    <p>
+    2) Choose a native C data type to be used as a key for selecting a concrete
+    family.
+    </p>
+
+    <p>
+    3) Make Abstract Factory's <span id="inlncode">SizeOf(), New()</span> and
+    <span id="inlncode">Construct()</span> functions accept the chosen key as a
+    parameter.
+    </p>
+
+    <p>
+    4) Implement Abstract Factory as a Factory consisting of sets of
+    <span id="inlncode">Construct()</span> and
+    <span id="inlncode">SizeOf()</span> functions of family's members, one set per
+    member.
+    </p>
+
+    <p>
+    5) For each family member implement the corresponding
+    <span id="inlncode">New()</span> function in Abstract Factory proper.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    We will use human-readable C strings, <span id="inlncode">char*</span>, as a
+    key to select a given family out of many available:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">"red"</span></li>
+     <li><span id="inlncode">"green"</span></li>
+     <li><span id="inlncode">"blue"</span></li>
+    </ul>
+
+    <p>
+    By folding the above key into the corresponding naming convention we will
+    partition our source code as follows:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">libcaf.h</span>, Abstract Factory's public
+      header</li><br>
+
+     <li><span id="inlncode">libcaf.c</span>, Abstract Factory proper</li><br>
+
+     <li><span id="inlncode">libcafred.c</span>,
+      <span id="inlncode">"red"</span> family of cars</li><br>
+
+     <li><span id="inlncode">libcafgreen.c</span>,
+      <span id="inlncode">"green"</span> family of cars</li><br>
+
+     <li><span id="inlncode">libcafblue.c</span>,
+      <span id="inlncode">"blue"</span> family of cars</li><br>
+
+     <li><span id="inlncode">libframe.h</span>, frame's Factory's public
+      header</li><br>
+
+     <li><span id="inlncode">libframe.c</span>, frame's Factory proper</li><br>
+
+     <li><span id="inlncode">libframered.c</span>, 
+      <span id="inlncode">"red"</span> frame implementation</li><br>
+
+     <li><span id="inlncode">libframegreen.c</span>, 
+      <span id="inlncode">"green"</span> frame implementation</li><br>
+
+     <li><span id="inlncode">libframeblue.c</span>, 
+      <span id="inlncode">"blue"</span> frame implementation</li><br>
+    </ul>
+
+    <p>
+    These files can be packaged into an executable form in a multitude of ways.
+    Choose one.
+    </p>
+
+    <p>
+    For demonstration purposes the drawings below show two extra members not
+    implemented here - an engine and a wheel:
+    </p>
+
+    <p>
+    1) <span id="inlncode">SLBTAF:</span>
+    </p>
+
+    <img src="imgs/slbtaf.png" class="center">
+
+    <p>
+    2) <span id="inlncode">MLBTAF:</span>
+    </p>
+
+    <img src="imgs/mlbtaf.png" class="center">
+
+    <p>
+    3) <span id="inlncode">MLRTAF:</span>
+    </p>
+
+    <img src="imgs/mlrtaf.png" class="center">
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Implement the car's frame as a Factory that lacks
+    <span id="inlncode">New(), Construct()</span> and
+    <span id="inlncode">SizeOf()</span> public functions.
+    </p>
+
+    <p>
+    Our frame's public interface will consist of the self-identification function,
+    <span id="inlncode">name()</span>:
+    </p>
+
+    <p>
+    <span id="inlncode">libframe.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct frame
+{
+	const char*	( *name )();
+	void		( *destruct )( struct frame* );
+} frame_t;
+
+extern void		frameDelete( frame_t** );
+extern const char*	frameName( frame_t* );
+extern void		frameDestruct( frame_t* );</p>
+
+    <p>
+    <span id="inlncode">libframe.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;dlfcn.h&gt;
+#include "libframe.h"
+
+extern void
+frameDestruct( frame_t* frame )
+{
+	printf( " %s.%d: frameDestruct()\n", __FILE__, __LINE__ );
+
+	frame->destruct( frame );
+}
+
+extern void
+frameDelete( frame_t** frame )
+{
+	printf( " %s.%d: frameDelete()\n", __FILE__, __LINE__ );
+
+	if ( !frame || !*frame )
+	{
+		return;
+	}
+
+	frameDestruct( *frame );
+
+	free( *frame );
+
+	*frame = ( frame_t* )NULL;
+}
+
+extern const char*
+frameName( frame_t* frame )
+{
+	const char*	fnm;
+
+	printf( " %s.%d: frameName()\n", __FILE__, __LINE__ );
+
+	fnm = frame->name();
+
+	return fnm;
+}</p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Implement concrete frame data types.
+    </p>
+
+    <p>
+    Observe that just like in an ordinary Factory the linkage specification of
+    <span id="inlncode">Construct()</span> and <span id="inlncode">SizeOf()</span>
+    is <span id="inlncode">extern</span>: the names of these functions must be
+    searchable across translation units since they will be used in the corresponding
+    concrete family's factory, see Step 5.
+    </p>
+
+    <p>
+    However, unlike an ordinary Factory we gave these functions arbitrary names
+    because we will be manipulating them manually, at keyboard time, again -
+    see Step 5.
+    </p>
+
+    <p>
+    Below is the <span id="inlncode">"red"</span> frame implementation. Type in
+    the remaining implementations by analogy.
+    </p>
+
+    <p>
+    <span id="inlncode">libframered.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libframe.h"
+
+typedef struct
+{
+	frame_t		frameadt;
+} framered_t;
+
+extern size_t		frameSizeOfred();
+extern frame_t*		frameConstructred( void* );
+
+static const char*	frameNameRed();
+static void		frameDestructRed( frame_t* );
+
+static frame_t	frameAdtRed = 
+{
+	frameNameRed,
+	frameDestructRed
+};
+
+extern size_t
+frameSizeOfRed()
+{
+	size_t		rv;
+
+	printf( "  %s.%d: frameSizeOfred()\n", __FILE__, __LINE__ );
+
+	rv = sizeof( framered_t );
+
+	return rv;
+}
+
+extern frame_t*
+frameConstructRed( void* mem )
+{
+	frame_t*	rv;
+	framered_t*	framered = ( framered_t* )mem;
+
+	printf( "  %s.%d: frameConstructred()\n", __FILE__, __LINE__ );
+
+	framered->frameadt = frameAdtRed;
+
+	rv = &framered->frameadt;
+
+	return rv;
+}
+
+static void
+frameDestructRed( frame_t* frame )
+{
+	printf( "  %s.%d: frameDestructRed()\n", __FILE__, __LINE__ );
+}
+
+static const char*
+frameNameRed()
+{
+	printf( "  %s.%d: frameNameRed()\n", __FILE__, __LINE__ );
+
+	return "red";
+}</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Implement Abstract Factory as a Factory driven by the chosen key, see the
+    Factory chapter for details.
+    </p>
+
+    <p>
+    Initially our Abstract Factory will be a Factory of car frames. As such,
+    make frame's creational functions a part of Abstract Factory ADT's  public
+    interface.
+    </p>
+
+    <p>
+    <strong>Commentary</strong>
+    </p>
+
+    <p>
+    The life of a car's Abstract Factory-type variable begins with a call to
+    <span id="inlncode">cafNew()</span>. For example, here is a way to create a
+    factory that will manufacture a <span id="inlncode">"red"</span> family of
+    cars:
+    </p>
+
+    <p id="srccode">caf_t*		caf = cafNew( "red" );</p>
+
+    <p>
+    Once a name of a concrete family has been captured, it will not be used
+    explicitly to create its members. Observe below that, unlike its ordinary
+    Factory's counterparts, the prototypes of the frame's creational functions
+    do not accept a key for selecting a concrete frame any more. That key has
+    been replaced by the abstract factory which carries out this selection
+    internally, see <span id="inlncode">cafConstruct()</span> in
+    <span id="inlncode">libcaf.c</span> below, keeping the key out of external
+    reach. This is the mechanism that ensures consistency of members across the
+    given family.
+    </p>
+
+    <p>
+    Once a frame is created, it assumes a life of its own that is of no concern
+    to the car's Abstract Factory.
+    </p>
+
+    <p>
+    Since the number of copies of a member's given <span id="inlncode">New()</span>
+    function is one, this function is implemented in Abstract Factory's proper
+    and, as such, it is absent from this Abstract Factory ADT's interface.
+    </p>
+
+    <p>
+    Since the number of copies of a member's
+    <span id="inlncode">Consturct()</span> and
+    <span id="inlncode">SizeOf()</span> functions is arbitrary - one per concrete
+    type, these functions <dfn>are</dfn> a part of Abstract Factory ADT's
+    interface.
+    </p>
+
+    <p>
+    <span id="inlncode">libcaf.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+#include "libframe.h"
+
+typedef struct caf
+{
+	<strong>/*
+	   Abstract Factory Proper, family.
+	 */</strong>
+	const char*	( *name )();
+	void		( *destruct )( struct caf* );
+
+	<strong>/*
+	   Family Members' Factories.
+
+	   Frame.
+	 */</strong>
+	frame_t*	( *frameConstruct )( void* );
+	size_t		( *frameSizeOf )();
+} caf_t;
+
+<strong>/*
+   Abstract Factory Proper.
+ */</strong>
+extern caf_t*		cafNew( const char* );
+extern void		cafDelete( caf_t** );
+extern caf_t*		cafConstruct( void*, const char* );
+extern void		cafDestruct( caf_t* );
+extern size_t		cafSizeOf( const char* );
+extern const char*	cafName( caf_t* );
+
+<strong>/*
+   Frame's Factory.
+ */</strong>
+extern frame_t*		frameNew( caf_t* );
+extern frame_t*		frameConstruct( caf_t*, void* );
+extern size_t		frameSizeOf( caf_t* );</p>
+
+    <p>
+    In the code below the names of files and functions that must adhere to a
+    chosen naming convention are highlighted.
+    </p>
+
+    <p>
+    <span id="inlncode">libcaf.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;dlfcn.h&gt;
+#include "libcaf.h"
+
+<strong>/*
+   Abstract Factory Proper.
+ */</strong>
+extern size_t
+cafSizeOf( const char* cafnm )
+{
+	size_t		rv;
+	size_t		( *cafsizeof )();
+	void*		handle = RTLD_DEFAULT;
+	char		nm[ 1024 + 1 ] = { 0 };
+	size_t		nmsz = sizeof( nm );
+
+	printf( "%s.%d: cafSizeOf()\n", __FILE__, __LINE__ );
+
+#ifdef CAR_MLRTAF
+	<strong>snprintf( nm, nmsz, "libcaf%s.so", cafnm );</strong>
+	handle = dlopen( nm, RTLD_LAZY | RTLD_GLOBAL );
+#endif
+
+	<strong>snprintf( nm, nmsz, "cafSizeOf%s", cafnm );</strong>
+
+	cafsizeof = ( size_t ( * )() )dlsym( handle, nm );
+
+	rv = cafsizeof();
+
+	return rv;
+}
+
+extern caf_t*
+cafConstruct( void* mem, const char* cafnm )
+{
+	caf_t*		caf;
+	caf_t*		( *cafcnstrct )( void* );
+	char		fnm[ 1024 + 1 ] = { 0 };
+	size_t		fnmsz = sizeof( fnm );
+
+	printf( "%s.%d: cafConstruct()\n", __FILE__, __LINE__ );
+
+	<strong>snprintf( fnm, fnmsz, "cafConstruct%s", cafnm );</strong>
+
+	cafcnstrct = ( caf_t* ( * )( void* ) )dlsym( RTLD_DEFAULT, fnm );
+
+	caf = cafcnstrct( mem );
+
+	return caf;
+}
+
+extern caf_t*
+cafNew( const char* cafnm )
+{
+	caf_t*		caf;
+	size_t		n = cafSizeOf( cafnm );
+	void*		mem = calloc( 1, n );
+
+	printf( "%s.%d: cafNew()\n", __FILE__, __LINE__ );
+
+	caf = cafConstruct( mem, cafnm );
+
+	return caf;
+}
+
+extern void
+cafDestruct( caf_t* caf )
+{
+	printf( "%s.%d: cafDestruct()\n", __FILE__, __LINE__ );
+
+	caf->destruct( caf );
+}
+
+extern void
+cafDelete( caf_t** caf )
+{
+	printf( "%s.%d: cafDelete()\n", __FILE__, __LINE__ );
+
+	if ( !caf || !*caf )
+	{
+		return;
+	}
+
+	cafDestruct( *caf );
+
+	free( *caf );
+
+	*caf = ( caf_t* )NULL;
+}
+
+extern const char*
+cafName( caf_t* caf )
+{
+	const char*	rv;
+
+	printf( "%s.%d: cafName()\n", __FILE__, __LINE__ );
+
+	rv = caf->name( caf );
+
+	return rv;
+}
+
+<strong>/*
+   Family Members' Factories.
+
+   Frame.
+ */</strong>
+extern frame_t*
+frameNew( caf_t* caf )
+{
+	frame_t*	frm;
+	size_t		n = caf->frameSizeOf();
+	void*		mem = calloc( 1, n );
+
+	printf( "%s.%d: frameNew()\n", __FILE__, __LINE__ );
+
+	frm = caf->frameConstruct( mem );
+
+	return frm;
+}
+
+extern frame_t*
+frameConstruct( caf_t* caf, void* mem )
+{
+	frame_t*	frm;
+
+	printf( "%s.%d: frameConstruct()\n", __FILE__, __LINE__ );
+
+	frm = caf->frameConstruct( mem );
+
+	return frm;
+}
+
+extern size_t
+frameSizeOf( caf_t* caf )
+{
+	size_t		frmsz;
+
+	printf( "%s.%d: frameSizeOf()\n", __FILE__, __LINE__ );
+
+	frmsz = caf->frameSizeOf();
+
+	return frmsz;
+}</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Implement concrete families.
+    </p>
+
+    <p>
+    In Step 4 <span id="inlncode">cafConstruct()</span> in
+    <span id="inlncode">libcaf.c</span> promised that a given key will be mapped
+    to the corresponding family.
+    </p>
+
+    <p>
+    This is where (the author of) Abstract Factory fulfills that promise by
+    mapping, at keyboard time, members' concrete creational functions to the
+    current family - <span id="inlncode">"red"</span> frames to
+    <span id="inlncode">"red"</span> family, <span id="inlncode">"green"</span>
+    frames to <span id="inlncode">"green"</span> family and so on.
+    </p>
+
+    <p>
+    Below is the <span id="inlncode">"red"</span> family implementation. Type in
+    the remaining implementations by analogy.
+    </p>
+
+    <p>
+    <span id="inlncode">libcafred.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include "libcaf.h"
+
+typedef struct
+{
+	caf_t		cafadt;
+} cafred_t;
+
+extern size_t		cafSizeOfred();
+extern caf_t*		cafConstructred( void* );
+
+static const char*	cafNameRed();
+static void		cafDestructRed( caf_t* );
+
+<strong>/*
+   The names of the corresponding frame's
+   concrete creational functions are searched
+   across translation units ...
+ */
+extern frame_t*		frameConstructRed( void* );
+extern size_t		frameSizeOfRed();</strong>
+
+static caf_t	cafAdtRed = 
+{ 
+	cafNameRed,
+	cafDestructRed,
+
+	<strong>/*
+	   ... recorded ...
+	 */
+	frameConstructRed,
+	frameSizeOfRed</strong>
+};
+
+extern size_t
+cafSizeOfred()
+{
+	size_t		rv;
+
+	printf( " %s.%d: cafSizeOfred()\n", __FILE__, __LINE__ );
+
+	rv = sizeof( cafred_t );
+
+	return rv;
+}
+
+extern caf_t*
+cafConstructred( void* mem )
+{
+	cafred_t*	cafred = ( cafred_t* )mem;
+
+	printf( " %s.%d: cafConstructred()\n", __FILE__, __LINE__ );
+
+	<strong>/*
+	   ... and set.
+	 */
+	cafred->cafadt = cafAdtRed;</strong>
+
+	return &cafred->cafadt;
+}
+
+extern void
+cafDestructRed( caf_t* caf )
+{
+	cafred_t*	cafred;
+
+	printf( " %s.%d: cafDestructRed()\n", __FILE__, __LINE__ );
+
+	if ( !caf )
+	{
+		return;
+	}
+
+	cafred = ( cafred_t* )caf;
+
+	memset( cafred, 0, sizeof( cafred_t ) );
+}
+
+static const char*
+cafNameRed()
+{
+	printf( " %s.%d: cafNameRed()\n", __FILE__, __LINE__ );
+
+	return "red";
+}</p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Build the Abstract Factory.
+    </p>
+
+    <p>
+    <strong>SLBTAF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libcaf.c
+gcc -g -c -fPIC -I . libcafred.c
+gcc -g -c -fPIC -I . libcafgreen.c
+gcc -g -c -fPIC -I . libcafblue.c
+
+gcc -g -c -fPIC -I . libframe.c
+gcc -g -c -fPIC -I . libframered.c
+gcc -g -c -fPIC -I . libframegreen.c
+gcc -g -c -fPIC -I . libframeblue.c
+
+gcc -g -shared -o libcaf.so libcaf.o \
+	libcafred.o \
+	libcafgreen.o \
+	libcafblue.o \
+	libframe.o \
+	libframered.o \
+	libframegreen.o \
+	libframeblue.o -ldl</p>
+
+    <p>
+    <br><strong>MLBTAF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libcaf.c
+gcc -g -c -fPIC -I . libcafred.c
+gcc -g -c -fPIC -I . libcafgreen.c
+gcc -g -c -fPIC -I . libcafblue.c
+
+gcc -g -c -fPIC -I . libframe.c
+gcc -g -c -fPIC -I . libframered.c
+gcc -g -c -fPIC -I . libframegreen.c
+gcc -g -c -fPIC -I . libframeblue.c
+
+gcc -g -shared -o libcaf.so \
+	libcaf.o \
+	libframe.o -ldl
+
+gcc -g -shared -o libcafred.so \
+	libcafred.o \
+	libframered.o
+
+gcc -g -shared -o libcafgreen.so \
+	libcafgreen.o \
+	libframegreen.o
+
+gcc -g -shared -o libcafblue.so \
+	libcafblue.o \
+	libframeblue.o</p>
+
+    <p>
+    <br><strong>MLRTAF:</strong>
+    </p>
+
+    <p>
+    Add <span id="inlncode">-DCAR_MLRTAF</span> option to
+    <span id="inlncode">MLBTAF</span>'s
+    <span id="inlncode">libcaf.c</span> build line above:
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -DCAR_MLRTAF -g -c -fPIC -I . libcaf.c</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Write a sample application to exercise the Abstract Factory pattern.
+    </p>
+
+    <p>
+    <span id="inlncode">caf.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libcaf.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	const char*		familynm;
+	caf_t*			caf;
+	frame_t*		frame;
+
+	if ( argc < 2 )
+	{
+		return -1;
+	}
+
+	familynm = ( const char* )argv[ 1 ];
+
+	caf = cafNew( familynm );
+
+	frame = frameNew( caf );
+
+	printf( "Family name: \"%s\"\n", cafName( caf ) );
+
+	printf( "Frame from \"%s\" family.\n", frameName( frame ) );
+	printf( "frameSizeOf() = %zu\n", frameSizeOf( caf ) );
+
+	frameDelete( &frame );
+	cafDelete( &caf );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Build the sample Abstract Factory application.
+    </p>
+
+    <p>
+    <strong>SLBTAF</strong> and <strong>MLRTAF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . caf.c
+gcc -g -L . -o caf caf.o -lcaf</p>
+
+    <p>
+    <br><strong>MLBTAF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . caf.c
+gcc -g -L . -o caf caf.o -lcaf -lcafred -lcafgreen -lcafblue</p>
+
+    <p>
+    <br><strong>Step 9</strong>
+    </p>
+
+    <p>
+    Run the sample program with various inputs:
+    </p>
+
+    <p id="cmdln">./caf red
+<span class="italic">libcaf.c.18: cafSizeOf()
+ libcafred.c.34: cafSizeOfred()
+libcaf.c.60: cafNew()
+libcaf.c.42: cafConstruct()
+ libcafred.c.46: cafConstructred()
+  libframered.c.26: frameSizeOfred()
+libcaf.c.116: frameNew()
+  libframered.c.39: frameConstructred()
+libcaf.c.97: cafName()
+ libcafred.c.73: cafNameRed()
+Family name: "red"
+ libframe.c.36: frameName()
+  libframered.c.57: frameNameRed()
+Frame from "red" family.
+libcaf.c.140: frameSizeOf()
+  libframered.c.26: frameSizeOfred()
+frameSizeOf() = 16
+ libframe.c.17: frameDelete()
+ libframe.c.9: frameDestruct()
+  libframered.c.51: frameDestructRed()
+libcaf.c.78: cafDelete()
+libcaf.c.70: cafDestruct()
+ libcafred.c.58: cafDestructRed()</span></p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Carry out the following modifications and analyze their cost:
+    </p>
+
+    <p>
+    - add a new family keeping the number of the existing members constant
+    </p>
+
+    <p>
+    - add a new member to all the existing families (whose overall number should
+    remain constant)
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/afactory/libcaf.h" download target="_blank">libcaf.h</a>
+    <a href="src/afactory/libcaf.c" download target="_blank">libcaf.c</a>
+    <a href="src/afactory/libcafred.c" download target="_blank">libcafred.c</a>
+    <a href="src/afactory/libcafgreen.c" download target="_blank">libcafgreen.c</a>
+    <a href="src/afactory/libcafblue.c" download target="_blank">libcafblue.c</a>
+    </p>
+
+    <p>
+    <a href="src/afactory/libframe.h" download target="_blank">libframe.h</a>
+    <a href="src/afactory/libframered.c" download target="_blank">libframered.c</a>
+    <a href="src/afactory/libframegreen.c" download target="_blank">libframegreen.c</a>
+    <a href="src/afactory/libframeblue.c" download target="_blank">libframeblue.c</a>
+    <a href="src/afactory/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/afactory/caf.c" download target="_blank">caf.c</a>
+    <a href="src/afactory/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicfactory.html">prev</a>
+     <a href="ryapdpicbuilder.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

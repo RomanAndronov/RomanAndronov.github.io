@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Chained Linking
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Chained Linking</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicadt.html">prev</a>
+     <a href="ryapdpiccomposition.html">next</a>
+    </p>
+
+    <h1>Chained Linking</h1>
+
+    <p>
+    Before we investigate composition in depth let us take a look at Chained
+    Linking which is not a C source code pattern. Rather, it is a pattern that
+    can be used in make files.
+    </p>
+
+    <p>
+    The essence of Chained Linking is capturing the usage hierarchy of data types
+    in commands that build them. 
+    </p>
+
+    <p>
+    Chained Linking consequences:
+    </p>
+
+    <ul>
+     <li>minimization of the number of explicit dependencies in make files</li>
+     <li>elimination or reduction of code duplication in make files</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Let application <span id="inlncode">app</span> depend explicitly on
+    <span id="inlncode">typea</span>.
+    </p>
+
+    <p>
+    Let <span id="inlncode">typea</span> depend explicitly on
+    <span id="inlncode">typeb</span> which is of no concern to
+    <span id="inlncode">app</span>.
+    </p>
+
+    <p>
+    Let <span id="inlncode">typeb</span> depend explicitly on
+    <span id="inlncode">typec</span> which is of no concern to
+    <span id="inlncode">typea</span> and to <span id="inlncode">app</span>.
+    </p>
+
+    <p>
+    Implement this hierarchy of dependencies via Chained Linking.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    Implement <span id="inlncode">typec</span> as a shared library. For the
+    purposes of this discussion it is irrelevant whether this implementation
+    is patterned or not:
+    </p>
+
+    <p>
+    <span id="inlncode">libtypec.h:</span>
+    </p>
+
+    <p id="srccode">extern void		typeC( void );</p>
+
+    <p>
+    <span id="inlncode">libtypec.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libtypec.h"
+
+extern void
+typeC( void )
+{
+	printf( "%s:%d: typeC()\n", __FILE__, __LINE__ );
+}</p>
+
+    <p>
+    Since this library does not depend on any other components its build
+    instructions are the traditional ones:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libtypec.c
+gcc -g -shared -o libtypec.so libtypec.o</p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Implement <span id="inlncode">typeb</span> as a shared library reflecting
+    the fact that it depends on <span id="inlncode">typec</span>:
+    </p>
+
+    <p>
+    <span id="inlncode">libtypeb.h:</span>
+    </p>
+
+    <p id="srccode">extern void		typeB( void );</p>
+
+    <p>
+    <span id="inlncode">libtypeb.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+<strong>#include "libtypec.h"</strong>
+#include "libtypeb.h"
+
+extern void
+typeB( void )
+{
+	<strong>typeC();</strong>
+
+	printf( "%s:%d: typeB()\n", __FILE__, __LINE__ );
+}</p>
+
+    <p>
+    We observe here that <span id="inlncode">typec</span> should only be used by
+    and visible to <span id="inlncode">typeb</span>'s implementation. Consequently,
+    <span id="inlncode">libtypec.h</span> is included in the source file
+    <span id="inlncode">libtypeb.c</span> - not in the (presumably) public header
+    <span id="inlncode">libtypeb.h</span> file.
+    </p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    To build <span id="inlncode">libtypeb.so</span> via Chained Linking we will
+    reflect or capture the hierarchy of usage of <span id="inlncode">typec</span>
+    in the upcoming build lines.
+    </p>
+
+    <p>
+    Since in our example no other components rely on or use
+    <span id="inlncode">typec</span> explicitly then
+    <span id="inlncode">libtypeb.so</span> should be the only component that is
+    burdened with the task of linking in the corresponding dependencies.
+    </p>
+
+    <p>
+    Consequently, instead of requiring the application(s) to link in
+    <span id="inlncode">libtypec.so</span> we will instruct
+    <span id="inlncode">libtypeb.so</span> to do so:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libtypeb.c
+gcc -g -L . -shared -o libtypeb.so libtypeb.o -ltypec</p>
+
+    <p>
+    Observe the <span id="inlncode">-ltypec</span> option at the end of the
+    link line. Use your operating system's facility to investigate the result
+    of the above operation.
+    </p>
+
+    <p>
+    On UNIX/Linux machines <span id="inlncode">ldd</span> produced the following
+    relevant output:
+    </p>
+
+    <p id="cmdln">ldd libtypeb.so
+<span class="italic">	libtypea.so => ./libtypea.so (0x00007f2a7c440000)</span>
+</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Implement <span id="inlncode">typea</span> as a shared library reflecting
+    the fact that it depends on <span id="inlncode">typeb</span>:
+    </p>
+
+    <p>
+    <span id="inlncode">libtypea.h:</span>
+    </p>
+
+    <p id="srccode">extern void		typeA( void );</p>
+
+    <p>
+    <span id="inlncode">libtypea.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+<strong>#include "libtypeb.h"</strong>
+#include "libtypea.h"
+
+extern void
+typeA( void )
+{
+	<strong>typeB();</strong>
+
+	printf( "%s:%d: typeA()\n", __FILE__, __LINE__ );
+}</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Since the only component that depends explicitly on
+    <span id="inlncode">typeb</span> is <span id="inlncode">libtypea.so</span>
+    then the latter library should link <span id="inlncode">libtypeb.so</span>
+    in relieving other components from this duty:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libtypea.c
+gcc -g -L . -shared -o libtypea.so libtypea.o -ltypeb</p>
+
+    <p>
+    At this point we expect <span id="inlncode">libtypea.so</span> to depend on
+    <span id="inlncode">libtypeb.so</span> which depends on
+    <span id="inlncode">libtypec.so</span>:
+    </p>
+
+    <p id="cmdln">ldd libtypea.so
+<span class="italic">	libtypeb.so => ./libtypeb.so (0x00007f411b073000)
+	libtypec.so => ./libtypec.so (0x00007f411aa9f000)</span></p>
+
+    <p>
+    We observe further that even though the only explicit dependency that
+    <dfn>we</dfn> specified for <span id="inlncode">libtypea.so</span> was
+    <span id="inlncode">libtypeb.so</span> the linker nonetheless have found
+    <dfn>and recorded</dfn> the target's library implicit dependency on
+    <span id="inlncode">libtypec.so</span>.
+    </p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Implement the application that uses <span id="inlncode">typea</span>
+    directly:
+    </p>
+
+    <p>
+    <span id="inlncode">app.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+<strong>#include "libtypea.h"</strong>
+
+extern int
+main( int argc, char* argv[] )
+{
+	<strong>typeA();</strong>
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Here the mechanics of Chained Linking are brought to light. Instead of linking
+    all the involved libraries in we will link the only library on which
+    <span id="inlncode">app</span> depends explicitly -
+    <span id="inlncode">libtypea.so</span>:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . app.c
+gcc -g -L . -o app app.o -ltypea</p>
+
+    <p>
+    Examining <span id="inlncode">app</span>'s dependencies we obtain:
+    </p>
+
+    <p id="cmdln">ldd app
+<span class="italic">	libtypea.so => ./libtypea.so (0x00007f9fe5a44000)
+	libtypeb.so => ./libtypeb.so (0x00007f9fe5470000)
+	libtypec.so => ./libtypec.so (0x00007f9fe526e000)</span></p>
+
+    <p>
+    For comparison purposes here is how <span id="inlncode">app</span> would be
+    build the traditional way:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . app.c
+gcc -g -L . -o app app.o -ltypea -ltypeb -ltypec</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Execute <span id="inlncode">app</span>:
+    </p>
+
+    <p id="cmdln">./app
+<span class="italic">libtypea.c:7: typeC()
+libtypea.c:10: typeB()
+libtypea.c:10: typeA()</span></p>
+
+    <p>
+    The program works as expected and the above <span id="inlncode">ldd</span>'s
+    output explains why. While building the executable image for
+    <span id="inlncode">app</span> the linker examines, finds and records all of
+    its dependencies which relieves us of the necessity to perform these tasks
+    manually.
+    </p>
+
+    <p>
+    By the time <span id="inlncode">app</span>'s <span id="inlncode">main()</span>
+    is invoked the entire hierarchy of all the dependencies is loaded, the relevant
+    functions are relocated, their code is mapped into the program's address space
+    and the executable is fully operational.
+    </p>
+
+    <p>
+    <br><strong>Cost Analysis</strong>
+    </p>
+
+    <p>
+    The sum total of all the commands and make files (not shown) that must be
+    modified if a new dependency must be added to or an existing dependency must
+    be removed from, say, <span id="inlncode">libtypeb.so</span> is equal to one.
+    In comparison, \(N\) commands somehow distributed over \(M\) make files that
+    build <span id="inlncode">app</span>-like programs the traditional way must be
+    modified to achieve the same result.
+    </p>
+
+    <p>
+    <br><strong>Exercise</strong>
+    </p>
+
+    <p>
+    1) make <span id="inlncode">typec</span> depend on
+    <span id="inlncode">typed</span> which should be used by and visible only to
+    <span id="inlncode">libtypec.so</span>.
+    </p>
+
+    <p>
+    Estimate the cost of the above change.
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/chlnk/libtypec.h" download target="_blank">libtypec.h</a>
+    <a href="src/chlnk/libtypec.c" download target="_blank">libtypec.c</a>
+    <a href="src/chlnk/libtypeb.h" download target="_blank">libtypeb.h</a>
+    <a href="src/chlnk/libtypeb.c" download target="_blank">libtypeb.c</a>
+    <a href="src/chlnk/libtypea.h" download target="_blank">libtypea.h</a>
+    <a href="src/chlnk/libtypea.c" download target="_blank">libtypea.c</a>
+    <a href="src/chlnk/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/chlnk/app.c" download target="_blank">app.c</a>
+    <a href="src/chlnk/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicadt.html">prev</a>
+     <a href="ryapdpiccomposition.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

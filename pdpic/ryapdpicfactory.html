@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Factory
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Factory</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpiccreate.html">prev</a>
+     <a href="ryapdpicabstractfactory.html">next</a>
+    </p>
+
+    <h1>Factory</h1>
+
+    <p>
+    The Factory pattern may be used to create variables of encapsulated custom
+    C data types that may have a multitude of similar but different implementations
+    each of which may be attached to a common interface.
+    </p>
+
+    <p>
+    A data type representing the common interface is called <dfn>common</dfn> or
+    <dfn>abstract</dfn> while the data types representing similar but different
+    implementations of that interface are called <dfn>concrete</dfn>.
+    </p>
+
+    <p>
+    For example, an abstract data type of a byte I/O Factory, a model used in
+    this chapter, could be:
+    </p>
+
+$$bio\_t$$
+
+    <p>
+    The similar but different implementations or concrete data types of such a
+    Factory could be:
+    </p>
+
+$$file\_t$$
+$$tcpipv4\_t$$
+$$tcpipv6\_t$$
+
+    <p>
+    where <span id="inlncode">file_t</span> represents a concrete implementation
+    of an abstract data type based on disk files,
+    <span id="inlncode">tcpipv4_t</span> represents an implementation based on
+    TCP/IP version four and <span id="inlncode">tcpipv6_t</span> represents an
+    implementation based on TCP/IP version six.
+    </p>
+
+    <p>
+    While ADT and Handle encapsulate a single custom C data type, Factory
+    encapsulates an arbitrary number of them by hiding their differences and
+    exposing their commonalities. As such, by containing the creation of
+    variables of the above concrete data types within its boundaries Factory
+    eliminates the explicit dependency of the code external to it on a multitude
+    of concrete types.
+    </p>
+
+    <p>
+    The Factory pattern consequences:
+    </p>
+
+    <ul>
+     <li>Out of a multitude of available implementations the single one of
+      interest my be selected at either compile or run time via a native C data
+      type used as a mapping key</li><br>
+
+     <li>Common interface constancy - all the concrete types of a given
+      Factory must implement the given interface in its entirety, they can
+      neither reduce nor expand that interface</li><br>
+
+     <li>Within the given Factory all of its concrete data types are
+      indistinguishable siblings: where one can be used - any other can be used
+      without the external code modifications</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Implement an abstract byte I/O, or just I/O from now on, data type using disk
+    files, TCP/IP v4 and TCP/IP v6 as its concrete incarnations.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Establish a common interface that all the known concrete I/O mechanisms
+    will have to implement.
+    </p>
+
+    <p>
+    2) Choose a native C data type to be used as a key for selecting a concrete
+    I/O data type.
+    </p>
+
+    <p>
+    3) Make Factory's <span id="inlncode">SizeOf(), New()</span> and
+    <span id="inlncode">Construct()</span> functions accept the chosen key as a
+    parameter.
+    </p>
+
+    <p>
+    4) Implement Factory as an ADT comprised of (pointers to) functions
+    corresponding to the established interface.
+    </p>
+
+    <p>
+    5) Forward each Factory's common interface call to a concrete I/O data type.
+    </p>
+
+    <p>
+    6) Implement each concrete I/O data type as a modified ADT - an ADT that only
+    possesses <span id="inlncode">Construct()</span> and
+    <span id="inlncode">Destruct()</span> and lacks
+    <span id="inlncode">New()</span> and <span id="inlncode">Delete()</span>
+    interfaces.
+    </p>
+
+    <p>
+    <br><strong>Sample Implementation</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    Make the I/O common interface consist of four functions:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">open()</span></li>
+     <li><span id="inlncode">read()</span></li>
+     <li><span id="inlncode">write()</span></li>
+     <li><span id="inlncode">close()</span></li>
+    </ul>
+
+    <p>
+    Capture the above interface as an ADT in the public
+    <span id="inlncode">libbio.h</span> header file:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct bio
+{
+	int		( *open )( struct bio*, const char* );
+	ssize_t		( *read )( struct bio*, void*, size_t );
+	ssize_t		( *write )( struct bio*, void*, size_t );
+	int		( *close )( struct bio* );
+} bio_t;</p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Reasonably convenient native C data types that can be used as keys to select
+    a desired implementation are <span id="inlncode">char</span> and
+    <span id="inlncode">int</span>. We will use <span id="inlncode">char*</span>
+    or human-readable C strings.
+    </p>
+
+    <p>
+    As such, the string <span id="inlncode">"file"</span> will identify a disk
+    file-based data type, the string <span id="inlncode">"tcpipv4"</span>
+    will identify a TCP/IP version four data type and the string
+    <span id="inlncode">"tcpipv6"</span> will identify a TCP/IP version six
+    data type.
+    </p>
+
+    <p>
+    We will use the above strings as input to generate the corresponding function
+    and file names according to the following rule:
+    </p>
+
+$$name = suffix + key + prefix$$
+
+    <p>
+    where either <span id="inlncode">suffix</span> or
+    <span id="inlncode">prefix</span> may be optional depending on the nature of
+    the name.
+    </p>
+
+    <p>
+    For example, the name of the generic and public <span id="inlncode">sizeOf</span>
+    function is <span id="inlncode">"bioSizeOf"</span>. The name of the corresponding
+    concrete and private function implemented by the disk file mechanism is
+    <span id="inlncode">"bioSizeOffile"</span> - that is the name that we will
+    type into the <span id="inlncode">"libbiofile.c"</span> implementation file.
+    </p>
+
+    <p>
+    By analogy, the corresponding pairs of names for the TCP/IP v4 and TCP/IP v6
+    mechanisms are <span id="inlncode">"bioSizeOftcpipv4"</span> and
+    <span id="inlncode">"libbiotcpipv4.c"</span>, and
+    <span id="inlncode">"bioSizeOftcpipv6"</span> and
+    <span id="inlncode">"libbiotcpipv6.c"</span>.
+    </p>
+
+    <p>
+    These, and other relevant names, will be generated programmatically by the
+    I/O Factory proper at run time to satisfy the callers' requests. Consequently,
+    these names should be adhered to by the author(s) at keyboard time when the
+    corresponding implementations are typed in.
+    </p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Based on the established "<dfn>human-readable C string to a concrete data
+    type</dfn>" mapping scheme our I/O Factory will consist of the following
+    files:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">libbio.h</span>, public header</li>
+     <li><span id="inlncode">libbio.c</span>, Factory proper</li>
+     <li><span id="inlncode">libbiofile.c</span>, disk file implementation</li>
+     <li><span id="inlncode">libbiotcpipv4.c</span>, TCP/IP v4 implementation</li>
+     <li><span id="inlncode">libbiotcpipv6.c</span>, TCP/IP v6 implementation</li>
+    </ul>
+    </p>
+
+    <p>
+    These files can be packaged into an executable form in a multitude of ways.
+    Choose one.
+    </p>
+
+    <p>
+    We will cover three packaging possibilities that have been tested in practice:
+    </p>
+
+    <p>
+    1) Package all the I/O Factory source files into a single shared library,
+    <span id="inlncode">libbio.so</span>, which will be linked in explicitly, at
+    build time:
+    </p>
+
+    <p id="cmdln">... -lbio</p>
+
+    <p>
+    For brevity sake, let us name this packaging option Single Library Build
+    Time Factory or <span id="inlncode">SLBTF</span> for short:
+    </p>
+
+    <img src="imgs/slbtf.png" class="center">
+
+    <p>
+    2) Package the I/O Factory proper, <span id="inlncode">libbio.h</span> and
+    <span id="inlncode">libbio.c</span>, into the
+    <span id="inlncode">libbio.so</span> shared library.
+    </p>
+
+    <p>
+    Package the concrete I/O mechanism implementations into separate shared
+    libraries:
+    </p>
+
+    <ul>
+     <li>disk file-based implementation - into the
+    <span id="inlncode">libbiofile.so</span></li>
+     <li>TCP/IP v4-based implementation - into the
+      <span id="inlncode">libbiotcpipv4.so</span> and</li>
+     <li>TCP/IP v6-based implementation - into the
+      <span id="inlncode">libbiotcpipv6.so</span> library
+    </ul>
+
+    <p>
+    All the above libraries will be linked in explicitly, at build time:
+    </p>
+
+    <p id="cmdln">... -lbio -lfile -ltcpipv4 -ltcpipv6</p>
+
+    <p>
+    For brevity sake, let us name this packaging option Multiple Libraries
+    Build Time Factory or <span id="inlncode">MLBTF</span> for short:
+    </p>
+
+    <img src="imgs/mlbtf.png" class="center">
+
+    <p>
+    3) Package the I/O Factory files the same way that they are packaged in
+    <span id="inlncode">MLBTF</span>.
+    </p>
+
+    <p>
+    Add the code to <span id="inlncode">bioSizeOf()</span> to load the requested
+    concrete I/O mechanism implementation library at run time.
+    </p>
+
+    <p>
+    In this case only the <span id="inlncode">libbio.so</span> library will be
+    linked in explicitly, at build time:
+    </p>
+
+    <p id="cmdln">... -lbio</p>
+
+    <p>
+    The rest of the libraries will be linked in dynamically at run time on the
+    "need-to-load" bases by the I/O Factory proper.
+    </p>
+
+    <p>
+    Why <span id="inlncode">bioSizeOf()</span> is a chosen function is explained
+    in Step 7 below.
+    </p>
+
+    <p>
+    For brevity sake, let us name this packaging option Multiple Libraries
+    <span id="inlncode">Run</span> Time Factory or
+    <span id="inlncode">MLRTF</span> for short:
+    </p>
+
+    <img src="imgs/mlrtf.png" class="center">
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    <strong>Commentary</strong>
+    </p>
+
+    <p>
+    The life of an I/O Factory-based variable begins with a call to
+    <span id="inlncode">bioNew()</span>. Based on our mapping scheme, to create
+    a disk file type variable, for example, we will invoke this function with the
+    corresponding key as follows:
+    </p>
+
+    <p id="cmdln">bio_t*		bio = bioNew( "file" );</p>
+
+    <p>
+    From the encapsulation patterns chapters we remember that
+    <span id="inlncode">bioNew()</span> will call
+    <span id="inlncode">bioConstruct()</span> which must know the name of the
+    construction function corresponding to the disk files implementation in order
+    to invoke it. Since a variable of type <span id="inlncode">file</span> does
+    not exist yet, <span id="inlncode">bioConstruct()</span> will rely on the
+    chosen mapping scheme to synthesize that name programmatically.
+    </p>
+
+    <p>
+    The symmetrical operation of destruction, on the other hand, is applied to an
+    already existing variable. Hence, the name of the concrete
+    <span id="inlncode">destruct()</span> function bound to that variable does not
+    have to adhere to any mapping scheme - recall the ADT's inner mechanics.
+    </p>
+
+    <br><p>
+    As such, add the name of the destruction function to the public interface
+    of our I/O Factory in the <span id="inlncode">libbio.h</span> public header
+    file:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct bio
+{
+	int		( *open )( struct bio*, const char* );
+	ssize_t		( *read )( struct bio*, void*, size_t );
+	ssize_t		( *write )( struct bio*, void*, size_t );
+	int		( *close )( struct bio* );
+
+	<strong>void		( *destruct )( struct bio* );</strong>
+} bio_t;</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Add the prototypes of the life cycle functions to
+    <span id="inlncode">libbio.h</span>.
+    </p>
+
+    <p>
+    Observe that only <span id="inlncode">bioNew()</span>,
+    <span id="inlncode">bioConstruct()</span> and
+    <span id="inlncode">bioSizeOf()</span> accept the concrete I/O mechanism key
+    as an argument:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct bio
+{
+	int		( *open )( struct bio*, const char* );
+	ssize_t		( *read )( struct bio*, void*, size_t );
+	ssize_t		( *write )( struct bio*, void*, size_t );
+	int		( *close )( struct bio* );
+
+	void		( *destruct )( struct bio* );
+} bio_t;
+
+<strong>extern bio_t*		bioNew( const char* );
+extern void		bioDelete( bio_t** );
+
+extern bio_t*		bioConstruct( void*, const char* );
+extern void		bioDestruct( bio_t* );
+
+extern size_t		bioSizeOf( const char* );</strong></p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Add the prototypes of the convenience functions to
+    <span id="inlncode">libbio.h</span>:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct bio
+{
+	int		( *open )( struct bio*, const char* );
+	ssize_t		( *read )( struct bio*, void*, size_t );
+	ssize_t		( *write )( struct bio*, void*, size_t );
+	int		( *close )( struct bio* );
+
+	void		( *destruct )( struct bio* );
+} bio_t;
+
+extern bio_t*		bioNew( const char* );
+extern void		bioDelete( bio_t** );
+
+extern bio_t*		bioConstruct( void*, const char* );
+extern void		bioDestruct( bio_t* );
+
+extern size_t		bioSizeOf( const char* );
+
+<strong>extern int		bioOpen( bio_t*, const char* );
+extern ssize_t		bioRead( bio_t*, void*, size_t );
+extern ssize_t		bioWrite( bio_t*, void*, size_t );
+extern int		bioClose( bio_t* );</strong></p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Implement the <span id="inlncode">bioSizeOf()</span> function in the
+    <span id="inlncode">libbio.c</span> file.
+    </p>
+
+    <p>
+    If an I/O Factory-type variable is created with a call to
+    <span id="inlncode">bioNew()</span> then <span id="inlncode">bioSizeOf()</span>
+    is the very first function that will be invoked, see Step 9.
+    </p>
+
+    <p>
+    If an I/O Factory-type variable is constructed at an arbitrary memory
+    location via <span id="inlncode">bioConstruct()</span> then
+    <span id="inlncode">bioSizeOf()</span> must be invoked prior - to obtain the
+    size of the corresponding variable in bytes.
+    </p>
+
+    <p>
+    In either case <span id="inlncode">bioSizeOf()</span> is invoked before any
+    construction work commences. It follows then that
+    <span id="inlncode">bioSizeOf()</span> is the function that will dynamically
+    load the concrete I/O mechanism's implementation library at run time if
+    that particular Factory packaging option, <span id="inlncode">MLRTF</span>,
+    is chosen, via the <span id="inlncode">-DIO_MLRTF</span> option perhaps.
+    </p>
+
+    <p>
+    In the latter, <span id="inlncode">MLRTF</span>, case, for the consequent
+    symbol searches to work properly, instruct the library loader to make the
+    just linked in library's symbols globally visible so that any object within
+    the process can find them. On Unix/Linux do this via the
+    <span id="inlncode">RTLD_GLOBAL</span> flag.
+    </p>
+
+    <p>
+    Regardless of the Factory's packaging type,
+    <span id="inlncode">bioSizeOf()</span> will search all the objects within
+    the running process - the ones loaded explicitly at program's start up and
+    the ones linked in dynamically at run time - for the requested I/O mechanism's
+    <span id="inlncode">SizeOf()</span> function and then it will invoke it.
+    </p>
+
+    <p>
+    <span id="inlncode">bioSizeOf()</span> is the only Factory packaging
+    type-specific function:
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+<strong>#include &lt;dlfcn.h&gt; /* for dlsym(). Replace with your OS' equivalent header. */</strong>
+#include "libbio.h"
+
+extern size_t
+bioSizeOf( const char* bionm )
+{
+	size_t		rv;
+	size_t		( *biosizeof )();
+	void*		handle = RTLD_DEFAULT;
+	char		nm[ 1024 + 1 ] = { 0 };
+	size_t		nmsz = sizeof( nm );
+
+#ifdef IO_MLRTF
+	snprintf( nm, nmsz, "libbio%s.so", bionm );
+	handle = dlopen( nm, RTLD_LAZY | RTLD_GLOBAL );
+#endif
+
+	snprintf( nm, nmsz, "bioSizeOf%s", bionm );
+
+	biosizeof = ( size_t ( * )() )dlsym( handle, nm );
+
+	rv = biosizeof();
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Implement the <span id="inlncode">bioConstruct()</span> function in the
+    <span id="inlncode">libbio.c</span> file.
+    </p>
+
+    <p>
+    Just like <span id="inlncode">bioSizeOf()</span>, this function will search
+    all the loaded modules for a concrete construction function and then it will
+    invoke it. However, unlike <span id="inlncode">bioSizeOf()</span>, this
+    function does not have to load any libraries because
+    <span id="inlncode">bioSizeOf()</span> has, optionally, done so already:
+    </p>
+
+    <p id="srccode">extern bio_t*
+bioConstruct( void* mem, const char* bionm )
+{
+	bio_t*		bio;
+	bio_t*		( *biocnstrct )( void* );
+	char		fnm[ 1024 + 1 ] = { 0 };
+	size_t		fnmsz = sizeof( fnm );
+
+	snprintf( fnm, fnmsz, "bioConstruct%s", bionm );
+
+	biocnstrct = ( bio_t* ( * )( void* ) )dlsym( RTLD_DEFAULT, fnm );
+
+	bio = biocnstrct( mem );
+
+	return bio;
+}</p>
+
+    <p>
+    <br><strong>Step 9</strong>
+    </p>
+
+    <p>
+    Implement the <span id="inlncode">bioNew()</span> function in the
+    <span id="inlncode">libbio.c</span> file.
+    </p>
+
+    <p>
+    Now that the key-driven functions <span id="inlncode">bioSizeOf()</span> and
+    <span id="inlncode">bioConstruct()</span> are implemented
+    <span id="inlncode">bioNew()</span> can eliminate any static, compile or
+    keyboard time, dependency on concrete data types:
+    </p>
+  
+    <p id="srccode">extern bio_t*
+bioNew( const char* bionm )
+{
+	bio_t*		bio;
+	size_t		n = bioSizeOf( <strong>bionm</strong> );
+	void*		mem = calloc( 1, n );
+
+	bio = bioConstruct( mem, <strong>bionm</strong> );
+
+	return bio;
+}</p>
+
+    <p>
+    <br><strong>Step 10</strong>
+    </p>
+
+    <p>
+    Implement the <span id="inlncode">bioDestruct()</span> and
+    <span id="inlncode">bioDelete()</span> functions in the
+    <span id="inlncode">libbio.c</span> file.
+    </p>
+
+    <p>
+    These functions operate on the existing, previously constructed, variables
+    and, as such, they are not mapping keys-driven. Further,
+    <span id="inlncode">bioDestruct()</span> forwards the call to its concrete
+    equivalent that was set by the corresponding
+    <span id="inlncode">bioConstruct()</span> function (again, recall the ADT's
+    inner mechanics):
+    </p>
+
+    <p id="srccode">extern void
+bioDestruct( bio_t* bio )
+{
+	bio->destruct( bio );
+}
+
+extern void
+bioDelete( bio_t** bio )
+{
+	if ( !bio || !*bio )
+	{
+		return;
+	}
+
+	bioDestruct( *bio );
+
+	free( *bio );
+
+	*bio = ( bio_t* )NULL;
+}</p>
+
+    <p>
+    <br><strong>Step 11</strong>
+    </p>
+
+    <p>
+    In the <span id="inlncode">libbio.c</span> file forward each Factory ADT's
+    common interface call to its concrete equivalent (that will be set by the
+    corresponding <span id="inlncode">bioConstruct()</span> function):
+    </p>
+
+    <p id="srccode">extern int
+bioOpen( bio_t* bio, const char* adrs )
+{
+	int		rv;
+
+	rv = bio->open( bio, adrs );
+
+	return rv;
+}
+
+extern ssize_t
+bioRead( bio_t* bio, void* b, size_t bsz )
+{
+	ssize_t		rv;
+
+	rv = bio->read( bio, b, bsz );
+
+	return rv;
+}
+
+extern ssize_t
+bioWrite( bio_t* bio, void* b, size_t bsz )
+{
+	ssize_t		rv;
+
+	rv = bio->write( bio, b, bsz );
+
+	return rv;
+}
+
+extern int
+bioClose( bio_t* bio )
+{
+	int		rv;
+
+	rv = bio->close( bio );
+
+	return rv;
+}</p>
+
+    <p>
+    This step completes the work on <span id="inlncode">libbio.c</span> shown
+    here in its entirety:
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;dlfcn.h&gt; /* for dlsym(). Replace with your OS' equivalent header. */
+#include "libbio.h"
+
+extern size_t
+bioSizeOf( const char* bionm )
+{
+	size_t		rv;
+	size_t		( *biosizeof )();
+	void*		handle = RTLD_DEFAULT;
+	char		nm[ 1024 + 1 ] = { 0 };
+	size_t		nmsz = sizeof( nm );
+
+#ifdef IO_MLRTF
+	snprintf( nm, nmsz, "libbio%s.so", bionm );
+	handle = dlopen( nm, RTLD_LAZY | RTLD_GLOBAL );
+#endif
+
+	snprintf( nm, nmsz, "bioSizeOf%s", bionm );
+
+	biosizeof = ( size_t ( * )() )dlsym( handle, nm );
+
+	rv = biosizeof();
+
+	return rv;
+}
+
+extern bio_t*
+bioConstruct( void* mem, const char* bionm )
+{
+	bio_t*		bio;
+	bio_t*		( *biocnstrct )( void* );
+	char		fnm[ 1024 + 1 ] = { 0 };
+	size_t		fnmsz = sizeof( fnm );
+
+	snprintf( fnm, fnmsz, "bioConstruct%s", bionm );
+
+	biocnstrct = ( bio_t* ( * )( void* ) )dlsym( RTLD_DEFAULT, fnm );
+
+	bio = biocnstrct( mem );
+
+	return bio;
+}
+
+extern bio_t*
+bioNew( const char* bionm )
+{
+	bio_t*		bio;
+	size_t		n = bioSizeOf( bionm );
+	void*		mem = calloc( 1, n );
+
+	bio = bioConstruct( mem, bionm );
+
+	return bio;
+}
+
+extern void
+bioDestruct( bio_t* bio )
+{
+	bio->destruct( bio );
+}
+
+extern void
+bioDelete( bio_t** bio )
+{
+	if ( !bio || !*bio )
+	{
+		return;
+	}
+
+	bioDestruct( *bio );
+
+	free( *bio );
+
+	*bio = ( bio_t* )NULL;
+}
+
+extern int
+bioOpen( bio_t* bio, const char* adrs )
+{
+	int		rv;
+
+	rv = bio->open( bio, adrs );
+
+	return rv;
+}
+
+extern ssize_t
+bioRead( bio_t* bio, void* b, size_t bsz )
+{
+	ssize_t		rv;
+
+	rv = bio->read( bio, b, bsz );
+
+	return rv;
+}
+
+extern ssize_t
+bioWrite( bio_t* bio, void* b, size_t bsz )
+{
+	ssize_t		rv;
+
+	rv = bio->write( bio, b, bsz );
+
+	return rv;
+}
+
+extern int
+bioClose( bio_t* bio )
+{
+	int		rv;
+
+	rv = bio->close( bio );
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 12</strong>
+    </p>
+
+    <p>
+    Implement each concrete I/O mechanism as a modified ADT - an ADT that
+    possesses <span id="inlncode">Construct()</span> and
+    <span id="inlncode">Destruct()</span> and lacks
+    <span id="inlncode">New()</span> and <span id="inlncode">Delete()</span>
+    interfaces.
+    </p>
+
+    <p>
+    We will only implement the disk file modified ADT in its entirety, in the
+    <span id="inlncode">libbiofile.c</span> file. The implementations of the
+    remaining I/O mechanisms will be rudimentary - we will type in enough code
+    for the corresponding libraries to compile without warnings, see
+    <span id="inlncode">libbiotcpipv4.c</span> below. You are encouraged to
+    complete these implementations on your own.
+    </p>
+
+    <p>
+    Observe that the names of only two functions -
+    <span id="inlncode">bioSizeOffile()</span> and
+    <span id="inlncode">bioConstructfile()</span> - must follow the chosen
+    naming convention because these names will be generated programmatically by
+    the I/O Factory proper. Since these names must be searchable across
+    translation units, designate their linkage specification as
+    <span id="inlncode">extern</span>.
+    </p>
+
+    <p>
+    While the names of the remaining functions can be arbitrary, their prototypes
+    must adhere to the ones announced in the public
+    <span id="inlncode">libbio.h</span> header file. Since these names are not
+    searchable across translation units, their linkage specification may be
+    designated as <span id="inlncode">static</span>:
+    </p>
+
+    <p>
+    <span id="inlncode">libbiofile.c</span>:
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libbio.h"
+
+typedef struct
+{
+	bio_t		bioadt;
+
+	FILE*		f;
+} biofile_t;
+
+<strong>/*
+   The names of these functions must
+   adhere to the chosen naming convention.
+   Their linkage specification is "extern".
+ */</strong>
+extern size_t		bioSizeOffile();
+extern bio_t*		bioConstructfile( void* );
+
+<strong>/*
+   The names of these functions are arbitrary but their
+   prototypes must conform to the ones announced in
+   libbio.h public header file. The linkage specification
+   of these functions may be "static".
+ */</strong>
+static int		bioOpenFile( bio_t*, const char* );
+static ssize_t		bioReadFile( bio_t*, void*, size_t );
+static ssize_t		bioWriteFile( bio_t*, void*, size_t );
+static int		bioCloseFile( bio_t* );
+static void		bioDestructFile( bio_t* );
+
+static bio_t	bioAdtFile = 
+{ 
+	bioOpenFile,
+	bioReadFile,
+	bioWriteFile,
+	bioCloseFile,
+	bioDestructFile 
+};
+
+extern size_t
+bioSizeOffile()
+{
+	size_t		rv;
+
+	rv = sizeof( biofile_t );
+
+	return rv;
+}
+
+extern bio_t*
+bioConstructfile( void* mem )
+{
+	bio_t*		rv;
+	biofile_t*	file = ( biofile_t* )mem;
+
+	file->bioadt = bioAdtFile;
+
+	file->f = ( FILE* )NULL;
+
+	rv = &file->bioadt;
+
+	return rv;
+}
+
+static void
+bioDestructFile( bio_t* bio )
+{
+	bioCloseFile( bio );
+}
+
+static int
+bioOpenFile( bio_t* bio, const char* adrs )
+{
+	int		rv;
+	biofile_t*	file = ( biofile_t* )bio;
+
+	file->f = fopen( adrs, "a+" );
+
+	rv = file->f ? 0 : -1;
+
+	return rv;
+}
+
+static ssize_t
+bioReadFile( bio_t* bio, void* b, size_t bsz )
+{
+	size_t		n;
+	biofile_t*	file = ( biofile_t* )bio;
+
+	n = fread( b, 1, bsz, file->f );
+	if ( n != bsz && ferror( file->f ) )
+	{
+		return -1;
+	}
+
+	return n;
+}
+
+static ssize_t
+bioWriteFile( bio_t* bio, void* b, size_t bsz )
+{
+	size_t		n;
+	biofile_t*	file = ( biofile_t* )bio;
+
+	n = fwrite( b, 1, bsz, file->f );
+	if ( n != bsz && ferror( file->f ) )
+	{
+		return -1;
+	}
+
+	return n;
+}
+
+static int
+bioCloseFile( bio_t* bio )
+{
+	biofile_t*	file = ( biofile_t* )bio;
+
+	if ( !file->f )
+	{
+		return 0;
+	}
+
+	fclose( file->f );
+	file->f = ( FILE* )NULL;
+
+	return 0;
+}</p>
+
+    <p>
+    <span id="inlncode">libbiotcpipv4.c</span>:
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libbio.h"
+
+typedef struct
+{
+	bio_t		bioadt;
+
+	int		sockd;
+} biotcpipv4_t;
+
+<strong>/*
+   The names of these functions must
+   adhere to the chosen naming convention.
+   Their linkage specification is "extern".
+ */</strong>
+extern size_t		bioSizeOftcpipv4();
+extern bio_t*		bioConstructtcpipv4( void* );
+
+<strong>/*
+   The names of these functions are arbitrary but their
+   prototypes must conform to the ones announced in
+   libbio.h public header file. The linkage specification
+   of these functions may be "static".
+ */</strong>
+static int		bioOpenTcpipv4( bio_t*, const char* );
+static ssize_t		bioReadTcpipv4( bio_t*, void*, size_t );
+static ssize_t		bioWriteTcpipv4( bio_t*, void*, size_t );
+static int		bioCloseTcpipv4( bio_t* );
+static void		bioDestructTcpipv4( bio_t* );
+
+static bio_t	bioAdtTcpipv4 = 
+{ 
+	bioOpenTcpipv4,
+	bioReadTcpipv4,
+	bioWriteTcpipv4,
+	bioCloseTcpipv4,
+	bioDestructTcpipv4 
+};
+
+extern size_t
+bioSizeOftcpipv4()
+{
+	size_t		rv;
+
+	rv = sizeof( biotcpipv4_t );
+
+	return rv;
+}
+
+extern bio_t*
+bioConstructtcpipv4( void* mem )
+{
+	bio_t*		rv;
+	biotcpipv4_t*	tcpipv4 = ( biotcpipv4_t* )mem;
+
+	tcpipv4->bioadt = bioAdtTcpipv4;
+
+	printf( "%s.%d: bioConstructtcpipv4()\n", __FILE__, __LINE__ );
+
+	rv = &tcpipv4->bioadt;
+
+	return rv;
+}
+
+static void
+bioDestructTcpipv4( bio_t* bio )
+{
+	bioCloseTcpipv4( bio );
+}
+
+static int
+bioOpenTcpipv4( bio_t* bio, const char* adrs )
+{
+	int		rv;
+	biotcpipv4_t*	tcpipv4 = ( biotcpipv4_t* )bio;
+
+	printf( "%s.%d: bioOpenTcpipv4()\n", __FILE__, __LINE__ );
+
+	rv = 1;
+
+	return rv;
+}
+
+static ssize_t
+bioReadTcpipv4( bio_t* bio, void* b, size_t bsz )
+{
+	size_t		n;
+	biotcpipv4_t*	tcpipv4 = ( biotcpipv4_t* )bio;
+
+	printf( "%s.%d: bioReadTcpipv4()\n", __FILE__, __LINE__ );
+
+	n = bsz;
+
+	return n;
+}
+
+static ssize_t
+bioWriteTcpipv4( bio_t* bio, void* b, size_t bsz )
+{
+	size_t		n;
+	biotcpipv4_t*	tcpipv4 = ( biotcpipv4_t* )bio;
+
+	printf( "%s.%d: bioWriteTcpipv4()\n", __FILE__, __LINE__ );
+
+	n = bsz;
+
+	return n;
+}
+
+static int
+bioCloseTcpipv4( bio_t* bio )
+{
+	biotcpipv4_t*	tcpipv4 = ( biotcpipv4_t* )bio;
+
+	printf( "%s.%d: bioCloseTcpipv4()\n", __FILE__, __LINE__ );
+
+	return 0;
+}</p>
+
+    <p>
+    Type in the <span id="inlncode">libbiotcpipv6.c</span> file by ananlogy with
+    its <span id="inlncode">libbiotcpipv4.c</span> counterpart.
+    </p>
+
+    <p>
+    <br><strong>Step 13</strong>
+    </p>
+
+    <p>
+    Build the I/O Factory.
+    </p>
+
+    <p>
+    <strong>SLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libbio.c
+gcc -g -c -fPIC -I . libbiofile.c
+gcc -g -c -fPIC -I . libbiotcpipv4.c
+gcc -g -c -fPIC -I . libbiotcpipv6.c
+gcc -g -shared -o libbio.so \
+	libbio.o \
+	libbiofile.o \
+	libbiotcpipv4.o \
+	libbiotcpipv6.o -ldl</p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libbio.c
+gcc -g -shared -o libbio.so libbio.o -ldl
+
+gcc -g -c -fPIC -I . libbiofile.c
+gcc -g -shared -o libbiofile.so libbiofile.o
+
+gcc -g -c -fPIC -I . libbiotcpipv4.c
+gcc -g -shared -o libbiotcpipv4.so libbiotcpipv4.o
+
+gcc -g -c -fPIC -I . libbiotcpipv6.c
+gcc -g -shared -o libbiotcpipv6.so libbiotcpipv6.o</p>
+
+    <p>
+    <br><strong>MLRTF:</strong>
+    </p>
+
+    <p>
+    Add the <span id="inlncode">-DIO_MLRTF</span> option to the
+    <span id="inlncode">libbio.so</span> library's build line:
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -DIO_MLRTF -g -c -fPIC -I . libbio.c
+gcc -g -shared -o libbio.so libbio.o -ldl
+
+gcc -g -c -fPIC -I . libbiofile.c
+gcc -g -shared -o libbiofile.so libbiofile.o
+
+gcc -g -c -fPIC -I . libbiotcpipv4.c
+gcc -g -shared -o libbiotcpipv4.so libbiotcpipv4.o
+
+gcc -g -c -fPIC -I . libbiotcpipv6.c
+gcc -g -shared -o libbiotcpipv6.so libbiotcpipv6.o</p>
+
+    <p>
+    <br><strong>Step 14</strong>
+    </p>
+
+    <p>
+    Write a sample application to exercise the byte I/O Factory pattern.
+    </p>
+
+    <p>
+    Our version:
+    </p>
+
+    <p>
+    - creates a new I/O variable of a type specified on the command line
+    </p>
+
+    <p>
+    - opens an I/O channel whose address is also specified on the command line
+    </p>
+
+    <p>
+    - reads an arbitrary number of bytes from the open I/O channel and prints
+    them to <span id="inlncode">stdout</span>
+    </p>
+
+    <p>
+    <span id="inlncode">bio.c</span>:
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "libbio.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	const char*	bionm;
+	const char*	adrs;
+	bio_t*		bio;
+	char		b[ 59 ] = { 0 };
+	size_t		bsz = sizeof( b ) - 1;
+
+	if ( argc != 3 )
+	{
+		return -1;
+	}
+
+	bionm = argv[ 1 ];
+	adrs = argv[ 2 ];
+	
+	bio = bioNew( bionm );
+
+	bioOpen( bio, adrs );
+
+	bioRead( bio, b, bsz );
+
+	printf( "First %zu bytes:\n%s\n", bsz, b );
+
+	bioDelete( &bio );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 15</strong>
+    </p>
+
+    <p>
+    Build the sample I/O Factory application.
+    </p>
+
+    <p>
+    <strong>SLBTF</strong> and <strong>MLRTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . bio.c
+gcc -g -L . -o bio bio.o -lbio</p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . bio.c
+gcc -g -L . -o bio bio.o -lbio \
+	-lbiofile \
+	-lbiotcpipv4 \
+	-lbiotcpipv6</p>
+
+    <p>
+    <br><strong>Step 16</strong>
+    </p>
+
+    <p>
+    Run the sample program with various inputs:
+    </p>
+
+<p id="cmdln">./bio file ./bio.c
+<span class="italic">First 58 bytes: 
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "libbio.h"</span></p>
+
+    <p>
+    <br><strong>Cost Analysis</strong>
+    </p>
+
+    <p>
+    In practice a project's build infrastructure may be organized in a multitude
+    of ways. To make our cost analysis concrete and realistic let us assume that
+    we have two makefiles - one makefile responsible for building all the
+    libraries, Makefile.Libs symbolically, and another makefile to build all the
+    applications, Makefile.Apps symbolically.
+    </p>
+
+    <p>
+    Further, for demonstration purposes, let us assume that a new I/O mechanism
+    must be added to our Factory, Unix Domain Sockets or
+    <span id="inlncode">"uds"</span> for example.
+    </p>
+
+    <p>
+    <strong>SLBTF:</strong>
+    </p>
+
+    <p>
+    the cost is \(2\):
+    </p>
+
+    <p>
+    - Makefile.Libs must be modified: to add the build line for the new I/O
+    mechanism and to add the new <span id="inlncode">.o</span> file to the
+    Factory's build line:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libbiouds.c
+gcc -g -shared -o libbio.so \
+	libbio.o \
+	libbiofile.o \
+	libbiotcpipv4.o \
+	libbiotcpipv6.o \
+	libbiouds.o -ldl</p>
+
+    <p>
+    - the <span id="inlncode">libbio.so</span> library must be rebuilt
+    </p>
+
+    <p>
+    The I/O Factory proper, <span id="inlncode">libbio.[hc]</span>, and the
+    sample application are impervious to that change. Prove it.
+    </p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p>
+    the cost is \(3\):
+    </p>
+
+    <p>
+    - Makefile.Libs must be modified to add the build lines for the new I/O
+    mechanism:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libbiouds.c
+gcc -g -shared -o libbiouds.so libbiouds.o</p>
+
+    <p>
+    - Makefile.Apps must be modified to add the new <span id="inlncode">-l</span>
+    option to the application's link line:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . bio.c
+gcc -g -L . -o bio bio.o -lbio \
+	-lbiofile \
+	-lbiotcpipv4 \
+	-lbiotcpipv6 \
+	-lbiouds</p>
+
+    <p>
+    - the sample application's binary, <span id="inlncode">bio</span>, must be
+    rebuilt (relinked)
+    </p>
+
+    <p>
+    The I/O Factory proper, <span id="inlncode">libbio.[hc]</span>,  is impervious
+    to that change. Verify.
+    </p>
+
+    <p>
+    <br><strong>MLRTF:</strong>
+    </p>
+
+    <p>
+    the cost is \(1\):
+    </p>
+
+    <p>
+    - Makefile.Libs must be modified to add the build lines for the new I/O
+    mechanism:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libbiouds.c
+gcc -g -shared -o libbiouds.so libbiouds.o</p>
+
+    <p>
+    The I/O Factory proper, <span id="inlncode">libbio.[hc]</span>, and the
+    sample application are impervious to that change. Prove it.
+    </p>
+
+    <p>
+    <br><strong>From Here</strong>
+    </p>
+
+    <p>
+    Using <span id="inlncode">name()</span> and
+    <span id="inlncode">sizeOf()</span> as sample functions, here is how to add
+    them to I/O Factory:
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    Add the pointers to new functions to the Factory's ADT definition in the
+    public header file <span id="inlncode">libbio.h</span>:
+    </p>
+
+     <p id="srccode">typedef struct bio
+{
+	int		( *open )( struct bio*, const char* );
+	ssize_t		( *read )( struct bio*, void*, size_t );
+	ssize_t		( *write )( struct bio*, void*, size_t );
+	int		( *close )( struct bio* );
+
+	<strong>const char*	( *name )();
+	size_t		( *sizeOf )();</strong>
+
+	void		( *destruct )( struct bio* );
+} bio_t;</p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Add the prototypes of the convenience functions in the same header file:
+    </p>
+
+    <p id="srccode"><strong>extern const char*	bioName( bio_t* );
+extern size_t		biosizeof( bio_t* );</strong></p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Forward the calls of the generic functions in
+    <span id="inlncode">libbio.c</span> to their concrete counterparts:
+    </p>
+
+    <p id="srccode">extern const char*
+bioName( bio_t* bio )
+{
+	const char*	rv;
+
+	rv = bio->name();
+
+	return rv;
+}
+
+extern size_t
+biosizeof( bio_t* bio )
+{
+	size_t		rv;
+
+	rv = bio->sizeOf();
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Implement the new functionality for all the existing data type. Here is a
+    sample disk file-based implementation:
+    </p>
+
+    <p id="srccode">/*
+   New prototype.
+ */
+<strong>static const char*	bioNameFile();</strong>
+
+/*
+   Add the new functions to the disk file's ADT:
+ */
+static bio_t	bioAdtFile = 
+{ 
+	bioOpenFile,
+	bioReadFile,
+	bioWriteFile,
+	bioCloseFile,
+	<strong>bioNameFile,
+	bioSizeOffile,</strong>
+	bioDestructFile
+};
+
+/*
+   Implement the new function.
+ */
+static const char*
+bioNameFile()
+{
+	return "file";
+
+	/*
+	   Exercise: using a naming convention write a generic function
+	   to parse the I/O mechanism's name from file name.
+
+	   Possible usage:
+
+	   return bioMechanismName( __FILE__ );
+	 */
+}
+
+/*
+   No need to implement bioSizeOffile() - it has been implemented already.
+ */</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Rebuild the I/O Factory as per Factory package type instructions.
+    </p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Think of and implement your own data type as Factory.
+    </p>
+
+    <p>
+    2) Experiment with using C's <span id="inlncode">int</span> as Factory's
+    mapping key.
+    </p>
+
+    <p>
+    What consequences does the usage of this data type have?
+    </p>
+
+    <p>
+    3) Implement a Factory template similar to the ones shown in Handle and ADT
+    chapters.
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/factory/libbio.h" download target="_blank">libbio.h</a>
+    <a href="src/factory/libbio.c" download target="_blank">libbio.c</a>
+    <a href="src/factory/libbiofile.c" download target="_blank">libbiofile.c</a>
+    <a href="src/factory/libbiotcpipv4.c" download target="_blank">libbiotcpipv4.c</a>
+    <a href="src/factory/libbiotcpipv6.c" download target="_blank">libbiotcpipv6.c</a>
+    <a href="src/factory/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/factory/bio.c" download target="_blank">bio.c</a>
+    <a href="src/factory/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpiccreate.html">prev</a>
+     <a href="ryapdpicabstractfactory.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

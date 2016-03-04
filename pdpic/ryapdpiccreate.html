@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Creational Patterns
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Creational Patterns</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicnonintegralparts.html">prev</a>
+     <a href="ryapdpicfactory.html">next</a>
+    </p>
+ 
+    <h1>Creational Patterns</h1>
+
+    <p>
+    The patterns that we have studied in the previous chapters, Handle and ADT,
+    describe how encapsulated custom C data types may be implemented and what
+    the costs and consequences such implementations carry and inflict on the
+    surrounding software landscape.
+    </p>
+
+    <p>
+    The focus of the above patterns is very narrow - one custom data type
+    wrapped into the mechanics of hiding information which is subject to variance
+    the most.
+    </p>
+
+    <p>
+    In this chapter we will take the material developed previously further by
+    concerning ourselves with situations when, for all practical purposes, the
+    number of custom C data types grows without upper bound.
+    </p>
+
+    <p>
+    The Factory pattern may be used to create variables of encapsulated custom
+    C data types that have a multitude of similar but different implementations
+    attached to a single interface. Factory allows such variables to be created
+    without the explicit dependency on concrete underlying custom data types.
+    </p>
+
+    <p>
+    The Abstract Factory pattern may be used to create variables of encapsulated
+    data types that belong to a <dfn>family</dfn> of types - a logical whole that
+    has a certain common underlying idea or a unifying theme. Abstract Factory
+    allows such variables to be created without the explicit dependency on
+    concrete implementation data types.
+    </p>
+
+    <p>
+    The Builder pattern may be used to create variables of encapsulated data types
+    that have common parts. Builder captures, centralizes and hides the mechanics
+    of a uniform process used to assemble such parts into different wholes.
+    </p>
+
+    <p>
+    The Prototype pattern may be used to create new variables by cloning the
+    existing ones.
+    </p>
+
+    <p>
+    Singleton is a restrictive pattern that may be used to create the one and the
+    only instance of a variable of a given encapsulated data type.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicnonintegralparts.html">prev</a>
+     <a href="ryapdpicfactory.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

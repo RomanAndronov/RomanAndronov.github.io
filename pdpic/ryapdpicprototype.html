@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Prototype
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Prototype</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicbuilder.html">prev</a>
+     <a href="ryapdpicsingleton.html">next</a>
+    </p>
+
+    <h1>Prototype</h1>
+
+    <p>
+    Prototype may be used to give a variable of a custom data type an ability
+    to clone or make a copy of itself.
+    </p>
+
+    <p>
+    Such cloning should be treated on a type by type basis since cloning an
+    existing string, for example, requires one set of considerations to be made
+    while cloning an existing secure TCP/IP connection requires a different set
+    of questions to be answered.
+    </p>
+
+    <p>
+    Yet in another case, if a current custom data type is composite and contains
+    custom data types which are composite themselves and these contain composite
+    custom data types and so on to an arbitrary depth then how can a variable of
+    such a data type be cloned?
+    </p>
+
+    <p>
+    Each participating data type for which a bit-wize copy is not sufficient
+    must implement its own cloning function. Observe that cloning of composite
+    custom data types is similar in that respect to the process of turning a
+    variable into an array of bytes via
+    <span id="inlncode">toBytes()</span> discussed in Encapsulation Patterns
+    chapter.
+    </p>
+
+    <p>
+    The Prototype pattern consequences:
+    </p>
+
+    <ul>
+     <li>Each part of a composite whole has to, potentially recursively, support
+      cloning in some way</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Implement the Prototype pattern for custom C strings from ADT chapter.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Understand what exactly does it mean to clone a variable of a given data
+    type.
+    </p>
+
+    <p>
+    2) Add a <span id="inlncode">Clone()</span> function or its equivalent to
+    the data type's public interface.
+    </p>
+
+    <p>
+    3) Implement the cloning of the variable of a given data type.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    To make a copy of an existing string means to:
+    </p>
+
+    <p>
+    1) allocate enough space to hold the contents of the original string
+    </p>
+
+    <p>
+    2) copy the contents of the original string into the new memory location
+    </p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Our clone function accepts two arguments:
+    </p>
+
+    <p>
+    1) a pointer to a variable to make a copy of
+    </p>
+
+    <p>
+    2) a custom memory location to create a new variable at
+    </p>
+
+    <p>
+    Add the prototypes of the new functions to <span id="inlncode">libstr.h</span>:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+
+typedef struct str
+{
+	int		( *cmp )( struct str*, struct str*, int );
+	size_t		( *length )( struct str* );
+	<strong>struct str*	( *clone )( struct str*, void* );</strong>
+} str_t;
+
+extern str_t*		strNew( const char* );
+extern void		strDelete( str_t** );
+extern str_t*		strConstruct( void*, const char* );
+extern void		strDestruct( str_t* );
+extern size_t		strSizeOf();
+
+extern int		strCmp( str_t*, str_t*, int );
+extern size_t		strLength( str_t* );
+
+<strong>extern str_t*		strClone( str_t*, void* );</strong></p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Implement the algorithm outlined in Step 1 in the
+    <span id="inlncode">libstr.c</span> file.
+    </p>
+
+    <p>
+    For this particular data type we can implement cloning in terms of existing
+    functions:
+    </p>
+
+    <p id="srccode">static str_t*	strCloneImpl( str_t*, void* );
+
+static str_t	strAdt = 
+{ 
+	strCmpImpl,
+	strLengthImpl,
+	<strong>strCloneImpl</strong>
+};
+
+extern str_t*
+strClone( str_t* src, void* mem )
+{
+	str_t*		rv;
+
+	rv = str->clone( src, mem );
+
+	return rv;
+}
+
+static str_t*
+strCloneImpl( str_t* prot, void* mem )
+{
+	str_t*		rv;
+	strimpl_t*	simpl = ( strimpl_t* )prot;
+
+	printf( "%s:%d: strCloneImpl(): cloning \"%s\"\n",
+		__FILE__, __LINE__, src->buf );
+
+	if ( !mem )
+	{
+		rv = strNew( simpl->buf );
+	}
+	else
+	{
+		rv = strConstruct( mem, simpl->buf );
+	}
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Rebuild the custom string library:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libstr.c
+gcc -g -shared -o libstr.so libstr.o</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Modify the sample application to exercise the Prototype pattern.
+    </p>
+
+    <p>
+    <span id="inlncode">str.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libstr.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	str_t*		s1;
+	str_t*		s2;
+
+	<strong>if ( argc != 2 )</strong>
+	{
+		return 1;
+	}
+
+	s1 = strNew( argv[ 1 ] );
+	<strong>s2 = strClone( s1, NULL );</strong>
+
+	printf( "Strings s1 and s2 are %s equal.\n",
+		strCmp( s1, s2, 1 ) ? "not" : "" );
+
+	<strong>printf( "strLength( s1 ) = %zu\n", strLength( s1 ) );
+	printf( "strLength( s2 ) = %zu\n", strLength( s2 ) );</strong>
+
+	strDelete( &s1 );
+	strDelete( &s2 );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Rebuild the sample application:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . str.c
+gcc -g -L . -o str str.o -lstr</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Run the sample program with various inputs:
+    </p>
+
+    <p id="cmdln">./str "Hello, world!"
+<span class="italic">libstr.c:224: strCloneImpl(): cloning "Hello, world!"
+libstr.c:200: strCmpImpl( "Hello, world!", "Hello, world!", 1 )
+Strings s1 and s2 are  equal.
+strLength( s1 ) = 13
+strLength( s2 ) = 13</span></p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Implement the Prototype pattern for a custom data type of your choice.
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/prototype/libstr.h" download target="_blank">libstr.h</a>
+    <a href="src/prototype/libstr.c" download target="_blank">libstr.c</a>
+    <a href="src/prototype/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/prototype/str.c" download target="_blank">str.c</a>
+    <a href="src/prototype/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicbuilder.html">prev</a>
+     <a href="ryapdpicsingleton.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

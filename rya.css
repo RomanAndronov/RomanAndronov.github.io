@@ -1,0 +1,190 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	font-family: "Bitstream Vera Sans", "DejaVu Sans", Geneva, Verdana, Tahoma, Sans-Serif;
+	color: #000000;
+	background-color: #ffffff;
+}
+
+
+#header
+{
+	background-color: #cccccc;
+	padding: 1em;
+}
+
+
+#footer
+{
+	clear: both;
+	text-align: right;
+	height: 1%;
+	padding: 1em;
+	background-color: #cccccc;
+}
+
+
+#colorRight
+{
+	clear: left;
+	float: left;
+	width: 100%;
+	overflow: hidden;
+	background-color: #999999;
+}
+
+
+#colorLeft
+{
+	float: left;
+	width: 100%;
+	position: relative;
+	right: 25%;
+	background-color: #ffffff;
+}
+
+
+#textLeft
+{
+	float: left;
+	width: 71%;
+	position: relative;
+	left: 27%;
+	overflow: hidden;
+}
+
+
+#textRight
+{
+	float: left;
+	width: 21%;
+	position: relative;
+	left: 31%;
+	overflow: hidden;
+	color: #ffffff;
+}
+
+
+#textRight ul
+{
+	margin: 0;
+	padding: 0;
+}
+
+
+#textRight ul li
+{
+	list-style-type: none;
+	padding: 0.5em;
+}
+
+
+a
+{
+	text-decoration: none;
+	color: #003300;
+	padding: 0.5em;
+}
+
+
+a:hover
+{
+	background-color: #cccccc;
+}
+
+
+#header a
+{
+	color: #303030;
+}
+
+
+#textRight ul li a
+{
+	color: #ffffff;
+}
+
+
+#textRight ul li a:hover
+{
+	background-color: #003300;
+}
+
+
+#pointer
+{
+	text-align: right;
+}
+
+
+#srccode
+{
+	font-family: "Liberation Mono", "Nimbus Mono L", "FreeMono",
+		"DejaVu Mono", "Bitstream Vera Mono", "Lucida Console",
+		"Andale Mono", "Courier New", Monospace;
+	background-color: #cccccc;
+	padding: 1em;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+
+#inlncode
+{
+	font-family: "Liberation Mono", "Nimbus Mono L", "FreeMono",
+		"DejaVu Mono", "Bitstream Vera Mono", "Lucida Console",
+		"Andale Mono", "Courier New", Monospace;
+	font-weight: bold;
+}
+
+
+#cmdln
+{
+	font-family: "Liberation Mono", "Nimbus Mono L", "FreeMono",
+		"DejaVu Mono", "Bitstream Vera Mono", "Lucida Console",
+		"Andale Mono", "Courier New", Monospace;
+	background-color: #cccccc;
+	padding: 1em;
+	font-weight: bold;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+
+#formula
+{
+	white-space: pre;
+}
+
+
+.italic
+{
+	font-weight: normal;
+	font-style: italic;
+}
+
+img.center
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+p.center
+{
+	text-align: center;
+}
+
+td
+{
+	padding: 1em;
+}
+
+#dbg
+{
+	padding: 1em;
+	background-color: #eeeeee;
+}
+

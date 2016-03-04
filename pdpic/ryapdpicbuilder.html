@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Builder
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Builder</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicabstractfactory.html">prev</a>
+     <a href="ryapdpicprototype.html">next</a>
+    </p>
+
+    <h1>Builder</h1>
+
+    <p>
+    An acoustic guitar manufacturer runs an apprentice shop where a person
+    orchestrating the learning process issues the following directives to the
+    future masters of the craft:
+    </p>
+
+    <ul>
+     <li>add acoustic guitar body (resonance chamber)</li>
+     <li>add acoustic guitar neck</li>
+     <li>add acoustic guitar truss rod</li>
+     <li>add acoustic guitar fretboard</li>
+     <li>add acoustic guitar nut</li>
+     <li>add acoustic guitar bridge</li>
+     <li>add acoustic guitar tuning keys</li>
+     <li>add acoustic guitar strings</li>
+    </ul>
+
+    <p>
+    and the like.
+    </p>
+
+    <p>
+    Later on, after endeavoring to make banjos, the manufacturer faces a choice
+    - hire a new person to run the banjo-making apprentice shop or keep the same
+    person but change his/her and all the participants' behavior in two ways by:
+    </p>
+
+    <p>
+    1) removing the name of the concrete string instrument from the overseer's
+    directives when he/she issues them
+    </p>
+
+    <p>
+    2) adding the name of <dfn>"their"</dfn> instrument to the directive by the
+    students when they hear it
+    </p>
+
+    <p>
+    In the latter distribution of responsibilities a directive:
+    </p>
+
+    <ul>
+     <li>add (string instrument's) neck</li>
+    </ul>
+
+    <p>
+    will result in an acoustic guitar maker adding an acoustic guitar-specific
+    neck, a banjo maker adding a banjo-specific neck, a violin maker adding a
+    violin-specific neck, a zither maker consuming the directive but not acting
+    if a neckless variety of the instrument is produced and so on.
+    </p>
+
+    <p>
+    In the above example:
+    </p>
+
+    <p>
+    - necks, fretboards, bodies, nuts, bridges, scrolls, strings, etc., are
+    <dfn>generic parts</dfn> while their instrument-specific equivalents are
+    <dfn>concrete parts</dfn>
+    </p>
+
+    <p>
+    - a string instrument is a generic or abstract composite data type called a
+    <dfn>generic product</dfn>
+    </p>
+
+    <p>
+    - acoustic guitars, banjos, violins, etc., are concrete composite data types
+    called <dfn>concrete products</dfn>
+    </p>
+
+    <p>
+    - a collection of concrete parts of a concrete product forms its
+    <dfn>internal layout</dfn>
+    </p>
+
+    <p>
+    - apprentices are <dfn>concrete builders</dfn>
+    </p>
+
+    <p>
+    - the entire apprentice shop is a <dfn>builder</dfn>
+    </p>
+
+    <p>
+    We observe that even though all the concrete products possess enough
+    commonality to be classed as <dfn>string instruments</dfn> their
+    corresponding parts - and hence the exact steps required to assemble them -
+    differ from one instrument type to another.
+    </p>
+
+    <p>
+    However, the reason just one overseer in our apprentice shop can orchestrate
+    the production of multiple types of string instruments is because our
+    arrangement - the Builder pattern, while capturing and exposing the commonality
+    of, encapsulates the construction differences among the parts across these
+    instruments.
+    </p>
+
+    <p>
+    Formally, then, Builder may be used to encapsulate the internal layout of a
+    variable of a composite data type.
+    </p>
+
+    <p>
+    All the patterns that we have looked at so far create their variables in,
+    essentially, one step.
+    </p>
+
+    <p>
+    In contrast, Builder creates a variable of a composite data type in a series
+    of steps via a set of externally-driven
+    <span id="inlncode">addPart()/removePart()</span> functions or their
+    equivalents. Thus Builder encapsulates the internal layout of a variable of
+    a composite data type by formalizing and granulating its assembly process.
+    </p>
+
+    <p>
+    Parts of a product may be:
+    </p>
+
+    <ul>
+     <li>fixed in number but of different data types</li>
+     <li>of the same data type but different in number which may be not known
+      until run time</li>
+     <li>of different data types and different in number (which may be not known
+      until run time)</li>
+    </ul>
+
+    <p>
+    Builder is a versatile arrangement with a wide area of application: it may be
+    used to form TCP/IP packets, for example. Each such packet - a product - is
+    represented  by a variable of a composite data type consisting of a fixed
+    number - four - of parts:
+    </p>
+
+    <ul>
+     <li>application (FTP, Telnet, SMTP)</li>
+     <li>transport (TCP, UDP)</li>
+     <li>internet (IP, ICMP, IGMP, IPSec)</li>
+     <li>network access (ARP, RARP, Ethernet, Token Ring)</li>
+    </ul>
+
+    <p>
+    where each type of packet corresponds to what is known as <dfn>layer</dfn>.
+    </p>
+
+    <p>
+    The type of a concrete packet is determined by the mix (internal layout) of
+    the above protocols. Before bits and bytes on a local host become electrical
+    signals on a wire they undergo a uniform assembly process - each consequent
+    layer treats the previous layer's data as a body or payload, attaches its
+    own header to it and passes the built up header/body pair as data on to the
+    next layer.
+    </p>
+
+    <p>
+    Builder may be used in client-server communications on the client side to
+    package different types of concrete requests into a generic whole before
+    sending it off to a server for further processing.
+    </p>
+
+    <p>
+    The <span id="inlncode">printf()</span> family of the standard C library
+    functions is another example of Builder - these functions encapsulate the
+    process of a composite string creation via an implicit set of
+    <span id="inlncode">add()</span> functions impersonated by the set of
+    conversion specifications - <span id="inlncode">%d, %i, %o, %u</span>, etc.
+    </p>
+
+    <p>
+    The Builder pattern consequences:
+    </p>
+
+    <ul>
+     <li>Encapsulation of the internal layout of a variable of a composite data
+      type</li><br>
+
+     <li>Ability to create variables of different underlying composite data types
+      via a uniform assembly process</li>
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    An ASCII text-based document, <span id="inlncode">doc_t</span> ADT, supports
+    <span id="inlncode">"plain"</span> and <span id="inlncode">"html"</span> text
+    formats and consists of a header and a body.
+    </p>
+
+    <p>
+    Implement this document's builder.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Identify all the parts of a product and model them with an appropriate
+    data type - native C or custom.
+    </p>
+
+    <p>
+    2) Implement this product's Builder as Factory driven by the chosen key, see
+    Factory chapter for details.
+    </p>
+
+    <p>
+    3) For each part of a product add one set of
+    <span id="inlncode">addPart/removePart()</span> functions or their
+    equivalents to Builder's public interface.
+    </p>
+
+    <p>
+    4) Implement each concrete builder to carry out the part and type-specific
+    tasks.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    Our product, which we will implement as ADT, consists of two distinct parts
+    - a header and a body - which we will model with null-terminated C strings.
+    </p>
+
+    <p>
+    Builders will set the contents of a document via its
+    <span id="inlncode">setContent()</span> interface while applications will
+    print the contents of a document via its
+    <span id="inlncode">print()</span> interface (see ADT chapter for details).
+    </p>
+
+    <p>
+    <span id="inlncode">libdoc.h:</span>
+    </p>
+
+    <p id="srccode">#ifndef __DOC_HEADER__
+#define __DOC_HEADER__
+
+#include &lt;sys/types.h&gt;
+
+typedef struct doc
+{
+	void		( *setContent )( struct doc*, const char* );
+	void		( *print )( struct doc* );
+} doc_t;
+
+extern doc_t*		docNew();
+extern void		docDelete( doc_t** );
+extern doc_t*		docConstruct( void* );
+extern void		docDestruct( doc_t* );
+extern size_t		docSizeOf();
+
+extern void		docSetContent( doc_t*, const char* );
+extern void		docPrint( doc_t* );
+
+#endif</p>
+
+    <p>
+    <span id="inlncode">libdoc.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include "libdoc.h"
+
+typedef struct
+{
+	doc_t		docadt;
+
+	<strong>/*
+	   Both - header and body - are combined
+	   in one state variable, buf.
+	 */</strong>
+	char		buf[ 1024 + 1 ];
+} docimpl_t;
+
+static void		docSetContentImpl( doc_t*, const char* );
+static void		docPrintImpl( doc_t* );
+
+static doc_t	docAdt = 
+{ 
+	docSetContentImpl,
+	docPrintImpl
+};
+
+extern size_t
+docSizeOf()
+{
+	return sizeof( docimpl_t );
+}
+
+extern doc_t*
+docNew()
+{
+	void*		docimpl = calloc( 1, docSizeOf() );
+
+	doc_t*		doc = docConstruct( docimpl );
+
+	return doc;
+}
+
+extern doc_t*
+docConstruct( void* docmem )
+{
+	docimpl_t*	docimpl = ( docimpl_t* )docmem;
+
+	docimpl->docadt = docAdt;
+
+	docimpl->buf[ 0 ] = '\0';
+
+	return &docimpl->docadt;
+}
+
+extern void
+docDestruct( doc_t* doc )
+{
+	docimpl_t*	docimpl;
+
+	if ( !doc )
+	{
+		return;
+	}
+
+	docimpl = ( docimpl_t* )doc;
+
+	memset( docimpl, 0, sizeof( docimpl_t ) );
+}
+
+extern void
+docDelete( doc_t** doc )
+{
+	if ( !doc && !*doc )
+	{
+		return;
+	}
+
+	docDestruct( *doc );
+
+	free( *doc );
+
+	*doc = ( doc_t* )NULL;
+}
+
+extern void
+docSetContent( doc_t* doc, const char* cntnt )
+{
+	doc->setContent( doc, cntnt );
+}
+
+extern void
+docPrint( doc_t* doc )
+{
+	doc->print( doc );
+}
+
+static void
+docSetContentImpl( doc_t* doc, const char* cntnt )
+{
+	docimpl_t*	docimpl = ( docimpl_t* )doc;
+
+	memset( docimpl->buf, 0, sizeof( docimpl->buf ) );
+
+	if ( cntnt && *cntnt )
+	{
+		snprintf( docimpl->buf,
+			sizeof( docimpl->buf ),
+			"%s",
+			cntnt );
+	}
+}
+
+static void
+docPrintImpl( doc_t* doc )
+{
+	docimpl_t*	docimpl = ( docimpl_t* )doc;
+
+	printf( "%s", docimpl->buf );
+}</p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Our Builder will be driven by human-readable null-terminated C strings:
+    <span id="inlncode">"plain"</span> will select the plain text document
+    builder while <span id="inlncode">"html"</span> will select the HTML document
+    builder (see Factory chapter for details):
+    </p>
+
+    <ul>
+     <li><span id="inlncode">libdocbldr.h</span>, Builder's public header</li><br>
+     <li><span id="inlncode">libdocbldr.c</span>, Builder proper</li><br>
+     <li><span id="inlncode">libdocbldrplain.c</span>, plain text builder</li><br>
+     <li><span id="inlncode">libdocbldrhtml.c</span>, HTML builder</li>
+    </ul>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Add one set of <span id="inlncode">add()/remove()</span> functions to Builder's
+    public interface.
+    </p>
+
+    <p>
+    By giving our document builder an ability to attach and detach a document,
+    the same builder variable may be used to assemble multiple like products.
+    </p>
+
+    <p>
+    <span id="inlncode">libdocbldr.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+#include "libdoc.h"
+
+typedef struct docbldr
+{
+	void		( *addHdr )( struct docbldr*, const char* );
+	void		( *rmHdr )( struct docbldr* );
+	void		( *addBody )( struct docbldr*, const char* );
+	void		( *rmBody )( struct docbldr* );
+
+	void		( *attachDoc )( struct docbldr*, doc_t* );
+	doc_t*		( *detachDoc )( struct docbldr* );
+
+	void		( *destruct )( struct docbldr* );
+} docbldr_t;
+
+extern docbldr_t*	docbldrNew( const char* );
+extern void		docbldrDelete( docbldr_t** );
+extern docbldr_t*	docbldrConstruct( void*, const char* );
+extern void		docbldrDestruct( docbldr_t* );
+extern size_t		docbldrSizeOf( const char* );
+
+extern void		docbldrAddHdr( docbldr_t*, const char* );
+extern void		docbldrRmHdr( docbldr_t* );
+extern void		docbldrAddBody( docbldr_t*, const char* );
+extern void		docbldrRmBody( docbldr_t* );
+extern void		docbldrAttachDoc( docbldr_t*, doc_t* );
+extern doc_t*		docbldrDetachDoc( docbldr_t* );</p>
+
+    <p>
+    By analogy with the naming convention adopted in Factory chapter we have used
+    the <span id="inlncode">MLRTB</span> token to designate the Multi-Library Run
+    Time Builder in the code below.
+    </p>
+
+    <p>
+    <span id="inlncode">libdocbldr.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;dlfcn.h&gt;
+#include "libdocbldr.h"
+
+extern size_t
+docbldrSizeOf( const char* docbldrnm )
+{
+	size_t		rv;
+	size_t		( *docbldrsizeof )();
+	void*		handle = RTLD_DEFAULT;
+	char		nm[ 1024 + 1 ] = { 0 };
+	size_t		nmsz = sizeof( nm );
+
+#ifdef DOC_MLRTB
+	snprintf( nm, nmsz, "libdocbldr%s.so", docbldrnm );
+	handle = dlopen( nm, RTLD_LAZY | RTLD_GLOBAL );
+#endif
+
+	snprintf( nm, nmsz, "docbldrSizeOf%s", docbldrnm );
+
+	docbldrsizeof = ( size_t ( * )() )dlsym( handle, nm );
+
+	rv = docbldrsizeof();
+
+	return rv;
+}
+
+extern docbldr_t*
+docbldrConstruct( void* mem, const char* docbldrnm )
+{
+	docbldr_t*	docbldr;
+	docbldr_t*	( *docbldrcnstrct )( void* );
+	char		fnm[ 1024 + 1 ] = { 0 };
+	size_t		fnmsz = sizeof( fnm );
+
+	snprintf( fnm, fnmsz, "docbldrConstruct%s", docbldrnm );
+
+	docbldrcnstrct = ( docbldr_t* ( * )( void* ) )dlsym( RTLD_DEFAULT, fnm );
+
+	docbldr = docbldrcnstrct( mem );
+
+	return docbldr;
+}
+
+extern docbldr_t*
+docbldrNew( const char* docbldrnm )
+{
+	docbldr_t*	docbldr;
+	size_t		n = docbldrSizeOf( docbldrnm );
+	void*		mem = calloc( 1, n );
+
+	docbldr = docbldrConstruct( mem, docbldrnm );
+
+	return docbldr;
+}
+
+extern void
+docbldrDestruct( docbldr_t* docbldr )
+{
+	docbldr->destruct( docbldr );
+}
+
+extern void
+docbldrDelete( docbldr_t** docbldr )
+{
+	if ( !docbldr || !*docbldr )
+	{
+		return;
+	}
+
+	docbldrDestruct( *docbldr );
+
+	free( *docbldr );
+
+	*docbldr = ( docbldr_t* )NULL;
+}
+
+extern void
+docbldrAddHdr( docbldr_t* docbldr, const char* txt )
+{
+	docbldr->addHdr( docbldr, txt );
+}
+
+extern void
+docbldrRmHdr( docbldr_t* docbldr )
+{
+	docbldr->rmHdr( docbldr );
+}
+
+extern void
+docbldrAddBody( docbldr_t* docbldr, const char* txt )
+{
+	docbldr->addBody( docbldr, txt );
+}
+
+extern void
+docbldrRmBody( docbldr_t* docbldr )
+{
+	docbldr->rmBody( docbldr );
+}
+
+extern void
+docbldrAttachDoc( docbldr_t* docbldr, doc_t* doc )
+{
+	docSetContent( doc, NULL );
+
+	docbldr->attachDoc( docbldr, doc );
+}
+
+extern doc_t*
+docbldrDetachDoc( docbldr_t* docbldr )
+{
+	doc_t*		doc;
+
+	doc = docbldr->detachDoc( docbldr );
+
+	return doc;
+}</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Implement all the concrete builders.
+    </p>
+
+    <p>
+    Below is a sample plain text builder implementation.
+    </p>
+
+    <p>
+    Observe that the corresponding <span id="inlncode">add()</span> functions
+    perform only format and, more importantly, part-specific tasks:
+    </p>
+
+    <p>
+    - <span id="inlncode">docbldrAddHdrPlain()</span> creates a plain text version
+    of a header only
+    </p>
+
+    <p>
+    - <span id="inlncode">docbldrAddBodyPlain()</span> creates a plain text version
+    of a body only
+    </p>
+
+    <p>
+    While the above functions are granular or atomic
+    <span id="inlncode">docbldrDetachDoc()</span> is where final document assembly
+    takes place. We observe in passing that while the name of this function comes
+    in many guises: <span id="inlncode">getProduct, getResult, getWhole</span>,
+    etc., its purpose is to provide an explicit final construction step.
+    </p>
+
+    <p>
+    <span id="inlncode">libdocbldrplain.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libdocbldr.h"
+
+typedef struct
+{
+	docbldr_t	docbldradt;
+
+	doc_t*		doc;
+	char		hdr[ 1024 + 1 ];
+	char		body[ 1024 + 1 ];
+} docbldrplain_t;
+
+extern size_t		docbldrSizeOfplain();
+extern docbldr_t*	docbldrConstructplain( void* );
+
+static void		docbldrAddHdrPlain( docbldr_t*, const char* );
+static void		docbldrRmHdrPlain( docbldr_t* );
+static void		docbldrAddBodyPlain( docbldr_t*, const char* );
+static void		docbldrRmBodyPlain( docbldr_t* );
+static void		docbldrAttachDocPlain( docbldr_t*, doc_t* );
+static doc_t*		docbldrDetachDocPlain( docbldr_t* );
+static void		docbldrDestructPlain( docbldr_t* );
+
+static docbldr_t	docbldrAdtPlain = 
+{ 
+	docbldrAddHdrPlain,
+	docbldrRmHdrPlain,
+	docbldrAddBodyPlain,
+	docbldrRmBodyPlain,
+	docbldrAttachDocPlain,
+	docbldrDetachDocPlain,
+	docbldrDestructPlain 
+};
+
+extern size_t
+docbldrSizeOfplain()
+{
+	size_t		rv;
+
+	rv = sizeof( docbldrplain_t );
+
+	return rv;
+}
+
+extern docbldr_t*
+docbldrConstructplain( void* mem )
+{
+	docbldr_t*		rv;
+	docbldrplain_t*		plain = ( docbldrplain_t* )mem;
+
+	plain->docbldradt = docbldrAdtPlain;
+
+	plain->doc = ( doc_t* )NULL;
+
+	rv = &plain->docbldradt;
+
+	return rv;
+}
+
+static void
+docbldrDestructPlain( docbldr_t* docbldr )
+{
+	docbldrplain_t*		plain = ( docbldrplain_t* )docbldr;
+
+	plain->doc = ( doc_t* )NULL;
+	plain->hdr[ 0 ] = '\0';
+	plain->body[ 0 ] = '\0';
+}
+
+<strong>static void
+docbldrAddHdrPlain( docbldr_t* docbldr, const char* txt )
+{
+	docbldrplain_t*		plain = ( docbldrplain_t* )docbldr;
+
+	snprintf( plain->hdr,
+		sizeof( plain->hdr ),
+		"[%s]", txt );
+}</strong>
+
+static void
+docbldrRmHdrPlain( docbldr_t* docbldr )
+{
+	docbldrplain_t*		plain = ( docbldrplain_t* )docbldr;
+
+	plain->hdr[ 0 ] = '\0';
+}
+
+<strong>static void
+docbldrAddBodyPlain( docbldr_t* docbldr, const char* txt )
+{
+	docbldrplain_t*		plain = ( docbldrplain_t* )docbldr;
+
+	snprintf( plain->body,
+		sizeof( plain->body ),
+		"[%s]", txt );
+}</strong>
+
+static void
+docbldrRmBodyPlain( docbldr_t* docbldr )
+{
+	docbldrplain_t*		plain = ( docbldrplain_t* )docbldr;
+
+	plain->body[ 0 ] = '\0';
+}
+
+static void
+docbldrAttachDocPlain( docbldr_t* docbldr, doc_t* doc )
+{
+	docbldrplain_t*		plain = ( docbldrplain_t* )docbldr;
+
+	plain->doc = doc;
+}
+
+<strong>static doc_t*
+docbldrDetachDocPlain( docbldr_t* docbldr )
+{
+	doc_t*			rv;
+	char			cntnt[ 1024 + 1 ] = { 0 };
+	docbldrplain_t*		plain = ( docbldrplain_t* )docbldr;
+
+	rv = plain->doc;
+
+	snprintf( cntnt,
+		sizeof( cntnt ),
+		"%s\n%s\n",
+		plain->hdr,
+		plain->body );
+
+	docSetContent( rv, cntnt );
+
+	plain->doc = ( doc_t* )NULL;
+
+	return rv;
+}</strong></p>
+
+    <p>
+    Type in the remaining builder implementation by analogy.
+    </p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Build the document ADT:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libdoc.c
+gcc -g -shared -o libdoc.so libdoc.o</p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Build the document builder.
+    </p>
+
+    <p>
+    <strong>SLBTB:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libdocbldr.c
+gcc -g -c -fPIC -I . libdocbldrplain.c
+gcc -g -c -fPIC -I . libdocbldrhtml.c
+gcc -g -shared -o libdocbldr.so libdocbldr.o \
+	libdoclnbldrplain.o \
+	libdoclnbldrhtml.o -ldl</p>
+
+    <p>
+    <br><strong>MLBTB:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . libdocbldr.c
+gcc -g -shared -o libdocbldr.so libdocbldr.o -ldl
+
+gcc -g -c -fPIC -I . libdocbldrplain.c
+gcc -g -shared -o libdocbldrplain.so libdocbldrplain.o
+
+gcc -g -c -fPIC -I . libdocbldrhtml.c
+gcc -g -shared -o libdocbldrhtml.so libdocbldrhtml.o</p>
+
+    <p>
+    <br><strong>MLRTB:</strong>
+    </p>
+
+    <p>
+    Add <span id="inlncode">-DDOC_MLRTB</span> option to
+    <span id="inlncode">MLBTB</span>'s
+    <span id="inlncode">libdocbldr.c</span> build line above:
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -DDOC_MLRTB -g -c -fPIC -I . libdocbldr.c</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Write a sample application to exercise the Builder pattern. Our version
+    below should be self-explanatory.
+    </p>
+
+    <p>
+    <span id="inlncode">docbldr.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libdoc.h"
+#include "libdocbldr.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	doc_t*		doc;
+	docbldr_t*	db;
+
+	if ( argc < 2 )
+	{
+		return -1;
+	}
+
+	db = docbldrNew( argv[ 1 ] );
+
+	doc = docNew();
+
+	docbldrAttachDoc( db, doc );
+
+	docbldrAddHdr( db, "Hello" );
+
+	docbldrAddBody( db, "world." );
+
+	doc = docbldrDetachDoc( db );
+
+	docPrint( doc );
+
+	docbldrDelete( &db );
+	docDelete( &doc );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Build the sample application.
+    </p>
+
+    <p>
+    <strong>SLBTB</strong> and <strong>MLRTB:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . docbldr.c
+gcc -g -L . -o docbldr docbldr.o -ldoc -ldocbldr</p>
+
+
+    <p>
+    <br><strong>MLBTB:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . docbldr.c
+gcc -g -L . -o docbldr docbldr.o -ldoc -ldocbldr -ldocbldrplain -ldocbldrhtml</p>
+
+    <p>
+    <br><strong>Step 9</strong>
+    </p>
+
+    <p>
+    Run the sample program with various inputs. Study the output observing how
+    the same assembly process created two different types of products:
+    </p>
+
+    </p>
+
+    <p id="cmdln">./docbldr plain
+<span class="italic">[Hello]
+[world.]</span>
+
+./docbldr html
+<span class="italic">&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt;Hello&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+  &lt;p&gt;world.&lt;/p&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</span></p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Carry out the following modifications and analyze their cost:
+    </p>
+
+    <p>
+    - add a new part, a footer perhaps, to a product keeping the number of the
+    existing document formats constant
+    </p>
+
+    <p>
+    - add a new document format, PDF perhaps, keeping the number of parts of a
+    product constant
+    </p>
+
+    <p>
+    2) A new requirement demands the ability to create products (documents) at
+    varying degrees of completion. For example, we should be able to create
+    plain text or HTML (or PDF) documents with:
+    </p>
+
+    <ul>
+     <li>header only (and no body)</li>
+     <li>body only (and no header)</li>
+     <li>header and footer only</li>
+     <li>footer only</li>
+    </ul>
+
+    <p>
+    and so on. The mix of parts that should be present in such a document is
+    arbitrary and is not known until run time.
+    </p>
+
+    <p>
+    Implement this requirement.
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/builder/libdoc.h" download target="_blank">libdoc.h</a>
+    <a href="src/builder/libdoc.c" download target="_blank">libdoc.c</a>
+    </p>
+
+    <p>
+    <a href="src/builder/libdocbldr.h" download target="_blank">libdocbldr.h</a>
+    <a href="src/builder/libdocbldr.c" download target="_blank">libdocbldr.c</a>
+    <a href="src/builder/libdocbldrplain.c" download target="_blank">libdocbldrplain.c</a>
+    <a href="src/builder/libdocbldrhtml.c" download target="_blank">libdocbldrhtml.c</a>
+    </p>
+
+    <p>
+    <a href="src/builder/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/builder/docbldr.c" download target="_blank">docbldr.c</a>
+    <a href="src/builder/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicabstractfactory.html">prev</a>
+     <a href="ryapdpicprototype.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

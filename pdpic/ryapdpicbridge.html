@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Bridge
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Bridge</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicdecorator.html">prev</a>
+     <a href="ryapdpicbehave.html">next</a>
+    </p>
+
+    <h1>Bridge</h1>
+
+    <p>
+    The Bridge pattern may be used to separate a data type's interface from a
+    multitude of terms of its implementation.
+    </p>
+
+    <p>
+    Let an abstract data type have \(m\) concrete data types each of which may
+    use a common entity - a term of implementation - which has \(n\) different
+    varieties.
+    </p>
+
+    <p>
+    From  elementary combinatorial analysis we recall the Fundamental
+    Multiplication Counting Principle (for two sets):
+    </p>
+
+    <p>
+    <dfn>let \(S_1\) be a set of items \(a_j, j = 1, 2, \dots, m: |S_1| = m\) and
+    \(S_2\) be a set of items \(b_k, k = 1, 2, \dots, n: |S_2| = n\). If,
+    regardless of the previous outcomes, for each choice of item \(a_j\) from
+    \(S_1\) there are exactly \(n\) choices of items \(b_k\) from \(S_2\) then
+    the size of the set \(S\) comprised of ordered pairs \((a_j, b_k)\) is equal
+    to \(m \times n\):</dfn>
+    </p>
+
+$$|S| = |S_1| \times |S_2| = m \times n$$
+
+    <p>
+    The above principle, which is a direct consequence of the Fundamental
+    Addition Counting Principle since repetitive addition of integers is
+    multiplication, can be extended to an arbitrary finite number of sets.
+    </p>
+
+    <p>
+    The resulting set \(S\) of ordered pairs is called a <dfn>Cartesian
+    Product</dfn>. Instead of viewing \(S\) as such let us partition it into some
+    number of pairwise disjoint subsets in which the choice of \(a_j\) is fixed
+    while the choices of \(b_k\) run their entire course:
+    </p>
+
+$$\sigma_j = \{(a_j, b_1), (a_j, b_2), (a_j, b_3), \dots, (a_j, b_n)\}$$
+
+    <p>
+    Since there are \(n\) \(b_k\) items in total, the size of one such subset will
+    be \(n\), \(|\sigma_j| = n\). Since there are \(m\) choices for item \(a_j\),
+    it follows that there will be \(m\) such subsets. Lastly, to calculate the
+    size of \(S\) we have to add \(n\) to itself \(m\) times:
+    </p>
+
+$$|S| = \sum_{j=1}^m |\sigma_j| = \sum_{j=1}^m n = m \times n$$
+
+    <p>
+    The above reasoning gives us a practical way to enumerate the members of
+    \(S\), manually or programmatically.
+    </p>
+
+    <p>
+    For example, let an abstract data type <span id="inlncode">fruit</span>
+    have \(m = 3\) concrete data types, <span id="inlncode">apple, orange</span>
+    and <span id="inlncode">banana</span>, each of which may be implemented,
+    sculpted or manufactured, using a common term, material, of which there are
+    \(n = 3\) different types: <span id="inlncode">wood, glass</span> and
+    <span id="inlncode">clay</span>. Formally:
+    </p>
+
+$$S_1 = \{ apple, orange, banana \}, |S_1| = m = 3$$
+$$S_2 = \{ wood, glass, clay \}, |S_2| = n = 3$$
+
+    <p>
+    Partitioning the above sets into C source code files the direct way, which
+    combines one concrete material and one concrete fruit into one translation
+    unit, we obtain:
+    </p>
+
+    <ul>
+     <li>apple_wood.c</li>
+     <li>apple_glass.c</li>
+     <li>apple_clay.c</li>
+     <li>orange_wood.c</li>
+     <li>orange_glass.c</li>
+     <li>orange_clay.c</li>
+     <li>banana_wood.c</li>
+     <li>banana_glass.c</li>
+     <li>banana_clay.c</li>
+    </ul>
+
+    <p>
+    or \(m \times n = 3 \times 3 = 9\) files in total.
+    </p>
+
+    <p>
+    Further, the addition of a new concrete fruit to the above set when the
+    number of materials is kept constant will require the addition of \(n = 3\)
+    <span id="inlncode">.c</span> files and the addition of a new material when
+    the number of fruits is kept constant will require the addition of \(m = 3\)
+    <span id="inlncode">.c</span> files.
+    </p>
+
+    <p>
+    Using Bridge, on the other hand, we separate the fruit, an abstract data
+    type, from material, a term of its implementation, by branching out material
+    into a stand-alone (abstract) data type and adjusting fruit's functions to
+    accept material as a formal argument.
+    </p>
+
+    <p>
+    Partitioning \(S_1\) and \(S_2\) into C source code files the Bridge way we
+    obtain:
+    </p>
+    
+    <ul>
+     <li>apple.c</li>
+     <li>orange.c</li>
+     <li>banana.c</li>
+     <li>wood.c</li>
+     <li>glass.c</li>
+     <li>clay.c</li>
+    </ul>
+
+    <p>
+    The above arrangement now falls under the jurisdiction of the Fundamental
+    Addition Counting Principle:
+    </p>
+
+    <p>
+    <dfn>if a set \(S\) is partitioned into a finite number of \(n\) subsets
+    \(S_1, S_2, \dots , S_n\) disjoint pairwise then the total number of items
+    in \(S\) is equal to the sum of item counts in each subset \(S_j, j = 1, 2,
+    \dots , n\):</dfn>
+    </p>
+
+$$|S| = |S_1| + |S_2| + \dots + |S_n| = \sum_{j=1}^n S_j$$
+
+    <p>
+    The <dfn>"disjoint pairwise"</dfn> requirement is of paramount importance -
+    if it is not met then the Addition Counting Principle does not apply and a
+    different - Inclusion Exclusion Counting Principle (not shown here) - must
+    be used.
+    </p>
+
+    <p>
+    In our case there are two sets and the earlier product, \(m \times n\), is
+    replaced with a sum, \(m + n = 3 + 3 = 6\):
+    </p>
+
+<img src="imgs/bridge.png" class="center">
+
+    <p>
+    Further, though in practice nothing is guaranteed, theoretically the addition
+    of a new concrete fruit to the above arrangement will require the addition of
+    one <span id="inlncode">.c</span> file and the addition of a new material will
+    require the addition of one <span id="inlncode">.c</span> file also.
+    </p>
+
+    <p>
+    Now that a way to bridge an abstract data type and one term of its
+    implementation is understood, an arbitrary (finite) number of terms may be
+    bridged to a data type by repetition of the above procedure.
+    </p>
+
+    <p>
+    The Bridge pattern consequences:
+    </p>
+
+    <ul>
+     <li>The separation of a data type's interface from a multitude of its terms
+      of implementation</li><br>
+
+     <li>A potential independence of a data type's interface from the interfaces
+      of its terms of implementation
+    </ul>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Implement a multitude of mock reports which write out the contents of an
+    arbitrarily sized C array of C integers as:
+    </p>
+
+    <ul>
+     <li>one line</li>
+     <li>one column</li>
+     <li>North-West to South-East diagonal</li>
+    </ul>
+   
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Identify all the data type's terms of implementation and branch them out
+    into stand-alone data types that possess the ability to attach a multitude
+    of similar but different implementations to a single interface.
+    </p>
+
+    <p>
+    2) Adjust the corresponding functions of a data type to accept variables of
+    data types representing terms of its implementation as formal arguments.
+    </p>
+
+    <p>
+    3) Provide a mechanism for terms of implementation to be selected within or
+    attached to a data type.
+    </p>
+
+    <p>
+    <br><strong>Sample Solution</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    One of the terms of report's implementation is the destination of data which
+    could be: disk files, TCP or UNIX Domain sockets, an e-mail, etc.
+    </p>
+
+    <p>
+    Implement report's data destination as <span id="inlncode">bio_t</span>
+    borrowing the relevant files,
+    <span id="inlncode">libbio.h</span> and <span id="inlncode">libbio.so</span>,
+    from Factory chapter.
+    </p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Implement reports as <span id="inlncode">report_t</span> Factory, selecting
+    line reports via <span id="inlncode">"l"</span>, column reports via
+    <span id="inlncode">"c"</span> and North-West to South-East diagonal reports
+    via <span id="inlncode">"nwd"</span> strings:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">librprt.h</span></li>
+     <li><span id="inlncode">librprt.c</span></li>
+     <li><span id="inlncode">librprtl.h</span></li>
+     <li><span id="inlncode">librprtc.h</span></li>
+     <li><span id="inlncode">librprtnwd.h</span></li>
+    </ul>
+   
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Bridge the report with the destination of its output in report's
+    <span id="inlncode">write()</span> function by making it accept
+    <span id="inlncode">bio_t*</span> as one of its arguments.
+    </p>
+
+    <p>
+    This arrangement will also serve as a mechanism by which a concrete term of
+    implementation is attached to a data type making it possible to:
+    </p>
+
+    <ul>
+     <li>fix the report type and vary its destination</li><br>
+     <li>fix the destination of a report and vary its type</li><br>
+     <li>vary both - the type and destination of a report</li>
+    </ul>
+
+    <p>
+    <br><span id="inlncode">librprt.h:</span>
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+<strong>#include "libbio.h"</strong>
+
+typedef struct rprt
+{
+	int		( *write )( struct rprt*, int [], size_t, <strong>bio_t*</strong> );
+
+	const char*	( *name )();
+	size_t		( *sizeOf )();
+
+	void		( *destruct )( struct rprt* );
+} rprt_t;
+
+extern rprt_t*		rprtNew( const char* );
+extern void		rprtDelete( rprt_t** );
+extern rprt_t*		rprtConstruct( void*, const char* );
+extern void		rprtDestruct( rprt_t* );
+extern size_t		rprtSizeOf( const char* );
+
+extern int		rprtWrite( rprt_t*, int [], size_t, <strong>bio_t*</strong> );
+
+extern const char*	rprtName( rprt_t* );
+extern size_t		rprtsizeof( rprt_t* );</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Implement the report factory proper and its three concrete types - line,
+    column and North-West to South-East diagonal.
+    </p>
+
+    <p>
+    We will not show the remaining mechanical details here - finish this step by
+    yourself, consult Factory chapter if needed.
+    </p>
+
+    <p>
+    Below are our sample implementations of the corresponding
+    <span id="inlncode">write()</span> functions only.
+    </p>
+
+    <p>
+    <span id="inlncode">librprtl.c:</span>
+    </p>
+
+    <p id="srccode">static int
+rprtWriteL( rprt_t* rprt, int input[], size_t inputsz, bio_t* dst )
+{
+	size_t		i;
+	char*		sp;
+	char*		nl;
+	char		b[ 512 + 1 ];
+	rprtl_t*	rprtl = ( rprtl_t* )rprt;
+
+	for ( i = 0; i < inputsz; i++ )
+	{
+		sp = " ";
+		nl = "";
+		if ( i == 0 )
+		{
+			sp = "";
+		}
+		if ( i == ( inputsz - 1 ) )
+		{
+			nl = "\n";
+		}
+		snprintf( b, sizeof( b ), "%s%d%s", sp, input[ i ], nl );
+		bioWrite( dst, b, strlen( b ) );
+	}
+
+	return 1;
+}</p>
+
+    <p>
+    <span id="inlncode">librprtc.c:</span>
+    </p>
+
+    <p id="srccode">static int
+rprtWriteC( rprt_t* rprt, int input[], size_t inputsz, bio_t* dst )
+{
+	size_t		i;
+	char		b[ 512 + 1 ];
+	rprtc_t*	rprtc = ( rprtc_t* )rprt;
+
+	for ( i = 0; i < inputsz; i++ )
+	{
+		snprintf( b, sizeof( b ), "%d\n", input[ i ] );
+		bioWrite( dst, b, strlen( b ) );
+	}
+
+	return 1;
+}</p>
+
+    <p>
+    <span id="inlncode">librprtnwd.c:</span>
+    </p>
+
+    <p id="srccode">static int
+rprtWriteNWD( rprt_t* rprt, int input[], size_t inputsz, bio_t* dst )
+{
+	size_t		i;
+	size_t		j;
+	char		b[ 512 + 1 ];
+	size_t		bsz = sizeof( b ) - 1;
+	rprtnwd_t*	rprtnwd = ( rprtnwd_t* )rprt;
+
+	for ( i = 0; i < inputsz; i++ )
+	{
+		for ( j = 0; j < i && j < bsz; j++ )
+		{
+			b[ j ] = ' ';
+		}
+		snprintf( b + j,
+			sizeof( b ) - strlen( b ),
+			"%d\n",
+			input[ i ] );
+		bioWrite( dst, b, strlen( b ) );
+	}
+
+	return 1;
+}</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Build the report factory.
+    </p>
+
+    <p>
+    <strong>SLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . librprt.c
+gcc -g -c -fPIC -I . librprtl.c
+gcc -g -c -fPIC -I . librprtc.c
+gcc -g -c -fPIC -I . librprtnwd.c
+gcc -g -shared -o librprt.so \
+	librprt.o \
+	librprtl.o \
+	librprtc.o \
+	librprtnwd.o -ldl</p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -g -c -fPIC -I . librprt.c
+gcc -g -shared -o librprt.so librprt.o -ldl
+
+gcc -g -c -fPIC -I . librprtl.c
+gcc -g -shared -o librprtl.so librprtl.o
+
+gcc -g -c -fPIC -I . librprtc.c
+gcc -g -shared -o librprtc.so librprtc.o
+
+gcc -g -c -fPIC -I . librprtnwd.c
+gcc -g -shared -o librprtnwd.so librprtnwd.o</p>
+
+    <p>
+    <br><strong>MLRTF:</strong>
+    </p>
+
+    <p>
+    Add the <span id="inlncode">-DRPRT_MLRTF</span> option to the
+    <span id="inlncode">librprt.so</span> library's build line:
+    </p>
+
+    <p id="cmdln">gcc -D_GNU_SOURCE -DRPRT_MLRTF -g -c -fPIC -I . libbio.c</p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Write a sample program to exercise the Bridge pattern.
+    </p>
+
+    <p>
+    Our version accepts report type, destination type and address and up to
+    \(100\) integers from the command line, opens the destination address and
+    sends the report there.
+    </p>
+
+    <p>
+    <span id="inlncode">rprt.c:</span>
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "librprt.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	int		i;
+	const char*	rprtnm;
+	const char*	dstnm;
+	const char*	dstadrs;
+	bio_t*		dst;
+	rprt_t*		rprt;
+	int		input[ 100 ] = { 0 };
+	size_t		inputsz = 0;
+
+	if ( argc < 5 )
+	{
+		return -1;
+	}
+
+	rprtnm = argv[ 1 ];
+	dstnm = argv[ 2 ];
+	dstadrs = argv[ 3 ];
+	
+	rprt = rprtNew( rprtnm );
+	dst = bioNew( dstnm );
+
+	for ( i = 0; i < ( argc - 4 ) && i < 100; i++ )
+	{
+		input[ i ] = atoi( argv[ i + 4 ] );
+		inputsz++;
+	}
+
+	bioOpen( dst, dstadrs );
+
+	rprtWrite( rprt, input, inputsz, dst );
+
+	rprtDelete( &rprt );
+	bioDelete( &dst );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Build the sample application.
+    </p>
+
+    <p>
+    <strong>SLBTF</strong> and <strong>MLRTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . rprt.c
+gcc -g -L . -o rprt rprt.o -lrprt -lbio</p>
+
+    <p>
+    <br><strong>MLBTF:</strong>
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . rprt.c
+gcc -g -L . -o rprt rprt.o -lrprt -lbio \
+	-lrprtl \
+	-lrprtc \
+	-lrprtnwd</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Run the sample program with various inputs:
+    </p>
+
+    <p id="cmdln">./rprt l file rl 1 2 3 4 5 6 7 8 9
+cat rl
+<span class="italic">1 2 3 4 5 6 7 8 9</span>
+
+./rprt c file rc 1 2 3 4 5 6 7 8 9
+cat rc
+<span class="italic">1
+2
+3
+4
+5
+6
+7
+8
+9</span></p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Assuming that all three types of I/O Factory are implemented write a shell
+    script based on <span id="inlncode">rprt</span> that sends all the types of
+    reports to all the types of destinations.
+    </p>
+
+    <p>
+    How many reports will be generated in total?
+    </p>
+
+    <p>
+    2) Add a North-East to South-West diagonal report type to our reports factory.
+    </p>
+
+    <p>
+    3) Another popular report's term of implementation is output format.
+    </p>
+
+    <p>
+    Bridge <span id="inlncode">plain text</span> and
+    <span id="inlncode">html</span> output formats into our reports factory
+    preserving its geometric nature.
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/bridge/librprt.h" download target="_blank">librprt.h</a>
+    <a href="src/bridge/librprt.c" download target="_blank">librprt.c</a>
+    <a href="src/bridge/librprtl.c" download target="_blank">librprtl.c</a>
+    <a href="src/bridge/librprtc.c" download target="_blank">librprtc.c</a>
+    <a href="src/bridge/librprtnwd.c" download target="_blank">librprtnwd.c</a>
+    <a href="src/bridge/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/bridge/rprt.c" download target="_blank">rprt.c</a>
+    <a href="src/bridge/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicdecorator.html">prev</a>
+     <a href="ryapdpicbehave.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

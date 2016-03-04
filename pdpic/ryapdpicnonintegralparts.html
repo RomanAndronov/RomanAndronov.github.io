@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Practical Design Patterns in C by Roman Y. Andronov. Non-integral Parts
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css"/>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Practical Design Patterns in C by Roman Y. Andronov.
+  Non-integral Parts</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapdpicintegralparts.html">prev</a>
+     <a href="ryapdpiccreate.html">next</a>
+    </p>
+
+    <h1>Non-integral Parts</h1>
+
+    <p>
+    Non-integral are the parts that are not embedded in a whole permanently. At
+    run time the whole and its non-integral parts exist in separate blocks of
+    memory.
+    </p>
+
+    <p>
+    If a whole has to manage the life time of a non-integral part then we will
+    say that the whole <dfn>owns</dfn> that part or that this non-integral part
+    is <dfn>owned</dfn> by its whole. When a whole is created all of its
+    non-integral owned parts are created also. Consequently, when a whole is
+    deleted all of its non-integral owned parts are also deleted.
+    </p>
+
+    <p>
+    If a whole does not have to manage the life time of a non-integral part then
+    we will say that the whole <dfn>rents</dfn> that part or that this
+    non-integral part is <dfn>rented</dfn> by its whole. In this case a whole
+    completely ignores all of its non-integral rented parts in its life cycle
+    functions.
+    </p>
+
+    <p>
+    <br><strong>Non-integral Owned Parts</strong>
+    </p>
+
+    <p>
+    <strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Make <span id="inlncode">str_t</span> ADTs - book's title and authors -
+    private non-integral owned parts of a <span id="inlncode">book_t</span> ADT.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Add one pointer to a non-integral owned part for each and all such parts
+    in the whole's implementation data type. 
+    </p>
+
+    <p>
+    2) Exclude all the non-integral owned parts from the whole's memory allocation
+    budget in the whole's <span id="inlncode">SizeOf()</span> function.
+    </p>
+
+    <p>
+    3) Create all the non-integral owned parts in the whole's
+    <span id="inlncode">Construct()</span> function.
+    </p>
+
+    <p>
+    4) Delete all the non-integral owned parts in the whole's
+    <span id="inlncode">Destruct()</span> function.
+    </p>
+
+    <p>
+    <br><strong>Sample Implementation</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    Borrow the relevant files from Integral Parts chapter:
+    </p>
+
+    <ul>
+     <li> <span id="inlncode">libstr.h</span> and
+     <span id="inlncode">libstr.so</span></li>
+     <li> <span id="inlncode">libbook.[hc]</span> pair of files</li>
+     <li> <span id="inlncode">book.c</span> sample application</li>
+    </ul>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Since we will not be using the <span id="inlncode">logicalSize()</span>
+    family of functions from Integral Parts chapter we will delete them from
+    <span id="inlncode">libbook.c</span>. You may keep these functions if you
+    wish.
+    </p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    We will use the latest implementation of
+    <span id="inlncode">bookimpl_t</span> which includes
+    <span id="inlncode">authors</span> as an additional integral part.
+    </p>
+
+    <p>
+    As such, exclude <span id="inlncode">title</span> and
+    <span id="inlncode">authors</span> from the
+    <span id="inlncode">bookimpl_t</span>'s size calculation in
+    <span id="inlncode">bookSizeOf()</span> in
+    <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">extern size_t
+bookSizeOf()
+{
+	size_t		rv;
+
+	rv = sizeof( bookimpl_t );
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Once the whole is created and ready to be returned to the user, create the
+    non-integral owned parts in <span id="inlncode">bookConstruct()</span> in
+    <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">extern book_t*
+bookConstruct( void* mem, const char* title, const char* authors )
+{
+	bookimpl_t*		bimpl = ( bookimpl_t* )mem;
+
+	bimpl->bookadt = bookAdt;
+
+	<strong>bimpl->title = strNew( title );
+	bimpl->authors = strNew( authors );</strong>
+
+	return &bimpl->bookadt;
+}</p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Once the whole is destructed, delete the non-integral owned parts in
+    <span id="inlncode">bookDestruct()</span> in
+    <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">extern void
+bookDestruct( book_t* book )
+{
+	bookimpl_t*		bimpl = ( bookimpl_t* )book;
+
+	<strong>strDelete( &bimpl->title );
+	strDelete( &bimpl->authors );</strong>
+}</p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Adjust <span id="inlncode">bookInfoImpl()</span> in
+    <span id="inlncode">libbook.c</span> to reflect the change in the parts'
+    ownership type.
+    </p>
+
+    <p>
+    Observe that in Integral Parts chapter
+    <span id="inlncode">title</span> and <span id="inlncode">authors</span>,
+    as <span id="inlncode">str_t*</span>, pointed to memory locations inside the
+    <span id="inlncode">bookimpl_t</span> block. As such, to print the addresses
+    of <span id="inlncode">title</span> and <span id="inlncode">authors</span>
+    we used the <span id="inlncode">bimpl->title</span> and
+    <span id="inlncode">bimpl->authors</span> constructs.
+    </p>
+
+    <p>
+    In contrast, the now non-integral parts do not reside in
+    <span id="inlncode">bookimpl_t</span>'s memory block anymore. Consequently, to
+    print their addresses we use the "address of" C operator,
+    <span id="inlncode">&</span>, in the <span id="inlncode">&bimpl->title</span>
+    and <span id="inlncode">&bimpl->authors</span> constructs in
+    <span id="inlncode">libbbok.c</span>:
+    </p>
+
+    <p id="srccode">extern void
+bookInfoImpl( book_t* book )
+{
+	bookimpl_t*	bimpl = ( bookimpl_t* )book;
+
+	printf( "%s:%d: bookInfoImpl()\n", __FILE__, __LINE__ );
+
+	printf( " bookSizeOf() = %zu\n", bookSizeOf() );
+	printf( " sizeof( bookimpl_t ) = %zu\n", sizeof( bookimpl_t ) );
+	printf( " sizeof( book_t ) = %zu\n", sizeof( book_t ) );
+	printf( " sizeof( title ) = %zu\n", sizeof( str_t* ) );
+	printf( " sizeof( authors ) = %zu\n", sizeof( str_t* ) );
+	printf( "  &book = %p\n", ( void* )book );
+	printf( "  &bookadt = %p\n", ( void* )( &bimpl->bookadt ) );
+	printf( "  &title = %p\n", ( void* )( &bimpl->title ) );
+	printf( "  &title - &book = %zu\n",
+		( void* )( &bimpl->title ) - ( void* )book );
+	printf( "  &authors = %p\n", ( void* )( &bimpl->authors ) );
+	printf( "  &authors - &title = %zu\n",
+		( void* )( &bimpl->authors ) - ( void* )( &bimpl->title ) );
+}</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    Rebuild the <span id="inlncode">libbook.so</span> shared library (using
+    Chained Linking):
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libbook.c
+gcc -g -L . -shared -o libbook.so libbook.o -lstr</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Run the <span id="inlncode">book</span> sample application. Observe that there
+    is no need to rebuild it:
+    </p>
+
+    <p id="cmdln">./book
+<span class="italic">libbook.c:100: bookInfoImpl()
+ bookSizeOf() = 24
+ sizeof( bookimpl_t ) = 24
+ sizeof( book_t ) = 8
+ sizeof( title ) = 8
+ sizeof( authors ) = 8
+  &book = 0xb3a010
+  &bookadt = 0xb3a010
+  &title = 0xb3a018
+  &title - &book = 8
+  &authors = 0xb3a020
+  &authors - &title = 8</span></p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/nintprts/owned/libbook.h" download target="_blank">libbook.h</a>
+    <a href="src/nintprts/owned/libbook.c" download target="_blank">libbook.c</a>
+    <a href="src/nintprts/owned/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/nintprts/owned/book.c" download target="_blank">book.c</a>
+    <a href="src/nintprts/owned/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    <br><br><strong>Non-integral Rented Parts</strong>
+    </p>
+
+    <p>
+    Normally, all the non-integral rented parts are created, constructed,
+    destructed and deleted elsewhere outside the whole. In these scenarios a
+    whole is not called upon to manage the life cycle of its non-integral rented
+    parts.
+    </p>
+
+    <p>
+    Even though non-integral rented parts are pointers in the whole's
+    implementation structure, the whole ignores that fact in its
+    <span id="inlncode">New(), Construct(), Destrcut(), Delete()</span> functions.
+    See the Decorator pattern for an example.
+    </p>
+
+    <p>
+    In certain cases a whole may specifically be charged with creating some
+    part(s) via this part's <span id="inlncode">New()</span> function. See the
+    Builder pattern for an example. However, these parts are still qualified
+    as "rented" and not "owned" as they are not created and deleted in unison
+    with the whole. Instead, such parts' life cycle is controlled elsewhere
+    outside and beyond the reach of the whole - users decide when these types
+    of parts come into existence and when they vanish.
+    </p>
+
+    <p>
+    The Builder pattern, mentioned earlier, is used to absorb and centralize a
+    broader functionality of assembling an arbitrarily complex entity out of
+    multitude of subordinate parts. The usage of Builder also implies that after
+    a while a fully assembled entity will be separated or detached from the
+    object (variable) that created it.
+    </p>
+
+    <p>
+    <br><strong>Sample Problem</strong>
+    </p>
+
+    <p>
+    Make book's title and authors private non-integral rented parts of a
+    <span id="inlncode">book_t</span> ADT.
+    </p>
+
+    <p>
+    <br><strong>Generic Solution Description</strong>
+    </p>
+
+    <p>
+    1) Add one pointer to a non-integral rented part for each and all such parts
+    in the whole's implementation data type. 
+    </p>
+
+    <p>
+    2) Exclude all the non-integral rented parts from the whole's memory allocation
+    budget in the whole's <span id="inlncode">SizeOf()</span> function.
+    </p>
+
+    <p>
+    3) Ignore all the non-integral rented parts in the whole's
+    <span id="inlncode">New(), Construct(), Destruct(), Delete()</span> functions.
+    </p>
+
+    <p>
+    4) Add an appropriate public interface to a whole to add/remove, set/unset,
+    attach/detach its non-integral rented parts.
+    </p>
+
+    <p>
+    <br><strong>Sample Implementation</strong>
+    </p>
+
+    <p>
+    <strong>Step 1</strong>
+    </p>
+
+    <p>
+    Borrow the files from the previous section, non-integral owned parts, by
+    copying them to the corresponding directory, for example.
+    </p>
+
+    <p>
+    <br><strong>Step 2</strong>
+    </p>
+
+    <p>
+    Since <span id="inlncode">str_t</span> now belongs to
+    <span id="inlncode">book_t</span>'s public interface, move
+    <span id="inlncode">libstr.h</span> from <span id="inlncode">libbook.c</span>
+    to <span id="inlncode">libbook.h</span>:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+<strong>#include "libstr.h"</strong></p>
+
+    <p>
+    <br><strong>Step 3</strong>
+    </p>
+
+    <p>
+    Add a public interface to <span id="inlncode">book_t</span> to set its
+    title and authors in <span id="inlncode">libbook.h</span>:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+#include "libstr.h"
+
+typedef struct book
+{
+	void		( *info )( struct book* );
+	<strong>str_t*		( *setTitle )( struct book*, str_t* );
+	str_t*		( *setAuthors )( struct book*, str_t* );</strong>
+} book_t;</p>
+
+    <p>
+    <br><strong>Step 4</strong>
+    </p>
+
+    <p>
+    Remove the title and authors C strings from the prototype of
+    <span id="inlncode">bookNew()</span> and
+    <span id="inlncode">bookConstruct()</span> in
+    <span id="inlncode">libbook.h</span>:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+#include "libstr.h"
+
+typedef struct book
+{
+	void		( *info )( struct book* );
+	str_t*		( *setTitle )( struct book*, str_t* );
+	str_t*		( *setAuthors )( struct book*, str_t* );
+} book_t;
+
+<strong>extern book_t*		bookNew();</strong>
+extern void		bookDelete( book_t** );
+
+<strong>extern book_t*		bookConstruct( void* );</strong></p>
+
+    <p>
+    <br><strong>Step 5</strong>
+    </p>
+
+    <p>
+    Add the prototypes for the corresponding convenience functions in
+    <span id="inlncode">libbook.h</span>:
+    </p>
+
+    <p id="srccode">#include &lt;sys/types.h&gt;
+#include "libstr.h"
+
+typedef struct book
+{
+	void		( *info )( struct book* );
+	str_t*		( *setTitle )( struct book*, str_t* );
+	str_t*		( *setAuthors )( struct book*, str_t* );
+} book_t;
+
+extern book_t*		bookNew();
+extern void		bookDelete( book_t** );
+
+extern book_t*		bookConstruct( void* );
+extern void		bookDestruct( book_t* );
+
+extern size_t		bookSizeOf();
+
+extern void		bookInfo( book_t* );
+<strong>extern str_t*		bookSetTitle( book_t*, str_t* );
+extern str_t*		bookSetAuthors( book_t*, str_t* );</strong></p>
+
+    <p>
+    <br><strong>Step 6</strong>
+    </p>
+
+    <p>
+    Add the prototypes of the implementation functions of the new public interface
+    to <span id="inlncode">book_t</span> in <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">static void		bookInfoImpl( book_t* );
+<strong>static str_t*		bookSetTitleImpl( book_t*, str_t* );
+static str_t*		bookSetAuthorsImpl( book_t*, str_t* );</strong>
+
+static book_t	bookAdt = 
+{ 
+	bookInfoImpl,
+	<strong>bookSetTitleImpl,
+	bookSetAuthorsImpl</strong>
+};</p>
+
+    <p>
+    <br><strong>Step 7</strong>
+    </p>
+
+    <p>
+    <span id="inlncode">bookSizeOf()</span> in
+    <span id="inlncode">libbook.c</span> already excludes
+    <span id="inlncode">title</span> and <span id="inlncode">authors</span>
+    from <span id="inlncode">bookimpl_t</span>'s memory allocation budget:
+    </p>
+
+    <p id="srccode">extern size_t
+bookSizeOf()
+{
+	size_t		rv;
+
+	rv = sizeof( bookimpl_t );
+
+	return rv;
+}</p>
+
+    <p>
+    <br><strong>Step 8</strong>
+    </p>
+
+    <p>
+    Remove the creation of <span id="inlncode">title</span> and
+    <span id="inlncode">authors</span> from
+    <span id="inlncode">bookNew(), bookConstruct()</span> and their deletion
+    from <span id="inlncode">bookDestruct()</span> in
+    <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">extern book_t*
+bookNew()
+{
+	book_t*		book = ( book_t* )NULL;
+	void*		mem = calloc( 1, bookSizeOf() );
+
+	book = bookConstruct( mem );
+
+	return book;
+}
+
+extern book_t*
+bookConstruct( void* mem )
+{
+	bookimpl_t*		bimpl = ( bookimpl_t* )mem;
+
+	bimpl->bookadt = bookAdt;
+
+	bimpl->title = NULL;
+	bimpl->authors = NULL;
+
+	return &bimpl->bookadt;
+}
+
+extern void
+bookDestruct( book_t* book )
+{
+	bookimpl_t*		bimpl = ( bookimpl_t* )book;
+
+	bimpl->title = NULL;
+	bimpl->authors = NULL;
+}</p>
+
+    <p>
+    <br><strong>Step 9</strong>
+    </p>
+
+    <p>
+    Implement the new interface in <span id="inlncode">libbook.c</span>:
+    </p>
+
+    <p id="srccode">extern str_t*
+bookSetTitle( book_t* book, str_t* title )
+{
+	str_t*		oldTitle;
+
+	oldTitle = book->setTitle( book, title );
+
+	return oldTitle;
+}
+
+extern str_t*
+bookSetAuthors( book_t* book, str_t* authors )
+{
+	str_t*		oldAuthors;
+
+	oldAuthors = book->setAuthors( book, authors );
+
+	return oldAuthors;
+}
+
+extern str_t*
+bookSetTitleImpl( book_t* book, str_t* title )
+{
+	str_t*		oldTitle;
+	bookimpl_t*	bimpl = ( bookimpl_t* )book;
+
+	oldTitle = bimpl->title;
+	bimpl->title = title;
+
+	return oldTitle;
+}
+
+extern str_t*
+bookSetAuthorsImpl( book_t* book, str_t* authors )
+{
+	str_t*		oldAuthors;
+	bookimpl_t*	bimpl = ( bookimpl_t* )book;
+
+	oldAuthors = bimpl->authors;
+	bimpl->authors = authors;
+
+	return oldAuthors;
+}</p>
+
+    <p>
+    <br><strong>Step 10</strong>
+    </p>
+
+    <p>
+    Build the <span id="inlncode">libbook.so</span> shared library.
+    </p>
+
+    <p>
+    In this particular scenario <span id="inlncode">str_t</span> is used as a
+    means of public communication between two components -
+    <span id="inlncode">libbook.so</span> and
+    <span id="inlncode">book</span>. Since <span id="inlncode">book</span>
+    is a program, it will have to specify <span id="inlncode">libstr.so</span>
+    as its dependency because otherwise link editor will fail to assemble its
+    executable image because of the unresolved references to
+    <span id="inlncode">strNew()</span> and <span id="inlncode">strDelete()</span>.
+    Being a shared library, <span id="inlncode">libbook.so</span> does not have
+    to specify <span id="inlncode">libstr.so</span> as its dependency.
+    </p>
+
+    <p>
+    As such, to eliminate the potential code duplication, build
+    <span id="inlncode">libbook.so</span> without the dependency on
+    <span id="inlncode">libstr.so</span>:
+    </p>
+
+    <p id="cmdln">gcc -g -c -fPIC -I . libbook.c
+gcc -g -shared -o libbook.so libbook.o</p>
+
+    <p>
+    <br><strong>Step 11</strong>
+    </p>
+
+    <p>
+    Adjust the sample application to reflect the change in the book's parts'
+    ownership type in <span id="inlncode">book.c</span>:
+    </p>
+
+    <p id="srccode">#include &lt;stdio.h&gt;
+#include "libbook.h"
+
+extern int
+main( int argc, char* argv[] )
+{
+	book_t*		book = bookNew();
+	str_t*		title = strNew( "The C Programming Language" );
+	str_t*		authors = strNew( "K & R" );
+
+	bookInfo( book );
+
+	bookSetTitle( book, title );
+	bookSetAuthors( book, authors );
+
+	bookDelete( &book );
+	strDelete( &title );
+	strDelete( &authors );
+
+	return 0;
+}</p>
+
+    <p>
+    <br><strong>Step 12</strong>
+    </p>
+
+    <p>
+    Build the <span id="inlncode">book</span> sample application.
+    </p>
+
+    <p>
+    For the reasons explained earlier make
+    <span id="inlncode">libstr.so</span> a dependency of
+    <span id="inlncode">book</span> on the link line:
+    </p>
+
+    <p id="cmdln">gcc -g -c -I . book.c
+gcc -g -L . -o book book.o -lbook -lstr</p>
+
+    <p>
+    <br><strong>Step 13</strong>
+    </p>
+
+    <p>
+    Run <span id="inlncode">book</span>:
+    </p>
+
+    <p id="cmdln">./book
+<span class="italic">libbook.c:113: bookInfoImpl()
+ bookSizeOf() = 40
+ sizeof( bookimpl_t ) = 40
+ sizeof( book_t ) = 24
+ sizeof( title ) = 8
+ sizeof( authors ) = 8
+  &book = 0x13e2010
+  &bookadt = 0x13e2010
+  &title = 0x13e2028
+  &title - &book = 24
+  &authors = 0x13e2030
+  &authors - &title = 8</p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    1) Add <span id="inlncode">bookGetTitle()</span> and
+    <span id="inlncode">bookGetAuthors()</span> interfaces to
+    <span id="inlncode">book_t</span> version that implements
+    <span id="inlncode">title</span> and <span id="inlncode">authors</span> as
+    non-integral rented parts.
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/nintprts/rented/libbook.h" download target="_blank">libbook.h</a>
+    <a href="src/nintprts/rented/libbook.c" download target="_blank">libbook.c</a>
+    <a href="src/nintprts/rented/mklib.sh" download target="_blank">mklib.sh</a>
+    </p>
+
+    <p>
+    <a href="src/nintprts/rented/book.c" download target="_blank">book.c</a>
+    <a href="src/nintprts/rented/mkapp.sh" download target="_blank">mkapp.sh</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapdpicintegralparts.html">prev</a>
+     <a href="ryapdpiccreate.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapdpic.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>
