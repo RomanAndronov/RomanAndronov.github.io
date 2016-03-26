@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Incremental Software Construction by Roman Y. Andronov. AEC. Conversion
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Incremental Software Construction by Roman Y. Andronov. AEC.
+   Conversion</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaiscaec3.html">prev</a>
+     <a href="ryaiscaec5.html">next</a>
+    </p>
+    
+    <h1>
+    Conversion
+    </h1>
+
+    <p>
+    <strong>AecImpl.java:</strong>
+    </p>
+
+    <p>
+    Now that the input reader has been implemented and meaningful arithmetic
+    items are available for processing we can start working on the Shunting
+    Yard algorithm proper.
+    </p>
+
+    <p>
+    In this step we implement the initial portion of the conversion algorithm
+    described in <span id="inlncode">Whole Pass, At Once</span> section in the
+    introductory chapter: add operands to the output queue, add operators to the
+    stack and, once the input has been exhausted, empty the contents of the stack
+    into the output queue.
+    </p>
+
+    <p>
+    We split the above functionality across two methods: the existing
+    <span id="inlncode">AecImpl.java:infixTo()</span> and a new one:
+    </p>
+
+    <p id="srccode">private boolean
+processItem( AeItem newitem )</p>
+
+    <p>
+    <br>To help us keep track of <span id="inlncode">AEC</span>'s internal state
+    we also implement:
+    </p>
+
+    <p id="srccode">private void
+printState()</p>
+
+    <p>
+    which produces output only if the debugging option has been turned on:
+    </p>
+
+    <p id="cmdln">java -Ddbg -Dae="9-4" -jar aec.jar
+<span class="italic">prefix queue: [4{1.3}]
+Stack: {}
+
+prefix queue: [4{1.3}]
+Stack: 	[-{1.2}]
+
+prefix queue: [9{1.1}][4{1.3}]
+Stack: 	[-{1.2}]
+
+prefix queue: [-{1.2}][9{1.1}][4{1.3}]
+Stack: {}
+
+prefix queue, 3 item(s):
+[-{1.2}][9{1.1}][4{1.3}]
+0</span>
+
+java -Ddbg -Don=postfix -Dae="9-4" -jar aec.jar
+<span class="italic">postfix queue: [9{1.1}]
+stack: {}
+
+postfix queue: [9{1.1}]
+stack:  [-{1.2}]
+
+postfix queue: [9{1.1}][4{1.3}]
+stack:  [-{1.2}]
+
+postfix queue: [9{1.1}][4{1.3}][-{1.2}]
+stack: {}
+
+postfix queue, 3 item(s):
+[9{1.1}][4{1.3}][-{1.2}]
+0</span></p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    Modified: <span id="inlncode">AecImpl.java</span>
+    </p>
+
+    <p>
+    <a href="src/step4/Makefile" download target="_blank">Makefile</a>
+    </p>
+
+    <p>
+    <a href="src/step4/aec/Aec.java" download target="_blank">Aec.java</a>
+    <a href="src/step4/aec/AecImpl.java" download target="_blank">AecImpl.java</a>
+    <a href="src/step4/aec/Postfix.java" download target="_blank">Postfix.java</a>
+    <a href="src/step4/aec/Prefix.java" download target="_blank">Prefix.java</a>
+    <a href="src/step4/aec/AeNotation.java" download target="_blank">AeNotation.java</a>
+    <a href="src/step4/aec/AeItem.java" download target="_blank">AeItem.java</a>
+    <a href="src/step4/aec/IReader.java" download target="_blank">IReader.java</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaiscaec3.html">prev</a>
+     <a href="ryaiscaec5.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryaiscaec.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

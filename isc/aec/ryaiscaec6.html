@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Incremental Software Construction by Roman Y. Andronov. AEC. Associativity
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Incremental Software Construction by Roman Y. Andronov. AEC.
+   Associativity</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaiscaec5.html">prev</a>
+     <a href="ryaiscaec7.html">next</a>
+    </p>
+    
+    <h1>
+    Associativity
+    </h1>
+
+    <p>
+    <strong>AecImpl.java:</strong>
+    </p>
+
+    <p>
+    In this step we develop the existing method
+    <span id="inlncode">AecImpl.java:addOperator()</span> further by introducing
+    a new one:
+    </p>
+
+    <p id="srccode">private int
+addSamePrecOperator( AeItem newop, AeItem currop )</p>
+
+    <p>
+    which handles same-precedence operators respecting their associativity.
+    </p>
+
+    <p>
+    Since this is the first time we have to handle syntactic errors we also
+    implement a new method:
+    </p>
+
+    <p id="srccode">private void
+mkErr( String where, String what, AeItem optitem )</p>
+
+    <p>
+    <br>Observe that at this stage <span id="inlncode">AEC</span> can handle
+    operators' precedence and associativity. <span id="inlncode">OOEM</span>s
+    are next:
+    </p>
+
+    <p id="cmdln">java -Dae="9-4+1" -jar aec.jar
+<span class="italic">prefix queue, 5 item(s):
+[+{1.4}][-{1.2}][9{1.1}][4{1.3}][1{1.5}]
+0</span>
+
+java -Don=postfix -Dae="9-4+1" -jar aec.jar
+<span class="italic">postfix queue, 5 item(s):
+[9{1.1}][4{1.3}][-{1.2}][1{1.5}][+{1.4}]
+0</span></p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    Modified: <span id="inlncode">AecImpl.java</span>
+    </p>
+
+    <p>
+    <a href="src/step6/Makefile" download target="_blank">Makefile</a>
+    </p>
+
+    <p>
+    <a href="src/step6/aec/Aec.java" download target="_blank">Aec.java</a>
+    <a href="src/step6/aec/AecImpl.java" download target="_blank">AecImpl.java</a>
+    <a href="src/step6/aec/Postfix.java" download target="_blank">Postfix.java</a>
+    <a href="src/step6/aec/Prefix.java" download target="_blank">Prefix.java</a>
+    <a href="src/step6/aec/AeNotation.java" download target="_blank">AeNotation.java</a>
+    <a href="src/step6/aec/AeItem.java" download target="_blank">AeItem.java</a>
+    <a href="src/step6/aec/IReader.java" download target="_blank">IReader.java</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaiscaec5.html">prev</a>
+     <a href="ryaiscaec7.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryaiscaec.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

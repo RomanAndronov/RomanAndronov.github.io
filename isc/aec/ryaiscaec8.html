@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Incremental Software Construction by Roman Y. Andronov. AEC. Computation
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Incremental Software Construction by Roman Y. Andronov. AEC.
+   Computation</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaiscaec7.html">prev</a>
+     <a href="ryaiscaecepilog.html">next</a>
+    </p>
+    
+    <h1>
+    Computation
+    </h1>
+
+    <p>
+    In this, final, step we implement the second pass of the Shunting Yard
+    algorithm through its rearranged input by adding code to the existing method
+    <span id="inlncode">AecImpl.java:compute()</span> and by introducing a new
+    method:
+    </p>
+
+    <p id="srccode">private boolean
+executeOperator( AeItem op )</p>
+
+    <p>
+    <br>At this stage our <span id="inlncode">AEC</span> is fully functional:
+    </p>
+
+    <p id="cmdln">java -Dae="9-4+1" -jar aec.jar
+<span class="italic">prefix queue, 5 item(s):
+[+{1.4}][-{1.2}][9{1.1}][4{1.3}][1{1.5}]
+6</span>
+
+java -Don=postfix -Dae="9-4+1" -jar aec.jar
+<span class="italic">postfix queue, 5 item(s):
+[9{1.1}][4{1.3}][-{1.2}][1{1.5}][+{1.4}]
+6</span></p>
+
+    <p>
+    (a C-like <span id="inlncode">AEC</span> that uses a cache to manage items'
+    life cycle is available at
+    <a href="https://github.com/RomanAndronov/jaec">this GitHub repository</a>)
+    </p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    Modified: <span id="inlncode">AecImpl.java</span>
+    </p>
+
+    <p>
+    <a href="src/step8/Makefile" download target="_blank">Makefile</a>
+    </p>
+
+    <p>
+    <a href="src/step8/aec/Aec.java" download target="_blank">Aec.java</a>
+    <a href="src/step8/aec/AecImpl.java" download target="_blank">AecImpl.java</a>
+    <a href="src/step8/aec/Postfix.java" download target="_blank">Postfix.java</a>
+    <a href="src/step8/aec/Prefix.java" download target="_blank">Prefix.java</a>
+    <a href="src/step8/aec/AeNotation.java" download target="_blank">AeNotation.java</a>
+    <a href="src/step8/aec/AeItem.java" download target="_blank">AeItem.java</a>
+    <a href="src/step8/aec/IReader.java" download target="_blank">IReader.java</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaiscaec7.html">prev</a>
+     <a href="ryaiscaecepilog.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryaiscaec.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

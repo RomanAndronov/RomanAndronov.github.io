@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Incremental Software Construction by Roman Y. Andronov. AEC. Epilog
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Incremental Software Construction by Roman Y. Andronov. AEC.
+   Epilog</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaiscaec8.html">prev</a>
+     <a href="ryaiscaec.html">next</a>
+    </p>
+    
+    <h1>
+    Epilog
+    </h1>
+
+    <p>
+    <strong>Reality Check</strong>
+    </p>
+
+    <p>
+    Being a part of a tutorial, the well-polished and smooth steps and source code
+    presented here are no doubt idealistic to some degree but are representative
+    nonetheless.
+    </p>
+
+    <p>
+    An activity absent from this discussion that, however, can not be avoided in
+    practice - debugging - aids a deeper understanding of a problem at the current
+    iteration and facilitates the success during the next one.
+    </p>
+
+    <p>
+    <br><strong>Exercises</strong>
+    </p>
+
+    <p>
+    To convince yourself that you have a firm grasp of the Shunting Yard algorithm
+    add an exponentiation operator to <span id="inlncode">AEC</span>.
+    </p>
+
+    <p>
+    <br><strong>Potential</strong>
+    </p>
+
+    <p>
+    With an arbitrary naming convention aimed at reducing the token-recognition
+    complexity <span id="inlncode">AEC</span> can be augmented to accept:
+    </p>
+
+    <ul>
+     <li>symbolic constants</li>
+     <li>variables</li>
+     <li>functions</li>
+    </ul>
+
+    <p>
+    as input.
+    </p>
+
+    <p>
+    The names of symbolic constants, for example, may be stipulated to be
+    delineated with an underscore, ASCII decimal \(95\), character:
+    </p>
+
+$$\_Pi\_ = 3.1415$$
+$$\_E\_ = 2.718$$
+$$\_EulersGamma\_ = 0.577215$$
+
+    <p>
+    The names of variables may be stipulated to be comprised of lower case
+    letters only:
+    </p>
+
+$$limit$$
+$$area$$
+$$volume$$
+
+    <p>
+    The names of functions may be stipulated to begin with an upper case letter:
+    </p>
+
+$$Cos$$
+$$Sin$$
+$$Log$$
+
+    <p>
+    Constants and variables should be treated as operands while functions should
+    be treated as operators of highest precedence.
+    </p>
+
+    <p>
+    Then, a second power of cosine of seven radians renders in an infix notation
+    as follows:
+    </p>
+
+$$E_{in} = Cos(7)\wedge 2$$
+
+    <p>
+    which renders in prefix and postfix notations as follows:
+    </p>
+
+$$E_{pr} = [\wedge] [Cos] [7] [2]$$
+$$E_{po} = [7] [Cos] [2] [\wedge]$$
+
+    <p>
+    On the other hand:
+    </p>
+
+$$E_{in} = Cos(7\wedge 2)$$
+$$E_{pr} = [Cos] [\wedge] [7] [2]$$
+$$E_{po} = [7] [2] [\wedge] [Cos]$$
+
+    <p>
+    And:
+    </p>
+
+$$E_{in} = Cos(7) \times 2$$
+$$E_{pr} = [\times] [Cos] [7] [2]$$
+$$E_{po} = [7] [Cos] [2] [\times]$$
+
+    <p>
+    Further:
+    </p>
+
+$$E_{in} = Cos(7) \times_1 Tan(9) \times_2 Sin(11)$$
+$$E_{pr} = [\times_2] [\times_1] [Cos] [7] [Tan] [9] [Sin] [11]$$
+$$E_{po} = [7] [Cos] [9] [Tan] [\times_1] [11] [Sin] [\times_2]$$
+
+    <p>
+    And:
+    </p>
+
+$$E_{in} = Cos(Tan(Sin(Cot(13))))$$
+$$E_{pr} = [Cos] [Tan] [Sin] [Cot] [13]$$
+$$E_{po} = [13] [Cot] [Sin] [Tan] [Cos]$$
+
+    <p>
+    and so on.
+    </p>
+
+    <p>
+    To demonstratie the abstract power of the Shunting Yard algorithm we will
+    adjust it to operate on Boolean expressions consisting of human-readable
+    strings as operands and logical operators <span id="inlncode">NOT, AND,
+    OR</span> next.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaiscaec8.html">prev</a>
+     <a href="ryaiscaec.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryaiscaec.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

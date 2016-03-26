@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Incremental Software Construction by Roman Y. Andronov. AEC. Whole
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Incremental Software Construction by Roman Y. Andronov. AEC.
+   Whole</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaiscaec.html">prev</a>
+     <a href="ryaiscaec2.html">next</a>
+    </p>
+    
+    <h1>
+    Whole
+    </h1>
+
+    <p>
+    Since algorithms are programming language-independent, they can be implemented
+    in a multitude of mediums. We shall present a Java-based solution while you
+    are encouraged to experiment with different host languages of your choice in
+    which case the number of the upcoming steps will likely vary.
+    </p>
+
+    <p>
+    We reason that first we need an input reader to scan an arithmetic expression
+    rendered in an infix notation. Since this is not a grammar-recognition exercise
+    we fuse the input reader and the parser into one whole: our arithmetic operators
+    are one character-long and, barring white space, everything that is not an
+    operator is treated as an operand:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">IReader.java</span></li>
+    </ul>
+
+    <p>
+    We store the input reader-manufactured arithmetic expression items in a
+    mixed-gender entity that can be either an operand or an operator:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">AeItem.java</span></li>
+     <li>IReader.java</li>
+    </ul>
+
+    <p>
+    These items dwell in linear containers we qualify as a queue and a stack.
+    Java offers a plethora of stock linear containers to choose from - we use
+    <span id="inlncode">ArrayList</span> and
+    <span id="inlncode">Stack</span> for those.
+    </p>
+
+    <p>
+    To capture the commonalities of arithmetic expressions' output notations
+    in order to preserve the input-reading uniformity we use an abstract data
+    type in a form of a Java interface:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">AeNotation.java</span></li>
+     <li>AeItem.java</li>
+     <li>IReader.java</li>
+    </ul>
+
+    <p>
+    of which we have two implementations:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">Postfix.java</span></li>
+     <li><span id="inlncode">Prefix.java</span></li>
+     <li>AeNotation.java</li>
+     <li>AeItem.java</li>
+     <li>IReader.java</li>
+    </ul>
+
+    <p>
+    We house the Shunting Yard algorithm implementation proper in one file:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">AecImpl.java</span></li>
+     <li>Postfix.java</li>
+     <li>Prefix.java</li>
+     <li>AeNotation.java</li>
+     <li>AeItem.java</li>
+     <li>IReader.java</li>
+    </ul>
+
+    <p>
+    while wrapping it in a separate entity containing a command line interface
+    that can be used to exercise the functionality of this arithmetic expressions
+    calculator:
+    </p>
+
+    <ul>
+     <li><span id="inlncode">Aec.java</span></li>
+     <li>AecImpl.java</li>
+     <li>Postfix.java</li>
+     <li>Prefix.java</li>
+     <li>AeNotation.java</li>
+     <li>AeItem.java</li>
+     <li>IReader.java</li>
+    </ul>
+
+    <p>
+    which completes the whole - a Java <span id="inlncode">aec</span> package:
+    </p>
+
+    <ul>
+     <li>Aec.java</li>
+     <li>AecImpl.java</li>
+     <li>Postfix.java</li>
+     <li>Prefix.java</li>
+     <li>AeNotation.java</li>
+     <li>AeItem.java</li>
+     <li>IReader.java</li>
+    </ul>
+
+    <p>
+    We use <span id="inlncode">vi</span> to type in the code and a C-styled make
+    file to build it.
+    </p>
+
+    <p>
+    The initial set of source files should survive the compilation producing a
+    functional program that runs but generates no meaningful output yet:
+    </p>
+
+    <p id="cmdln">make clean
+<span class="italic">rm -f aec.jar aec/*.class</span>
+
+make aec.jar
+<span class="italic">javac -g -classpath .:./aec aec/Aec.java
+javac -g -classpath .:./aec aec/AecImpl.java
+javac -g -classpath .:./aec aec/AeNotation.java
+javac -g -classpath .:./aec aec/AeItem.java
+javac -g -classpath .:./aec aec/IReader.java
+javac -g -classpath .:./aec aec/Postfix.java
+javac -g -classpath .:./aec aec/Prefix.java
+rm -f /tmp/aecManifest
+echo "Main-Class: aec/Aec" > /tmp/aecManifest
+jar cmf /tmp/aecManifest aec.jar aec/*.class
+rm -f /tmp/aecManifest</span>
+
+java -jar aec.jar</p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    <a href="src/step1/Makefile" download target="_blank">Makefile</a>
+    </p>
+
+    <p>
+    <a href="src/step1/aec/Aec.java" download target="_blank">Aec.java</a>
+    <a href="src/step1/aec/AecImpl.java" download target="_blank">AecImpl.java</a>
+    <a href="src/step1/aec/Postfix.java" download target="_blank">Postfix.java</a>
+    <a href="src/step1/aec/Prefix.java" download target="_blank">Prefix.java</a>
+    <a href="src/step1/aec/AeNotation.java" download target="_blank">AeNotation.java</a>
+    <a href="src/step1/aec/AeItem.java" download target="_blank">AeItem.java</a>
+    <a href="src/step1/aec/IReader.java" download target="_blank">IReader.java</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaiscaec.html">prev</a>
+     <a href="ryaiscaec2.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryaiscaec.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

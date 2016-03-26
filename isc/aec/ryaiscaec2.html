@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Incremental Software Construction by Roman Y. Andronov. AEC. Skeleton
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Incremental Software Construction by Roman Y. Andronov. AEC.
+   Skeleton</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaiscaec1.html">prev</a>
+     <a href="ryaiscaec3.html">next</a>
+    </p>
+    
+    <h1>
+    Skeleton
+    </h1>
+
+    <p>
+    <strong>Aec.java</strong> and <strong>AecImpl.java:</strong>
+    </p>
+
+    <p>
+    We define the multi-step usage pattern of our arithmetic expressions calculator
+    as follows:
+    </p>
+
+    <ul>
+     <li>convert</li>
+     <li>print</li>
+     <li>compute</li>
+     <li>print</li>
+    </ul>
+
+    <p>
+    The first step converts an input arithmetic expression rendered in an infix
+    notation into its equivalent in a requested output notation - prefix or postfix:
+    </p>
+
+    <p id="srccode">public boolean
+infixTo( String infixae, int notationType )</p>
+
+    <p>
+    <br>The second step renders the contents of the output queue into a
+    human-readable and printable form with potentially useful auxiliary information:
+    </p>
+
+    <p id="srccode">public void
+mkOutputExpression( StringBuilder s )</p>
+
+    <p>
+    <br>The third step takes an output queue as its input and computes the numeric
+    value of the input arithmetic expression:
+    </p>
+
+    <p id="srccode">public boolean
+compute()</p>
+
+    <p>
+    <br>The fourth step retrieves the result of the computation process:
+    </p>
+
+    <p id="srccode">public int
+result()</p>
+
+    <p>
+    <br>A string containing the description of the last error can be retrieved
+    via:
+    </p>
+
+    <p id="srccode">public String
+error()</p>
+
+    <p>
+    <br><strong>Aec.java:</strong>
+    </p>
+
+    <p>
+    Having settled on <span id="inlncode">AEC</span>'s options we also
+    implement its <span id="inlncode">main()</span> and
+    <span id="inlncode">usage()</span>.
+    </p>
+
+    <p>
+    <br>We observe that all along the way we keep the whole in a compilable state
+    which exercises <span id="inlncode">AEC</span>'s entire functionality developed
+    so far:
+    </p>
+
+    <p id="cmdln">java -Ddbg -Dae="9-4+1" -jar aec.jar
+
+<span class="italic">0</span></p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    Modified: <span id="inlncode">Aec.java, AecImpl.java</span>
+    </p>
+
+    <p>
+    <a href="src/step2/Makefile" download target="_blank">Makefile</a>
+    </p>
+
+    <p>
+    <a href="src/step2/aec/Aec.java" download target="_blank">Aec.java</a>
+    <a href="src/step2/aec/AecImpl.java" download target="_blank">AecImpl.java</a>
+    <a href="src/step2/aec/Postfix.java" download target="_blank">Postfix.java</a>
+    <a href="src/step2/aec/Prefix.java" download target="_blank">Prefix.java</a>
+    <a href="src/step2/aec/AeNotation.java" download target="_blank">AeNotation.java</a>
+    <a href="src/step2/aec/AeItem.java" download target="_blank">AeItem.java</a>
+    <a href="src/step2/aec/IReader.java" download target="_blank">IReader.java</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaiscaec1.html">prev</a>
+     <a href="ryaiscaec3.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryaiscaec.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

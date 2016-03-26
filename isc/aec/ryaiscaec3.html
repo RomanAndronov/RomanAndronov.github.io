@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Incremental Software Construction by Roman Y. Andronov. AEC. Input
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Incremental Software Construction by Roman Y. Andronov. AEC.
+   Input</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaiscaec2.html">prev</a>
+     <a href="ryaiscaec4.html">next</a>
+    </p>
+    
+    <h1>
+    Input
+    </h1>
+
+    <p>
+    <strong>AeItem.java:</strong>
+    </p>
+
+    <p>
+    Being of mixed-gender, an arithmetic expression item can become an operand:
+    </p>
+
+    <p id="srccode">void
+mkOperand( String a, int ln, int col )</p>
+
+    <p>
+    <br>or an operator:
+    </p>
+
+    <p id="srccode">void
+mkOperator( String op, int ln, int col )</p>
+
+    <p>
+    <br>Playing a partial role of a parser it also detects if an input character
+    is an operator:
+    </p>
+
+    <p id="srccode">boolean
+isOperator( char c )</p>
+
+    <p>
+    <br><strong>AeNotation.java:</strong>
+    </p>
+
+    <p>
+    Arithmetic expression's output notations should be able to identify themselves
+    via:
+    </p>
+
+    <p id="srccode">public String
+name()</p>
+
+    <p>
+    <br>Since potentially multi-byte operands are discovered by the prefix
+    notation in a right to left fashion, we will need a mechanism to rotate such
+    an operand about a vertical axis passing through its center prior to
+    converting it into a binary form so that \(321\), for example, becomes
+    \(123\):
+    </p>
+
+    <p id="srccode">public void
+prepareOperand( StringBuilder operand )</p>
+
+    <p>
+    <br>To support the uniform motion through the input arithmetic expression
+    rendered in an infix form both output notations should be able to:
+    </p>
+
+    <ul>
+     <li>rewind</li>
+     <li>detect the logical end of an input queue</li>
+     <li>maintain its current absolute position, line and column numbers
+      within the input queue</li>
+     <li>move through the input forward and backward:</li>
+    </ul>
+
+    <p id="srccode">public void		rewind( String input )
+public boolean		eoi()
+public int		curr()
+public int		ln()
+public int		col()
+public void		setLn()
+public void		setCol()
+public void		moveNext()
+public void		movePrev()</p>
+
+    <p>
+    <br>Both output notations should also support the uniform addition of the new
+    items to and the removal of the existing items from the corresponding queue
+    which we implement as Java's built-in <span id="inlncode">ArrayList</span>:
+    </p>
+
+    <p id="srccode">public void		qAdd( ArrayList&lt;AeItem&gt; q, AeItem item )
+public AeItem		qRm( ArrayList&lt;AeItem&gt; q )</p>
+
+    <p>
+    <br><strong>Prefix.java</strong> and <strong>Postfix.java:</strong>
+    </p>
+
+    <p>
+    Implement the interface outlined in <span id="inlncode">AeNotation.java</span>.
+    </p>
+
+    <p>
+    <br><strong>IReader.java:</strong>
+    </p>
+
+    <p>
+    The reader accepts its input via:
+    </p>
+
+    <p id="srccode">public void
+setInput( String infixae, AeNotation aeon )</p>
+
+    <p>
+    <br>and retrieves the next input item via:
+    </p>
+
+    <p id="srccode">public AecItem
+getItem()</p>
+
+    <p>
+    using the following algorithm:
+    </p>
+
+    <p id="srccode">skip white space
+
+if ( end of input )
+	return null
+
+if ( item is an operator )
+	make an operator
+else
+	make an operand
+
+move next
+
+return item</p>
+
+    <p>
+    Consult <span id="inlncode">IReader.java</span> for details.
+    </p>
+
+    <p>
+    <br><strong>AecImpl.java:</strong>
+    </p>
+
+    <p>
+    To test the reader <span id="inlncode">AecImpl.java:infixTo()</span>
+    steps through all the available input items and adds them to the output queue
+    as is - <dfn>not</dfn> respecting the output notation request.
+    </p>
+
+    <p>
+    The auxiliary information attached to each item is its position within the
+    input in the <span id="inlncode">line.column</span> format, for identification
+    purposes:
+    </p>
+
+    <p id="cmdln">java -Dae="9-4+1" -jar aec.jar
+<span class="italic">prefix queue, 5 item(s):
+[9{1.1}][-{1.2}][4{1.3}][+{1.4}][1{1.5}]
+0</span>
+
+java -Don=postfix -Dae="9-4+1" -jar aec.jar
+<span class="italic">postfix queue, 5 item(s):
+[9{1.1}][-{1.2}][4{1.3}][+{1.4}][1{1.5}]
+0</p>
+
+    <p>
+    <br><strong>Files</strong>
+    </p>
+
+    <p>
+    Modified: <span id="inlncode">AeItem.java, AeNotation.java, Postfix.java,
+    Prefix.java, IReader.java, AecImpl.java</span>
+    </p>
+
+    <p>
+    <a href="src/step3/Makefile" download target="_blank">Makefile</a>
+    </p>
+
+    <p>
+    <a href="src/step3/aec/Aec.java" download target="_blank">Aec.java</a>
+    <a href="src/step3/aec/AecImpl.java" download target="_blank">AecImpl.java</a>
+    <a href="src/step3/aec/Postfix.java" download target="_blank">Postfix.java</a>
+    <a href="src/step3/aec/Prefix.java" download target="_blank">Prefix.java</a>
+    <a href="src/step3/aec/AeNotation.java" download target="_blank">AeNotation.java</a>
+    <a href="src/step3/aec/AeItem.java" download target="_blank">AeItem.java</a>
+    <a href="src/step3/aec/IReader.java" download target="_blank">IReader.java</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaiscaec2.html">prev</a>
+     <a href="ryaiscaec4.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryaiscaec.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

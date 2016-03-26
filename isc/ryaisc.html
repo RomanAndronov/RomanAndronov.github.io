@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Incremental Software Construction by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Incremental Software Construction by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="aec/ryaiscaec.html">next</a>
+    </p>
+    
+    <h1>
+    Incremental Software Construction
+    </h1>
+
+    <p>
+    <strong>Tutorial</strong>
+    </p>
+
+    <p>
+    consists of two parts and explores the fundamentals of the incremental
+    software construction process using the Shunting Yard algorithm as a
+    reference.
+    </p>
+
+    <p>
+    In the first part of the tutorial we will use the Shunting Yard algorithm
+    to create a fully functional Arithmetic Expressions Calculator,
+    <span id="inlncode">AEC</span>, that accepts numbers is its input.
+    </p>
+
+    <p>
+    In the second part of the tutorial we will adapt the Shunting Yard algorithm
+    to accept human-readable strings as its input by developing a fully functional
+    Boolean Expressions Evaluator For Strings, <span id="inlncode">BEEFS</span>.
+    </p>
+
+    <p>
+    Both Shunting Yard algorithm implementations, in
+    <span id="inlncode">AEC</span> and in <span id="inlncode">BEEFS</span>, are
+    non-recursive and both use a linear container as their processing medium.
+    </p>
+
+    <p>
+    Work through <span id="inlncode">AEC</span> first.
+    </p>
+
+    <p>
+    <br><strong>Principles</strong>
+    </p>
+
+    <p>
+    Some of the fundamental principles of incremental software construction
+    process are:
+    </p>
+
+    <ul>
+     <li>Wholesome vision</li>
+     <li>Deductive workflow</li>
+     <li>Simultaneous comparison</li>
+    </ul>
+
+    <p>
+    <br><strong>Wholesome Vision</strong>
+    </p>
+
+    <p>
+    is an ability to capture in one's mind the whole problem in its entirety, at
+    once. Ideally the understanding of the essence of a problem at hand should
+    be acquired before the keyboard is touched.
+    </p>
+
+    <p>
+    Wholesome vision is applicable recursively to a collection of projects, a
+    single project, which is a collection of applications and libraries, a single
+    application or a single library, either of which is a collection of native
+    and custom data types, functions and other language-specific constructs, a
+    single custom data type, a single function, a single statement, a single
+    expression and so on.
+    </p>
+
+    <p>
+    <br><strong>Deductive Workflow</strong>
+    </p>
+
+    <p>
+    mimics the deductive reasoning process discovered by the ancient Greeks
+    circa \(500-300\) BC, vividly demonstrated by Euclid in his
+    <dfn>"Elements"</dfn>, and proceeds as follows:
+    </p>
+
+    <ul>
+     <li>from outside in</li>
+     <li>from whole to part</li>
+     <li>from large to small</li>
+     <li>from generic to specific</li>
+     <li>from abstract to concrete</li>
+    </ul>
+
+    <p>
+    Capturing the above workflow algorithmically:
+    </p>
+
+    <p id="srccode">parts = container of all parts (including whole)
+sort parts by size in descending order - from largest (whole) to smallest
+for ( i = 0; i < parts count; i++ )
+{
+	implement parts[ i ];
+}</p>
+
+    <p>
+    we obtain some of its consequences:
+    </p>
+
+    <p>
+    - the scope of work is fixed ahead of time
+    </p>
+
+    <p>
+    - the scope and cost of mistakes should diminish with time
+    </p>
+
+    <p>
+    - the likelihood that the final result and the original idea coincide should
+    increase with time
+    </p>
+
+    <p>
+    <br><strong>Simultaneous Comparison</strong>
+    </p>
+
+    <p>
+    is the process of juxtaposing of a part against the whole with the purpose
+    of verifying that the former is chosen correctly and occupies the place
+    that it should within the latter. Wholesome vision may come at the expense
+    of temporary loss of narrow focus on minor details. The process of simultaneous
+    comparison ensures that these details fall into place naturally.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="aec/ryaiscaec.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryaisc.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>
