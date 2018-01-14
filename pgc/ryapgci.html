@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Pendulum Gear Clocks by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Pendulum Gear Clocks by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapgcp.html">next</a>
+    </p>
+
+    <h1>Introduction</h1>
+
+    <p>
+    1) Purpose<br>
+    2) Scope<br>
+    3) Major Parts
+    </p>
+
+    <p>
+    <br><strong>Purpose</strong>
+    </p>
+
+    <p>
+    Mechanical pendulum gear clocks are fascinating objects in which hard science
+    and art intertwine in perfect harmony to produce a hypnotizing result of graceful
+    and elegant precision. The purpose of this tutorial is to remove a pay wall between
+    an individual willing to learn how to design and build these intriguing objects
+    with a full and deep understanding of each step involved.
+    </p>
+
+    <p>
+    Though it is technically not feasible to cover exhaustively absolutely everything
+    there is to cover on the subject, it is just too vast, I will try to cover enough
+    basics to bring an absolute beginner up to speed. I will attempt to leave no stone
+    unturned at the very bottom of the knowledge pyramid so that by the end of this
+    tutorial the reader should feel confident enough to take on a simple clock building
+    project.
+    </p>
+
+    <p>
+    Having said that I want to make it perfectly clear that I am not a professional
+    clock maker and I do not intend to compete with the atomic clock precision and
+    the professional clock manufacturing industry. I am solely after the pleasure of
+    creating a device of sufficient precision to be of practical use in a family setting.
+    </p>
+
+    <p>
+    - What time is it, junior?<br>
+    - <dfn>Your clock</dfn> is at nine twenty five, for the past three days now, dad ...
+    </p>
+
+    <p>
+    <br><strong>Scope and Target Audience</strong>
+    </p>
+
+    <p>
+    The scope of this tutorial is mostly theoretical since this is the first hurdle to
+    overcome. I will cover classical mechanics only. The target audience is the do it yourself
+    crowd. Think creating a small to medium size wall hung indoor mechanical pendulum gear
+    clock using reasonably workable materials like plywood, plexiglass, etc. You will design
+    such a clock from your imagination and then, possibly, build it - starting with cutting
+    the gears and finishing with assembling them into a properly functioning mechanism.
+    </p>
+
+    <p>
+    Our Universe is a conflict and a conflict is our Universe. As such any undertaking is
+    affected by this phenomenon including writing. In this particular text the conflict is
+    between the curiosity and the practicality. You may be a scientifically inclined person
+    only interested in theory and not caring much about the practical side of things. Or you
+    may be a practitioner who wants nothing to do with the formulas.
+    </p>
+
+    <p>
+    To balance these needs I have organized this tutorial as a blend of <dfn>the why</dfn>,
+    science, and <dfn>the how</dfn>, practice. There will be a fair amount of math and physics
+    in <dfn>the why</dfn> section. If you did not study math and physics or you are the
+    impatient kind or you simply do not care you can skip all the deductions and jump to the
+    ready made formulas and procedures right away. If later on you get bitten by the curiosity
+    bug and would like to understand why these things work the way they do you can always come
+    back and work your way through <dfn>the why</dfn> section.
+    </p>
+
+    <p>
+    Lastly, for a full disclosure I must say that I am not claiming to have invented or
+    discovered anything. Looking for a book for an absolute beginner on the subject I
+    could not find anything. As such this text is my personal investigation into the subject
+    put on a public display. It is based on the knowledge I gained in the grade school
+    and college, common sense, numerous tiny articles, excerpts and a number of books which
+    I list at the end of the Hands chapter.
+    </p>
+
+    <p>
+    <br><strong>Major Parts</strong>
+    </p>
+
+    <p>
+    As a first much simplified cut we can modularize any mechanical gear clock into
+    three major parts. One part is the <dfn>time chunking</dfn> mechanism which somehow
+    breaks up the time into regular, calculable and preferably convenient and adjustable
+    on demand intervals. Breaking up means generating or producing events that we can
+    detect, interact with and act upon. As such we can call this part a <dfn>time
+    intervals producer</dfn>. A pendulum is one such device amongst several others. I will
+    refer to it exclusively from now on.
+    </p>
+
+    <p>
+    Another part is the <dfn>time displaying</dfn> mechanism. Though many wildly different
+    variations are possible we will stick with a classical tradition - second, minute and
+    hour hands on a round clock face. We then expect a second hand to make one full
+    revolution in \(60\) seconds thus measuring one minute. We expect a minute hand to run
+    \(60\) times slower than a second hand - the former should make one full revolution in
+    \(60\) minutes thus measuring one hour. Lastly, we expect an hour hand to run \(12\)
+    times slower than a minute hand - the former should make one full revolution in \(12\)
+    hours with two such revolutions measuring one day.
+    </p>
+
+    <p>
+    With a stand-alone swinging pendulum our only way to tell time is to keep track of it
+    ourselves. Not an attractive proposition. A time displaying mechanism void of input is
+    also next to useless. In other words if on the one hand we have a device that generates
+    information and on the other we have a device that knows how to display it how do we
+    make it all tick? The answer is the final part or <dfn>time intervals manager</dfn>
+    which reads the information produced by the <dfn>time intervals producer</dfn> and
+    delivers this information to the <dfn>time displayer</dfn>. In horology, the study of
+    measuring time, this part is known as the <dfn>escapement</dfn>.
+    </p>
+
+    <p>
+    So now we have it - time intervals producer (pendulum), intervals manager (escapement)
+    and time displayer (hands and face). This is an atomic or smallest set up constituting
+    the necessary and sufficient conditions for our clock's proper operation. Throw any one
+    part away and a clock falls apart.
+    </p>
+
+    <p>
+    We shall look at each part in that order - producer (pendulum), manager (escapement),
+    displayer (hands and face) but you can read this tutorial in any sequence you wish.
+    </p>
+
+    <p>
+    One consequence of the above modularization is the ability to replace any of the parts
+    with something similar but different and still end up with a properly working device
+    with minimal effort.
+    </p>
+ 
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapgcp.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapgc.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

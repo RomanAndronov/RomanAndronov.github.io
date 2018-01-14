@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Inversion with Respect to a Circle in a Real Plane, by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Inversion with Respect to a Circle in a Real Plane, by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaircp.html">prev</a>
+     <a href="ryaircc.html">next</a>
+    </p>
+    
+    <h1>Straight Lines</h1>
+
+    <p>
+    <br><strong>Property ICP9</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) a straight line
+    \(l\) passing through \(O\) is transformed into itself</dfn>
+    </p>
+
+    <p>
+    If the inversion power is negative then <dfn>all</dfn> the points on \(l\)
+    trade places (<strong>ICP7</strong>) while staying collinear including \(O\)
+    that goes into \(P_{\infty}\) and \(P_{\infty}\) that goes into \(O\).
+    </p>
+
+    <p>
+    If the inversion power is positive then also all the points on \(l\) trade
+    places except for two intersection points of \(l\) and \(c\) which stay
+    where they are.
+    </p>
+
+    <p>
+    <br><strong>Property ICP10</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with positive
+    power a straight line \(l\) that does not pass through \(O\) and has exactly
+    two common points with \(c\), \(F_1\) and \(F_2\), is transformed into a
+    circle \(q'\) passing through \(O\) and \(F_1\) and \(F_2\)</dfn>
+    </p>
+
+    <p>
+    Construct a perpendicular \(p\) to \(l\) through \(O\) to locate the point of
+    their intersection \(P\). Invert \(P\) with respect to \(c\) with positive
+    power (<strong>ICE1</strong>). Invert an arbitrary point \(A\) on \(l\) inside
+    \(c\) to locate \(A'\). Consider \(\triangle OPA\) and \(\triangle OA'P'\).
+    They share a common angle at \(O\). From <strong>ICC3</strong> we have:
+    </p>
+ 
+$$OP \times OP' = r^2 = OA \times OA'$$
+$$\frac {OP}{OA} = \frac {OA'}{OP'}$$
+ 
+    <p>
+    which means that the two triangles have two sides about the equal angle in
+    the same proportion - the essence of <strong>B6P6</strong>. Hence, they are
+    similar and their corresponding angles, \(\angle OPA\) and \(\angle OA'P'\),
+    are equal. But \(\triangle OPA\) is right by construction and hence
+    \(\triangle OA'P'\) is right:
+    </p>
+
+    <img src="imgs/irc12.png" class="center">
+
+    <p>
+    Since \(A\) was picked at random, the locus traced by \(A'\) must be a
+    circumference of a circle with diameter \(OP'\) which can be verified by
+    using a different point, \(B\), on \(l\) outside \(c\).
+    </p>
+
+    <p>
+    This suggests the following straight edge and compass construction:
+    </p>
+ 
+    <p>
+    1) Perpendicular \(p\) to \(l\) through \(O\)
+    </p>
+
+    <p>
+    2) LineSegment(\(O\), \(F_1\)) bisector \(s\) until it intersects \(p\) at
+    \(Q'\)
+    </p>
+
+    <p>
+    3) Circle(\(Q'\), \(Q'F_1 = Q'O\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc13.png" class="center">
+
+    <p>
+    <br><strong>Property ICP11</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with negative
+    power a straight line \(l\) that does not pass through \(O\) and has exactly
+    two common points with \(c\), \(F_1\) and \(F_2\), is transformed into a
+    circle \(q'\) passing through \(O\) and \(F'_1\) and \(F'_2\) which are the
+    points diametrically opposite to \(F_1\) and \(F_2\) correspondingly</dfn>
+    </p>
+
+    <p>
+    Here we can reap the benefits afforded by <strong>ICP8</strong> and use
+    <strong>ICP10</strong> to construct an image of \(l\) under the inversion
+    with respect to \(c\) with positive power and then rotate it \(180\) degrees
+    about \(O\).
+    </p>
+
+    <p>
+    However, it is a good exercise to construct the proof of this property from
+    first principles yourself. We will just highlight the fact that the
+    corresponding angles at \(O\) are not shared this time but are vertical and
+    from <strong>B1P15</strong> it follows that they are equal. The rest of the
+    proof follows the one from <strong>ICP10</strong> pretty much verbatim:
+    </p>
+
+    <img src="imgs/irc14.png" class="center">
+
+    <p>
+    1) Perpendicular \(p\) to \(l\) through \(O\)
+    </p>
+
+    <p>
+    2) Line(\(F_1\), \(O\)) until it intersects \(c\) at \(F'_1\)
+    </p>
+
+    <p>
+    3) LineSegment(\(O\), \(F'_1\)) bisector \(s\) until it intersects \(p\) at
+    \(Q'\)
+    </p>
+
+    <p>
+    4) Circle(\(Q'\), \(Q'O = Q'F'_1\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc15.png" class="center">
+
+    <p>
+    <br><strong>Property ICP12</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with positive
+    power a straight line \(l\) that has exactly one common point with \(c\) at
+    \(T\) is transformed into a circle \(q'\) passing through \(O\) and
+    \(T\)</dfn>
+    </p>
+
+    <p>
+    Since \(T\) is on the circumference of \(c\) - it is fixed. From
+    <strong>B3P16</strong> it follows that an arbitrary point \(A\) on \(l\)
+    different from \(T\) will be outside \(c\). \(A\)'s inverse \(A'\) will then
+    be thrown inside \(c\), <strong>ICP5</strong>. By construction
+    (<strong>ICE3</strong>) \(\angle OA'T\) is right. Hence, \(\triangle OA'T\)
+    is right. Hence, from <strong>B3P31</strong>, in a circle the angle in the
+    semicircle is right, it follows that the locus traced by \(A'\) must be a
+    circumference of a circle with diameter \(OT\) since \(A\) was picked at
+    random:
+    </p>
+ 
+    <img src="imgs/irc16.png" class="center">
+
+    <p>
+    The straight edge and compass construction steps are especially easy this time:
+    </p>
+ 
+    <p>
+    1) Line(\(O\), \(T\))
+    </p>
+
+    <p>
+    2) LineSegment(\(O\), \(T\)) bisector \(s\) to locate \(Q'\): \(Q'O = Q'T\)
+    </p>
+
+    <p>
+    3) Circle(\(Q'\), \(Q'O = Q'T = \frac {r}{2}\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc17.png" class="center">
+
+    <p>
+    <br><strong>Property ICP13</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with negative
+    power a straight line \(l\) that has exactly one common point with \(c\) at
+    \(T\) is transformed into a circle \(q'\) passing through \(O\) and \(T'\)
+    which is a point diametrically opposite to \(T\)</dfn>
+    </p>
+
+    <p>
+    Based on <strong>ICP8</strong> we can use <strong>ICP12</strong> to construct
+    an image of \(l\) under the inversion with respect to \(c\) with positive
+    power and then rotate it \(180\) degrees about \(O\). It pays, however, to
+    construct the proof of this property from first principles yourself:
+    </p>
+
+    <img src="imgs/irc18.png" class="center">
+
+    <p>
+    1) Line(\(T\), \(O\)) until it intersects \(c\) at \(T'\): \(OT = OT'\)
+    </p>
+
+    <p>
+    2) LineSegment(\(O\), \(T'\)) bisector \(s\) to locate \(Q'\): \(Q'O = Q'T'\)
+    </p>
+
+    <p>
+    3) Circle(\(Q'\), \(Q'O = Q'T' = \frac {r}{2}\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc19.png" class="center">
+
+    <p>
+    <br><strong>Property ICP14</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) a straight
+    line \(l\) that has no common points with \(c\) is transformed into a circle
+    \(q'\) passing through \(O\) having no common points with \(c\)</dfn>
+    </p>
+
+    <p>
+    Verbally this property sounds the same for inversions with positive and
+    negative powers. The only difference between them is the location of the
+    image relative to \(l\). For an inversion with positive power \(q'\) and
+    \(c\) are on the same side of \(O\) and for an inversion with negative power
+    they are on the opposite sides of \(O\).
+    </p>
+
+    <p>
+    Let us prove this property for an inversion with negative power. Construct a
+    perpendicular \(p\) to \(l\) through \(O\) to locate their intersection point
+    \(P\). Invert \(P\) with respect to \(c\) with negative power
+    (<strong>ICE4</strong>). Invert an arbitrary point \(A\) on \(l\) to locate
+    \(A'\). Consider \(\triangle OPA\) and \(\triangle OA'P'\). Their angles at
+    \(O\) are vertical and, hence, equal. From <strong>ICC3</strong> we have:
+    </p>
+ 
+$$OP \times OP' = r^2 = OA \times OA'$$
+$$\frac {OP}{OA} = \frac {OA'}{OP'}$$
+ 
+    <p>
+    which means that the two triangles have two sides about the equal angles in
+    the same proportion - the essence of <strong>B6P6</strong>. Hence, they are
+    similar and their corresponding angles, \(\angle OPA\) and \(\angle OA'P'\),
+    are equal. But \(\triangle OPA\) is right by construction and hence
+    \(\triangle OA'P'\) is right:
+    </p>
+
+    <img src="imgs/irc20.png" class="center">
+
+    <p>
+    Since \(A\) was picked at random, the locus traced by \(A'\) must be a
+    circumference of a circle with diameter \(OP'\).
+    </p>
+
+    <p>
+    This suggests the following straight edge and compass construction (for both
+    powers):
+    </p>
+ 
+    <p>
+    1) Perpendicular \(p\) to \(l\) through \(O\) to locate their intersection at
+    \(P\)
+    </p>
+
+    <p>
+    2) Invert \(P\) with respect to \(c\) to locate \(P'\)
+    </p>
+
+    <p>
+    3) LineSegment(\(O\), \(P'\)) bisector \(s\) until it intersects
+    Line(\(O\), \(P\)) at \(Q'\)
+    </p>
+
+    <p>
+    4) Circle(\(Q'\), \(Q'P' = Q'O\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc21.png" class="center">
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaircp.html">prev</a>
+     <a href="ryaircc.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryairc.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

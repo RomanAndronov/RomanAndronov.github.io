@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Inversion with Respect to a Circle in a Real Plane, by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Inversion with Respect to a Circle in a Real Plane, by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaircc.html">prev</a>
+     <a href="ryairctp.html">next</a>
+    </p>
+    
+    <h1>Angles</h1>
+
+    <p>
+    <strong>Definition ICD2</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>An angle between two curves at a point \(T\) is an angle between the
+    tangents to both curves at a point \(T\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Property ICP31</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) the angle
+    between two straight lines \(l_1\) and \(l_2\), both of which pass through
+    \(O\), is equal to the angle between their images \(l'_1\) and
+    \(l'_2\)</dfn>
+    </p>
+
+    <p>
+    According to <strong>ICP9</strong> both straight lines \(l_1\) and \(l_2\)
+    are transformed into themselves and, hence, the angle between them is equal
+    to the angle between their images \(l'_1\) and \(l'_2\).
+    </p>
+
+    <p>
+    <br><strong>Property ICP32</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) the angle
+    between two straight lines \(l_1\) and \(l_2\), of which exactly one passes
+    through \(O\), is equal to the angle between their images \(l'_1\) and
+    \(l'_2\)</dfn>
+    </p>
+
+    <p>
+    Without the loss of generality let us assume that \(l_1\) passes through
+    \(O\) and from <strong>ICP9</strong> it follows then that its image with
+    respect to \(c\) also passes through \(O\) and coincides with \(l_1\). From
+    the properties <strong>ICP10-14</strong> it follows then that \(l_2\) is
+    transformed into a circle \(l'_2\) that passes through \(O\). From
+    <strong>ICD2</strong> it follows that the angle between \(l'_1\) and
+    \(l'_2\) is the angle between the straight line \(l'_1\) and the tangent
+    \(t\) to \(l'_2\) at \(O\).
+    </p>
+ 
+    <p>
+    Let us look at an inversion with positive power and consider three cases:
+    \(l_1\) and \(l_2\) are parallel, perpendicular, neither.
+    </p>
+ 
+    <p>
+    <strong>Case 1</strong>
+    </p>
+
+    <p>
+    When \(l_1\) and \(l_2\) are parallel then the angle between them is zero 
+    degrees and the tangent \(t\) to \(l'_2\) at \(O\) is parallel to \(l_2\)
+    (<strong>B1P27</strong>). We then have two parallel straight lines, \(l'_1\)
+    and \(t\), passing through one point \(O\) which means that they must coincide
+    which makes the angle between them also zero degrees, thus preserving it: 
+    </p>
+
+    <img src="imgs/irc34.png" class="center">
+
+    <p>
+    <strong>Case 2</strong>
+    </p>
+
+    <p>
+    When \(l_1\) and \(l_2\) are perpendicular then \(O\), \(A\), \(A'\) and \(Q'\),
+    by the properties <strong>ICP10-14</strong>, are all located on \(l'_1\).
+    Hence, the diameter \(OQ'A'\) of \(l'_2\) is also located on \(l'_1\).
+    </p>
+
+    <p>
+    By <strong>B1P27</strong>, if a straight line falling on two straight lines
+    makes the alternate angles equal then the two straigt lines are parallel,
+    both tangents to \(l'_2\), \(t\) at \(O\) and \(t'\) at \(A'\), are parallel
+    since the corresponding angles between the diameter \(OQ'A'\) and \(t\) and
+    \(t'\) are right by definition of a tangent.
+    </p>
+
+    <p>
+    By the same <strong>B1P27</strong> we prove that \(t\) is prallel to \(l_2\)
+    and \(t'\) is parallel to \(l_2\) making all three straight lines \(t, t',
+    l_2\) parallel.
+    </p>
+
+    <p>
+    Lastly, because the above straight lines are parallel, by <strong>B1P29</strong>,
+    a straight line (\(l_1 = l'_1\)) falling on two parallel straight lines (\(t\)
+    and \(t'\)) makes the alternate angles equal to one another, it follows that
+    \(t\) and \(t'\) are perpendicular to \(l'_1\) which preserves the angle
+    between \(l_1\) and \(l_2\): 
+    </p>
+
+    <img src="imgs/irc35.png" class="center">
+
+    <p>
+    <strong>Case 3</strong>
+    </p>
+
+    <p>
+    When \(l_1\) and \(l_2\) are neither parallel nor perpendicular then we
+    consider the smaller angle between them as \(\alpha\). The tangent \(t\) to
+    \(l'_2\) at \(O\) is parallel to \(l_2\) (<strong>B1P27</strong>). It follows
+    then that a straight line \(l'_1\) is falling on two parallel straight lines
+    \(t\) and \(l_2\). From <strong>B1P29</strong> it follows that:
+    </p>
+
+$$\angle BOA = \alpha$$
+
+    <p>
+    thus preserving the angle between \(l'_1\) and \(l'_2\) at \(O\):
+    </p>
+ 
+    <img src="imgs/irc36.png" class="center">
+
+    <p>
+    Consider the angle between the second tangent, \(t'\), and \(l'_1\) at \(A\).
+    By construction (and the definition of a tangent) \(\angle Q'AB\) and \(\angle
+    Q'OB\) are right and:
+    </p>
+
+$$Q'A = Q'O$$
+
+    <p>
+    (being the radii of \(l'_2\)). Hence, the right triangles \(Q'AB\) and \(Q'OB\),
+    by Pythagoras, have:
+    </p>
+
+$$BA = BO$$
+
+    <p>
+    (\(BQ'\) being a common hypotenuse). Hence, \(\triangle OBA\) is isosceles
+    having its interior angles at the base \(OA\) equal (<strong>B1P5</strong>).
+    Hence:
+    </p>
+
+$$\angle BAO = \angle BOA = \alpha$$
+
+    <p>
+    and the angle between \(l_1\) and \(l_2\) is also preserved.
+    </p>
+
+    <p>
+    <br><strong>Property ICP33</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) the angle between
+    two straight lines \(l_1\) and \(l_2\), none of which pass through \(O\), is
+    equal to the angle between their images \(l'_1\) and \(l'_2\)</dfn>
+    </p>
+
+    <p>
+    Again, let us look at an inversion with positive power and consider three cases:
+    \(l_1\) and \(l_2\) are parallel, perpendicular, neither. Let \(P\) be the
+    second point of intersection of \(l'_1\) and \(l'_2\). Let \(t_1\) and
+    \(t'_1\) be tangents to \(l'_1\) at \(O\) and \(P\). Let \(t_2\) and \(t'_2\)
+    be tangents to \(l'_2\) at \(O\) and \(P\).
+    </p>
+ 
+    <p>
+    <strong>Case 1</strong>
+    </p>
+
+    <p>
+    When \(l_1\) and \(l_2\) are parallel then the angle between them is zero
+    degrees. By <strong>B1P27</strong> the tangent \(t_1\) to \(l'_1\) at \(O\)
+    is parallel to \(l_1\) and the tangent \(t_2\) to \(l'_2\) at \(O\) is
+    parallel to \(l_2\).
+    </p>
+
+    <p>
+    But it is given that \(l_1\) is parallel to \(l_2\) and hence \(t_2\), for
+    example, is parallel to \(l_1\). From <strong>B1P30</strong>, straight lines
+    (\(t_1, t_2\)) parallel to the same straight line (\(l_1\)) are parallel to
+    one another, it follows that \(t_1\) and \(t_2\) are parallel.
+    </p>
+
+    <p>
+    But since \(t_1\) and \(t_2\) both pass through \(O\), it follows that they
+    coincide making the angle between them also zero degrees, thus preserving it: 
+    </p>
+
+    <img src="imgs/irc37.png" class="center">
+
+    <p>
+    <strong>Case 2</strong>
+    </p>
+
+    <p>
+    When \(l_1\) and \(l_2\) are perpendicular then together with \(t_1\), which
+    is parallel to \(l_1\) (<strong>B1P27</strong>) and \(t_2\), which is parallel
+    to \(l_2\) (<strong>B1P27</strong>), they form a parallelogram. Hence, from
+    <strong>B1P34</strong> (in parallelogrammic areas the opposite sides and
+    angles equal one another), it follows that \(t_1\) and \(t_2\) are also
+    perpendicular. In the previous property, <strong>ICP32</strong>, we've proved
+    that \(\triangle OQ'_1P\) and \(\triangle OQ'_2P\) are isosceles. Hence:
+    </p>
+ 
+$$90^{\circ} = \alpha + \beta$$
+ 
+    <p>
+    must be true at both vertexes, \(O\) and \(P\), thus proving that the angle
+    between \(t'_1\) and \(t'_2\) is preserved: 
+    </p>
+
+    <img src="imgs/irc38.png" class="center">
+
+    <p>
+    <strong>Case 3</strong>
+    </p>
+
+    <p>
+    When \(l_1\) and \(l_2\) are neither parallel nor perpendicular then we
+    consider the smaller angle between them as \(\alpha\). As in the previous
+    (perpendicular) case we prove that the angle between \(t_1\) and \(t_2\) is
+    \(\alpha\) (the opposite angles in the parallelogrammic areas argument).
+    However, this time the tangents to circles intersect not at their centers but
+    elsewhere - at the points \(A\) and \(B\):
+    </p>
+
+    <img src="imgs/irc39.png" class="center">
+
+    <p>
+    Still, by construction \(\triangle Q'_1OB\) and \(\triangle Q'_1PB\) are
+    right. They have a common hypotenuse \(Q'_1B\) and two equal sides, \(Q'_1O
+    = Q'_1P\), since these are the radii of \(l'_1\). By Pythagoras \(BP = BO\).
+    Hence, \(\triangle OBP\) is isosceles having its interior angles at the base
+    \(OP\) equal, \(\gamma\). In a similar way we can prove that \(AP = AO\), 
+    \(\triangle OAP\) is isosceles having its interior angles at the base \(OP\)
+    equal, \(\beta\). Hence:
+    </p>
+ 
+$$\alpha = \beta + \gamma$$
+ 
+    <p>
+    proving that the angle between \(t'_1\) and \(t'_2\) is also preserved.
+    </p>
+
+    <p>
+    From <strong>ICD2</strong> and the above angle preservation properties for
+    straight lines two more properties follow:
+    </p>
+
+    <p>
+    <br><strong>Property ICP34</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) the angle between
+    a straight line \(l\) and a circle \(q\) is equal to the angle between their
+    images \(l'\) and \(q'\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Property ICP35</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) the angle between
+    two circles \(q_1\) and \(q_2\) is equal to the angle between their images
+    \(q'_1\) and \(q'_2\)</dfn>
+    </p>
+
+    <p>We will omit the proofs of these properties but your are encouraged to
+    construct them yourself nonetheless.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaircc.html">prev</a>
+     <a href="ryairctp.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryairc.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

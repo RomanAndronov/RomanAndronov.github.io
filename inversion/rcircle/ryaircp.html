@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Inversion with Respect to a Circle in a Real Plane, by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Inversion with Respect to a Circle in a Real Plane, by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryairc.html">prev</a>
+     <a href="ryaircsl.html">next</a>
+    </p>
+    
+    <h1>Points</h1>
+
+    <p>
+    <strong>Property ICP1</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with positive
+    power any point \(A\) on \(c\) is transformed into itself</dfn>
+    </p>
+
+    <p>
+    Such points are called <dfn>fixed</dfn>. From <strong>ICC3</strong> for any
+    point \(A\) on \(c\) we have:
+    </p>
+
+$$OA \times OA' = r^2$$
+$$OA = r$$
+$$r \times OA' = r^2$$
+$$OA' = r$$
+
+    <p>
+    From the above and <strong>ICC2</strong> it follows that \(A'\) does coincide
+    with \(A\).
+    </p>
+
+    <p>
+    <br><strong>Property ICP2</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with negative
+    power any point \(A\) on \(c\) is transformed into a point on \(c\)
+    diametrically opposite to \(A\)</dfn>
+    </p>
+
+    <p>
+    From <strong>ICC3</strong> for any point \(A\) on \(c\) we have:
+    </p>
+
+$$OA \times OA' = r^2$$
+$$OA = r$$
+$$r \times OA' = r^2$$
+$$OA' = r$$
+
+    <p>
+    Since all three points must be collinear and \(O\) must be between \(A\) and
+    \(A'\), it follows that \(A'\) is located on \(c\) diametrically opposite to
+    \(A\).
+    </p>
+
+    <p>
+    <br><strong>Property ICP3</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) the circle of
+    inversion is transformed into itself</dfn>
+    </p>
+
+    <p>
+    Such figures are called <dfn>invariant</dfn> and such transformations are
+    called <dfn>identity transformations</dfn>. This property is common for
+    inversions with negative and positive powers and it follows directly from
+    <strong>ICP1</strong> and <strong>ICP2</strong>.
+    </p>
+
+    <p>
+    <br><strong>Property ICP4</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) a point \(A\)
+    inside \(c\) different from \(O\) is transformed into a point \(A'\) outside
+    \(c\)</dfn>
+    </p>
+
+    <p>
+    For any point \(A\) inside \(c\) from <strong>ICC3</strong> we have:
+    </p>
+
+$$OA \times OA' = r^2$$
+$$OA < r$$
+$$OA' = \frac {r^2}{OA} > \frac {r^2}{r} = r$$
+$$OA' > r$$
+
+    <p>
+    <br><strong>Exercise ICE1</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Given a circle of inversion \(c(O, r)\) and a point \(A\) inside \(c\)
+    different from \(O\) construct \(A\)'s inverse with respect to \(c\) with
+    positive power</dfn>
+    </p>
+
+    <p>
+    1) Line(\(O\), \(A\))
+    </p>
+
+    <p>
+    2) Perpendicular \(p_1\) to Line(\(O\), \(A\)) through \(A\) until it intersects
+    \(c\) at \(B\)
+    </p>
+
+    <p>
+    3) Line(\(O\), \(B\))
+    </p>
+
+    <p>
+    4) Perpendicular \(p_2\) to Line(\(O\), \(B\)) through \(B\) until it intersects
+    Line(\(O\), \(A\)) at \(A'\):
+    </p>
+
+    <img src="imgs/irc04.png" class="center">
+
+    <p>
+    By construction \(\triangle OAB\) and \(\triangle OBA'\) are right and
+    Line(\(A\), \(B\)) is a perpendicular drawn from the right angle at \(B\)
+    to the base \(OA'\). From <strong>B6P8</strong> it follows then that these
+    triangles are similar and in similar triangles the corresponding sides about
+    the equal angles are in the same proportion (<strong>B6P4</strong>):
+    </p>
+
+$$\frac {OA}{OB} = \frac {OB}{OA'}$$
+$$OB = r$$
+$$OA \times OA' = r^2$$
+
+    <p>
+    <br><strong>Exercise ICE2</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Given a circle of inversion \(c(O, r)\) and a point \(A\) inside \(c\)
+    different from \(O\) construct \(A\)'s inverse with respect to \(c\) with
+    negative power</dfn>
+    </p>
+
+    <p>
+    1) Line(\(O\), \(A\))
+    </p>
+
+    <p>
+    2) Perpendicular \(p_1\) to Line(\(O\), \(A\)) through \(O\) until it
+    intersects \(c\) at \(C_1\) and \(C_2\)
+    </p>
+
+    <p>
+    3) Line(\(A\), \(C_1\))
+    </p>
+
+    <p>
+    4) Perpendicular \(p_2\) to Line(\(A\), \(C_1\)) through \(C_1\) until it
+    intersects Line(\(O\), \(A\)) at \(A'_n\):
+    </p>
+
+    <img src="imgs/irc05.png" class="center">
+
+    <p>
+    By construction \(\triangle AC_1A'_n\) is right and \(p_1\) is a perpendicular
+    drawn from the right angle at \(C_1\) to the base \(AA'_n\). From
+    <strong>B6P8</strong> it follows then that \(\triangle AOC_1\) and \(\triangle
+    C_1OA'_n\) are similar and in similar triangles the corresponding sides about
+    the equal angles are in the same proportion (<strong>B6P4</strong>):
+    </p>
+
+$$\frac {OA}{OC_1} = \frac {OC_1}{OA'_n}$$
+$$OC_1 = r$$
+$${OA} \times {OA'_n} = r^2$$
+
+    <p>
+    The construction of a point \(A'\) as an inverse image of \(A\) with respect
+    to \(c\) with positive power that we have added in this drawing will be used
+    shortly.
+    </p>
+
+    <p>
+    <br><strong>Property ICP5</strong>
+    </p>
+
+    <p id = "dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) a point \(A\)
+    outside \(c\) different from \(P_{\infty}\) is transformed into a point \(A'\)
+    inside \(c\) other than \(O\)</dfn>
+    </p>
+
+    <p>
+    For any point \(A\) outside \(c\) from <strong>ICC3</strong> we have:
+    </p>
+
+$$OA \times OA' = r^2$$
+$$OA > r$$
+$$OA' = \frac {r^2}{OA} < \frac {r^2}{r} = r$$
+$$OA' < r$$
+
+    <p>
+    <br><strong>Exercise ICE3</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Given a circle of inversion \(c(O, r)\) and a point \(A\) outside \(c\)
+    different from \(P_{\infty}\) construct \(A\)'s inverse with respect to \(c\)
+    with positive power</dfn>
+    </p>
+
+    <p>
+    Here we have to reconstruct a tangent to a circle (\(c\)) through a point
+    (\(A\)):
+    </p>
+ 
+    <p>
+    1) Line(\(O\), \(A\))
+    </p>
+
+    <p>
+    2) LineSegment(\(O\), \(A\)) bisector \(s\) to locate \(B\): \(BA = BO\)
+    </p>
+
+    <p>
+    3) Circle(\(B\), \(BO = BA\)) until it intersects \(c(O, r)\) at \(D\)
+    </p>
+
+    <p>
+    4) Perpendicular \(p\) to Line(\(O\), \(A\)) through \(D\) to locate \(A'\):
+    </p>
+ 
+    <img src="imgs/irc06.png" class="center">
+
+    <p>
+    From <strong>B3P31</strong>, in a circle the angle in the semicircle is right,
+    it follows that \(\angle ODA\) is right by construction. And \(p\) is a
+    perpendicular drawn from the right angle at \(D\) to the base \(OA\). From
+    <strong>B6P8</strong> it follows then that \(\triangle ODA\) and \(\triangle
+    OA'D\) are similar and in similar triangles the corresponding sides about the
+    equal angles are in the same proportion (<strong>B6P4</strong>):
+    </p>
+ 
+$$\frac {OA}{OD} = \frac {OD}{OA'}$$
+$$OA \times OA' = OD^2 = r^2$$
+
+    <p>
+    <br><strong>Exercise ICE4</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Given a circle of inversion \(c(O, r)\) and a point \(A\) outside \(c\)
+    different from \(P_{\infty}\) construct \(A\)'s inverse with respect to \(c\)
+    with negative power</dfn>
+    </p>
+
+    <p>
+    1) Line(\(O\), \(A\))
+    </p>
+
+    <p>
+    2) Perpendicular \(p_1\) to Line(\(O\), \(A\)) through \(O\) to locate \(B\):
+    \(OB = r\)
+    </p>
+
+    <p>
+    3) Perpendicular \(p_2\) to Line(\(A\), \(B\)) through \(B\) to locate \(A'_n\):
+    </p>
+ 
+    <img src="imgs/irc07.png" class="center">
+
+    <p>
+    By construction \(\triangle ABA'_n\) is right and \(p_1\) is a perpendicular
+    drawn from the right angle at \(B\) to the base \(AA'_n\). From
+    <strong>B6P8</strong> it follows then that \(\triangle BOA\) and \(\triangle
+    A'_nOB\) are similar and in similar triangles the corresponding sides about
+    the equal angles are in the same proportion (<strong>B6P4</strong>):
+    </p>
+ 
+$$\frac {OA}{OB} = \frac {OB}{OA'_n}$$
+$$OA \times OA'_n = OB^2 = r^2$$
+
+    <p>
+    The construction of a point \(A'\) as an inverse image of \(A\) with respect
+    to \(c\) with positive power that we have added in this drawing will be used
+    shortly.
+    </p>
+
+    <p>
+    <br><strong>Exercise ICE5</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Given two distinct points \(A\) and \(A'\) that are inverses of each
+    other with respect to a circle with a given radius \(r\) locate the center
+    of inversion \(O\) with positive power</dfn>
+    </p>
+
+    <p>
+    From <strong>ICC3</strong> we have (\(OA = x\) and \(AA' = a\)): 
+    </p>
+
+$$x(x + a) = r^2$$
+$$x^2 + ax - r^2 = 0$$
+$$x_{1, 2} = \pm \sqrt {\Big(\frac {a}{2}\Big)^2 + r^2} - \frac {a}{2}$$
+$$x_{1, 2} + \frac {a}{2} = \pm \sqrt {\Big(\frac {a}{2}\Big)^2 + r^2}$$
+
+    <p>
+    We see that the square root on the right hand side of the equation is the
+    hypotenuse of a right triangle with known sides which suggests the following
+    construction:
+    </p>
+ 
+    <p>
+    1) Line(\(A\), \(A'\))
+    </p>
+
+    <p>
+    2) LineSegment(\(A\), \(A'\)) perpendicular bisector \(s\) to locate \(B\):
+    \(BA = BA'\)
+    </p>
+
+    <p>
+    3) Perpendicular \(p\) to Line(\(A\), \(A'\)) through \(A\) (or \(A'\))
+    </p>
+
+    <p>
+    4) Circle(\(A\), \(r\)) until it intersects \(p\) to locate \(D\): \(AD = r\)
+    </p>
+
+    <p>
+    5) Circle(\(B\), \(BD\)) until it intersects Line(\(A\), \(A'\)) to locate
+    \(O\) and \(O'\):
+    </p>
+
+    <img src="imgs/irc08.png" class="center">
+
+    <p>
+    <br><strong>Exercise ICE6</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Given two distinct points \(A\) and \(A'\) that are inverses of each
+    other with respect to a circle with a given radius \(r\) locate the center
+    of inversion \(O\) with negative power</dfn>
+    </p>
+
+    <p>
+    From <strong>ICC3</strong> we have (\(OA = x\) and \(AA' = a\)): 
+    </p>
+
+$$x(a - x) = r^2$$
+$$x^2 - ax + r^2 = 0$$
+$$x_{1,2} = \frac {a}{2} \pm \sqrt {\Big(\frac {a}{2}\Big)^2 - r^2}$$
+
+    <p>
+    We see that the square root on the right hand side of the equation is a side
+    of a right triangle with a known side \(r\) and a known hypotenuse \(\frac
+    {a}{2}\) which suggests the following construction:
+    </p>
+ 
+    <p>
+    1) Line(\(A\), \(A'\))
+    </p>
+
+    <p>
+    2) LineSegment(\(A\), \(A'\)) bisector \(s\) to locate \(B\): \(BA = BA'\)
+    </p>
+
+    <p>
+    3) Circle(\(B\), \(BA = BA'\))
+    </p>
+
+    <p>
+    4) Circle(\(B\), \(r\)) until it intersects \(s\) at \(C\)
+    </p>
+
+    <p>
+    5) Perpendicular \(p_1\) to \(s\) through \(C\) until it intersects
+    Circle(\(B\), \(BA = BA'\)) at \(D\) and \(E\)
+    </p>
+
+    <p>
+    6) Perpendiculars to Line(\(A\), \(A'\)): \(p_2\) through \(D\) until it
+    intersects Line(\(A\), \(A'\)) at \(O\) and \(p_3\) through \(E\) until it
+    intersects Line(\(A\), \(A'\)) at \(O'\):
+    </p>
+
+    <img src="imgs/irc09.png" class="center">
+
+    <p>
+    <br><strong>Exercise ICE7</strong>
+    </p>
+
+    <p id = "dbg">
+    <dfn>Given two distinct points \(A\) and \(A'\) that are inverses of each other
+    with respect to a circle with a given center \(O\) construct the radius of
+    inversion \(r\) with positive power</dfn>
+    </p>
+
+    <p>
+    To construct the radius of inversion we can change the steps of
+    <strong>ICE5</strong> just a bit but there is a simpler way which is based on
+    <strong>ICE1</strong>:
+    </p>
+
+    <p>
+    1) Line(\(O\), \(A'\))
+    </p>
+
+    <p>
+    2) LineSegment(\(O\), \(A'\)) bisector \(s\) to locate \(B\): \(BO = BA'\)
+    </p>
+
+    <p>
+    3) Circle(\(B\), \(BO = BA'\))
+    </p>
+
+    <p>
+    4) Perpendicular \(p\) to Line(\(O\), \(A'\)) through \(A\) until it intersects
+    Circle(\(B\), \(BO = BA'\)) to locate \(C\)
+    </p>
+
+    <p>
+    5) \(OC = r\):
+    </p>
+
+    <img src="imgs/irc10.png" class="center">
+
+    <p>
+    <br><strong>Exercise ICE8</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Given two distinct points \(A\) and \(A'\) that are inverses of each
+    other with respect to a circle with a given center \(O\) construct the radius
+    of inversion \(r\) with negative power</dfn>
+    </p>
+
+    <p>
+    Again, to construct the radius of inversion we can change the steps of
+    <strong>ICE6</strong> just a bit but there is a simpler way which is based
+    on <strong>ICE2</strong>:
+    </p>
+
+    <p>
+    1) Line(\(A\), \(A'\))
+    </p>
+
+    <p>
+    2) LineSegment(\(A\), \(A'\)) bisector \(s\) to locate \(B\): \(BA = BA'\)
+    </p>
+
+    <p>
+    3) Circle(\(B\), \(BA = BA'\))
+    </p>
+
+    <p>
+    4) Perpendicular \(p\) to Line(\(A\), \(A'\)) through \(O\) until it intersects
+    Circle(\(B\), \(BA = BA'\)) to locate \(C\)
+    </p>
+
+    <p>
+    5) \(OC = r\):
+    </p>
+
+    <img src="imgs/irc11.png" class="center">
+
+    <p>
+    <br><strong>Property ICP6</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>A point \(A'\) inverse to a point \(A\) under the inversion with respect
+    to a circle \(c(O, r)\) is unique</dfn>
+    </p>
+
+    <p>
+    This follows directly from <strong>ICC3</strong>. Algebraically, if we put
+    \(x = OA'\) and take that \(r^2 = const\) and \(OA\) as known, we obtain: 
+    </p>
+
+$$x = \frac {r^2}{OA}$$
+
+    <p>
+    a first degree equation yielding a unique solution.
+    </p>
+
+    <p>
+    <br><strong>Property ICP7</strong>
+    </p>
+
+    <p id="dbg"l>
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) an even number
+    of inversions of a point \(A\) with respect to \(c\) transforms \(A\) into
+    itself</dfn>
+    </p>
+
+    <p>
+    Two consecutive inversions is all we need to look at. Assume that \(A\) is
+    inverted into \(A'\) and \(A'\) is inverted into \(A''\) with respect to \(c\).
+    From <strong>ICC3</strong> we have: 
+    </p>
+ 
+$$OA \times OA' = r^2$$
+$$OA' \times OA'' = r^2$$
+
+    <p>
+    Since \(A'\) is unique (<strong>ICP6</strong>) and \(OA'\) is one and the same:
+    </p>
+
+$$\frac {r^2}{OA} = \frac {r^2}{OA''}$$
+$$OA = OA''$$
+
+    <p>
+    and since all three points are collinear (<strong>ICC2</strong>), \(A''\) must
+    coincide with \(A\).
+    </p>
+
+    <p>
+    Another way to look at this property is to state that:
+    </p>
+
+    <p id="dbg" class="center">
+    <dfn>"if a point \(A'\) is the inverse of a point \(A\) under the inversion
+    with respect to a circle \(c\) then \(A\) is the inverse of \(A'\) with
+    respect to \(c\)"</dfn>
+    </p>
+
+    <p>
+    <br><strong>Property ICP8</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>An inversion with respect to a circle \(c(O, r)\) with negative power
+    is equivalent to an inversion with respect to the same circle \(c\) with
+    positive power with a consequent \(180\)-degree rotation about \(O\), and
+    conversely</dfn>
+    </p>
+
+    <p>
+    Inverting \(A\) with respect to \(c\) with positive power puts \(A'\) on the
+    same side of \(O\) while inverting \(A\) with respect to \(c\) with negative
+    power puts \(A'_n\) on the opposite side of \(O\). From the previous properties
+    it follows then that regardless of where \(A\) is in reference to \(c\) (in,
+    on, out) we have:
+    </p>
+
+$$OA \times OA' = r^2 = OA \times OA'_n$$
+$$OA' = OA'_n$$
+
+    <p>
+    The <strong>ICE2</strong> and <strong>ICE4</strong> drawings demonstrate this
+    idea.
+    </p>
+
+    <p>
+    Since the inversions with positive and negative power are equivalent in the
+    above sense, we can exploit this fact to our advantage by choosing the most
+    convenient inversion type to derive a proof or a solution to a problem and
+    then claim the same for the remaining inversion type.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryairc.html">prev</a>
+     <a href="ryaircsl.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryairc.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

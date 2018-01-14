@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Pendulum Gear Clocks by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Pendulum Gear Clocks by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapgcp.html">prev</a>
+     <a href="ryapgch.html">next</a>
+    </p>
+
+    <h1>Escapement</h1>
+
+    <p>
+    1) Graham<br>
+    2) Major Parts<br>
+    3) Cycle<br>
+    4) Purpose<br>
+    5) Escape Wheel<br>
+    6) Draw the Wheel<br>
+    7) Draw the Fork
+    </p>
+
+    <p>
+    <br><strong>Graham</strong>
+    </p>
+
+    <p>
+    In the introductory chapter we have modularized a mechanical gear clock into three major
+    parts - a time intervals producer (pendulum), an intervals manager (escapement) and a time
+    displayer (hands and face). We have covered the pendulum in a dedicated chapter and now we
+    know how to calculate the pendulum's length for a chosen period \(T\). In this chapter we
+    will investigate the inner workings of an escapement mechanism which is used to convert the
+    back and forth swinging motion of a pendulum into a predictable circular motion of the gears.
+    </p>
+
+    <p>
+    Over the years many different types of escapement mechanisms were invented. The purpose or
+    area of application usually defined the concrete implementation. For example, a bell tower
+    clock positioned at a considerable height above ground is subject to sudden wind gusts or
+    snow accumulation which could be damaging to the mechanism if the appropriate steps are not
+    taken. The need for a sturdy assembly for such situations was answered with
+    <dfn>Gravity</dfn> and <dfn>Pin Wheel</dfn> escapements.
+    </p>
+
+    <p>
+    In general an escapement mechanism carries two names - of its inventor, if known, and of
+    its characteristic feature. For example, verge or crown-wheel, Hooke anchor or recoil,
+    Graham deadbeat, Dennison gravity, Lepaute pin wheel, Brocot pin pallet, Mudge gravity,
+    Grimthorpe three-legged gravity, Riefler, Harrison grasshopper, Bloxham and so on.
+    </p>
+
+    <p>
+    There are two reasons why we will examine the inner workings of the <dfn>Deadbeat</dfn>
+    or <dfn>Graham Escapement</dfn> invented as the name implies by the British watchmaker
+    George Graham (1673-1751) in 1715. Time being on our side the deadbeat escapement has been
+    historically proven to produce accurate results. And it does not require expensive
+    industrial machinery to manufacture - it is well within our reach, after some practice, to
+    have it ticking within couple of hours. In addition George Graham was one of those simply
+    decent human beings whose technical talents were matched by an equal amount of generosity
+    - he refused to patent his invention reasoning that other clock makers should also be able
+    to use it free of charge.
+    </p>
+
+    <p>
+    <br><strong>Major Parts</strong>
+    </p>
+
+    <p>
+    As a first much simplified cut the two major parts of most of popular escapements are
+    an <dfn>Anchor</dfn> or a <dfn>Fork</dfn> and an <dfn>Escape Wheel</dfn>. Let us examine
+    these parts as they are implemented in the deadbeat escapement.
+    </p>
+
+    <p>
+    A fork and a pendulum are coaxal. The net affect of such an arrangement is that the fork
+    and the pendulum swing in unison. It further means that if a pendulum reaches its extreme
+    position - so does the fork. Though most escapement forks are called forks they are actually
+    two-tooth spur gears in disguise. As such they must mesh with the escape wheel to operate
+    properly. I have used the OpenSCAD software to create the following drawing. It is based
+    on the 2-D geometric constructions of the escape wheel and the fork at the end of this
+    chapter. If you want to understand, modify and improve the OpenSCAD program it is best to
+    work through the 2-D steps first:
+    </p>
+
+    <p>
+    <a href="dbe.scad.pdf" download="dbe.scad.pdf">
+     (click here to download the OpenSCAD source code - as is, no warranties)
+    </a>
+    </p>
+
+    <img src="imgs/pgc04.png" class="center">
+
+    <p>
+    The two major parts of a fork are a <dfn>Crutch</dfn> or an <dfn>Arm</dfn> and a
+    <dfn>Pallet</dfn>. A fork has two arms and two pallets - one per arm. The angle under
+    which the pallets are seen from the center of the escape wheel depends on a variable
+    set by the author - the number of teeth of the escape wheel embraced or hugged by the
+    fork. The more teeth are embraced - the larger the angle and conversely.
+    </p>
+
+    <p>
+    The escape wheel can rotate in either of two directions - clockwise or counterclockwise,
+    the former by far being the most popular one. If the escape wheel rotates clockwise, as
+    depicted in the drawing below, then the pallet on the left is called an <dfn>Entry
+    Pallet</dfn>, \(P_n\), while the pallet on the right is called an <dfn>Exit Pallet</dfn>,
+    \(P_x\). If the escape wheel rotates counterclockwise, a less popular but nonetheless
+    an implementable choice, then the pallet on the right would be an Entry Pallet while the
+    pallet on the left would be an Exit Pallet with the remaining definitions that follow
+    reversed accordingly. The direction of rotation of the escape wheel must be decided on
+    ahead of time because it affects the fork's final configuration which is not symmetrical
+    (to avoid the clutter the pendulum is not shown):
+    </p>
+
+    <img src="imgs/pgc05.png" class="center">
+
+    <p>
+    Each pallet has two special surfaces or, more commonly, simply <dfn>Faces</dfn>. One
+    face is called <dfn>Dead</dfn>, or <dfn>Stopping</dfn>, or <dfn>Locking</dfn> or
+    <dfn>Resting Face</dfn>, the other is called an <dfn>Impulse Face</dfn>. The stopping
+    face is a portion of a right circular cylinder whose axis of rotation coincides with the
+    axis of the fork. The impulse face is a plane formed by the intersection of the above
+    (stopping) cylinder with another plane running parallel to the fork's or cylinder's axis
+    of rotation.
+    </p>
+
+    <p>
+    In this arrangement the stopping face \(S_n\) of the <dfn>entry</dfn> pallet is located
+    on its <dfn>outer</dfn> side while the stopping face \(S_x\) of the <dfn>exit</dfn>
+    pallet is located on its <dfn>inner</dfn> side. As such the pallets are not entirely
+    symmetrical. The absence of symmetry is explained by the fact that two different types
+    of motion are forced to interact with each other - circular, in one direction only, of
+    the escape wheel and oscillating, back and forth, of the fork.
+    </p>
+
+    <p>
+    The intersection of the stopping and impulse faces forms a <dfn>Stop</dfn>, or
+    <dfn>Lock</dfn>, or <dfn>Rest</dfn> or <dfn>Dead Corner</dfn>. The intersection of the
+    impulse face with the face opposite to the stopping face forms the <dfn>Discharge
+    Corner</dfn>.
+    </p>
+
+    <p>
+    From the above definitions of the stopping and impulse faces it follows that it is
+    possible to make either of them equidistant from the center of the fork. As such there
+    are two major design variations of the fork - when the <dfn>impulse</dfn> faces are
+    equidistant from the axis of the fork or when the <dfn>stopping</dfn> faces are
+    equidistant from the axis of the fork.
+    </p>
+
+    <p>
+    If the <dfn>impulse</dfn> faces are equidistant from the axis of the fork then its arms
+    have <dfn>equal</dfn> lengths while if the <dfn>stopping</dfn> faces are equidistant
+    from the center of the fork then its arms have <dfn>different</dfn> lengths. The drawing
+    above depicts a fork with the equidistant impulse faces. Historically there was much
+    debate about which arrangement is better but by now it has been established that there
+    is no major difference between the two performance wise so pick the most technologically
+    convenient one. I will cover the construction of both types of forks.
+    </p>
+
+    <p>
+    Unlike the fork the escape wheel is not attached to the pendulum's axis but rather sits
+    on a separate axis of its own. Normally the escape wheel is set in motion with a weight
+    attached to it with a string. As gravity pulls the weight down the weight pulls on the
+    string which in turn pulls on and spins the wheel. After the weight reaches the floor it
+    stops pulling on the escape wheel which eventually comes to a complete stop. Rewind the
+    string to set the escape wheel in motion again:
+    </p>
+
+    <img src="imgs/pgc06.png" class="center">
+
+    <p>
+    <br><strong>Cycle of Operation</strong>
+    </p>
+
+    <p>
+    To better understand the cycle of operation of an escapement mechanism let us conduct
+    the following thought experiment. Imagine a fork swinging back and forth by itself
+    in one location and an escape wheel spinning by itself in a different location so that
+    the two are not in contact. Observe that we have two independent motions occurring
+    simultaneously. Nothing particularly interesting is happening. Now let us bring the
+    swinging fork and the spinning wheel closer and closer together until they come into
+    contact in the same plane as spur gears should, engage and start a two-way interaction
+    with each other. The way to determine the exact distance between the centers of the
+    escape wheel and the fork will be explained below.
+    </p>
+
+    <p>
+    Now on the one hand, during the moments of their physical contact, the fork puts an end
+    to the escape gear's freewheeling by forcing it to turn at a specific rate which we can
+    calculate ahead of time. On the other hand, the escape wheel passes the potential energy
+    of the attached weight on to the fork in the form of a gentle nudge. The fork passes
+    that energy on to the axis which in turn passes it on to the pendulum thus keeping it
+    swinging at a constant rate.
+    </p>
+
+    <p>
+    The upcoming terminology may sound very confusing for a novice because its use is
+    overloaded - the same words are used to describe <dfn>a process</dfn> or <dfn>an
+    event</dfn> - as verbs and define <dfn>magnitudes</dfn> - as nouns. In particular this
+    applies to <dfn>Lock</dfn>, <dfn>Lift</dfn> and <dfn>Drop</dfn>. Not only that - the
+    word <dfn>drop</dfn> is used in two different contexts.
+    </p>
+
+    <p>
+    Before we deep dive into more details it should be duly noted that from this point
+    onward, in various procedures, steps and definitions I will explicitly avoid specifying
+    any measurements in <dfn>linear</dfn> magnitudes. For these procedures, steps and
+    definitions to be truly generic they must be framed in the independent terms -
+    <dfn>angular</dfn> in this case. The gears of <dfn>any physical size</dfn> can then be
+    drawn - small, medium or large and anything in between.
+    </p>
+
+    <img src="imgs/pgc07.png" class="center">
+
+    <p>
+    In the series of sketches above the escape wheel always runs clockwise and so are the
+    progressive positions of the single depicted tooth. Let us start at the leftmost sketch
+    when the tip \(T\) of the wheel's tooth just kissed the entry pallet \(P_n\) on the
+    (outer) stopping face \(S_n\). The reason this surface is called <dfn>stopping</dfn> is
+    because for a brief moment the escape wheel stops rotating since \(S_n\) is in its way.
+    </p>
+
+    <p>
+    The exact <dfn>manner</dfn> in which the wheel stops is very important - it does so
+    without any recoil which the earlier <dfn>anchor</dfn> design suffered from. The
+    absence of recoil during the fork-wheel interaction is one of the key features of
+    Graham's invention. Do keep in mind that even though the <dfn>wheel</dfn> stops - the
+    <dfn>pendulum</dfn> does not as it <dfn>and the pallet of the fork</dfn> keep tracing
+    out circular paths.
+    </p>
+
+    <p>
+    As <dfn>a process</dfn> or as <dfn>an event</dfn> the above kissing moment, which
+    occurs very close to the pendulum's right extreme point, is called a <dfn>Lock</dfn>.
+    By analogy with the name of the responsible surface we might as well call it
+    <dfn>Stop</dfn>, <dfn>Rest</dfn> or <dfn>Death</dfn>.
+    </p>
+
+    <p>
+    As a purely geometric idea a point or an edge are very convenient notions but in
+    practice the tip of the tooth of the escape wheel should not come into contact with the
+    stopping face \(S_n\) dead on a point or an edge. It should also not land on the impulse
+    face either - that as is easy to imagine would be really bad. So in practice, for a safe
+    mechanism operation, we want the tip of the tooth to land somewhere above the lock
+    <dfn>corner</dfn> \(C_n\) at a point we can call a <dfn>Lock Point</dfn> \(L_n\). As
+    <dfn>a magnitude</dfn> then a Lock is the angle between \(C_n\) and \(L_n\) measured
+    along the circumference of the stopping surface the center of which is located at \(F\).
+    In the drawing below I exaggerated that angle greatly for demonstration purposes. In
+    practice it is usually about \(1^{\circ}\):
+    </p>
+
+    <img src="imgs/pgc08.png" class="center">
+
+    <p>
+    After the pendulum reaches its right extreme point and flips its swing from
+    counterclockwise to clockwise the entry pallet's (outer) stopping face \(S_n\) glides
+    upwards for a while, along the stationary tip \(T\), tracing a circular arc, until
+    the entry pallet's lock corner \(C_n\) comes into contact with \(T\). Note that in
+    reality \(C_n\) is an edge - an intersection of a right circular cylinder with a plane
+    running parallel to the cylinder's axis of rotation.
+    </p>
+
+    <p>
+    At that moment the wheel resumes its clockwise rotation as nothing stands in its way.
+    The tip \(T\) now kisses the impulse face of the entry pallet \(I_n\), see the second
+    sketch above. As <dfn>a process</dfn> it is called a <dfn>Lift</dfn>. During that
+    process as \(T\) runs from a lock to a discharge corner, from \(C_n\) to \(D_n\), the
+    fork sweeps a certain angle. A Lift as <dfn>a magnitude</dfn> is that angle:
+    </p>
+
+    <img src="imgs/pgc09.png" class="center">
+
+    <p>
+    It is during that lift, as both the wheel, \(T\), and the fork, \(P_n\), run clockwise,
+    the potential energy is transferred <dfn>from</dfn> the wheel <dfn>to</dfn> the pallet
+    and hence to the pendulum. That is why \(I_n\) is called an <dfn>impulse</dfn> face. To
+    reiterate, the energy is transferred from the wheel to the pallet on the pallet's
+    upswing, against gravity. When \(T\) reaches \(D_n\), the discharge corner, it breaks
+    its contact with the fork. The arithmetic sum of the above two angles, the lock and the
+    lift (or actual lift) is called a <dfn>Total Lift</dfn> or an <dfn>Escape Angle</dfn>.
+    </p>
+
+    <p>
+    At this point the escape wheel runs free but only for a short while as it is soon stopped
+    by the opposite, exit, pallet because the entry pallet swung almost all the way up
+    corresponding to the event of the pendulum almost reaching its left extreme point. This
+    is the exact moment captured in the last sketch above - the angle swept by the escape
+    wheel while running free of contact with either pallet. As <dfn>a process</dfn> this
+    freewheeling is called a <dfn>Drop</dfn>. It is bracketed by two events - \(T\) breaking
+    contact with the entry pallet and the escape wheel as a whole being stopped completely as
+    its different tooth comes into contact with the exit pallet.
+    </p>
+
+    <p>
+    During this process the escape wheel or simply \(T\) sweeps a certain angle. A Drop as
+    <dfn>a magnitude</dfn> is that angle - it is highlighted with a different color in the
+    sketch.
+    </p>
+
+    <p>
+    The drop as <dfn>a process</dfn> occurs once per beat or twice per pendulum's period of
+    oscillation. Once when one tooth is about to kiss the exit pallet while another tooth
+    turns away from the discharge corner of the entry pallet and another time when one tooth
+    is about to kiss the entry pallet while another tooth turns away from the discharge
+    corner of the exit pallet.
+    </p>
+
+    <p>
+    After the drop as a process is over the above tooth-pallet interaction scenario plays
+    out again. The wheel's tooth \(T\) kisses the exit pallet's (inner) stopping face
+    \(S_x\), the lock. The pendulum's swing flips from clockwise to counterclockwise. The
+    lock corner \(C_x\) glides into contact with \(T\) which resumes its clockwise run giving
+    \(I_x\) a gentle nudge upwards against gravity, the lift. Note that during this love
+    affair the fork runs counterclockwise while \(T\) runs clockwise until they part their
+    ways. The wheel revolves free for a short while, the drop, but is soon trapped by the
+    entry pallet and the whole process repeats.
+    </p>
+
+    <p>
+    To sum up the above cycle at the intuitive, gut level this dynamic duo goes through lock,
+    lift and drop in a potentially never ending succession. The lock and the drop as the
+    magnitudes should be as small as technologically possible.
+    </p>
+
+    <p>
+    Keep in mind that not only the stopping faces of the entry and exit pallets are situated
+    differently but the orientation of the impulse faces is different as well. When the
+    pendulum (and the fork) is at rest the impulse face of the entry pallet is closer to a
+    horizontal while the impulse face of the exit pallet is closer to a vertical.
+    </p>
+
+    <p>
+    <br><strong>Purpose</strong>
+    </p>
+
+    <p>
+    Now that we know <dfn>how</dfn> the escapement mechanism works let us investigate
+    <dfn>why</dfn> is it needed, what is its purpose. Since we already have a pendulum
+    that swings at a known rate, we wish to somehow exploit that regularity by transforming
+    its choppiness into continuousness. That is where the escapement mechanism comes in.
+    </p>
+
+    <p>
+    It actually serves two purposes - to <dfn>convert</dfn> and to <dfn>maintain</dfn>.
+    As a pure time intervals manager the escapement is needed to convert the back and
+    forth motion of a pendulum into a controlled circular motion of the gears. To put it
+    even simpler - escapement translates so many swings into that many rotations. The
+    swings are of the pendulum, the rotations are of the gears.
+    </p>
+
+    <p>
+    Let us break down the motion of a pendulum in a more atomic way and introduce a formal
+    concept of a <dfn>Swing</dfn> or a <dfn>Beat</dfn>. Let us further agree that such a
+    beat is <dfn>an event</dfn> of a pendulum reaching one of its extreme points after
+    departing from the opposite extreme point. Using the drawing from the Pendulum chapter
+    a beat corresponds to our pendulum reaching the point \(B\) after departing from the
+    point \(A\). To make it perfectly clear a beat is not a <dfn>time</dfn> but an
+    <dfn>event</dfn> which occurs after some amount of time goes by.
+    </p>
+
+    <p>
+    With the above definition in place we can capture a unique characteristic of any
+    pendulum numerically via its rate or frequency - in the number of beats per unit of time.
+    One convenient unit of time is one minute or \(60\) seconds. Since in time one beat
+    corresponds to half the period, the number of beats per minute \(B_m\) then is:
+    </p>
+
+$$\begin{equation}
+B_m = \frac {60}{\frac {T}{2}} = \frac {120}{T}
+\end{equation}$$
+ 
+    <p>
+    where \(T\) is given in seconds. Our \(2\)-second pendulum then makes \(60\) beats per
+    minute, for example.
+    </p>
+
+    <p>
+    Using the above terms we can say that the escapement mechanism converts a known number
+    of pendulum's beats per minute \(B_m\) into a known number of full revolutions \(R_m\)
+    of a single gear per minute. If we call this special (conversion) gear an <dfn>Escape
+    Wheel</dfn> and to that wheel we connect one or more gears the last one of which
+    rotates at the exact rate of one full revolution per minute then we can attach a hand
+    to that wheel which gives us a way to tell seconds.
+    </p>
+
+    <p>
+    If to the above second gear we connect one or more gears the last one of which rotates
+    at the exact rate of one full revolution per hour (or \(60\) times slower) and to that
+    wheel we attach a hand then we have a way to tell minutes.
+    </p>
+
+    <p>
+    Finally, if to the above minute gear we connect one or more gears the last one of which
+    rotates at the exact rate of one full revolution in \(12\) hours (or \(12\) times slower)
+    and to that wheel we attach a hand then we have a way to tell hours, the clock is
+    complete and we can ... sell it. Just kidding.
+    </p>
+
+    <p>
+    Our <dfn>idealized</dfn> pendulum may swing forever but a <dfn>real</dfn> one of course
+    will not. The friction and the air resistance will eat away the initial energy given to
+    the pendulum by our muscle power. If left unattended such a pendulum will not swing at a
+    constant rate - it will slow down over time until it stops completely.
+    </p>
+
+    <p>
+    In addition to a conversion role the escapement mechanism is used to address this
+    gradual slow down phenomena by taking on an extra role of a constant rate of swings
+    maintainer. We have covered the exact way this is done in the cycle of operation section
+    above. The energy transfer from the wheel to the fork in the form of gentle pushes or
+    nudges must be carefully orchestrated. These nudges can not be haphazard and frivolous
+    but rather must be doled out in precise and delicate dosages - not too large as they will
+    disrupt the workings of the entire mechanism and not too small as they will have no
+    meaningful effect. Put it another way, the escapement mechanism releases the potential
+    energy of the weight or the elastic potential energy of a spring in small chunks (quanta)
+    over a prolonged period of time. The devil here is in the construction details and that
+    is what we will look at next.
+    </p>
+
+    <p>
+    <br><strong>The Deadbeat Escape Wheel</strong>
+    </p>
+
+    <p>
+    The deadbeat escape wheel is a special \(n\)-tooth spur gear that must mesh with another
+    special two-tooth spur gear - a fork. If at this point you are not familiar with gears
+    you should acquire some basic knowledge about them out of band since this knowledge will
+    be much needed. I list a few gear-related books at the end of the Hands chapter but the
+    crash course on gears as they relate to us is this.
+    </p>
+
+    <p>
+    Conceptually gears are levers. Practically they can be classified roughly by the relative
+    position of their axes in space - parallel, intersecting, neither. Physically gears are
+    implemented based on surfaces capable of rolling without slipping. The most popular
+    surfaces are right cylinders, truncated cones and hyperboloids, circular or elliptic.
+    If two engaged gears rotate smoothly without blocking and vibration it is said that they
+    <dfn>mesh</dfn>. Two or more gears connected for a purpose are called a <dfn>Gear
+    Train</dfn>. The purpose usually is to convert a known input into a desired output.
+    </p>
+
+    <p>
+    A gear to which an input or power is applied directly is called a <dfn>Driving</dfn>
+    or an <dfn>Input Gear</dfn> and a gear affected by it is called a <dfn>Driven</dfn> or
+    a <dfn>Follower</dfn> or an <dfn>Output Gear</dfn>. A <dfn>Gear Ratio</dfn> \(r_{io}\)
+    of two gears is:
+    </p>
+
+$$\begin{equation}
+r_{io} = \frac {\omega_i}{\omega_o} = \frac {N_o}{N_i}
+\end{equation}$$
+
+    <p>
+    where \(\omega\) designates an angular velocity and \(N\) designates a tooth count of
+    the gears. If in a gear train we carve out a path from the input gear to the gear of
+    interest, possibly the last one, and calculate the gear ratio of all the pairs in
+    between then by taking the product of all these ratios we will arrive at the gear ratio
+    of an aggregate - the whole or part of a train. To calculate the gear ratio of a current
+    pair in the above set make the output gear of the previous pair an input gear for the
+    current one. We will look at the gear trains in a bit more detail in the Hands chapter.
+    </p>
+
+    <p>
+    In clock making we are interested in a special type of gears that mesh in the same plane,
+    have parallel axes and straight teeth. Such gears are called <dfn>Spur Gears</dfn>. They
+    are distinguished further by the shape of their teeth or by a particular type of a plane
+    curve used to construct them. A <dfn>Cycloid</dfn> was an early choice but later on an
+    <dfn>Involute of a Circle</dfn> became very popular as its use lead to gears that
+    performed better under high speeds and heavy loads. An involute of a circle is a plane
+    curve traced by a point at the end of a taut string as it unwinds off of or winds around
+    the circumference of a stationary circle. Clock gear trains, however, are unlike most of
+    their industrial cousins. They turn very slowly under very light loads. As such it is
+    perfectly fine to use either cycloidal or involute tooth profiles in your projects.
+    </p>
+
+    <p>
+    The deadbeat escape wheel, as I mentioned before, is a special animal as its teeth can
+    be made triangular in shape and in theory arbitrary in number. In practice, however,
+    certain tooth counts have an advantage over the others. To see why let us task ourselves
+    with a requirement of designing a clock with the smallest number of gears practically
+    possible. The question then is - how many teeth must the escape wheel have for it to make
+    one full revolution in exactly one minute? If we find the answer to that question then we
+    can attach a second hand to the escape wheel directly and use it to drive the minute and
+    hour gears.
+    </p>
+
+    <p>
+    Since the escapement mechanism is designed in such a way that each extremity of the fork
+    engages one tooth of the escape wheel once per period of oscillation then we can equate
+    the number of such engagements to the number of teeth of the escape wheel \(N_m\) where
+    sub index \(m\) designates the chosen time interval of one minute or \(60\) seconds. It
+    follows then that if one engagement occurs in \(T\) seconds then \(N_m\) engagements
+    occur in a given time interval or \(60\) seconds:
+    </p>
+
+$$N_m \times T = 60$$
+$$\begin{equation}
+N_m = \frac {60}{T}
+\end{equation}$$
+
+    <p>
+    Our \(2\)-second pendulum then should have a \(30\)-tooth escape wheel which will make
+    one full revolution in one minute. Keeping the one full revolution per minute requirement
+    the \(1\)-second pendulum should have a \(60\)-tooth escape wheel, the \(4\)-second
+    pendulum should have a \(15\)-tooth wheel and so on.
+    </p>
+
+    <p>
+    Now that we have a connection between \(T\) and \(N_m\) instead of deciding on the value
+    of \(T\) we may decide on the value of \(N_m\). If we solve (3) for \(T\) and substitute
+    it into the length of pendulum's rod formula we can dispense with the period altogether
+    and calculate \(l\) as a function of \(N_m\):
+    </p>
+
+$$T(N_m) = \frac {60}{N_m}$$
+$$l(N_m) = \frac {g}{4\pi^2}\frac{T^2}{S^2} = \frac {g}{4\pi^2}\frac{3600}{N_m^2S^2}$$
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{l(N_m) = \frac {900g}{(\pi N_m S)^2}}
+\end{equation}$$
+
+    <p>
+    For example, if we take \(S = 1\) and wish to have a \(40\)-tooth escape wheel then a
+    rough estimate for \(l\) for NYC, NY, is \(55.87\) centimeters. For a \(50\)-tooth wheel
+    we get roughly \(35.76\) centimeters and so on.
+    </p>
+
+    <p>
+    As we can see we can drive the design of our clock by a number of parameters. We can
+    fix \(T\) to obtain \(N_m\) and \(l\), we can fix \(N_m\) to obtain \(l\) and \(T\) or
+    we can fix \(T\) to obtain \(l\) and pick an arbitrary number of teeth for the escape
+    wheel, \(N\), without imposing the one full revolution per minute requirement on it.
+    </p>
+
+    <p>
+    In the latter case let us say we want a \(50\)-tooth escape wheel for a \(2\)-second
+    pendulum. In this case the wheel will make one full revolution every \(50 \times 2 =
+    100\) seconds. As an option, since we, the designers, are in control, we may choose to
+    not have the second hand at all. Since there are \(3600\) seconds in one hour, our
+    \(50\)-tooth escape wheel will make \(3600 \div 100 = 36\) full revolutions.
+    Consequently, to the above \(50\)-tooth escape wheel we attach a \(36:1\) gear train
+    the last gear of which will make one full revolution in exactly one hour, we attach
+    the minute hand to that gear and proceed on to the hour hand as usual.
+    </p>
+
+    <p>
+    Keep in mind that whether we impose the one full revolution per minute requirement on the
+    escape wheel or not it still has to interact with the fork. As such between two
+    consecutive engagements <dfn>with the same pallet</dfn>, entry or exit, or per period
+    of oscillation the escape wheel will turn:
+    </p>
+
+$$\begin{equation}
+\theta_T = \frac {360^{\circ}}{N}
+\end{equation}$$
+
+    <p>
+    degrees where \(N\) is the escape wheel's tooth count. However, between two consecutive
+    engagements <dfn>with the opposite pallets</dfn>, first entry and then exit, or per
+    beat the escape wheel will turn half of the above value:
+    </p>
+
+$$\begin{equation}
+\theta_b = \frac {\theta_T}{2} = \frac {180^{\circ}}{N}
+\end{equation}$$
+
+    <p>
+    It follows then that if we attach a second hand directly to the escape wheel then per
+    beat that hand will sweep \(\theta_b\) degrees. To translate that angular measure into
+    the corresponding number of seconds swept by the second hand per beat we need to divide
+    \(\theta_b\) by \(6\) degrees - the angular distance between the one-second/one-minute
+    gradation marks on a traditional clock face:
+    </p>
+
+$$\begin{equation}
+sec_b = \frac {\theta_b}{6^{\circ}} = \frac {30}{N}
+\end{equation}$$
+
+    <p>
+    It should be clear now why some tooth counts for an escape wheel are more advantageous
+    than the others. For our \(2\)-second pendulum the \(30\)-tooth escape wheel will turn
+    \(6\) degrees per beat making the second hand attached to it sweep exactly one-second
+    intervals - a perfect fit as long as we align the clock face with gradations on it
+    properly. For the upcoming drawing procedure, however, it does not really matter exactly
+    <dfn>how</dfn> you came up with the escape wheel's tooth count. You just have to settle
+    on <dfn>a number</dfn>.
+    </p>
+
+    <p>
+    Before we move on to the drawing steps we will need to get acquainted with a small
+    amount of basic terminology.
+    </p>
+
+    <p>
+    <br><dfn>Wheel Anatomy</dfn>
+    </p>
+
+    <p>
+    Since all our gears are spur gears, when I say <dfn>"a gear"</dfn> it should be taken
+    to mean <dfn>"a spur gear"</dfn> unless otherwise noted. A spur gear is based on a 
+    right circular cylinder or simply cylinder from now on. If we cut such a cylinder with
+    a plane perpendicular to the cylinder's axis of rotation a circular surface will result.
+    This surface is called a <dfn>Face</dfn> of a gear. The edges of the gear's teeth are
+    straight lines that run parallel to the cylinder's axis of rotation and as such they are
+    perpendicular to the gear's face. That is what is meant when we say that the teeth of a
+    spur gear are <dfn>straight</dfn>.
+    </p>
+
+    <p>
+    The largest circle of a gear's face is called an <dfn>Outer</dfn> or an
+    <dfn>Addendum</dfn> or a <dfn>Tip Circle</dfn>. Its radius is a linear distance from the
+    center of a gear to the outer tips of its teeth. Since we are dealing with a circle,
+    by definition all the outer tips of all the teeth are equidistant from the center of the
+    gear:
+    </p>
+
+    <img src="imgs/pgc10.png" class="center">
+
+    <p>
+    On the same face of a gear there is a circle on the circumference of which the roots of the
+    gear's teeth sit. That circle is called a <dfn>Root</dfn> or a <dfn>Dedendum Circle</dfn>.
+    The radius of a root circle is also a linear measure. The difference between the radii of
+    the outer and root circles which determines a linear height of the gear's teeth is
+    called a <dfn>Whole Depth</dfn>.
+    </p>
+
+    <p>
+    <br><dfn>Tooth Anatomy</dfn>
+    </p>
+
+    <p>
+    It is possible to use a number of different tooth profiles for a deadbeat escape wheel.
+    We will settle on a triangular profile - a shape trapped between two straight lines -
+    the <dfn>Leading Line</dfn> and the <dfn>Trailing Line</dfn>. The tip of a tooth is
+    located on the circumference of the tip circle. The root of a tooth is located on the
+    circumference of the root circle. A small portion of the leading line close to the tip
+    of a tooth comes into a direct contact with the pallets. No points on the trailing line
+    come into contact with the pallets.
+    </p>
+
+    <p>
+    Let us call the angle between the tip radius and the trailing line the <dfn>Trailing
+    Angle</dfn> \(\theta_t\):
+    </p>
+
+    <img src="imgs/pgc11.png" class="center">
+
+    <p>
+    Since in practice the very tip of a tooth is not exactly sharp, let us call the angle
+    under which the two tooth tip edges are seen from the center of the gear the
+    <dfn>Central Angle</dfn> \(\theta_c\). In the drawing below the magnitude of the central
+    angle is exaggerated greatly for demonstration purposes. In practice it is about
+    \(0.5^{\circ}\). Let us further agree that the two corresponding points (edges) on the
+    circumference of the tip circle are the <dfn>Trailing Edge</dfn> and the <dfn>Leading
+    Edge</dfn>:
+    </p>
+
+    <img src="imgs/pgc12.png" class="center">
+
+    <p>
+    Lastly, we will undercut our teeth by an arbitrary angle which the leading line forms
+    with the tip radius of a gear. Let us call that angle the <dfn>Leading Angle</dfn>
+    \(\theta_l\). The purpose of the undercutting is to make the surface area of contact
+    between the leading edge of a tooth and a pallet smaller which in turn will make the
+    friction between the two smaller. The undercutting also makes the teeth of the escape
+    wheel <dfn>lean in the direction of rotation</dfn>:
+    </p>
+
+    <img src="imgs/pgc13.png" class="center">
+
+    <p>
+    Using the triangles involved we can work out the magnitude of the <dfn>Included
+    Angle</dfn> of a tooth \(\theta_i\) - the angle between the trailing and leading
+    lines:
+    </p>
+
+<img src="imgs/pgc14.png" class="center">
+
+$$\theta_i + (180^{\circ} - \theta_t) + (\theta_c + \theta_l) = 180^{\circ}$$
+$$\theta_i = \theta_t - \theta_c - \theta_l$$
+
+    <p>
+    Let us also agree to call the central angle under which two like edges of two adjacent
+    teeth are seen from the center of the escape wheel the <dfn>Angular Pitch</dfn> \(ap\):
+    </p>
+
+<img src="imgs/pgc15.png" class="center">
+
+    <p>
+    The Angular Pitch is derived by dividing \(360^{\circ}\) by the number of teeth of the
+    escape wheel.
+    </p>
+
+    <p>
+    With the above definitions in place the tooth, the wheel and the fork construction
+    procedures become transparent.
+    </p>
+
+    <p>
+    <br><strong>To Draw the Deadbeat Escape Wheel</strong>
+    </p>
+
+    <p>
+    In the long run, in a steady state of making clocks it is very likely that you will be
+    using software to draw the gears. However, it will not hurt to know how to do it manually
+    yourself.
+    </p>
+
+    <p>
+    Before drawing a deadbeat escape wheel choose:
+    </p>
+
+    <p>
+    1) Direction of rotation<br>
+    2) Tooth count \(N\)<br>
+    3) Tip radius \(R_t\)<br>
+    4) Root radius \(R_r\)<br>
+    5) Tooth Trailing Angle \(\theta_t\)<br>
+    6) Tooth Central Angle \(\theta_c\)<br>
+    7) Tooth Leading Angle \(\theta_l\)<br>
+    </p>
+
+    <p>
+    For the following demonstration the choices are:
+    </p>
+
+    <p>
+    1) Direction of rotation: clockwise<br>
+    2) Tooth count \(N = 30\)<br>
+    3) Tip radius \(R_t\)<br>
+    4) Root radius \(R_r = 0.75 \times R_t\)<br>
+    5) Tooth Trailing Angle \(\theta_t = 18.5^{\circ}\)<br>
+    6) Tooth Central Angle \(\theta_c = 0.5^{\circ}\)<br>
+    7) Tooth Leading Angle \(\theta_l = 6^{\circ}\)<br>
+    </p>
+
+    <p>
+    It follows then that:
+    </p>
+
+$$\theta_i = 18.5^{\circ} - 0.5^{\circ} - 6^{\circ} = 12^{\circ}$$
+
+    <p>
+    and:
+    </p>
+
+$$ap = 360^{\circ} \div N = 12^{\circ}$$
+
+    <p>
+    Procedure:
+    </p>
+
+    <p>
+    1) Draw a straight line of centers \(c\). The centers of the escape wheel and the fork
+    will be on it, pick a convenient orientation.
+    </p>
+
+    <p>
+    2) With the center \(W\) on \(c\) and the radius \(R_t\) draw the tip circle \(t\).
+    </p>
+
+    <p>
+    3) With the center at \(W\) and the radius \(R_r\) draw the root circle \(r\).
+    </p>
+
+    <p>
+    4) Let \(A\) be one of the intersections points of \(c\) and \(t\):
+    </p>
+
+    <img src="imgs/pgc16.png" class="center">
+
+    <p>
+    5) Construct one tooth starting with the Trailing Angle. With \(W\) as a leg point
+    and \(A\) as a vertex draw the Trailing Angle \(\theta_t\) in the chosen direction,
+    clockwise in this case. Let \(D\) be the intersection of the remaining side \(\tau\)
+    of \(\theta_t\) with the root circle \(r\) so that \(\theta_t = \angle WAD\).
+    </p>
+
+    <p>
+    6) With \(A\) as a leg point and \(W\) as a vertex draw the Central Angle \(\theta_c\)
+    in the chosen direction, clockwise in this case. Let \(B\) be the intersection of the
+    remaining side \(\sigma\) of \(\theta_c\) with the tip circle \(t\) so that \(\theta_c
+    = \angle AWB\).
+    </p>
+
+    <p>
+    7) With \(W\) as a leg point and \(B\) as a vertex draw the Leading Angle \(\theta_l\)
+    in the chosen direction, clockwise in this case. Let \(C\) be the intersection of the
+    remaining side \(\lambda\) of \(\theta_l\) with the root circle \(r\) so that
+    \(\theta_l = \angle WBC\):
+    </p>
+
+    <img src="imgs/pgc17.png" class="center">
+
+    <p>
+    At this point the shape \(ABCD\) delineates one tooth. \(DA\) is the trailing line (plane),
+    \(A\) is the trailing edge, \(B\) is the leading edge, \(BC\) is the leading line (plane)
+    and \(DC\) is the root:
+    </p>
+
+    <img src="imgs/pgc18.png" class="center">
+
+    <p>
+    Using your software's features repeat the steps 4-7 the remaining \(N - 1\) times rotating
+    the reference straight line \(c\) by the magnitude of the Angular Pitch \(ap\) about the
+    center of the escape wheel \(W\) each time if needed. Most types of graphing software have
+    a feature called <dfn>Rotate</dfn>. You can either rotate the whole tooth or if your
+    software can not do that then rotate each point separately.
+    </p>
+
+    <p>
+    Once all the teeth are in place make sure that you have marked the center of the escape
+    wheel clearly. Draw a small circle around the center of the wheel to represent the
+    opening for its shaft:
+    </p>
+
+    <img src="imgs/pgc19.png" class="center">
+
+    <p>
+    This is where the science mostly ends and the art mostly begins. Draw the spokes of the
+    wheel making them regular in shape or ornamental - your imagination is the only limit at
+    this point. Keep in mind that the escape wheel should possess two conflicting qualities.
+    On the one hand, it should be made as light as possible - hollow it out a lot and on the
+    other hand, the wheel and its teeth should be sturdy enough to withstand the many many
+    happy hours of operation. In other words balance the light and hollow against the sturdy
+    and true.
+    </p>
+
+    <p>
+    <br><strong>To Draw The Deadbeat Fork</strong>
+    </p>
+
+    <p>
+    The exact location of the center of the fork depends on the size and the tooth count of
+    the escape wheel it will mesh with. As such - draw the escape wheel first or at least
+    highlight the locations of some number of needed teeth. The procedure to do so is
+    described above.
+    </p>
+
+    <p>
+    Next, before drawing the fork choose:
+    </p>
+
+    <p>
+    1) The number of teeth of the escape wheel the fork will span, \(N_s\)<br>
+    2) The lock angle, \(\theta_l\)<br>
+    3) The lift angle, \(\theta_f\)<br>
+    4) The drop angle, \(\theta_d\) It should include the magnitude of the Central
+        Angle of a tooth \(\theta_c\) chosen in the previous procedure.<br>
+    </p>
+
+    <p>
+    For the following demonstration the choices are:
+    </p>
+
+    <p>
+    1) \(N_s = 7.5\)<br>
+    2) \(\theta_l = 1^{\circ}\)<br>
+    3) \(\theta_f = 2^{\circ}\)<br>
+    4) \(\theta_d = 1^{\circ} = \theta_c + 0.5^{\circ}\)<br>
+    </p>
+
+    <p>
+    Procedure:
+    </p>
+
+    <p>
+    1) Locate the center of the fork.
+    </p>
+
+    <p>
+    Multiply \(N_s\) by the Angular Pitch of the escape wheel \(ap\) to obtain the
+    <dfn>Span Angle</dfn> of the fork \(\theta_s\). In our case we get \(\theta_s = 7.5
+    \times 12^{\circ} = 90^{\circ}\) or in general:
+    </p>
+
+$$\theta_s = N_s \times \frac {360^{\circ}}{N}$$
+
+    <p>
+    2) Divide the Span Angle \(\theta_s\) in half.
+    </p>
+
+    <p>
+    With \(W\) as a vertex and \(A\) as a leg point construct each half of \(\theta_s\)
+    on either side of the line of centers \(c\) - one half clockwise and the other half
+    counterclockwise. In our case each half is \(45^{\circ}\). Let \(T_n\) and \(T_x\)
+    be the intersections of the remaining sides \(s_n\) and \(s_x\) of the half-angles
+    with the tip circle \(t\).
+    </p>
+
+    <p>
+    3) Construct a tangent \(\tau_n\) to \(t\) through \(T_n\).
+    </p>
+
+    <p>
+    4) Construct a tangent \(\tau_x\) to \(t\) through \(T_x\).
+    </p>
+
+    <p>
+    5) The intersection point of \(\tau_n\) and \(\tau_x\) with the line of centers \(c\)
+    locates the center of the fork \(F\):
+    </p>
+
+    <img src="imgs/pgc20.png" class="center">
+
+    <p>
+    From this it follows that analytically the distance between the centers of the escape
+    wheel and the fork \(WF\) and the distances \(FT_n\) and \(FT_x\) are:
+    </p>
+
+$$WF = \frac {R_t}{\cos\Big(\pi \frac {N_S}{N}\Big)}$$
+$$FT_n = FT_x = R_t\tan\Big(\pi \frac {N_S}{N}\Big)$$
+
+    <p>
+    6) Find the radial width of the fork's pallets.
+    </p>
+
+    <p>
+    This is where the procedures for two different types of forks diverge. Let us first
+    construct a fork with the equidistant impulse faces. Since we have two pallets each of
+    which invades the space between two adjacent teeth, it follows that the single intertooth
+    space should be split equally between each pallet and in addition it should have some
+    wiggle room - the drop which includes the central angle of a tooth or its thickness
+    along the circumference of the tip circle. Without the drop the pallets would fill the
+    space between the teeth too tight and the whole mechanism would likely malfunction.
+    </p>
+
+    <p>
+    From the Cycle of Operation section we remember that the drop as a process occurs once
+    per beat or twice per pendulum's period of oscillation. Therefore divide the Angular
+    Pitch of the escape wheel \(ap\) in half: \(12^{\circ} \div 2 = 6^{\circ}\). And then
+    subtract the magnitude of the drop angle from that half to find the radial width angle
+    \(\theta_w\) of both pallets under which they are seen from the center of the escape
+    wheel: \(\theta_w = 6^{\circ} - 1^{\circ} = 5^{\circ}\) or in general:
+    </p>
+
+$$\theta_w = \frac {360^{\circ}}{2N} - \theta_d$$
+
+    <p>
+    Since we are drawing a fork with the impulse faces equidistant from its center \(F\),
+    the point \(T_n\) divides the radial width of both pallets exactly in half. Therefore
+    \(\theta_w\) must be split equally between each half: divide \(\theta_w\) by \(2\) and
+    construct each half-anlge on each side of the straight line \(s_n\) (\(WT_n\)) using
+    \(T_n\) as a leg point and \(W\) as a vertex. In our case we get the \(2.5^{\circ}\)
+    angles:
+    </p>
+
+<img src="imgs/pgc21.png" class="center">
+
+    <p>
+    7) Let \(L_n\) and \(H_n\) be the intersections of the remaining sides \(h_1\) and
+    \(h_2\) of the above half-angles with the tip circle \(t\) such that \(\angle L_nWT_n =
+    \angle H_nWT_n = 2.5^{\circ}\). Draw a circle \(p\) centered at \(F\) with the radius
+    \(FL_n\). Draw a circle \(q\) centered at \(F\) with the radius \(FH_n\). The space
+    between \(p\) and \(q\) is the radial width of both pallets. The stopping face of the
+    entry pallet will be located on the circumference of \(p\). The stopping face of the exit
+    pallet will be located on the circumference of \(q\).
+    </p>
+
+    <p>
+    Note that the point \(L_n\) lands exactly on the leading edge of the highlighted tooth.
+    Further, let \(L_n\) be the lock point from the Cycle of Operation sketches above.
+    Incidentally, this event - a tooth coming into a contact with a pallet - is confusingly
+    called <dfn> a drop</dfn> elsewhere in literature where it is sometimes said that
+    <dfn>the tooth drops onto the pallet</dfn>. We shall avoid this confusion and call this
+    event a lock.
+    </p>
+
+    <p>
+    For the OpenSCAD drawing we observe here that we obtain the magnitudes of the outer and
+    the innder radii of the fork \(FL_n\) and \(FH_n\) using the law of cosines since all the
+    angles and required sides of the triangles are known:
+    </p>
+
+$$FL_n^2 = R_t^2 + WF^2 - 2R_t \times WF \times \cos\Big( \frac {\theta_s}{2} + \frac {\theta_w}{2}\Big)$$
+$$FH_n^2 = R_t^2 + WF^2 - 2R_t \times WF \times \cos\Big( \frac {\theta_s}{2} - \frac {\theta_w}{2}\Big)$$
+
+    <p>
+    and since all three sides and one angle are known in each triangle \(\triangle WL_nF\)
+    and \(\triangle WH_nF\), the remaining angles can be found using the law of sines.
+    </p>
+
+    <p>
+    8) Locate the discharge corner of the exit pallet.
+    </p>
+
+    <p>
+    Let \(D_x\) be the intersection point of the tip circle \(t\) with \(p\) on the \(T_x\)
+    side (see the drawing above). It may be difficult to see in the drawing but \(D_x\)
+    should <dfn>not</dfn> coincide with the trailing edge of the highlighted tooth. There
+    should be some amount of wiggle space between the two - the magnitude of the drop angle.
+    The point \(D_x\) is the discharge corner of the exit pallet.
+    </p>
+
+    <p>
+    9) Locate the lock corner of the entry pallet.
+    </p>
+
+    <p>
+    Using \(L_n\) as a leg point and \(F\) as a vertex construct the lock angle in the
+    direction opposite to the chosen one, counterclockwise in this case. Let \(C_n\) be the
+    intersection of the remaining side \(l\) of the lock angle with \(p\) so that \(\theta_l
+    = \angle L_nFC_n\). In our case this angle is \(1^{\circ}\) and \(C_n\) is the lock
+    corner of the entry pallet.
+    </p>
+
+    <p>
+    10) Locate the discharge corner of the entry pallet.
+    </p>
+
+    <p>
+    Using \(C_n\) as a leg point and \(F\) as a vertex construct the lift angle in the
+    direction opposite to the chosen one, counterclockwise in this case. Let \(D_n\) be the
+    intersection of the remaining side \(f\) of the lift angle with \(q\) so that \(\theta_f
+    = \angle C_nFD_n\). In our case this angle is \(2^{\circ}\) and \(D_n\) is the discharge
+    corner of the entry pallet.
+    </p>
+
+    <p>
+    11) To construct the impulse face of the entry pallet connect \(C_n\) and \(D_n\). The
+    entry pallet is now complete:
+    </p>
+
+    <img src="imgs/pgc22.png" class="center">
+
+    <p>
+    Finish constructing the exit pallet. At this point all we have to do is construct its
+    impulse face by locating its lock corner in either of two ways - using either the angles
+    or the circles.
+    </p>
+
+    <p>
+    12.1) To locate the lock corner of the exit pallet via the angles use \(D_x\) as a leg
+    point and \(F\) as a vertex to construct the lift angle \(\theta_f\) in the direction
+    opposite to the chosen one, counterclockwise in this case. Let \(C_x\) be the
+    intersection of the remaining side \(f\) of the lift angle and \(q\) so that \(\theta_f
+    = \angle D_xFC_x\). The point \(C_x\) is the lock corner of the  exit pallet and
+    \(C_xD_x\) is its impulse face:
+    </p>
+
+    <img src="imgs/pgc23.png" class="center">
+
+    <p>
+    Optionally you may locate the lock point of the exit pallet \(L_x\) as it may be used
+    in the last step of the fork construction. Using \(C_x\) as a leg point and \(F\) as a
+    vertex construct the lock angle \(\theta_l\) in the direction opposite to the chosen
+    one, counterclockwise in this case. Let \(L_x\) be the intersection of the remaining
+    side \(l\) of the lock angle with \(q\) so that \(\theta_l = \angle C_xFL_x\). The
+    point \(L_x\) is the lock point of the exit pallet.
+    </p>
+
+    <p>
+    12.2) To locate the lock corner of the exit pallet via the circles extend the straight
+    line \(C_nD_n\) of the impulse face of the entry pallet towards the center of the fork
+    \(F\). Let us name this extended straight line \(i_n\). Construct a perpendicular
+    \(o_n\) to \(i_n\) through \(F\) to locate their intersection point \(N\). Construct a
+    circle \(m\) centered at \(F\) with the radius \(FN\).
+    </p>
+
+    <p>
+    Let us call this circle an <dfn>Impulse Circle</dfn>. You probably have figured out by
+    now that the extension of the impulse face of the exit pallet must also be tangent to
+    the Impulse Circle - just like the extension of the impulse face of the entry pallet is.
+    So all we have to do now is construct a tangent to the Impulse Circle through \(D_x\).
+    In the Elements, Book \(3\) Proposition \(17\), Euclid does just that but in a rather
+    complicated way - for academic reasons.
+    </p>
+
+    <p>
+    A bit simpler way is to bisect the line segment \(FD_x\) to obtain the point \(Y\) on
+    it such that \(FY = YD_x\) and then to construct a circle centered at \(Y\) with the
+    radius \(YF\). That circle will intersect \(m\) at two points of which we need only
+    one - the point \(X\). The straight line passing through \(X\) and \(D_x\) is the
+    tangent sought-after. The intersection of that tangent with \(q\) and \(p\) locates
+    the impulse face of the exit pallet and its lock corner \(C_x\). This is a bit more
+    involved construction but we trade complexity for the depth of understanding - as the
+    fork swings back and forth the points \(N\) and \(X\) also swing back and forth - along
+    the circumference of the Impulse Circle:
+    </p>
+
+    <img src="imgs/pgc24.png" class="center">
+
+    <p>
+    One consequence of using the Impulse Circle is that if you decide to make the pallets
+    composite - attachable to and detachable from the arms - then you can construct the
+    auxiliary pallets on \(p\) and \(q\) by picking an appropriate points on them and
+    then constructing the tangents to the Impulse Circle to locate the impulse faces of
+    both pallets. Before we look at this procedure let us finish constructing the fork.
+    </p>
+
+    <p>
+    13) Finish constructing the fork.
+    </p>
+
+    <p>
+    This is where the science mostly ends and the art mostly begins. Just make sure that
+    the arms of the fork are symmetrical about the line of centers \(c\) and that the
+    lengths of the internal arcs along \(q\) - the arc \(Q_nD_n\) and the arc \(Q_xC_x\) -
+    are large enough to secure the free movement of the fork so that its arms do not hit
+    the tips of the teeth of the escape wheel during the engagements. Other than that you
+    can make the space trapped above the teeth and below the arms of the fork as decorative
+    as you wish. When and if decorating the outer portion of the fork make sure that the
+    adjacent gears can run freely.
+    </p>
+
+    <p>
+    In the drawing below the angles used to locate the points \(Q_n\) and \(Q_x\) are shown.
+    The reason the magnitudes of these angles are different is because the line of centers
+    \(c\) always remains strictly vertical but the axis of facial symmetry of the fork
+     \(FW'\) does not as it swings with the pendulum and we constructed the fork when
+    it is caught in one of its extreme positions. Therefore you can either construct these
+    angles based on the line of centers \(c\), as shown, or based on the line of symmetry
+    \(FW'\). The procedure to find \(FW'\) is also shown: extend the straight line \(FL_x\)
+    until it intersects \(p\) at \(L'_x\), bisect the line segment \(L_nL'_x\):
+    </p>
+
+    <img src="imgs/pgc25.png" class="center">
+
+    <p>
+    If using \(FW'\) - make \(\angle W'FQ_n = \angle W'FQ_x = \theta\) where \(\theta\) is
+    a number you pick. If using \(c\) - compensate for the deviation of \(FW'\) from \(c\):
+    </p>
+
+$$\angle WFQ_n = \theta - \frac {\theta_l + \theta_f}{2}$$
+$$\angle WFQ_x = \theta + \frac {\theta_l + \theta_f}{2}$$
+
+    <p>
+    To construct a set of auxiliary pallets in one drawing reflect the point \(C_n\) about
+    the point \(O_n\), for example. Construct a circle centered at \(O_n\) with the radius
+    \(O_nC_n\). That circle will intersect \(p\) at \(C'_n\). Construct a tangent to \(m\)
+    through \(C'_n\). That tangent, \(C'_nN'\) will intersect \(q\) at \(D'_n\). The line
+    segment \(C'_nD'_n\) is the impulse face of an auxiliary entry pallet:
+    </p>
+
+    <img src="imgs/pgc26.png" class="center">
+
+    <p>
+    When constructing the impulse face of an auxiliary exit pallet (not shown) draw the
+    tangent to the impulse circle towards the center of the escape wheel \(W\).
+    </p>
+
+    <p>
+    Now that we understand how to construct a fork with equidistant impulse faces the
+    procedure to construct a fork with equidistant stopping faces requires little new
+    material. We go back to the drawing where we have located the center of the fork \(F\).
+    The points \(T_n\) and \(T_x\) now must belong to the stopping surfaces \(S_n\) and
+    \(S_x\) of both pallets. As such - construct a circle \(p\) centered at \(F\) with the
+    radius \(FT_n = FT_x\). The radial width of the entry pallet will extend
+    <dfn>inside</dfn> \(p\) <dfn>towards</dfn> \(F\) while the radial width of the exit
+    pallet will extend <dfn>outside</dfn> of \(p\) <dfn>away from</dfn> \(F\).
+    </p>
+
+    <p>
+    6') Construct the radial width of the entry pallet.<br>
+    Assume that the tooth of the escape wheel just kissed (locked on to) the entry pallet.
+    By analogy with the equidistant impulse faces construction it means the points \(T_n\)
+    and \(L_n\) are the same - the point \(T_n\) now plays the role of the lock point of
+    the entry pallet.
+    </p>
+
+    <p>
+    With \(W\) as a vertex and \(T_n\) as a leg point construct the \(\theta_w\) angle in
+    the direction opposite to the chosen one, counterclockwise in this case. The
+    intersection of the remaining side \(h_n\) of \(\theta_w\) with \(t\) locates \(H_n\).
+    Construct a circle \(q_n\) centered at \(F\) with the radius \(FH_n\). The space between
+    \(p\) and \(q_n\) is the radial width of the entry pallet:
+    </p>
+
+    <img src="imgs/pgc27.png" class="center">
+
+    <p>
+    7') Construct the radial width of the exit pallet.
+    </p>
+
+    <p>
+    Since \(T_x\) belongs to two circumferences at once - that of the tip circle and that
+    of the impulse face, we can use it as a leg point to find the radial width of the exit
+    pallet. By doing so we will automatically locate one of the extreme points of the
+    exit pallet - its discharge corner. This is similar to what we did in the equidistant
+    impulse faces construction process.
+    </p>
+
+    <p>
+    With \(W\) as a vertex and \(T_x\) as a leg point construct the \(\theta_w\) angle in
+    the chosen direction, clockwise in this case. The intersection of the remaining side
+    \(h_x\) of \(\theta_w\) with \(t\) locates \(D_x\). Construct a circle \(q_x\) centered
+    at \(F\) with the radius \(FD_x\). The space between \(p\) and \(q_x\) is the radial
+    width of the exit pallet and \(D_x\) is its discharge corner.
+    </p>
+
+    <p>
+    Once the lock point of the entry pallet and the discharge corner of the exit pallet are
+    located the remaining equidistant impulse faces constructions steps \(8\) through \(13\)
+    can be repeated verbatim.
+    </p>
+
+    <p>
+    Note that in the sample procedure above I chose a lock point on the stopping face of the
+    entry pallet to start the construction. You might choose the stopping face of the exit
+    pallet for that purpose just as well.
+    </p>
+
+    <p>
+    If you want to construct an escape wheel which rotates counterclockwise simply change
+    the directions specified in the above procedures to the opposite.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapgcp.html">prev</a>
+     <a href="ryapgch.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapgc.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

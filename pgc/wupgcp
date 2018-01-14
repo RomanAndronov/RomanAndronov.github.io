@@ -1,0 +1,585 @@
+[url=][b]Mechanical Pendulum Gear Clocks[/b][/url]
+
+[b]Pendulum[/b]
+
+1) Law of Motion
+2) Solution
+3) Small Angles
+4) [b]g[/b], \pi, Reality
+5) Procedure
+6) Sample Calculation
+7) Huygens
+8) More Pendulums
+
+
+[b]Law of Motion[/b]
+
+As it is customary in physics which, as was duly noted, produces exact solutions for approximate problems, we shall at first eliminate some number of practical phenomena from the study of pendulum's motion. We shall discard the friction, the sound waves production, the reactionary forces of the pivot assembly, the mass of the pendulum's rod, its geometry change due to motion, the air resistance and a plethora of atmospheric factors like pressure, temperature, humidity, etc.
+
+Such an arrangement of a point mass [b]m[/b] swinging at the end of an absolutely rigid massless rod of length [b]L[/b] about a fixed point in a uniform gravitational field is called a [i]mathematical[/i] or [i]ideal[/i] or [i]simple[/i] (gravity) pendulum.
+
+To find a practically useful information - the length of the rod [b]L[/b] for a known period [b]T[/b] we first need to find the pendulum's law of motion. We shall derive it in three ways.
+
+
+[i]Newton[/i]
+
+Before we jump to the equations let us talk about pendulum's motion at the gut or intuitive level. When the pendulum is at rest it occupies the position along the equilibrium line [b]ZO[/b]. The force due to gravity [b]mg[/b] is balanced by the rod's tension force [b]N[/b], the pendulum's velocity is zero and so are its acceleration, kinetic and potential energies. Using our muscle power we move the pendulum to its left extreme position, point [b]A[/b], and let it go with zero initial velocity.
+
+At this extreme point [b]A[/b] (as well as at [b]B[/b]) the magnitude of the vector of [b]m[/b]'s normal acceleration [b]a[sub]n[/sub][/b] which points directly at [b]Z[/b] and tracks the change of [i]direction[/i] of [b]m[/b]'s velocity is the smallest and so are the magnitudes of the tension force [b]N[/b] and [b]m[/b]'s kinetic energy. The magnitude of the vector of the tangential acceleration [b]a[sub]t[/sub][/b] which is tangent to [b]m[/b]'s trajectory and tracks the change of [i]magnitude[/i] of [b]m[/b]'s velocity is the largest and so is [b]m[/b]'s potential energy. After being zero for an instance the magnitude of [b]m[/b]'s velocity [b]v[/b] grows quickly at first and at that stage vectors [b]a[sub]t[/sub][/b] and [b]v[/b] point in the same direction - towards the equilibrium point [b]O[/b]. The magnitude and the direction of the force due to gravity [b]mg[/b] remains constant at all times.
+
+By the time [b]m[/b] arrives at [b]O[/b] it covers one quarter of its period. The magnitudes of [b]m[/b]'s [b]a[sub]n[/sub][/b], [b]N[/b], [b]v[/b] and kinetic energy reach their maximums while the magnitudes of its [b]a[sub]t[/sub][/b] and potential energy are at their lowest. As [b]m[/b] moves away from [b]O[/b] towards [b]B[/b] the magnitudes of [b]a[sub]n[/sub][/b], [b]N[/b] and [b]v[/b] begin to shrink, [b]a[sub]t[/sub][/b] becomes negative as [b]m[/b] begins to slow down and as a result vectors [b]a[sub]t[/sub][/b] and [b]v[/b] point in different directions - [b]a[sub]t[/sub][/b] points towards [b]O[/b] again while [b]v[/b] points towards [b]B[/b].
+
+By the time [b]m[/b] arrives at [b]B[/b] it covers one half of its period. The magnitudes of [b]m[/b]'s [b]a[sub]n[/sub][/b], [b]N[/b], [b]v[/b] and kinetic energy reach their minimums while the magnitudes of [b]a[sub]t[/sub][/b] and potential energy reach their maximums. The velocity of [b]m[/b] changes its direction towards [b]O[/b] and begins to grow, [b]a[sub]t[/sub][/b] points in the same direction and the above [b]A[/b] to [b]O[/b] scenario plays out again but this time in the opposite direction, from [b]B[/b] to [b]O[/b]. At [b]O[/b] [b]m[/b] covers three quarters of its period and by the time it reaches [b]A[/b] again the entire period is covered:
+
+[img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_pgc01.png[/img]
+
+According to Newton's second law the vector sum of all the forces acting on a body equals the first derivative of [b]mv[/b] over time. Let us project these forces on the \tau  axis that runs perpendicular to [b]ZP[/b] where [b]P[/b] is the location of the point mass [b]m[/b] at an arbitrary time [b]t[/b]. Since the mass remains constant we take the derivative of [b]v[sub]t[/sub][/b] only:
+
+[center][color=Cyan]d(mv[sub]t[/sub])/dt = mdv[sub]t[/sub]/dt     [/color][color=Yellow](p.1)[/color][/center]
+
+where [b]v[sub]t[/sub][/b] is [b]m[/b]'s velocity. As a vector [b]v[sub]t[/sub][/b] is always tangential to [b]m[/b]'s trajectory and it is the first derivative of the length of [b]m[/b]'s path [b]s[/b] over time:
+
+[center][color=Cyan]v[sub]t[/sub] = ds/dt     [/color][color=Yellow](p.2)[/color][/center]
+
+Since the rod is rigid [b]m[/b] traces a circular arc. Therefore we can express [b]s[/b] as a function of an angle \theta  if the latter itself is expressed in [i]radians[/i]. From the definition of a radian we have:
+
+[center][color=Cyan]s = L\theta[/color][/center]
+
+Therefore for very very small portions of the path [b]ds[/b] we have ([b]L[/b] is const):
+
+[center][color=Cyan]ds = Ld\theta[/color][/center]
+
+Putting [b]ds[/b] back into (p.2) and [b]v[sub]t[/sub][/b] into (p.1) we get:
+
+[center][color=Cyan]v[sub]t[/sub] = ds/dt = Ld\theta/dt = L\theta'[/color][/center]
+[center][color=Cyan]mdv[sub]t[/sub]/dt = md(L\theta')/dt = mLd[sup]2[/sup]\theta/dt[sup]2[/sup] = mL \theta''[/color][/center]
+
+where ' designates a derivative.
+
+The projection of the vector [b]N[/b] on \tau  is zero since the two are orthogonal. To project [b]mg[/b] on \tau  we observe that the straight lines [b]ZO[/b] and [b]PC[/b] are dead verticals and hence are parallel - the length of our pendulum's rod [b]L[/b] is way smaller than the radius of Earth whose curvature we ignore in this case. This of course is an idealization since strictly speaking the verticals are the straight lines that pass through the center of the Earth, they are perpendicular to the spherical surface of the Earth and as such are not really parallel. Approximating the shape of the Earth with a perfect sphere is yet another idealization.
+
+The straight lines [b]ZP[/b] and [b]CD[/b] are both perpendicular to the same straight line \tau  and hence are parallel. The straight line [b]CD[/b] when extended intersects [b]ZO[/b] at [b]D'[/b] and hence by definition the quadrilateral [b]ZPCD'[/b] is a parallelogram in which, according to Euclid (Elements, Book 1 Proposition 34), the opposite angles are equal which in turn means that \angle  [b]OZP[/b] = \angle  [b]PCD[/b] = \theta.
+
+The force [b]F[sub]t[/sub][/b] that always points towards [b]O[/b] is a restoring force - its direction is always opposite to that of [b]m[/b]'s angular displacement. It means that if we displace [b]m[/b] in one direction then [b]F[sub]t[/sub][/b] would always act in the opposite direction as it would want to bring [b]m[/b] to its equilibrium point [b]O[/b]. For example, at [b]P[/b] the angle \theta  is measured clockwise relative to the vertical [b]ZO[/b] - the equilibrium line - and hence we take it to be negative while [b]F[sub]t[/sub][/b] points in the opposite direction, as it wants to move [b]m[/b] counterclockwise, and we take it to be positive. If [b]P[/b] were on the other side of [b]O[/b], closer to [b]B[/b], then the angle \theta  would have been measured counterclockwise, positive, while [b]F[sub]t[/sub][/b] would be pointing against this displacement and we would take it to be negative. This restoring behavior is captured with the minus sign:
+
+[center][color=Cyan]F[sub]t[/sub] = -mgSin(\theta)[/color][/center]
+
+Find the analogy here with an ideal spring obeying Hooke's law where the restoring force [b]F = -k\Delta  x[/b] is proportional to a linear measure, [b]\Delta  x[/b], while in our case the restoring force is proportional to an angular measure.
+
+Finally we have:
+
+[center][color=Cyan]mL\theta'' = -mgSin(\theta)[/color][/center]
+[center][color=Cyan]\theta'' + (g/L)Sin(\theta) = 0     [/color][color=Yellow](p.3)[/color][/center]
+
+
+[i]Torque[/i]
+
+Torques and angular momenta make sense only when the reference point is specified. In our case the reference point is [b]Z[/b] and [b]ZP[/b] is [b]m[/b]'s radius vector pointing from [b]Z[/b] to [b]P[/b] with a known and constant length [b]L[/b].
+
+On the one hand, [b]m[/b]'s torque relative to [b]Z[/b] is the cross product of two vectors:
+
+[center][color=Cyan]\tau[sub]Z[/sub] = L \times  mg[/color][/center] (vector form)
+[center][color=Cyan]\tau[sub]Z[/sub] = -mgLSin(\theta)[/color][/center]
+
+On the other hand, it is the first derivative of [b]m[/b]'s angular momentum [b]M[/b] relative to [b]Z[/b] over time:
+
+[center][color=Cyan]\tau[sub]Z[/sub] = dM[sub]Z[/sub]/dt[/color][/center]
+
+Since we agreed that the size of the point mass [b]m[/b] is much smaller than [b]L[/b] for its angular momentum we have:
+
+[center][color=Cyan]M[sub]Z[/sub] = L \times  mv[/color][/center] (vector form)
+[center][color=Cyan]M[sub]Z[/sub] = Lmv = Lm\omega  L = mL[sup]2[/sup]d\theta/dt = mL[sup]2[/sup]\theta'[/color][/center]
+[center][color=Cyan]\tau[sub]Z[/sub] = d(mL[sup]2[/sup]\t]eta')/dt = mL[sup]2[/sup]\theta''[/color][/center]
+
+since [b]m[/b] and [b]L[/b] remain constant over time. Equating the two expressions we get:
+
+[center][color=Cyan]-mgLSin(\theta) = mL[sup]2[/sup]\theta''[/color][/center]
+[center][color=Cyan]\theta'' + (g/L)Sin(\theta) = 0     [/color][color=Yellow](p.3)[/color][/center]
+
+
+[i]Lagrange[/i]
+
+Our simple pendulum can execute an independent motion in only one plane. The nature of this motion is such that just one variable, the angle \theta, is enough to fully describe it. Consequently our pendulum possesses only one degree of freedom and its Lagrangian in terms of \theta  is:
+
+[center][color=Cyan]\Lambda = T - U[/color][/center]
+[center][color=Cyan]T = mv[sup]2[/sup]/2 = mL[sup]2[/sup]\theta'[sup]2[/sup]/2[/color][/center]
+[center][color=Cyan]U = mgL(1 - Cos(\theta))[/color][/center]
+[center][color=Cyan]\Lambda = mL[sup]2[/sup]\theta[sup]2[/sup]/2 - mgL + mgLCos(\theta)[/color][/center]
+
+Since there is only one degree of freedom the Euler-Lagrangian equations collapse into just one:
+
+[center][color=Cyan]d/dt(\partial  \Lambda/\partial  \theta') = \partial  \Lambda/\partial  \theta}[/color][/center]
+[center][color=Cyan]\partial  \Lamgda/\partial  \theta' = mL[sup]2[/sup]\theta'[/color][/center]
+[center][color=Cyan]d(mL[sup]2[/sup]\theta')/dt = mL[sup]2[/sup]\theta''[/color][/center]
+[center][color=Cyan]\partial  \Lambda/\partial  \theta = -mgLSin(\theta)[/color][/center]
+
+Finally we have:
+
+[center][color=Cyan]mL[sup]2[/sup]\theta'' = -mgLSin(\theta)[/color][/center]
+[center][color=Cyan]\theta'' + (g/L)Sin(\theta) = 0     [/color][color=Yellow](p.3)[/color][/center]
+
+By solving the above equation we hope to obtain the behavior of the angle \theta  as a function of time. Before we do that however let us record the remaining entities as a function of the angle \theta.
+
+We obtain [b]v[/b] from the law of conservation of energy. Since the tension force [b]N[/b] is always perpendicular to [b]v[/b] it does not do any work. The force due to gravity [b]mg[/b] is conservative - it does not do any work either. Hence, the entire change in [b]m[/b]'s potential energy is translated into the change of its kinetic energy:
+
+[center][color=Cyan]mg\Delta  h = mg(h[sub]0[/sub] - h) = mg(L - LCos(\theta[sub]0[/sub]) - L + LCos(\theta))[/color][/center]
+[center][color=Cyan]mgL(Cos(\theta) - Cos(\theta[sub]0[/sub])) = mv[sup]2[/sup]/2[/color][/center]
+[center][color=Cyan]v(\theta) = \sqrt 2gL(Cos(\theta) - Cos(\theta[sub]0[/sub]))[/color][/center]
+
+Both accelerations follow:
+
+[center][color=Cyan]a[sub]t[/sub](\theta) = -gSin(\theta)[/color][/center]
+[center][color=Cyan]a[sub]n[/sub](\theta) = v[sup]2[/sup]/L = 2g(Cos(\theta) - Cos(\theta[sub]0[/sub]))[/color][/center]
+
+To find [b]N[/b] we project it and [b]mg[/b] on the normal axis [b]ZP[/b]:
+
+[center][color=Cyan]ma[sub]n[/sub] = N - F[sub]n[/sub] = N - mgCos(\theta)[/color][/center]
+[center][color=Cyan]N = ma[sub]n[/sub] + mgCos(\theta) = 2mg(Cos(\theta) - Cos(\theta[sub]0[/sub])) + mgCos(\theta)[/color][/center]
+[center][color=Cyan]N(\theta) = 3mgCos(\theta) - 2mgCos(\theta[sub]0[/sub])[/color][/center]
+
+
+[b]Solution[/b]
+
+Rearrange (p.3):
+
+[center][color=Cyan]\theta'' = - (g/L)Sin(\theta)[/color][/center]
+
+To save us some typing we designate:
+
+[center][color=Cyan]\omega[sup]2[/sup] = g/L[/color][/center]
+[center][color=Cyan] \theta'' = -\omega[sup]2[/sup]Sin(\theta)     [/color][color=Yellow](p.4)[/color][/center]
+
+Spell out the definition of a derivative \theta'' on the left hand side of (p.4) and then multiply both sides of (p.4) by [b]dt[/b]:
+
+[center][color=Cyan]\theta'' = d\theta'/dt = -\omega[sup]2[/sup]Sin(\theta)[/color][/center]
+[center][color=Cyan]d\theta' = -\omega[sup]2[/sup]Sin(\theta)dt     [/color][color=Yellow](p.5)[/color][/center]
+
+Multiply both sides of (p.5) by \theta' and expand its definition on the right hand side:
+
+[center][color=Cyan]\theta'd\theta' = -\omega[sup]2[/sup]Sin(\theta)dt\theta' = -\omega[sup]2[/sup]Sin(\theta)dt(d\theta/dt) = -\omega[sup]2[/sup]Sin(\theta)d\theta[/color][/center]
+[center][color=Cyan]\theta'd\theta' = -\omega[sup]2[/sup]Sin(\theta)d\theta     [/color][color=Yellow](p.6)[/color][/center]
+
+What we managed to do now is to completely separate the variables which means that we can integrate both sides of (p.6):
+
+[center][color=Cyan]\int \theta'd\theta' = \theta'[sup]2[/sup]/2 + C[sub]1[/sub][/color][/center]
+[center][color=Cyan]\int -\omega[sup]2[/sup]Sin(\theta)d\theta = \omega[sup]2[/sup]Cos(\theta) + C[sub]2[/sub][/color][/center]
+[center][color=Cyan]\theta'[sup]2[/sup]/2 + C[sub]1[/sub] = \omega[sup]2[/sup]Cos(\theta) + C[sub]2[/sub][/color][/center]
+[center][color=Cyan]\theta'[sup]2[/sup]/2 = \omega[sup]2[/sup]Cos(\theta) + C     [/color][color=Yellow](p.7)[/color][/center]
+
+Use the boundary conditions to find [b]C[/b]:
+
+[center][color=Cyan]\theta(t = 0) = \theta[sub]0[/sub][/color][/center]
+[center][color=Cyan]\theta'(t = 0) = 0[/color][/center]
+[center][color=Cyan]0 = \omega[sup]2[/sup] Cos(\theta[sub]0[/sub]) + C[/color][/center]
+[center][color=Cyan]C = -\omega[sup]2[/sup] Cos(\theta[sub]0[/sub])[/color][/center]
+
+Put [b]C[/b] into (p.7):
+
+[center][color=Cyan]\theta'[sup]2[/sup]/2 = \omega[sup]2[/sup]Cos(\theta) - \omega[sup]2[/sup]Cos(\theta[sub]0[/sub])[/color][/center]
+[center][color=Cyan]\theta'[sup]2[/sup] = 2\omega[sup]2[/sup](Cos(\theta) - Cos(\theta[sub]0[/sub]))[/color][/center]
+[center][color=Cyan]\theta' = \omega(\sqrt2)\sqrt(Cos(\theta) - Cos(\theta[sub]0[/sub]))     [/color][color=Yellow](p.8)[/color][/center]
+
+Use the power reduction half-angle trigonometric identity:
+
+[center][color=Cyan]Cos(x) = 1 - 2Sin[sup]2[/sup](x/2)[/color][/center]
+
+for both cosines under the square root in (p.8):
+
+[center][color=Cyan]\theta' = \omega(\sqrt2)\sqrt(1 - 2Sin[sup]2[/sup](\theta/2) - 1 + 2Sin[sup]2[/sup](\theta[sub]0[/sub]/2))[/color][/center]
+[center][color=Cyan]\theta' = d\theta/dt = 2\omega\sqrt(Sin[sup]2[/sup](\theta[sub]0[/sub]/2) - Sin[sup]2[/sup](\theta/2))[/color][/center]
+
+Separate the variables one more time:
+
+[center][color=Cyan]dt = (1/2\omega)d\theta/(\sqrt(Sin[sup]2[/sup](\theta[sub]0[/sub]/2) - Sin[sup]2[/sup](\theta/2)))     [/color][color=Yellow](p.9)[/color][/center]
+
+Integrate the left hand side of (p.9) from [b]0[/b] to [b]T/4[/b] - one quarter of the period. Integrate the right hand side of (p.9) from [b]0[/b] to \theta[sub]0[/sub]:
+
+[center][color=Cyan]T(\theta[sub]0[/sub]) = (2/\omega)\intd\theta/(\sqrt(Sin[sup]2[/sup](\theta[sub]0[/sub]/2) - Sin[sup]2[/sup](\theta/2)))     [/color][color=Yellow](p.10)[/color][/center]
+
+Within the given integral [b]Sin(\theta[sub]0[/sub]/2)[/b] is just a constant, designate it as:
+
+[center][color=Cyan]k = Sin(\theta[sub]0[/sub]/2)     [/color][color=Yellow](p.11)[/color][/center]
+
+And use the following substitution:
+
+[center][color=Cyan]Sin(\theta/2) = kSin(\phi)     [/color][color=Yellow](p.12)[/color][/center]
+
+Differentiate (p.12):
+
+[center][color=Cyan](d\theta/2)Cos(\theta/2) = kCos(\phi)d\phi[/color][/center]
+[center][color=Cyan]d\theta = 2kCos(\phi)d\phi/Cos(\theta/2)     [/color][color=Yellow](p.13)[/color][/center]
+
+Use the basic trigonometric identity [b]Sin[sup]2[/sup](x) + Cos[sup]2[/sup](x) = 1[/b] and (p.12) for the cosine in the denominator of (p.13):
+
+[center][color=Cyan]Cos(\theta/2) = \sqrt(1 - Sin[sup]2[/sup](\theta/2)) = \sqrt(1 - k[sup]2[/sup]Sin[sup]2[/sup](\phi))[/color][/center]
+
+And put it back into (p.13):
+
+[center][color=Cyan]d\theta = 2kCos(\phi)d\phi/(\sqrt(1 - k[sup]2[/sup]Sin[sup]2[/sup](\phi)))     [/color][color=Yellow](p.14)[/color][/center]
+
+Use (p.12) to rearrange the difference of squares of sines under the square root in (p.10):
+
+[center][color=Cyan]Sin[sup]2[/sup](\theta[sub]0[/sub]/2) - Sin[sup]2[/sup](\theta/2) = k[sup]2[/sup](1 - Sin[sup]2[/sup](\phi)) = k[sup]2[/sup]Cos[sup]2[/sup](\phi)     [/color][color=Yellow](p.15)[/color][/center]
+
+Change the boundaries of integration using (p.12):
+
+[center][color=Cyan]\theta = 0, Sin(0/2) = 0 = kSin(\phi), \phi = 0[/color][/center]
+[center][color=Cyan]\theta = \theta_0, Sin(\theta[sub]0[/sub]/2) =
+Sin(\theta[sub]0[/sub]/2)Sin(\phi), \phi = \pi/2[/color][/center]
+
+Put (p.14) and (p.15) into (p.10) and reverse substitute \omega  keeping the boundaries of integration as [b]0[/b] and \pi/2:
+
+[center][color=Cyan]T(k) = (4/\omega)\int kCos(\phi)/\sqrt(1 - k[sup]2[/sup]Sin[sup]2[/sup](\phi)) * d\phi/(kCos(\phi))[/color][/center]
+
+[center][color=Cyan]T(k) = 4\sqrt(L/g))\int d\phi/(\sqrt(1 - k[sup]2[/sup]Sin[sup]2[/sup](\phi)))     [/color][color=Yellow](p.16)[/color][/center]
+
+Though a French mathematician A. Legendre was working with functions of complex variables [b]z[/b] (circa 1825-1837) with a substitution [b]z = Sin(\phi)[/b] he was able to simplify a somewhat different but similarly looking integral to the form you see above. He called it an [i]elliptic integral of the first kind[/i] and designated it as [b]F(k)[/b]. Legendre normalized two other related integrals to what now known as a standard form. All three carry his name, the elliptic integrals of the first, second and third kinds in the Legendre form.
+
+When the upper boundary of the integrals is [b]\pi/2[/b] they are called [i]complete[/i], otherwise, if it is an arbitrary angle \phi, they are called [i]incomplete[/i] and designated as a function of two arguments, \phi  being the second argument. For example, [b]F(k, \phi)[/b] stands for an incomplete elliptic integral of the first kind.
+
+These integrals have been studied to a great depth and their numeric values can be estimated to a high degree of accuracy in a multitude of ways. Using Legendre polynomials and the works of J. Wallis, for example, our particular integral of the first kind can be exactly represented as an infinite sum:
+
+[center][color=Cyan]F(k) = \int d\phi/(\sqrt(1 - k[sup]2[/sup]Sin[sup]2[/sup](\phi))) = \pi/2 \sum  [(2n)!/(2[sup]n[/sup] * n!)[sup]2[/sup]][sup]2[/sup] * Sin[sup]2n[/sup](\theta[sub]0[/sub]/2)     [/color][color=Yellow](p.17)[/color][/center]
+
+where [b]n[/b] is a whole number: 0, 1, 2, 3, ... etc. which runs from zero to infinity. Putting it back into (p.16) we get:
+
+[center][color=Cyan]T(\theta[sub]0[/sub]) = 2\pi\sqrt(L/g)\sum  [(2n)!/(2[sup]n[/sup] * n!)[sup]2[/sup]][sup]2[/sup] * Sin[sup]2n[/sup](\theta[sub]0[/sub]/2)     [/color][color=Yellow](p.18)[/color][/center]
+
+It may be difficult to see but notice that [b]4[/b] became [b]2[/b] and \pi was added. The first few terms of the above sum are:
+
+[center][color=Cyan]T(\theta[sub]0[/sub]) = 2\pi\sqrt(L/g)(1 + (1/4)Sin[sup]2[/sup](\theta[sub]0[/sub]/2) + (9/64)Sin[sup]4[/sup](\theta[sub]0[/sub]/2) + (25/256)Sin[sup]6[/sup](\theta[sub]0[/sub]/2) + ...)[/color][/center]
+
+In clock making, however, the pendulum's period [b]T[/b] is known ahead of time while the length of its rod [b]L[/b] corresponding to that period must be found. If we decide to use (p.17) for the integral estimate then we can designate the sum in (p.18) as [b]S[/b]:
+
+[center][color=Cyan]T = 2\piS\sqrt(L/g)[/color][/center]
+
+and solve it for [b]L[/b]:
+
+[center][color=Cyan]L(T, \theta[sub]0[/sub]) = (gT[sup]2[/sup])/(4\pi[sup]2[/sup]S[sup]2[/sup])     [/color][color=Yellow](p.19)[/color][/center]
+
+where you have to decide on the number of terms in the sum [b]S[/b]. In a generic case that sum will be a function of \theta[sub]0[/sub].
+
+If you find a different way to calculate the integral (p.16) then we can name it as [b]I[/b]:
+
+[center][color=Cyan]T(\theta[sub]0[/sub]) = 4I\sqrt(L/g)[/color][/center]
+
+and solve it for [b]L[/b]:
+
+[center][color=Cyan]L(T, \theta[sub]0[/sub]) = (gT[sup]2[/sup])/(16I[sup]2[/sup])     [/color][color=Yellow](p.20)[/color][/center]
+
+Keep in mind that \theta[sub]0[/sub] must be [i]expressed[/i] in radians for the above calculations to work. It is highly likely that you will measure or decide on the value of \theta[sub]0[/sub] in degrees [b]d[/b] so here is how to convert them into radians [b]r[/b]:
+
+[center][color=Cyan]r = (\pi/180) * d     [/color][color=Yellow](p.21)[/color][/center]
+
+Before moving on to small angles I will remark in passing that traditionally, after obtaining the integral in (p.16), we hope to calculate it and then invert that solution to obtain an expression for \theta(t). Unfortunately the analytic or closed form solution for the integral in (p.16) does not exist. However, the behavior of the angle \theta  as a function of time can obtained via the elliptic function [b]sn()[/b] of Carl Jacobi who, after inverting the integral in (p.16) in particular and further developing the theory of elliptic functions in general, used to famously say "One must always invert!":
+
+[center][color=Cyan]\theta(t) = 2Arcsin(k * sn(\sqrt(g/L)t, k))[/color][/center]
+
+where [b]k[/b] is some periodic function. This, however, is way beyond the scope of this tutorial.
+
+
+[b]Small Angles[/b]
+
+There seem to be no end in sight to wonders in math which uncovers things that are true but neither intuitive nor obvious. One such wonder is the fact that functions that have nothing to do with polynomials can be expressed via the very things they have nothing to do with - polynomials of infinite degree.
+
+In 1712 an English mathematician Brook Taylor formalized the work done by a Scottish mathematician James Gregory in a form of a theorem, published in 1715, which states that a function possessing derivatives of all orders at a point [b]x = a[/b] can be expressed as a polynomial whose coefficients depend [i]only[/i] on the values of derivatives of the function at [b]a[/b]. Such representation of a function, in general, is now called Taylor series.
+
+Infinity is a convenient mathematical concept but in practice of course you will not be summing an infinite number of terms and you will not be raising a term to an infinite power. You will pick some reasonable finite number of terms and by doing so you will introduce a certain error. The upper bound of that error is addressed by the Taylor theorem but for the purposes of our discussion it is an overkill to cover it here. We will, however, look at the small angle error in the pendulum's length calculation below.
+
+What makes Taylor series quite remarkable is the fact that we can estimate a value of a function at a certain point (I am glossing over a large amount of gory details here) using only four basic operations - addition, subtraction, multiplication and division - something that computers are good at.
+
+An approximating series of a function in the vicinity of a specific point, zero, is sometimes called a Maclaurin series in memory of a Scottish mathematician Colin Maclaurin, Isaac Newton's disciple. Defending his teacher's analytic methods against the bitter criticism by the contemporaries Maclaurin published one of the first known systematic treatments of the subject, [i]"A Treatise of Fluxions"[/i], in 1842. This work was so well and carefully done that it became a sort of an academic standard in Europe for the next almost 80 years. In 1821 a French mathematician Augustin Cauchy published his famous analysis course that introduced a level of mathematical rigor never dreamed of by Newton and Leibniz and, pretty much, put mathematical analysis as we now know and love it on the academic map.
+
+Our prime suspect in (p.3) is [b]Sin(\theta)[/b]. Keeping the angle \theta  expressed in radians let us use Taylor (Maclaurin) series in the vicinity of [b]\theta = 0[/b] to represent [b]Sin(\theta)[/b] as a polynomial (of infinite degree):
+
+[center][color=Cyan]Sin(\theta) = \theta - \theta[sup]3[/sup]/3! + \theta[sup]5[/sup]/5! - \theta[sup]7[/sup]/7! + ... = \sum  (-1[sup]n[/sup])/((2n+1)!) * \theta^[sup]2n+1[/sup]     [/color][color=Yellow](p.22)[/color][/center]
+
+To get a sense for the actual numbers here is what some small and not so small angles look like:
+
+[img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_pgc02.png[/img]
+
+Further, here is what (p.22) looks like for 4 degrees expressed in radians:
+
+[center][color=Cyan]4 degrees = (3.14159 * 4)/180 = 0.0698131111 rad[/color][/center]
+[center][color=Cyan]Sin(0.0698131111) = 0.0698131111 - 0.0000567100 + 0.0000000138 - ...[/color][/center]
+
+We see that starting from as close as the second term the numbers become so small and contribute so little to the grand total that we can throw all of them out and keep the first term only:
+
+[center][color=Cyan]Sin(0.0698131111) \approx  0.0698131111[/color][/center]
+
+or in general for very small angles:
+
+[center][color=Cyan]Sin(\theta) \approx  \theta[/color][/center]
+
+If we now put the above approximation of [b]Sin(\theta)[/b] back into (p.3) we get:
+
+[center][color=Cyan]\theta'' + (g/L)\theta = 0     [/color][color=Yellow](p.23)[/color][/center]
+
+I leave it as an exercise for you to solve this equation using the separation of variables approach described above. Eventually you will come to the following integral:
+
+[center][color=Cyan]\int d\theta/\sqrt(\theta[sub]0[/sub][sup]2[/sup] - \theta[sup]2[/sup])[/color][/center]
+
+which you can calculate with the [b]\theta = \theta[sub]0[/sub]Sin(\phi)[/b] substitution to obtain the period [b]T[/b]:
+
+[center][color=Cyan]T = 2\pi\sqrt(L/g)     [/color][color=Yellow](p.24)[/color][/center]
+
+which is the limiting case of (p.18) when only the first term of the sum is kept. We now see why for small angles the period of our idealized pendulum does not depend on \theta[sub]0[/sub] (and [b]m[/b]).
+
+Note that if we replace the angular coordinate \theta  with a generic coordinate [b]q[/b] then purely mathematically we can abstract (p.23) as:
+
+[center][color=Cyan]q'' + \omega[sup]2[/sup]q = 0[/color][/center]
+
+which is applicable to: our simple pendulum, a point mass oscillating on an ideal spring, a current flowing through an LC circuit. For a simple pendulum [b]q[/b] means [i]angle[/i] and
+
+[center][color=Cyan]\omega = \sqrt(g/L)[/color][/center]
+
+For a point mass on an ideal spring [b]q[/b] means [i]linear distance[/i] and
+
+[center][color=Cyan]\omega = \sqrt(k/m)[/color][/center]
+
+For a current flowing through an LC circuit [b]q[/b] means [i]current[/i] and
+
+[center][color=Cyan]\omega = 1/\sqrt(LC)[/color][/center]
+
+All three examples can be covered under one umbrella of the concept known as [i]simple harmonic oscillator[/i] for which the behavior of the abstract coordinate as a function of time can be expressed in closed form. When you were solving (p.23) for your substitution for an arbitrary time [b]t[/b] you had [b]\phi = \omega  t[/b] and for the angle you had [b]\theta(t) = \theta[sub]0[/sub]Cos(\omega  t + \delta)[/b]. Replacing \theta with [b]q[/b] we get:
+
+[center][color=Cyan]q(t) = q[sub]0[/sub]Cos(\omega  t + \delta)[/color][/center]
+
+where \delta  is known as a [i]phase[/i] which captures the initial state of motion.
+
+
+[b][b]g[/b], \pi, Reality[/b]
+
+While other factors affect the exact value of [b]g[/b] the two major ones are elevation above or submersion below sea level and latitude.
+
+Elevation/submersion. The value of [b]g[/b] becomes smaller and smaller as you get farther and farther away from the surface of the Earth in either direction - away from or closer to the center of the Earth. And conversely. It may be intuitively clear why the value of [b]g[/b] diminishes as you get away from the Earth's center but why does it happen when you get closer to it? At the risk of straying off topic too much here is an explanation in broad strokes.
+
+Break a solid sphere of uniform density into a very large number of very thin and hollow shells of uniform density. Because of the equality of the angles involved and the inverse proportionality of the gravitational forces to the squares of distances the gravitational pull of such a shell on a point mass located anywhere [i]inside[/i] the shell is zero. A gravitational pull of a uniform sphere of mass [b]M[/b] on a point mass located anywhere [i]outside[/i] the sphere is equivalent to a pull of a material point of mass [b]M[/b] located at sphere's center. Apply this model to Earth. As we get deeper and deeper inside our planet we bypass more and more such shells which we can safely throw out - they contribute nothing to the current value of [b]g[/b]. The mass of the remaining not yet penetrated sphere diminishes and so is [b]g[/b].
+
+Latitude. Earth is not a perfect sphere - it can be approximated with a high degree of accuracy with a spinning oblate ellipsoid. As such Earth's radius varies with your clock's position on our planet - it is smallest at the poles and largest at the equator. Consequently, the value of [b]g[/b] starts out at the highest value at the poles, [b]g[sub]p[/sub][/b], and diminishes slightly as you get closer and closer to the equator, [b]g[sub]eq[/sub][/b]. And conversely:
+
+[center][color=Cyan]g[sub]p[/sub] = g(90) = 9.83236 m per s[sup]-2[/sup][/color][/center]
+[center][color=Cyan]g = g(45) = 9.80665 m per s[sup]-2[/sup][/color][/center]
+[center][color=Cyan]g[sub]eq[/sub] = g(0) = 9.78033 m per s[sup]-2[/sup][/color][/center]
+
+Here degrees stand for the latitude and the unsubscripted [b]g[/b] stands for [i]standard gravity[/i] whose value is used for definitions and unit conversions. You may experiment with using it in your calculations but you should really use the clock's locale-specific value. For example, you can look it up in a published table - the burden to find one is on you. Keep in mind that when it comes to measurements lone magnitudes like [b]9.806[/b] by themselves are useless. They become worthy of attention only when an error is given as in [b]9.806 \pm  0.003[/b]. Such errors tell us the degree of uncertainty of a measurement. However, I will mostly deviate from this practice in this tutorial.
+
+In US a National Oceanic and Atmospheric Administration (www.noaa.gov) has a branch called National Geodesic Survey (www.ngs.noaa.gov) which, at the time of this writing (2015), provided a Surface Gravity Prediction calculator (www.ngs.noaa.gov/cgi-bin/grav_pdx.prl) which accepted latitude, longtitude and height as input for continental US only. For New York City, NY, US (latitude [b]40.714167[/b] degrees, longtitude [b]74.006389[/b] degrees, elevation [b]4.66[/b] m) it produced the following estimate:
+
+[center][color=Cyan]g(NYC, NY, US) = 9.80252 m per s[sup]2[/sup][/color][/center]
+
+If for calculation purposes you need to convert the coordinates from the minutes [b]M[/b] and seconds [b]S[/b] format into a decimal format [b]d[/b] then use the following formula:
+
+[center][color=Cyan]d = \theta + M/60 + S/3600[/color][/center]
+
+For NYC, NY, US for example, we get:
+
+[center][color=Cyan]d[sub]lat[/sub] = 40 + 42'/60 + 51''/3600 = 40.714167 degrees[/color][/center]
+[center][color=Cyan]d[sub]lon[/sub] = 74 + 0'/60 + 23''/3600 = 74.006389 degrees[/color][/center]
+
+You can also estimate the local value of [b]g[/b] at sea level by using the Helmert's formula:
+
+[center][color=Cyan]g(\phi) = 9.780327(1 + 0.0053024Sin[sup]2[/sup](\phi) - 0.0000058Sin[sup]2[/sup](2\phi))     [/color][color=Yellow](p.25)[/color][/center]
+
+where \phi  is your latitude in degrees.
+
+If your clock will be operated above sea level at a considerable height [b]h[/b], measured in meters, then adjust (p.25) by subtracting an extra term from it:
+
+[center][color=Cyan]g(\phi, h) = g(\phi) - 0.000003086 * h     [/color][color=Yellow](p.26)[/color][/center]
+
+Using (p.26) to estimate the value of [b]g[/b] in NYC, NY, US for comparison purposes, we get:
+
+[center][color=Cyan]g = 9.80232 m per s[sup]2[/sup][/color][/center]
+
+If your clock will be operated below sea level at a considerable depth [b]d[/b], measured in meters, then adjust (p.25) by multiplying it by an extra term:
+
+[center][color=Cyan]g(\phi, d) = g(\phi)(1 - d/R[sub]m[/sub])     [/color][color=Yellow](p.27)[/color][/center]
+
+where [b]R[sub]m[/sub] = 6,371,009[/b] meters is the mean radius of Earth. If you feel that [b]R[sub]m[/sub][/b] is not precise enough then you can look up any number of ways to estimate the distance from the center of the Earth to its surface at an arbitrary latitude \phi. Wiki is one place to start from.
+
+Overall, the chase after a more precise estimate of a locale-specific value of [b]g[/b] is always on - check for the latest developments before running your calculations.
+
+Also, keep in mind that by making it possible for a massive object, bob, to slide along the pendulum's rod you can always fine-tune the period of your clock. If your clock runs fast then you slow it down by sliding the mass [b]m[/b] down the rod away from the pivot point effectively increasing the magnitude of [b]L[/b]. If you clock runs slow you speed it up by sliding the mass [b]m[/b] up the rod towards the pivot point effectively decreasing the magnitude of [b]L[/b].
+
+The value of \pi is known with a very high degree of accuracy - way more than we need for our practical purposes. I will use \pi \approx  [b]3.14159[/b].
+
+Lastly, it goes without saying that our nice mathematical model is [i]not[/i] realizable in practice. In reality the period of oscillation of a pendulum [i]is[/i] affected by the pivot assembly friction, air resistance, atmospheric pressure, temperature, humidity, etc. I will address the influence of friction and air resistance on [b]T[/b] in the escapement chapter but I will ignore the influence of all the other factors on [b]T[/b] completely.
+
+
+[b]Procedure[/b]
+
+Here are the steps to find the length of the simple pendulum's rod [b]L[/b]:
+
+Decide on the magnitude of [b]T[/b] in seconds.
+Decide on the magnitude of \theta[sub]0[/sub] in degrees.
+Convert degrees into radians with (p.21).
+Estimate the value of the integral (p.16).
+Find the locale-specific value of [b]g[/b].
+Take \pi \approx  3.14159.
+Put the above values into (p.19) or (p.20) to find [b]L[/b].
+
+
+[b]Sample Calculation[/b]
+
+1). We pick [b]T = 2[/b] seconds. It means that it takes our pendulum [b]1[/b] second to swing from [b]A[/b] to [b]B[/b] and [b]1[/b] second to swing from [b]B[/b] to [b]A[/b]. In other words this particular pendulum shows up at either extreme point every second. Historically it is known as [i]seconds pendulum[/i] and professionals say that it [i]"beats seconds[/i]".
+
+2). We pick \theta[sub]0[/sub] = 2 degrees.
+
+3). From (p.21) we obtain its radian measure:
+
+[center][color=Cyan]\theta[sub]0[/sub](2d) = (3.14159/180) * 2 = 0.03491 rad[/color][/center]
+
+4). At first we shall do a small degree approximation by taking only the first term, [b]1[/b], from [b]S[/b] in (p.18) and from (p.19) we get:
+
+[center][color=Cyan]S = 1[/color][/center]
+
+5). We will use the value of [b]g = 9.80252[/b] specific for NYC, NY, US.
+
+6). Put these numbers into (p.19) to obtain [b]l[/b]:
+
+[center][color=Cyan]L(2s, 2d) = 9.80252/(4 * (3.14159)[sup]2[/sup]) * 4 = 9.80252/9.86959 = 0.99320 m[/color][/center]
+[center][color=Cyan]L = 99.32 cm[/color][/center]
+
+In other words we get [b]99[/b] centimeters and [b]3.2[/b] millimeters. On a separate note observe a numeric curiosity - the values of [b]g[/b] and \pi  squared are somewhat close.
+
+Now instead of just one let us take three first terms in [b]S[/b] in (p.18) still using the [b]Sin()[/b] in it (not its small angle approximation):
+
+[center][color=Cyan]\theta[sub]0[/sub](2d)/2 = 0.01745[/color][/center]
+[center][color=Cyan]Sin(0.01745) = 0.00030[/color][/center]
+[center][color=Cyan]Sin[sup]2[/sup](0.01745) = 0.00000[/color][/center]
+[center][color=Cyan]Sin[sup]4[/sup](0.01745) = 0.00000[/color][/center]
+
+[center][color=Cyan]S = 1 + (1/4) * 0.00000 + (9/64) * 0.00000 = 1[/color][/center]
+
+In other words with [b]2[/b] degrees we do not get any perceptible difference for [b]T[/b]. What about [b]4[/b] degrees?
+
+[center][color=Cyan]\theta[sub]0[/sub](4d)/2 = 0.0349065555[/color][/center]
+[center][color=Cyan]Sin(0.0349065555) = 0.0348994671[/color][/center]
+[center][color=Cyan]Sin[sup]2[/sup](0.0349065555) = 0.0012179728[/color][/center]
+[center][color=Cyan]Sin[sup]4[/sup](0.0349065555) = 0.0000014834[/color][/center]
+
+[center][color=Cyan]S = 1 + (1/4) * 0.0012179728 + (9/64) * 0.0000014834 = 1.0003047018[/color][/center]
+[center][color=Cyan]S[sup]2[/sup] = 1.0003047018[sup]2[/sup] = 1.0006094964[/color][/center]
+[center][color=Cyan]l(2s, 4d) = 9.80252/(4 * (3.14159)[sup]2[/sup]) * 4/1.0006094964) = 0.99260 m[/color][/center]
+[center][color=Cyan]l = 99.26 cm[/color][/center]
+
+In other words we get [b]99[/b] centimeters and [b]2.6[/b] millimeters. If we take it as a correct value than our previous one, [b]99.32[/b] cm, which is off by [b]0.6[/b] mm, introduces about [b]0.06%[/b] error.
+
+In a similar manner for small angles ([b]S = 1[/b]) for NYC, NY, US we obtain:
+
+[center][color=Cyan]L(0.5s, 4d) = 6.21 cm[/color][/center]
+[center][color=Cyan]L(1s, 4d) = 24.83 cm[/color][/center]
+[center][color=Cyan]L(3s, 4d) = 2 m 23.47 cm[/color][/center]
+[center][color=Cyan]L(4s, 4d) = 3 m 97.28 cm[/color][/center]
+[center][color=Cyan]L(5s, 4d) = 6 m 20.75 cm[/color][/center]
+
+Overall keep in mind that the lengths of a small angle simple pendulum relate as [i]squares[/i] of its periods. If you double a period (from [b]2[/b] to [b]4[/b] seconds) you quadruple the length (from about [b]1[/b] meter to about [b]4[/b] meters) and conversely.
+
+
+[b]Huygens[/b]
+
+By around 1637 Galileo realized that the pendulum can be used as the main part of a time keeping mechanism - a clock. He sketched out a preliminary design of such a clock and started implementing it by the summer of 1641. Unfortunately he never finished it as he passed away in January of 1642. The scientific marathon, however, was not to die with him - on December 25th of that year Isaac Newton was born. In England.
+
+A friar of a Parisian order of Minims, the author of the special kind of numbers of the form [b]2[sup]n[/sup] - 1[/b], left a well known trace in number theory. It is less well known that while running a hard sciences informational hub out of the rooms of his Franciscan convent Marin Mersenne left a trace in physics as well as he was the one who suggested to a Dutch scientist and mathematician Christiaan Huygens the use of pendulums in time keeping.
+
+The devil is in the details and it took the intellectual power of Huygens to work these details out around 1656-1657 and invent a first known practical rigid rod pendulum clock. A physical functioning copy of this clock, built by someone else, was unveiled by Huygens on December 25th 1657 while its inner workings were described in 1658 in a small book [i]"Horologium"[/i]. Newton was a tender 15 years of age but a good friar Marin Mesenne did not live to witness this historic moment as he passed away in 1648.
+
+Eventually Huygens realized that a rigid rod pendulum tracing a circular arc is not [i]isochronous[/i] (from the Greek [i]"iso"[/i] meaning [i]equal[/i] and [i]"chrono"[/i] meaning [i]time[/i]) as its period of oscillation does depend on the size of the swing. In 1673, while in Paris on an invitation from one of the ministers of the French king Louis XIV, in a more voluminous book [i]"Horologium Oscillatorium"[/i] he published a solution to that problem by finding a curve tracing which an oscillating point has a period truly independent of the swing size - even for large initial angles. Since Newton's [i]"Principia"[/i] and calculus were not to be available for another 14 years (1687) Huygens relied on his personal insight and geometric constructions for the proof.
+
+Such a curve is called a [i]tautochrone[/i] from the Greek [i]"tauto"[/i] meaning [i]same[/i]. It turned out that in a uniform gravitational field a tautochrone is a [i]cycloid[/i]. A cycloid is a two-dimensional curve traced by a point on a circumference of a circle rolling along a stationary straight line without slipping. Further, no matter where a material point is initially placed on a properly positioned cycloid (horns up) it will always reach the equilibrium point [b]O[/b] in equal amounts of time.
+
+Based on the new find Huygens devised a different pendulum. Instead of using a rigid rod he suspended a point mass at the end of a flexible thread whose swings he limited by the semicycloidal cheeks. Finding the exact shape of these cheeks - a non-trivial task at the time - was yet another discovery made by Huygens. The essence of this discovery is that the evolute of a given cycloid is an equal but shifted cycloid (an evolute is the locus of all the centers of curvature of a given curve).
+
+At this point Huygens was assured that while the swinging thread hugs these cheeks the point mass has no choice but to trace a cycloid (he even went as far as devising a few practical methods of constructing a cycloidal curve). As such we can say that a cycloidal pendulum is isochronous.
+
+I will remark in passing that with calculus we can find the parametric equation of a tautochrone by imposing a requirement that the restoring force [b]mgSin(\theta)[/b] must be linearly proportional to the length of the path traveled by the point mass along the curve.
+
+However brilliant Huygens' theoretical discovery was unfortunately it did not work as well in practice. For large swings the flexible thread had so much contact with the curbing cheeks that it resulted in a lot of friction which in turn led to a rather rapid energy loss. For small swings the actual contact of the flexible thread with the required trajectory enforcing cheeks was estimated to be just north of one millimeter - not enough to exercise the full benefits of the cycloidal path (A. L. Rawlings, [i]The Science of Clocks and Watches[/i]). There were purely technological difficulties as well - at the time it was challenging to manufacture the curbing cheeks in a mathematically precise cycloidal shape. Rigid rod pendulums coupled with the escapement mechanism took the center stage in clock manufacturing.
+
+The book [i]"Horologium Oscillatorium"[/i] is highly recommended. If you do not now Latin, the book's original language, either learn it or seek a copy in a tongue you understand. Huygens' style of clarity and conciseness is contagious. I list the translations of the book into several languages at the end of the Hands chapter.
+
+
+[b]More Pendulums[/b]
+
+Over the years many different types of pendula were invented, each one for a specific purpose. I will mention just a few: O Botafumeiro, military, Kater's, Foucault's, coupled, torsion, chaotic pendula and - quantum pendulum, no less, first studied by Edward Condon (1928) though I am not very ... certain.
+
+After you master a simple mathematical pendulum you may want to take a look at the pendulums called [i]physical[/i] or [i]compound[/i]. In these pendulums the geometry of the oscillating mass can no longer be ignored - it takes the center stage. I will omit the deduction process and only show the end result of practical use. A period [b]T[/b] of a small angle compound pendulum depends on its moment of inertia [b]I[sub]z[/sub][/b] about the pivot point [b]Z[/b] (in our notation) and the distance [b]d[/b] from the pendulum's center of mass to the pivot point:
+
+[center][color=Cyan]T = 2\pi \sqrt(I[sub]z[/sub]/mgd)     [/color][color=Yellow](p.28)[/color][/center]
+
+Use the Stiener-Huygens (parallel axis) theorem to calculate [b]I[sub]z[/sub][/b].
+
+For compound pendulums the geometric parameter of interest to us will be packed into [b]I[sub]z[/sub][/b] and [b]d[/b] and the above equation will have to be solved anew for each particular case. Here are a few simple practical ones. All the bodies below are absolutely rigid, solid, thin and uniform. Keep in mind that in comparison with the simple pendulum the characteristic sizes of the compound pendulums come out quite large and will require more vertical and horizontal clearance:
+
+[img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_pgc03.png[/img]
+
+[i]A rod[/i]
+
+A rod of length [b]L[/b] and mass [b]m[/b] swinging about a point at one of its extremities. The distance [b]d = 0.5L[/b] and the rod's moment of inertia about [b]Z[/b] is:
+
+[center][color=Cyan]I[sub]z[/sub] = mL[sup]2[/sup]/12 + mL[sup]2[/sup]/4 = mL[sup]2[/sup]/3[/color][/center]
+
+From (p.28) we get:
+
+[center][color=Cyan]T = 2\pi  \sqrt((2mL[sup]2[/sup])/(3mgl)) = 2\pi  \sqrt((2L)/(3g))[/color][/center]
+
+Solve for [b]L[/b]:
+
+[center][color=Cyan]L(T) = (3gT[sup]2[/sup])/(8\pi[sup]2[/sup])[/color][/center]
+
+For a 2-second NYC, NY, US pendulum for [b]L[/b] we get a rough estimate of [b]148.98[/b] cm.
+
+
+[i]A Hoop[/i]
+
+A hoop of radius [b]R[/b] and mass [b]m[/b] swinging about a point on its circumference. The distance [b]d = R[/b] and the hoop's moment of inertia about [b]Z[/b] is:
+
+[center][color=Cyan]I[sub]z[/sub] = mR[sup]2[/sup] + mR[sup]2[/sup] = 2mR[sup]2[/sup][/color][/center]
+
+From (p.28) we get:
+
+[center][color=Cyan]T = 2\pi \sqrt((2mR^2)/(mgr)) = 2\pi \sqrt((2R)/(g))[/color][/center]
+
+Solve for [b]R[/b]:
+
+[center][color=Cyan]R(T) = (gT[sup]2[/sup])/(8\pi[sup]2[/sup])[/color][/center]
+
+For a 2-second pendulum for [b]r[/b] we get a rough estimate of [b]49.66[/b] cm. The hoop's characteristic size then is about one meter.
+
+
+[i]A Disk[/i]
+
+A disk of radius [b]R[/b] and mass [b]m[/b] swinging about a point on its circumference. The distance [b]d = R[/b] and the moment of inertia of a disk about [b]Z[/b] is:
+
+[center][color=Cyan]I[sub]z[/sub] = mR[sup]2[/sup]/2 + mR[sup]2[/sup] = 3mR[sup]2[/sup]/2[/color][/center]
+
+From (p.28) we get:
+
+[center][color=Cyan]T = 2\pi \sqrt((3mR[sup]2[/sup])/(2mgr)) = 2\pi \sqrt((3R)/(2g))[/color][/center]
+
+Solve for [b]R[/b]:
+
+[center][color=Cyan]R(T) = (gT[sup]2[/sup])/(6\pi[sup]2[/sup])[/color][/center]
+
+For a 2-second pendulum for [b]r[/b] we get a rough estimate of [b]66.21[/b] cm. In comparison with a hoop we need more disk for the same period.
+
+
+[i]A Triangular Boundary[/i]
+
+Three rods each having the length [b]L[/b] and mass [b]m[/b] form a rigid equilateral triangle which is swinging about one of its vertexes. The moment of inertia of the perimeter of the equilateral triangle (the boundary only) about [b]Z[/b] is:
+
+[center][color=Cyan]I[sub]z[/sub] = 2 * mL[sup]2[/sup]/3 + mL[sup]2[/sup]/12 + m3L[sup]2[/sup]/4 = 3mL[sup]2[/sup]/2[/color][/center]
+
+To find the location of the center of mass of a triangular boundary known as Spieker point or Spieker center we replace the massive rods with the equivalent point masses located at the rod's centers. We construct a medial triangle using these mid points. The intersection of the inner angles' bisectors of the medial triangle locates the center of mass. In our case of an equilateral triangle we get:
+
+[center][color=Cyan]d = (2/3) \sqrt(3/2) L = L\sqrt3/3[/color][/center]
+
+From (p.28) we get:
+
+[center][color=Cyan]T = 2\pi \sqrt((3mL^2)/(2 (3m)g) * (3)/(\sqrt(3)L)) = 2\pi \sqrt((L\sqrt(3))/(2g))[/color][/center]
+
+Solve for [b]L[/b]:
+
+[center][color=Cyan]L(T) = (gT[sup]2[/sup])/(2\sqrt(3)\pi[sup]2[/sup])[/color][/center]
+
+For a 2-second pendulum for [b]l[/b] we get a rough estimate of [b]114.68[/b] cm.

@@ -439,10 +439,23 @@ $$\sum_i f_i^{\Delta} = min$$
     </p>
 
     <p>
-    Within a single human-readable source code file the principle is applied to
-    the language-specific constructs - functions, for example. Within functions
-    the principle is applied to statements, within statements - to keywords and
-    expressions, within expressions - to terms and operators, within terms - to
+    The motivation for the above principle was the following idea: any arrangement
+    of source code (and other objects) can be looked at as a dependency tree - a
+    specialized graph. For each node of such a graph we define traditional operations
+    of addition and removal plus an extra <dfn>marking</dfn> operation - that of
+    <dfn>updating a node</dfn>. All three operations, essentially, lead to the same
+    outcome - a ripple effect of a trip toward the top of the dependency tree during
+    which we count each and every encountered node (that must be refactored) toward
+    the overall cost of the ARMing operation. Intuitively (and vaguely) we see here
+    an association with <dfn>finding a shortest path through a graph</dfn> problem.
+    </p>
+
+
+    <p>
+    Further, within a single human-readable source code file the principle is
+    applied to the language-specific constructs - functions, for example. Within
+    functions the principle is applied to statements, within statements - to keywords
+    and expressions, within expressions - to terms and operators, within terms - to
     variables and so on.
     </p>
 

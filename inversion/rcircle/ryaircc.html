@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Inversion with Respect to a Circle in a Real Plane, by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Inversion with Respect to a Circle in a Real Plane, by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryaircsl.html">prev</a>
+     <a href="ryairca.html">next</a>
+    </p>
+    
+    <h1>Circles</h1>
+
+    <p>
+    From the properties <strong>ICP10, 11, 12, 13, 14</strong> we see that, for
+    the most part, inversion with respect to a circle transforms a straight line
+    into a circle that passes through the center of inversion.
+    </p>
+ 
+    <p>
+    It should also be obvious that the converse statements of the above properties
+    are true. We will only formulate these properties here for the record and will
+    omit their proofs since they all follow the same pattern:
+    </p>
+
+    <p>
+    - draw a straight line perpendicular to both circles to obtain a point \(P\)
+    </p>
+
+    <p>
+    - invert \(P\)
+    </p>
+
+    <p>
+    - choose a point on the given circle at random
+    </p>
+
+    <p>
+    - invert that point
+    </p>
+
+    <p>
+    - form triangles
+    </p>
+
+    <p>
+    - use the inversion identity <strong>ICC3</strong> to prove that these
+    triangles, of which one is right, are similar and hence the remaining triangle
+    is right also, etc.
+    </p>
+ 
+    <p>
+    <br><strong>Property ICP15</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with positive
+    power a circle \(q\) that passes through \(O\) and has exactly two common
+    points with \(c\), \(F_1\) and \(F_2\), is transformed into a straight line
+    \(l'\) passing through \(F_1\) and \(F_2\)</dfn>
+    </p>
+ 
+    <p>
+    <br><strong>Property ICP16</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with negative
+    power a circle \(q\) that passes through \(O\) and has exactly two common
+    points with \(c\), \(F_1\) and \(F_2\), is transformed into a straight line
+    \(l'\) passing through \(F'_1\) and \(F'_2\) which are the points diametrically
+    opposite to \(F_1\) and \(F_2\)</dfn>
+    </p>
+ 
+    <p>
+    <br><strong>Property ICP17</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with positive
+    power a circle \(q\) that passes through \(O\) and has exactly one common
+    point with \(c\), \(T\), is transformed into a straight line \(l'\) tangent
+    to \(c\) at \(T\)</dfn>
+    </p>
+ 
+    <p>
+    <br><strong>Property ICP18</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with negative
+    power a circle \(q\) that passes through \(O\) and has exactly one common
+    point with \(c\), \(T\), is transformed into a straight line \(l'\) tangent
+    to \(c\) at \(T'\) which is a point diametrically opposite to \(T\)</dfn>
+    </p>
+ 
+    <p>
+    <br><strong>Property ICP19</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) a circle \(q\)
+    that passes through \(O\) and has no common points with \(c\) is transformed
+    into a straight line \(l'\) that has no common points with \(c\)</dfn>
+    </p>
+
+    <p>
+    In the upcoming properties we will look at inversions of circles into circles.
+    Please note that the <dfn>center</dfn> of the original circle does
+    <dfn>not</dfn> invert into the center of its image directly. However, there
+    exists an interesting relationship between the two and it <dfn>is</dfn> possible
+    to invert one into the other not in one but in two steps. Read more on that
+    in <strong>ICE9</strong> towards the end of this tutorial.
+    </p>
+
+    <p>
+    <br><strong>Property ICP20</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) a circle
+    \(q(O, R)\) concentric with and located inside \(c\) is transformed into a
+    circle \(q'(O, R')\) concentric with and located outside \(c\)</dfn>
+    </p>
+
+    <p>
+    For any point \(A\) on \(c\) from <strong>ICC3</strong> we have:
+    </p>
+
+$$OA \times OA' = r^2$$
+$$OA' = \frac {r^2}{R} = const = R'$$
+
+    <p>
+    From <strong>ICP4</strong> it follows that \(A'\) must be located outside
+    \(c\) and the distance from all such points to \(O\) is the same - a
+    definition of a circle. The converse property is proved in the similar way
+    with an obvious remark that in the drawing below under inversion with
+    negative power \(A\) inverts into \(B'\), \(B\) inverts into \(A'\), and
+    conversely:
+    </p>
+
+    <p>
+    <br><strong>Property ICP21</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) a circle
+    \(q(O, R)\) concentric with and located outside \(c\) is transformed into a
+    circle \(q'(O, R')\) concentric with and located inside \(c\):</dfn>
+    </p>
+
+    <img src="imgs/irc22.png" class="center">
+
+    <p>
+    <br><strong>Property ICP22</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with positive
+    power a circle \(q(Q, R)\) that does not pass through \(O\) and has exactly
+    two common points with \(c\), \(F_1\) and \(F_2\), is transformed into a
+    circle \(q'(Q', R')\) not passing through \(O\) but passing through \(F_1\)
+    and \(F_2\)</dfn>
+    </p>
+
+    <p>
+    We note right away that since \(F_1\) and \(F_2\) are on the circumference
+    of \(q\), according to <strong>ICP1</strong> they are fixed and hence the
+    curve into which \(q\) is transformed, whatever it is, must pass through
+    these points.
+    </p>
+
+    <p>
+    Next, draw Line(\(O\), \(Q\)) until it intersects \(q\) at \(A\) and \(B\).
+    Invert \(A\) and \(B\) with respect to \(c\) with positive power. Pick an
+    arbitrary point \(C\) on \(q\) and also invert it with respect to \(c\) with
+    positive power. Consider two pairs of triangles - \(\triangle OAC\) and
+    \(\triangle OC'A'\) and \(\triangle OCB\) and \(\triangle OB'C'\). From
+    <strong>ICC3</strong> we have:
+    </p>
+
+$$OA \times OA' = OC \times OC' = r^2$$
+$$\frac {OA}{OC} = \frac {OA'}{OC'}$$
+$$OB \times OB' = OC \times OC' = r^2$$
+$$\frac {OB}{OC} = \frac {OB'}{OC'}$$
+
+    <p>
+    From the first pair of equations we conclude that \(\triangle OAC\) and
+    \(\triangle OC'A'\) are similar since they have two sides about the shared
+    angle at \(O\) in the same proportion, <strong>B6P6</strong>. And, hence,
+    these triangles have their corresponding angles equal:
+    </p>
+
+$$\angle OCA = \angle OA'C' = \alpha$$
+
+    <p>
+    From the second pair of equations we conclude that \(\triangle OCB\) and
+    \(\triangle OB'C'\) are similar since they have two sides about the shared
+    angle at \(O\) in the same proportion, <strong>B6P6</strong>. And, hence,
+    these triangles have their corresponding angles equal:
+    </p>
+
+$$\angle OCB = \angle OB'C' = \beta$$
+
+    <p>
+    But \(\angle ACB\) is the angle in the semicircle of \(q\) and hence it is
+    right (<strong>B3P31</strong>) and hence:
+    </p>
+
+$$\angle OCB = \alpha + 90^{\circ} = \beta$$
+
+    <p>
+    Next, we note that \(\angle OB'C'\) is exterior for \(\triangle B'C'A'\) and
+    hence, (<strong>B1P32</strong>):
+    </p>
+
+$$\angle OB'C' = \beta = x + \alpha$$
+
+    <p>
+    And from the previous equation we have:
+    </p>
+
+$$\beta = x + \alpha = \alpha + 90^{\circ}$$
+$$x = 90^{\circ}$$
+
+    <p>
+    And since \(C\) was picked at random, the locus traced by \(C'\) must be a
+    circumference of a circle with \(B'A'\) as its diameter:
+    </p>
+
+    <img src="imgs/irc23.png" class="center">
+
+    <p>
+    This suggests the following straight edge and compass construction:
+    </p>
+ 
+    <p>
+    1) Line(\(O\), \(Q\)) until it intersects \(q\) at \(A\)
+    </p>
+
+    <p>
+    2) Invert \(A\) with respect to \(c\) with positive power to locate \(A'\)
+    </p>
+
+    <p>
+    3) LineSegment(\(F_1\), \(A'\)) bisector \(s\) until it intersects
+    Line(\(O\), \(Q\)) at \(Q'\)
+    </p>
+
+    <p>
+    4) Circle(\(Q'\), \(Q'F_1 = Q'A'\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc24.png" class="center">
+
+    <p>
+    The proof of the above property, <strong>ICP22</strong>, is a template for
+    proofs for all the remaining properties which we will only formulate for the
+    record and highlight their key triangles. You are encouraged to go through
+    the actual proofs yourself.
+    </p>
+
+    <p>
+    <br><strong>Property ICP23</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with negative
+    power a circle \(q(Q, R)\) that does not pass through \(O\) and has exactly
+    two common points with \(c\), \(F_1\) and \(F_2\), is transformed into a
+    circle \(q'(Q', R')\) not passing through \(O\) but passing through \(F'_1\)
+    and \(F'_2\) which are the points diametrically opposite to \(F_1\) and
+    \(F_2\):</dfn>
+    </p>
+
+    <img src="imgs/irc25.png" class="center">
+
+    <p>
+    1) Line(\(O\), \(Q\)) until it intersects \(q\) at \(A\)
+    </p>
+
+    <p>
+    2) Invert \(A\) with respect to \(c\) with negative power to locate \(A'\)
+    </p>
+
+    <p>
+    3) Line(\(F_1\), \(O\)) until it intersects \(q\) at \(F'_1\)
+    </p>
+
+    <p>
+    4) LineSegment(\(F'_1\), \(A'\)) bisector \(s\) until it intersects
+    Line(\(O\), \(Q\)) at \(Q'\)
+    </p>
+
+    <p>
+    5) Circle(\(Q'\), \(Q'F'_1 = Q'A'\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc26.png" class="center">
+
+    <p>
+    <br><strong>Property ICP24</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with positive
+    power a circle \(q(Q, R)\) that does not pass through \(O\) and touches
+    \(c\) at \(T\) internally is transformed into a circle \(q'(Q', R')\) that
+    touches \(c\) at \(T\) externally:</dfn>
+    </p>
+
+    <img src="imgs/irc27.png" class="center">
+
+    <p>
+    1) Line(\(O\), \(Q\)) until it intersects \(q\) at \(A\)
+    </p>
+
+    <p>
+    2) Invert \(A\) with respect to \(c\) with positive power to locate \(A'\)
+    </p>
+
+    <p>
+    3) LineSegment(\(T\), \(A'\)) bisector \(s\) through \(Q'\): \(Q'T = Q'A'\)
+    </p>
+
+    <p>
+    4) Circle(\(Q'\), \(Q'T = Q'A'\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc28.png" class="center">
+
+    <p>
+    <br><strong>Property ICP25</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with positive
+    power a circle \(q(Q, R)\) that does not pass through \(O\) and touches \(c\)
+    at \(T\) externally is transformed into a circle \(q'(Q', R')\) that touches
+    \(c\) at \(T\) internally</dfn>
+    </p>
+
+    <p>
+    This property is just a converse of <strong>ICP24</strong>.
+    </p>
+
+    <p>
+    <br><strong>Property ICP26</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with negative
+    power a circle \(q(Q, R)\) that does not pass through \(O\) and touches \(c\)
+    at \(T\) internally is transformed into a circle \(q'(Q', R')\) that touches
+    \(c\) at \(T'\) externally where \(T'\) is the point diametrically opposite
+    to \(T\):</dfn>
+    </p>
+
+    <img src="imgs/irc29.png" class="center">
+
+    <p>
+    1) Line(\(O\), \(Q\)) until it intersects \(q\) at \(A\) and \(c\) at
+    \(T'\)
+    </p>
+
+    <p>
+    2) Invert \(A\) with respect to \(c\) with negative power to locate
+    \(A'\)
+    </p>
+
+    <p>
+    3) LineSegment(\(T'\), \(A'\)) bisector \(s\) through \(Q'\): \(Q'T' =
+    Q'A'\)
+    </p>
+
+    <p>
+    4) Circle(\(Q'\), \(Q'T' = Q'A'\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc30.png" class="center">
+
+    <p>
+    <br><strong>Property ICP27</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) with negative
+    power a circle \(q(Q, R)\) that does not pass through \(O\) and touches \(c\)
+    at \(T\) externally is transformed into a circle \(q'(Q', R')\) that does not
+    pass through \(O\) and touches \(c\) at \(T'\) internally where \(T'\) is the
+    point diametrically opposite to \(T\)</dfn>
+    </p>
+
+    <p>
+    This property is just a converse of <strong>ICP26</strong>.
+    </p>
+
+    <p>
+    <br><strong>Property ICP28</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) a circle
+    \(q(Q, R)\) that does not pass through \(O\), has zero common points with and
+    is located inside \(c\) is transformed into a circle \(q'(Q', R')\) that does
+    not pass through \(O\), has zero common points with and is located outside
+    \(c\)</dfn>
+    </p>
+
+    <p>
+    Again, verbally this property sounds the same for inversions with positive
+    and negative powers. The only difference between them is the location of the
+    image \(q'\). For an inversion with positive power \(q'\) and \(c\) are on
+    the same side of \(O\) and for an inversion with negative power they are on
+    the opposite sides of \(O\).
+    </p>
+
+    <p>
+    Here is a drawing for an inversion with negative power. You are encouraged
+    to explore the positive power case yourself:
+    </p>
+
+    <img src="imgs/irc31.png" class="center">
+
+    <p>
+    1) Line(\(O\), \(Q\)) until it intersects \(q\) at \(A\) and \(B\)
+    </p>
+
+    <p>
+    2) Invert \(A\) and \(B\) with respect to \(c\) to locate \(A'\) and
+    \(B'\)
+    </p>
+
+    <p>
+    3) LineSegment(\(A'\), \(B'\)) bisector \(s\) through \(Q'\): \(Q'A' =
+    Q'B'\)
+    </p>
+
+    <p>
+    4) Circle(\(Q'\), \(Q'A' = Q'B'\)) = \(q'\):
+    </p>
+
+    <img src="imgs/irc32.png" class="center">
+
+    <p>
+    <br><strong>Property ICP29</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Under the inversion with respect to a circle \(c(O, r)\) a circle
+    \(q(Q, R)\) that does not pass through \(O\), has zero common points with
+    and is located outside \(c\) is transformed into a circle \(q'(Q', R')\) that
+    does not pass through \(O\), has zero common points with and is located
+    inside \(c\)</dfn>
+    </p>
+
+    <p>
+    This property is just a converse of <strong>ICP28</strong>.
+    </p>
+
+    <p>
+    <br><strong>Property ICP30</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>If \(q'(Q', R')\) is a circle inverse to \(q(Q, R)\) under the inversion
+    with respect to a circle \(c(O, r)\) and \(d = OQ\) then:</dfn>
+    </p>
+
+$$R' = R \frac {r^2}{|d^2 - R^2|}$$
+
+    <p>
+    Let us prove this property for an inversion with positive power:
+    </p>
+
+    <img src="imgs/irc33.png" class="center">
+
+    <p>
+    From the drawing above it is obvious that:
+    </p>
+
+$$R' = \frac {OA' - OB'}{2}$$
+$$OA' = \frac {r^2}{OA}, OB' = \frac {r^2}{OB}$$
+$$R' = \frac {r^2}{2} \Big(\frac {1}{OA} - \frac {1}{OB}\Big) = \frac {r^2}{2}
+\frac {OB - OA}{OA \times OB}$$
+$$OA = d - R, OB = d + R$$
+$$R' = \frac {r^2}{2} \frac {d + R - d + R}{(d - R)(d + R)} = \frac {r^2}{2}
+\frac {2R}{d^2 - R^2} = R \frac {r^2}{d^2 - R^2}$$
+
+    <p>
+    When \(O\) is inside \(q\) (not shown in the drawing) then:
+    </p>
+
+$$OA = R - d$$
+
+    <p>
+    which means that we should use the absolute value of the difference of
+    squares:
+    </p>
+
+$$R' = R \frac {r^2}{|d^2 - R^2|}$$
+
+    <p>
+    You can verify this property for inversion with negative power and various
+    other configurations of circles yourself.
+    </p>
+
+    <p>
+    Before we move on to the next topic here is a summary of popular inversions
+    with positive power:
+    </p>
+
+    <img src="imgs/irc49.png" class="center">
+
+    <p>
+    and negative power:
+    </p>
+
+    <img src="imgs/irc50.png" class="center">
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryaircsl.html">prev</a>
+     <a href="ryairca.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryairc.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

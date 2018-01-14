@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Inversion with Respect to a Circle in a Real Plane Problems 01, by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Inversion with Respect to a Circle in a Real Plane Problems 01,
+   by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+    </p>
+    
+    <h1>Problems 01</h1>
+
+    <p>
+    <strong>Algorithm</strong>
+    </p>
+
+    <p id="dbg">
+    Aside from using inversion to construct a reciprocal of a given linear measure
+    I have identified one inversion with respect to a circle-based problem solving
+    algorithm:
+    </p>
+
+    <p>
+    - choose a convenient center of inversion
+    </p>
+
+    <p>
+    - choose a convenient radius of inversion
+    </p> 
+
+    <p>
+    - choose a convenient power of inversion
+    </p> 
+
+    <p>
+    - invert the original object(s) with respect to the circle of inversion
+    found in the previous steps
+    </p>
+
+    <p>
+    - solve a (presumably easier) problem in terms of the inverse object(s)
+    </p> 
+
+    <p>
+    - using the preservation of angles and tangent points and other basic
+    properties of inversion convert the solution in terms of the inverse
+    object(s) obtained in the previous step into the solution in terms of the
+    original object(s)
+    </p> 
+
+    <p>
+    <br><strong>Tangent Circles</strong>
+    </p>
+
+    <p>
+    <strong>Problem 1</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Construct all circles which are tangent to a given circle \(q(Q, R)\),
+    pass through a given point \(P\) and have their centers located on a straight
+    line passing through \(P\) and \(Q\)</dfn>
+     </p>
+
+    <p>
+    Two interesting cases in this problem are 1) the given point \(P\) is
+    <dfn>outside</dfn> \(q(Q, R)\) and 2) the given point \(P\) is
+    <dfn>inside</dfn> \(q(Q, R)\).
+    </p>
+
+    <p>
+    Let us investigate the first case together and the second case you can do
+    yourself.
+    </p>
+
+    <p>
+    Construct a \(Line(P, Q)\) until it intersects \(q(Q, R)\) at \(A\) and \(B\).
+    </p>
+
+    <p>
+    <strong>Center of Inversion</strong>
+    </p>
+
+    <p>
+    We know that the circles sought after must pass through \(P\). We also remember
+    that circles passing through the center of inversion become straight lines
+    (which are "easier" to construct). Inversely - certain straight lines become
+    circles passing through the center of inversion. It makes sense then to pick
+    the given point \(P\) as a center of inversion - if we somehow construct these
+    straight lines and invert them back then we will obtain our circles. 
+    </p>
+
+    <p>
+    <strong>Radius of Inversion</strong>
+    </p>
+
+    <p>
+    It does not really matter which radius of inversion we choose but in order to
+    minimize the number of points we need to invert let us choose \(PA\) as a
+    radius of inversion (you should also try \(PB\) as a radius of inversion): 
+    </p>
+
+    <img src="imgs/ircp01.png" class="center">
+
+    <p>
+    <strong>Power of Inversion</strong>
+    </p>
+
+    <p>
+    It makes sense to choose a positive power of inversion.
+    </p>
+
+    <p>
+    <strong>Invert</strong>
+    </p>
+
+    <p>
+    According to <strong>ICP25</strong> under the inversion with respect to
+    \(c(P, PA)\) with positive power the circle \(q(Q, R)\) becomes
+    \(q'(Q', R')\) - a circle touching \(c(P, PA)\) at \(A\) internally. Under
+    that inversion the point \(B\) is thrown inside \(c(P, PA)\) becoming \(B'\).
+    </p>
+
+    <p>
+    <strong>Solution in Terms of Inverse Objects</strong>
+    </p>
+
+    <p>
+    The solution in terms of the inverse objects is a pair of tangents to
+    \(q'(Q', R')\) - one at \(A\), \(t_1\), and one at \(B'\), \(t_2\), - a pair
+    of straight lines touching the <dfn>image</dfn> of the given circle at two
+    points which are also the <dfn>images</dfn> of the target points.
+    </p>
+
+    <p>
+    <strong>Solution in Terms of Original Objects</strong>
+    </p>
+
+    <p>
+    Just because of the way we have chosen our circle of inversion the straight
+    line \(t_1\) is tangent to \(c\) at \(A\). From <strong>ICP12</strong> it
+    follows that \(t_1\) will invert into a circle passing through \(P\) and
+    touching \(c\) at \(A\) internally and touching the given circle \(q\) at
+    \(A\) externally.
+    </p>
+
+    <p>
+    From <strong>ICP36</strong> we know that under inversion tangency points
+    are preserved. If \(t_1\) and \(q'\) touch then their images will also touch.
+    This is exactly what we want and thus the first required circle is
+    constructed - invert \(t_1\) with respect to \(c\) with positive power. 
+    </p>
+
+    <p>
+    The straight line \(t_2\) does not pass through \(P\) and intersects \(c\) at
+    exactly two points, \(F_1\) and \(F_2\). From <strong>ICP10</strong> it
+    follows that \(t_2\) will invert into a circle passing through \(P\), \(F_1\),
+    \(F_2\). To locate the center of this circle we bisect \(LineSegment(P, F_1)\).
+    </p>
+
+    <p>
+    From <strong>ICP36</strong> we know that under inversion tangency points are
+    preserved. If \(t_2\) and \(q'\) touch at \(B'\) then their images will also
+    touch. But \(B'\) is the image of \(B\) so we expect the image of \(q'\) -
+    the given circle \(q\) - and the image of \(t_2\) - the circle sought after
+    - to touch at \(B\). This is exactly what we want and thus the second required
+    circle is constructed - invert \(t_2\) with respect to \(c\) with positive power: 
+    </p>
+
+    <img src="imgs/ircp02.png" class="center">
+
+    <p>
+    Here is a full solution for the first case:
+    </p>
+
+    <p>
+    1) \(Line(P, Q)\) until it intersects \(q(Q, R)\) at \(A\) and \(B\)
+    </p>
+
+    <p>
+    2) Invert \(q\) with respect to \(c(P, PA)\) with positive power to obtain
+    the circle \(q'\)
+    </p>
+
+    <p>
+    3) Tangent \(t_1\) to \(q'\) at \(A\)
+    </p>
+
+    <p>
+    4) Tangent \(t_2\) to \(q'\) at \(B'\)
+    </p>
+
+    <p>
+    5) Invert \(t_1\) with respect to \(c\) with positive power to obtain the
+    circle \(w_1\) (the first solution)
+    </p>
+
+    <p>
+    6) Invert \(t_2\) with respect to \(c\) with positive power to obtain the
+    circle \(w_2\) (the second solution). 
+    </p>
+
+    <p>
+    You can now investigate the case when the given point \(P\) is inside \(q\).
+    </p>
+
+    <p>
+    Also, now that we have looked at one solution very thoroughly we will move
+    a bit faster but you should have no trouble recognizing the algorithm outlined
+    at the beginning of this section.
+    </p>
+
+    <p>
+    <br><strong>Problem 2</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Construct all circles which are tangent to two given circles \(q_1(Q_1,
+    R_1)\) and \(q_2(Q_2, R_2)\) and pass through a given point \(P\) located
+    outside \(q_1\) and \(q_2\)</dfn>
+    </p>
+
+    <p>
+    Choose \(P\) as a center and \(c(P, r)\) as a circle of inversion with positive
+    power. Assume that one required circle, \(w_1\), is somehow constructed. Under
+    the inversion with respect to \(c\) with positive power circles \(q_1\) and
+    \(q_2\) become circles \(q'_1\) and \(q'_2\) (<strong>ICP29</strong>) while
+    the circle \(w_1\) becomes a straight line \(t_1\), based on
+    <strong>ICP15</strong> for the drawing below.
+    </p>
+
+    <p>
+    Since \(w_1\) touches \(q_1\) and \(q_2\) and tangency points under inversion
+    are preserved, it stands to reason that the <dfn>image</dfn> of \(w_1\) will
+    touch the <dfn>images</dfn> of \(q_1\) and \(q_2\).
+    </p>
+
+    <p>
+    But the image of \(w_1\) is a straight line and the images of \(q_1\) and
+    \(q_2\) are circles. Hence, \(t_1\) must be a tangent common to two circles,
+    \(q'_1\) and \(q'_2\):
+    </p>
+
+    <img src="imgs/ircp03.png" class="center">
+
+    <p>
+    How many common tangents do two circles can possibly have? Four - in the most
+    generic case. Inverting these tangents with respect to \(c\) with positive
+    power we locate our circles:
+    </p>
+
+    <p>
+    1) Invert the given circles \(q_1\) and \(q_2\) with respect to \(c(P, r)\)
+    with positive power to obtain the circles \(q'_1\) and \(q'_2\)
+    </p>
+
+    <p>
+    2) Construct four tangents common to \(q'_1\) and \(q'_2\) - \(t_1\),
+    \(t_2\), \(t_3\), \(t_4\)
+    </p>
+
+    <p>
+    3) Invert \(t_1\), \(t_2\), \(t_3\), \(t_4\) with respect to \(c(P, r)\)
+    with positive power to obtain the four circles sought after:
+    </p>
+
+    <img src="imgs/ircp04.png" class="center">
+
+    <p>
+    In the most generic case of four solution circles one will touch both given
+    circles externally (\(w_1\)), one will touch both circles internally (\(w_2\)),
+    and each of the two remaining circles will touch one given circle internally
+    while touching the remaining one externally (\(w_3\)) and vice versa (\(w_4\)).
+    </p>
+
+    <p>
+    In the drawing above we have used color and text to pair up a tangent straight
+    line with its solution circle that touches both given circles. The sub indexes
+    and the color match pairwise:
+    </p>
+
+$$t_1, w_1$$
+$$t_2, w_2$$
+$$t_3, w_3$$
+$$t_4, w_4$$
+
+    <p>
+    <br><strong>Problem 3</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Given three circles \(q_1\), \(q_2\) and \(q_3\), which intersect at a
+    point \(P\), construct all circles which are tangent to \(q_1\), \(q_2\) and
+    \(q_3\)</dfn>
+    </p>
+
+    <p>
+    Choose \(P\) as a center of inversion. Make the radius of inversion \(r\)
+    such that \(c(P, r)\) intersects all three given circles. Under the inversion
+    with respect to \(c(P, r)\) with <dfn>positive</dfn> power the given circles
+    \(q_1\), \(q_2\) and \(q_3\), which pass through \(P\), will invert into the
+    straight lines \(q'_1\), \(q'_2\) and \(q'_3\) (<strong>ICP15</strong>). Since
+    the original circles do not touch but intersect pairwise - so will the straight
+    lines. By intersecting these straight lines will delineate a triangle,
+    \(\triangle LMN\) in the drawing below.
+    </p>
+
+    <p>
+    Now we can construct four circles each of which is tangent to all three
+    straight lines - one <dfn>incircle</dfn> and three <dfn>excircles</dfn>.
+    Inverted with respect to \(c\) with positive power these circles will preserve
+    their points of tangency and will become the circles sought after.
+    </p>
+
+    <p>
+    In the drawing below we have constructed an <dfn>incircle</dfn>, \(w'_1\),
+    and its inverse - a circle \(w_1\) that touches all three given circles
+    <dfn>internally</dfn>:
+    </p>
+
+    <img src="imgs/ircp05.png" class="center">
+
+    <p>
+    A full solution then is:
+    </p>
+
+    <p>
+    1) Invert the given circles \(q_1\), \(q_2\) and \(q_3\) with respect to
+    \(c(P, r)\) with positive power to obtain the straight lines \(q'_1\), \(q'_2\)
+    and \(q'_3\) which will delineate a triangle
+    </p>
+
+    <p>
+    2) Construct four circles each of which is tangent to all three straight
+    lines \(q'_1\), \(q'_2\) and \(q'_3\) - \(w_1\), \(w_2\), \(w_3\) and \(w_4\)
+    (one <dfn>incircle</dfn> and three <dfn>excircles</dfn>)
+    </p>
+
+    <p>
+    3) Invert \(w_1\), \(w_2\), \(w_3\) and \(w_4\) with respect to \(c(P, r)\)
+    with positive power to obtain the four circles sought after
+    </p>
+ 
+    <p>
+    In the drawing below we have used just text to pair up a circle tangent to
+    \(q'_1\), \(q'_2\) and \(q'_3\) (a dashed line of one color) with its solution
+    circle that touches all three given circles (a solid line of a different color).
+    Only the sub indexes of each pair match while their colors differ:
+    </p>
+
+    <img src="imgs/ircp06.png" class="center">
+
+$$w'_1, w_1$$
+$$w'_2, w_2$$
+$$w'_3, w_3$$
+$$w'_4, w_4$$
+
+    <p>
+    <br><strong>Problem 4</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>The Three-Circle Problem of Apollonius: construct all circles which are
+    tangent to three given circles \(q_1(Q_1, R_1)\), \(q_2(Q_2, R_2)\) and
+    \(q_3(Q_3, R_3)\)</dfn>
+    </p>
+
+    <p>
+    The three-circle problem of Apollonius in general has eight solutions which
+    can be grouped into three sets of circles. There are two circles in the first
+    set - one that touches all three given circles <dfn>internally</dfn> and the
+    other one that touches all three given circles <dfn>externally</dfn>.
+    </p>
+
+    <p>
+    The remaining two sets of solutions have three circles each. The circles in
+    one solution set touch in turn each one of the given circles
+    <dfn>externally</dfn> while touching the remaining two given circles
+    <dfn>internally</dfn>. The circles in the other solution set touch in turn
+    each one of the given circles <dfn>internally</dfn> while touching the
+    remaining two given circles <dfn>externally</dfn>.
+    </p>
+
+    <p>
+    To obtain these solutions we will employ two main ideas. The first idea is
+    to reduce this problem to an already solved one - <strong>Problem 2</strong>.
+    The second idea is similar to the one used in constructing tangents common
+    to two circles.
+    </p>
+
+    <p>
+    Without the loss of generality let us assume that:
+    </p>
+
+$$R_1 \geqslant R_2$$
+
+    <p>
+    so that when we say:
+    </p>
+
+$$R_1 - R_2$$
+
+    <p>
+    while constructing an <dfn>external</dfn> common tangent it makes geometric
+    sense. The main idea here is to construct a helper circle with a radius equal
+    to the difference between the larger and the smaller given radii and then
+    construct a tangent \(t'\) to that circle through \(Q_2\) - the center of
+    the circle with the smaller radius.
+    </p>
+
+    <p>
+    Once \(t'\) is available we can construct a straight line parallel to \(t'\)
+    through \(T_1\) or we can construct a perpendicular to \(Ray(Q_1, T_1)\)
+    through \(T_1\) or we can construct a straight line parallel to
+    \(Ray(Q_1, T_1)\) through \(Q_2\) until it intersects \(q_2\) at \(T_2\)
+    and then a \(Line(T_1, T_2)\) is the common <dfn>external</dfn> tangent
+    sought after. The benefit of the latter approach is that the point \(T_2\)
+    is constructed explicitly:
+    </p>
+
+    <img src="imgs/ircp07.png" class="center">
+
+    <p>
+    1) \(Circle(Q_1, R_1 - R_2)\)
+    </p>
+
+    <p>
+    2) Tangent \(t'\) to \(Circle(Q_1, R_1 - R_2)\) through \(Q_2\) to locate
+    \(T'_1\)
+    </p>
+
+    <p>
+    3) \(Ray(Q_1, T'_1)\) until it intersects \(q_1\) at \(T_1\)
+    </p>
+
+    <p>
+    4) Line through \(Q_2\) parallel to \(Ray(Q_1, T'_1)\) until it intersects
+    \(q_2\) at \(T_2\)
+    </p>
+
+    <p>
+    5) \(Line(T_1, T_2)\) is the common tangent sought after
+    </p>
+
+    <p>
+    For brevity sake let us call the above an "\(R_1 - R_2\)" idea. The advantage
+    of this idea over the center of similitude approach is that it works even if
+    \(R_1 = R_2\).
+    </p>
+
+    <p>
+    To construct a common <dfn>internal</dfn> tangent construct a helper
+    \(Circle(Q_1, R_1 + R_2)\) - an operation which we will call an "\(R_1 +
+    R_2\)" idea for future reference:
+    </p>
+
+    <img src="imgs/ircp08.png" class="center">
+
+    <p>
+    Now let us go back to the problem of Apollonius. Let us first construct the
+    two circles that touch all three given circles <dfn>internally</dfn> and
+    <dfn>externally</dfn>.
+    </p>
+
+    <p>
+    To construct the circle that touches all three given circles
+    <dfn>internally</dfn> we will use the <dfn>external</dfn> tangent common to
+    two circles "\(R_1 - R_2\)" idea.
+    </p>
+
+    <p>
+    Without the loss of generality let us assume that we have sorted the given
+    radii in such a way that, say, \(R_3\) is the smallest: \(R_1 \geqslant R_3\)
+    and \(R_2 \geqslant R_3\). Construct two intermediate helper circles -
+    \(k_1(Q_1, R_1 - R_3)\) and \(k_2(Q_2, R_2 - R_3)\).
+    </p>
+
+    <p>
+    Rephrase the <strong>Problem 2</strong> as:
+    </p>
+
+    <p id="dbb" class="center">
+    <dfn>construct all circles which are tangent to two given circles \(k_1\) and
+    \(k_2\) and pass through \(Q_3\)"</dfn>
+    </p>
+
+    <p>
+    To solve this problem we invert the circles \(k_1\) and \(k_2\) with respect
+    to \(c(Q_3, R)\) with positive power into the circles \(k'_1\) and \(k'_2\),
+    construct two common <dfn>external</dfn> tangents to \(k'_1\) and \(k'_2\) -
+    \(t_1\) and \(t_2\) - and invert them back with respect to \(c(Q_3, R)\) with
+    positive power.
+    </p>
+
+    <p>
+    In the drawing below we have constructed and inverted \(t_1\) to obtain the
+    circle \(w'_1(W_1, R'_{w1})\) which passes through \(Q_3\) and touches \(k_1\)
+    and \(k_2\) <dfn>internally</dfn>:
+    </p>
+
+    <img src="imgs/ircp09.png" class="center">
+
+    <p>
+    We see that \(w'_1\) is <dfn>almost</dfn> exactly what we want - it is
+    concentric with the target circle and its radius is by \(R_3\) smaller. We
+    keep the center \(W_1\) where it is, <dfn>increase</dfn> \(R'_{w1}\) by \(R_3\)
+    and we have the first solution circle \(w_1\) that touches all three given
+    circles <dfn>internally</dfn>.
+    </p>
+
+    <p>
+    In the next drawing we have constructed and inverted \(t_2\) to obtain the
+    circle \(w'_2(W_2, R'_{w2})\) which passes through \(Q_3\) and touches \(k_1\)
+    and \(k_2\) <dfn>externally</dfn>. We keep \(W_2\) as a center where it is,
+    <dfn>decrease</dfn> \(R'_{w2}\) by \(R_3\) and we have the second solution
+    circle \(w_2\) that touches all three given circles <dfn>externally</dfn>:
+    </p>
+
+    <img src="imgs/ircp10.png" class="center">
+
+    <p>
+    To construct the remaining six circles we will use the <dfn>internal</dfn>
+    tangent common to two circles "\(R_1 + R_2\)" idea. All these circles are
+    constructed in the same way so we will cover just one set of two solution
+    circles and you should be able to finish the rest yourself.
+    </p>
+
+    <p>
+    To make the sizes of the solution circles manageable we made the given circles
+    a bit smaller this time.
+    </p>
+
+    <p>
+    Let us work with, say, \(q_1\). We shall construct one circle that touches
+    \(q_1\) <dfn>externally</dfn> while touching \(q_2\) and \(q_3\)
+    <dfn>internally</dfn> and one circle that touches \(q_1\) <dfn>internally</dfn>
+    while touching \(q_2\) and \(q_3\) <dfn>externally</dfn>.
+    </p>
+
+    <p>
+    Construct the circles \(k_2(Q_2, R_2 + R_1)\) and \(k_3(Q_3, R_3 + R_1)\).
+    Invert them with respect to \(c(Q_1, R)\) with positive power to obtain the
+    circles \(k'_2\) and \(k'_3\). Construct two external tangents common to
+    \(k'_2\) and \(k'_3\) - \(t_3\) and \(t_4\).
+    </p>
+
+    <p>
+    Invert \(t_3\) with respect to \(c(Q_1, R)\) with positive power to obtain
+    the circle \(w'_3(W_3, R'_{w3})\) which passes through \(Q_1\) and touches
+    \(k_2\) and \(k_3\) <dfn>internally</dfn>. Keep \(W_3\) as a center where it
+    is, <dfn>decrease</dfn> \(R'_{w3}\) by \(R_1\) to obtain the circle \(w_3\)
+    that touches \(q_1\) <dfn>externally</dfn> while touching \(q_2\) and \(q_3\)
+    <dfn>internally</dfn>:
+    </p>
+
+    <img src="imgs/ircp11.png" class="center">
+
+    <p>
+    Invert \(t_4\) with respect to \(c(Q_1, R)\) with positive power to obtain
+    the circle \(w'_4(W_4, R'_{w4})\) which passes through \(Q_1\) and touches
+    \(k_2\) and \(k_3\) <dfn>externally</dfn>. Keep \(W_4\) as a center where it
+    is, <dfn>increase</dfn> \(R'_{w4}\) by \(R_1\) to obtain the circle \(w_4\)
+    that touches \(q_1\) <dfn>internally</dfn> while touching \(q_2\) and \(q_3\)
+    <dfn>externally</dfn>:
+    </p>
+
+    <img src="imgs/ircp12.png" class="center">
+
+    <p>
+    That is two extra solution circles for a total of four. If we repeat the
+    above process for the remaining two circles, \(q_2\) and \(q_3\), we will
+    construct the remaining \(2 + 2 = 4\) circles for a total of eight.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryairc.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

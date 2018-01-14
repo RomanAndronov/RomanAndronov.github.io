@@ -1,0 +1,51 @@
+[b]Mechanical Pendulum Gear Clocks[/b]
+
+Itroduction
+[url=]Pendulum[/url]
+[url=]Escapement[/url]
+[url=]Hands[/url]
+
+
+[b]Introduction[/b]
+
+1) Purpose
+2) Scope
+3) Major Parts
+
+
+[b]Purpose[/b]
+
+Mechanical pendulum gear clocks are fascinating objects in which hard science and art intertwine in perfect harmony to produce a hypnotizing result of graceful and elegant precision. The purpose of this tutorial is to remove a pay wall between an individual willing to learn how to design and build these intriguing objects with a full and deep understanding of each step involved.
+
+Though it is technically not feasible to cover exhaustively absolutely everything there is to cover on the subject, it is just too vast, I will try to cover enough basics to bring an absolute beginner up to speed. I will attempt to leave no stone unturned at the very bottom of the knowledge pyramid so that by the end of this tutorial the reader should feel confident enough to take on a simple clock building project.
+
+Having said that I want to make it perfectly clear that I am not a professional clock maker and I do not intend to compete with either the precision of the atomic clocks nor the professional clock manufacturing industry. I am solely after the pleasure of creating a device of sufficient precision to be of practical use in a family setting.
+
+- What time is it, junior?
+- [i]Your clock[/i] is at nine twenty five, for the past three days now, dad ...
+
+
+[b]Scope, Target Audience[/b]
+
+The scope of this tutorial is mostly theoretical since this is the first hurdle to overcome. I will cover classical mechanics only. The target audience is the do it yourself crowd. Think creating a small to medium size wall hung indoor mechanical pendulum gear clock using reasonably workable materials like plywood, plexiglass, etc. You will design such a clock from your imagination and then, possibly, build it - starting with cutting the gears and finishing with assembling them into a properly functioning mechanism.
+
+Our Universe is a conflict and conflict is our Universe. As such any undertaking is affected by this phenomenon including writing. In this particular text the conflict is between the curiosity and the practicality. You may be a scientifically inclined person only interested in theory and not caring much about the practical side of things. Or you may be a practitioner who wants nothing to do with the formulas.
+
+To balance these needs I have organized this tutorial as a blend of [i]the why[/i], science, and [i]the how[/i], practice. There will be a fair amount of math and physics in [i]the why[/i] section. If you did not study math and physics or you are the impatient kind or you simply do not care you can skip all the deductions and jump to the ready made formulas and procedures right away. If later on you get bitten by the curiosity bug and would like to understand why these things work the way they do you can always come back and work your way through [i]the why[/i] section.
+
+Lastly, for a full disclosure I must say that I am not claiming to have invented or discovered anything. Looking for a book for an absolute beginner on the subject I could not find anything. As such this text is my personal investigation into the subject put on public display. It is based on the knowledge I gained in the grade school and college, common sense, numerous tiny articles, excerpts and a number of books which I list at the end of the Hands chapter.
+
+
+[b]Major Parts[/b]
+
+As a first much simplified cut we can modularize any mechanical gear clock into three major parts. One part is the [i]time chunking[/i] mechanism which somehow breaks up the time into regular, calculable and preferably convenient and adjustable on demand intervals. Breaking up means generating or producing events that we can detect, interact with and act upon. As such we can call this part a [i]time intervals producer[/i]. A pendulum is one such device amongst several others (springs). I will refer to it exclusively from now on.
+
+Another part is the [i]time displaying[/i] mechanism. Though many wildly different variations are possible we will stick with a classical tradition - second, minute and hour hands on a round clock face. We then expect a second hand to make one full revolution in [b]60[/b] seconds thus measuring one minute. We expect a minute hand to run [b]60[/b] times slower than a second hand - the former should make one full revolution in [b]60[/b] minutes thus measuring one hour. Lastly, we expect an hour hand to run [b]12[/b] times slower than a minute hand - the former should make one full revolution in [b]12[/b] hours with two such revolutions measuring one day.
+
+With a stand-alone swinging pendulum our only way to tell time is to keep track of it ourselves. Not an attractive proposition. A time displaying mechanism void of input is also next to useless. In other words if on the one hand we have a device that generates information and on the other we have a device that knows how to display it how do we make it all tick? The answer is the final part or [i]time intervals manager[/i] which reads the information produced by the [i]time intervals producer[/i] and delivers this information to the [i]time displayer[/i]. In horology, the study of measuring time, this part is known as the [i]escapement[/i].
+
+So now we have it - time intervals producer (pendulum), intervals manager (escapement) and time displayer (hands and face). This is an atomic or smallest set up constituting the necessary and sufficient conditions for our clock's proper operation. Throw any one part away and our pendulum clock falls apart.
+
+We shall look at each part in that order - producer (pendulum), manager (escapement), displayer (hands and face) but you can read this tutorial in any sequence you wish.
+
+One consequence of the above modularization is the ability to replace any of the parts with something similar but different and still end up with a properly working device with minimal effort.

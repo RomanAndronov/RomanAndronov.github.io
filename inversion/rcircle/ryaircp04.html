@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Inversion with Respect to a Circle in a Real Plane Problems 04, by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Inversion with Respect to a Circle in a Real Plane Problems 04,
+   by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+    </p>
+    
+    <h1>Problems 04</h1>
+
+    <p>
+    <strong>Problem 9</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>Among the three given distinct collinear points \(A\), \(B\) and \(C\),
+    the point \(C\) is located between the points \(A\) and \(B\). Using the
+    line segments \(AB\), \(CA\) and \(CB\) as diameters three circles, \(k\),
+    \(k_1\) and \(k_2\), are constructed. \(Line(C, D)\) is perpendicular to
+    \(Line(A, B)\). Each of the circles \(k_3\) and \(k_4\) touch \(k\) and
+    \(Line(C, D)\) with \(k_3\) also touching \(k_1\) and \(k_4\) also
+    touching \(k_2\).<br>
+ 
+    <br>
+    Prove that:</br>
+ 
+    <br>
+    9.1) the circles \(k_3\) and \(k_4\) are equal.<br>
+ 
+    <br>
+    9.2) the tangent \(t_{13}\) common to \(k_1\) and \(k_3\) at \(T_{13}\)
+    passes through \(B\) and the tangent \(t_{24}\) common to \(k_2\) and \(k_4\)
+    at \(T_{24}\) passes through \(A\):</dfn>
+    </p>
+
+    <img src="imgs/ircp20.png" class="center">
+
+    <p>
+    9.1) If we choose \(C\) to be the center of inversion with
+    <strong><dfn>negative!</dfn></strong> power then we can require \(A\) and
+    \(B\) to be the images of each other under that inversion. Since
+    \(Line(C, D)\) is a given perpendicular to \(Line(A, B)\), finding the radius
+    of this inversion is trivial. Since:
+    </p>
+
+$$r \equiv CD$$
+
+    <p>
+    then:
+    </p>
+
+$$c \equiv Circle(C, CD)$$
+
+    <p>
+    Under the inversion with respect to \(c\) with <dfn>negative!</dfn> power:
+    </p>
+ 
+    <p>
+    - \(Line(A, B)\) and \(Line(C, D)\) invert into themselves
+    </p>
+
+    <p>
+    - \(k\) also inverts into itself as it passes through \(D\) and \(D'\),
+    which are diametrically opposite to each other on \(c\)
+    (<strong>ICP41</strong>)
+    </p>
+
+    <p>
+    - \(k_1\) inverts into a straight line \(k'_1\) perpendicular to \(Line(A, B)\)
+    and touching \(k\) at \(B\) (preservation of tangency points)
+    </p>
+
+    <p>
+    - \(k_2\) inverts into a straight line \(k'_2\) perpendicular to \(Line(A, B)\)
+    and touching \(k\) at \(A\) (preservation of tangency points)
+    </p>
+
+    <p>
+    - \(k_3\) inverts into a circle \(k'_3\) touching \(Line(C, D)\), \(k\) and
+    \(k'_1\) (preservation of tangency points)
+    </p>
+
+    <p>
+    - \(k_4\) inverts into a circle \(k'_4\) touching \(Line(C, D)\), \(k\) and
+    \(k'_2\) (preservation of tangency points):
+    </p>
+ 
+    <img src="imgs/ircp21.png" class="center">
+
+    <p>
+    Let:
+    </p>
+ 
+$$O_1A = O_1C = r_1$$
+$$O_2C = O_2B = r_2$$
+$$OA = OB =$$
+$$\frac {2r_1 + 2r_2}{2} =$$
+$$r_1 + r_2 = r$$
+ 
+    <p>
+    Let us express the radii of \(k_3\), \(r_3\), and \(k_4\), \(r_4\), via
+    \(r_1\) and \(r_2\) and prove that \(r_3 \equiv r_4\).
+    </p>
+ 
+    <p>
+    Consider the circles \(k_4\) and \(k'_4\). \(Line(C, D)\) is their common
+    tangent. Points \(O_4\), \(C\) and \(O'_4\) are collinear. We can easily
+    prove that the right triangles \(CP_4O_4\) and \(CP'_4O'_4\) are similar
+    by <strong>AAA</strong> since their angles at the common vertex \(C\) are
+    vertical, and hence:
+    </p>
+ 
+$$\frac {r_4}{CP_4} = \frac {r_1}{CP'_4}$$
+$$\begin{equation}
+r_4 = r_1 \frac {CP_4}{CP'_4}
+\end{equation}$$
+ 
+    <p>
+    Since \(P_4\) and \(P'_4\) are inverses of each other with respect to \(c\)
+    with <dfn>negative!</dfn> power:
+    </p>
+ 
+$$CP_4 \times CP'_4 = CD^2$$
+$$CP_4 = \frac {CD^2}{CP'_4}$$
+ 
+    <p>
+    Putting \(CP_4\) back into (1) we obtain:
+    </p>
+ 
+$$\begin{equation}
+r_4 = r_1 \frac {CD^2}{CP'^2_4}
+\end{equation}$$
+ 
+    <p>
+    Since \(A\) and \(B\) are inverses of each other with respect to \(c\) with
+    <dfn>negative!</dfn> power:
+    </p>
+ 
+$$CA \times CB = CD^2 = 4r_1r_2$$
+ 
+    <p>
+    and (2) becomes:
+    </p>
+
+$$\begin{equation}
+r_4 = \frac {4r^2_1r_2}{CP'^2_4}
+\end{equation}$$
+ 
+    <p>
+    To find \(CP'^2_4\) we use Pythagoras and the right triangle \(OO_1O'_4\):
+    </p>
+ 
+$$CP'^2_4 = O_1O'^2_4 =$$
+$$OO'^2_4 - OO^2_1 =$$
+$$(2r_1 + r_2)^2 - (r_1 + r_2 - r_1)^2 =$$
+$$4r_1(r_1 + r_2)$$
+
+    <p>
+    Putting \(CP'^2_4\) back into (3) we obtain for \(r_4\):
+    </p>
+ 
+$$r_4 = \frac {4r^2_1r_2}{4r_1(r_1 + r_2)} =$$
+$$\frac {r_1r_2}{r_1 + r_2}$$
+ 
+    <p>
+    In a similar way we can show that:
+    </p>
+ 
+$$r_3 = \frac {r_1r_2}{r_1 + r_2}$$
+ 
+    <p>
+    and hence:
+    </p>
+
+$$r_3 \equiv r_4$$
+ 
+    <p>
+    9.2) This time we choose \(B\) as a center of inversion with
+    <strong><dfn>positive!</dfn></strong> power and require that \(C\) and \(A\)
+    must be the images of each other under that inversion. We can use
+    <strong>ICE1</strong> or <strong>ICE3</strong> to find the radius of inversion
+    \(r\). Since \(Line(C, D)\) is a perpendicular to \(Line( A, B)\) through \(C\),
+    it follows that:
+    </p>
+
+$$c \equiv Circle(B, BD)$$
+ 
+    <p>
+    Under that inversion:
+    </p>
+ 
+    <p>
+    - \(Line(A, B)\) inverts into itself
+    </p>
+
+    <p>
+    - \(Line(C, D)\) inverts into \(k\)
+    </p>
+
+    <p>
+    - \(k\) inverts into \(Line(C, D)\)
+    </p>
+
+    <p>
+    - \(k_1\) passes through \(A\) and \(C\), hence it is orthogonal to \(c\)
+    and it inverts into itself (<strong>ICP38</strong>)
+    </p>
+
+    <p>
+    - \(k_3\) touches \(k\), \(k_1\) and \(Line(C, D)\) all of which invert into
+    their original configuration. And since inversion preserves tangency points,
+    \(k_3\) must invert into itself and it also must be orthogonal to \(c\):
+    </p>
+
+    <img src="imgs/ircp22.png" class="center">
+
+    <p>
+    It follows then that \(T_{13}\) - the (single) point of tangency of \(k_1\)
+    and \(k_3\) - will also invert into itself. It will remain where it is, fixed,
+    and hence it must be on \(c\) (inversion with <dfn>positive!</dfn> power).
+    </p>
+ 
+    <p>
+    But \(c\) cuts the \(AT_{13}C\) semi-circle portion of \(k_1\) in only one
+    (fixed) point. So in fact \(T_{13}\) belongs to three circles at once, \(c\),
+    \(k_1\), \(k_3\), two of which, \(k_1\) and \(k_3\), touch and are orthogonal
+    to the third one, \(c\). From the definition of orthogonal circles it follows
+    then that the tangent \(t_{13}\) common to \(k_1\) and \(k_3\) at \(T_{13}\)
+    must pass through \(B\).
+    </p>
+ 
+    <p>
+    The case of \(t_{24}\) is proved in the similar way - choose \(A\) as a center
+    of inversion with <dfn>positive!</dfn> power, make \(C\) and \(B\) inverses of
+    each other under that inversion and so on.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryairc.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

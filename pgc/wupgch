@@ -1,0 +1,439 @@
+[url=https://www.ocf.berkeley.edu/~wwu/cgi-bin/yabb/YaBB.cgi?board=riddles_general;action=display;num=1437175174][b]Mechanical Pendulum Gear Clocks[/b][/url]
+
+[color=Cyan][b]Hands[/b][/color]
+
+1) Rolling Surfaces
+2) Tooth Profiles
+3) Gear Trains
+4) Hunting Tooth
+5) Procedure
+6) Second Hand
+7) Minute Hand
+8) Hour Hand
+9) Coaxal Hands
+10) Software
+11) Literature
+
+
+[color=Cyan][b]Rolling Surfaces[/b][/color]
+
+In the Pendulum chapter we have learned how to calculate the length of a pendulum's rod [b]L[/b] for a given period [b]T[/b]. In the Escapement chapter we have learned how to harness the back and forth motion of a pendulum and convert it into a predictable circular motion of a special, escape, wheel. In this chapter we will investigate how to complete a clock's design by adding the hands to it.
+
+An addition of the hands to a clock can be reduced to an addition of the corresponding gear trains to it. A gear train is a collection of two or more gears so before deep diving into the trains let us look at their atomic unit - a pair of meshing gears.
+
+Note that as a historic heritage large gears are called [i]wheels[/i] and their teeth are called [i]teeth[/i]. Small gears are called [i]pinions[/i] while their teeth are called [i]leaves[/i]. However, everything that follows is applicable to wheels and pinions and teeth and leaves in equal measure.
+
+Two rigid surfaces rolling without slipping is the underlying requirement for a large class of gears including the ones of interest to us - spur gears. For two arbitrary rigid surfaces to roll without slipping two conditions must be met:
+
+1) Their point of contact must be on the straight line connecting the centers of rotation of each surface called a [i]Line of Centers[/i] or a [i]Center Line[/i], the straight line [b]O[sub]1[/sub]O[sub]2[/sub][/b] in the drawing below.
+
+2) The projections of the linear velocities and accelerations of both surfaces at the point of contact on a tangent common to both surfaces must be equal in magnitude and same in direction.
+
+The last requirement by itself does not impose any additional constraints on linear velocities - it only states that at any instance the two must be equal in magnitude and same in direction. Since acceleration captures the change of velocity over time its presence in the constraint tells us that velocities may change but they must do so in unison. In other words the velocity ratio may vary or remain constant. From this point on we will only consider a constant velocity ratio.
+
+Even though the above rule can be applied to arbitrary rigid surfaces we will only consider the spur gears based on right circular cylinders or simply cylinders. Let [b]C[sub]1[/sub][/b] and [b]C[sub]2[/sub][/b] be two such cylinders rolling without slipping. Further, let the axes of rotation of [b]C[sub]1[/sub][/b] and [b]C[sub]2[/sub][/b] be parallel and remain at the same distance from each other at all times:
+
+[img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_pgc28.png[/img]
+
+Imagine now that the instantaneous point of contact [b]K[/b] splits in two as the surfaces turn. The point [b]K[sub]1[/sub][/b] will then travel along the circumference of [b]C[sub]1[/sub][/b] while [b]K[sub]2[/sub][/b] will travel along the circumference of [b]C[sub]2[/sub][/b]. In a given amount of time [b]K[sub]1[/sub][/b] will trace the arc [b]KK[sub]1[/sub][/b] while [b]K[sub]2[/sub][/b] will trace the arc [b]KK[sub]2[/sub][/b]. The second requirement of the equality of linear velocities' projections means that even though the angle swept by each point may be different the [i]lengths[/i] of both (highlighted) arcs must be the same:
+
+[center][color=Cyan]v[sub]1[/sub] = \omega[sub]1[/sub]R[sub]1[/sub] = \omega[sub]2[/sub]R[sub]2[/sub] = v[sub]2[/sub]     [/color][color=Yellow](h.1)[/color][/center]
+[center][color=Cyan]\omega[sub]1[/sub]/\omega[sub]2[/sub] = R[sub]2[/sub]/R[sub]1[/sub] = const     [/color][color=Yellow](h.2)[/color][/center]
+
+where \omega  designates an angular velocity. The equation (h.2) tells us that in the case of a constant linear velocity ratio for two cylinders to roll without slipping the ratio of their angular velocities must remain constant as well. Bare cylinders do not transmit torque and keep a constant angular velocity ratio at the same time too well that is why they are given teeth. The teeth are placed on a cylinder in such a way that some portion of them, called a [i]face[/i], protrudes beyond and some portion, called a [i]flank[/i], is submerged below the circumference of the generating cylinder. The radial height of a face is called an [i]addendum[/i] and the radial height of a flank is called a [i]dedendum[/i].
+
+In the above manner we can construct two gears which when engaged have the angular velocity ratio equal to that of two rolling virtual or generating cylinders. Such cylinders are called [i]Pitch Cylinders[/i]. A circle obtained by cutting a pitch cylinder with a plane perpendicular to its axis of rotation is called a [i]Pitch Circle[/i]. The radius of a pitch circle is called a [i]Pitch Radius[/i] and the diameter of a pitch circle is called a [i]Pitch Diameter[/i].
+
+A circle concentric with the pitch circle passing through the tips of the gear's teeth is called an [i]Addendum Circle[/i] or an [i]Outer[/i] or a [i]Tip[/i] circle. A circle concentric with the pitch circle passing through the roots of the gear's teeth is called a [i]Dedendum Circle[/i] or a [i]Root Circle[/i]. Hopefully these definitions that I gave in the Escapement chapter are more understandable now.
+
+Euclid's [i]Elements[/i] Book [b]3[/b] Proposition [b]13[/b] states that [i]a circle does not touch another circle at more than one point whether it touches it internally or externally[/i]. This single point of tangency of two pitch circles is called a [i]Pitch Point[/i]. From Book [b]3[/b] Propositions [b]11[/b] and [b]12[/b] it follows that for two gears engaged either externally or internally the pitch point is always located on the line of centers.
+
+A straight line perpendicular to a tangent common to two tooth profiles at the point of their contact, a normal, is called a [i]Line of Action[/i]. Earlier we have established that from the requirements imposed on two rolling smooth rigid surfaces it follows that for two gears to mesh their angular velocity ratio must remain the same. This is the basic law of gearing which is obeyed when [i]at any point of contact of two gears the line of action and the line of centers intersect at the pitch point[/i].
+
+Two more parameters must be the same for two gears to mesh - an [i]Angle of Pressure[/i] and a [i]Pitch[/i] of a gear. An angle of pressure or simply a pressure angle is an angle between the line of action and the tangent common to both pitch circles. Two popular pressure angles are [b]14.5[/b] and [b]20[/b] degrees. The larger the pressure angle the thicker the root of the tooth is - the more load it can bare and conversely.
+
+
+-----------------------
+A pitch of a gear is a numeric characteristic of the density of the gear's teeth distribution over the circumference of the root circle. Density is usually a ratio of a number or an amount of units of interest to some spacial measure. For example, a linear density tells us how mass is distributed over a massive line segment in one dimension. A square density tells us how mass is distributed over a thin disk (circle) in two dimensions. A volume density tells us how mass is distributed inside a solid sphere in three dimensions and so on. For a gear its pitch tells us how large the teeth and the spaces between them are.
+
+In our case all the teeth of a standard spur gear have the same size, the same amount of space between them and the same distance from the axis of rotation - in other words these teeth are distributed uniformly over the circumference of the root circle and their count is always a whole number. Imagine two such gears of equal radii one with [b]20[/b] and the other with [b]40[/b] teeth. Without any formulas it should be intuitively clear that the teeth and the spaces between them on the first gear should be larger than their counterparts on the second gear and conversely.
+
+Three basic magnitudes are used to describe the dental density of a gear - a [i]Circular Pitch[/i], a [i]Diametral Pitch[/i] and a [i]Module[/i] or [i]Modulus[/i].
+
+A [i]Circular Pitch[/i] or [b]cp[/b] for short is an absolute linear magnitude equal to the distance between the same points on the profiles of two adjacent teeth measured along the circumference of the pitch circle. From the above observation of uniform teeth distribution and the fact that the tooth count of a standard gear is always integral (a whole number) it follows that a gear that has [b]N[/b] teeth also has [b]N[/b] arcs each of which is equal to one circular pitch. If the angle of one such arc is measured in radians by definition we have:
+
+[center][color=Cyan]cp = R\theta    [/color][color=Yellow](h.3)[/color][/center]
+
+and [b]N[/b] such arcs complete the entire circle:
+
+[center][color=Cyan]cp = R2\pi/N = D\pi/N     [/color][color=Yellow](h.4)[/color][/center]
+ 
+where [b]R[/b] and [b]D[/b] are pitch radius and diameter. A circular pitch can be expressed in either Imperial units, inches, or in metric units, millimeters.
+
+A [i]Diametral Pitch[/i] (not to be confused with pitch diameter) or [b]dp[/b] for short is a relative magnitude equal to the number of teeth [b]N[/b] divided by the pitch diameter [b]D[/b]:
+
+[center][color=Cyan]dp = N/D     [/color][color=Yellow](h.5)[/color][/center]
+
+Though technically it does not have to be diametral pitch is usually associated with the Imperial system in terms of which it is a number of teeth of a gear per one inch of its pitch diameter. A diametral pitch can be expressed in either inverse Imperial or inverse metric units. Since [b]D[/b] is a common term between (h.4) and (h.5) it follows that:
+
+[center][color=Cyan]D = (N*cp)/\pi = N/dp = D     [/color][color=Yellow](h.6)[/color][/center]
+ 
+[center][color=Cyan]dp*cp = \pi     [/color][color=Yellow](h.7)[/color][/center]
+
+A [i]Module[/i] or [b]m[/b] for short is a relative magnitude equal to the pitch diameter [b]D[/b] divided by the number of teeth [b]N[/b]:
+
+[center][color=Cyan]m = D/N     [/color][color=Yellow](h.8)[/color][/center]
+
+Though technically it does not have to be Module is usually associated with the Metric system. In either system Module is the length of a pitch diameter per one tooth. A Module can be expressed in either metric or Imperial units. If the same units are used for diametral pitch and module then the two are just the inverses of each other.
+
+Now that we have three different ways of dealing with essentially the same thing which one should be used? In theory it does not matter - with the following relationship:
+
+[center][color=Cyan]1 inch = 25.4 mm     [/color][color=Yellow](h.9)[/color][/center]
+
+we know how to convert inches to millimeters and vice versa and with the above formulas given one dental density magnitude we can always obtain the other two. So theoretically even if you mix and match the systems within one project the end result should come out right - the only difference being the ugliness or nicety of the actual values. With the Imperial-oriented diametral pitch the inch values will be nice and round or close to it while the millimeter values will likely be ugly and awkward. And conversely - with the metric-oriented Module the millimeter values will be nice and round or close to it while the inch values will likely be ugly.
+
+The practice, however, begs to differ. Not only the software and the hardware tools which you will use to generate and cut the gear profiles will pick the units of measurement for you - these units should really be the same, all Imperial or all Metric. As long as the meaning of the terms used is understood the desirable results can be achieved regardless of the unit system employed. It may also be a good idea to capture the entire design of a clock in a number of key characteristics of lengths, tooth counts, diameters and train ratios and save it for future reference.
+
+Once the number of teeth and pitch diameters of two gears are decided on the distance between their axes can be calculated. In terms of pitch radii [b]R[sub]1[/sub][/b] and [b]R[sub]2[/sub][/b], or pitch diameters [b]D[sub]1[/sub][/b] and [b]D[sub]2[/sub][/b], or tooth counts [b]N[sub]1[/sub][/b] and [b]N[sub]2[/sub][/b] and either Diametral Pitch [b]dp[/b] or Module [b]m[/b] it is:
+
+[center][color=Cyan]O[sub]1[/sub]O[sub]2[/sub] = R[sub]1[/sub] + R[sub]2[/sub]     [/color][color=Yellow](h.10)[/color][/center]
+ 
+[center][color=Cyan]O[sub]1[/sub]O[sub]2[/sub] = (D[sub]1[/sub] + D[sub]2[/sub])/2     [/color][color=Yellow](h.11)[/color][/center]
+ 
+[center][color=Cyan]O[sub]1[/sub]O[sub]2[/sub] = (N[sub]1[/sub] + N[sub]2[/sub])/2dp     [/color][color=Yellow](h.12)[/color][/center]
+ 
+[center][color=Cyan]O[sub]1[/sub]O[sub]2[/sub] = (m(N[sub]1[/sub] + N[sub]2[/sub]))/2     [/color][color=Yellow](h.13)[/color][/center]
+ 
+
+
+--------------------------
+[color=Cyan][b]Tooth Profiles[/b][/color]
+
+A tooth profile is generally a plane curve used to delineate the shape of a tooth in the plane of the gear's face. To reveal the tooth profile of a given gear the name of the curve is inserted in front of the word [i]gear[/i] as in [i]cycloidal gear[/i] or [i]involute gear[/i]. Though in theory we can use any goofy tooth profile for two gears to kind of turn and sort of work in practice their choice is limited. In so many words in [i]"The Science of Clocks and Watches"[/i] A. L. Rawlings outlines the following requirements on practical tooth profiles at the industrial scope:
+
+1) constant angular velocity ratio, 2) manufacturability of mathematically precise shapes, 3) interchangeability of gears across all tooth counts of the same pitch, 4) axes distance deviation tolerance, 5) axes should not be pushed apart, 6) post line of centers action.
+
+In the early days a cycloid was a curve of choice. From the Pendulum chapter we remember that a cycloid is a plane curve traced by a point on a circumference of a circle rolling along a stationary straight line without slipping. These [i]cycloidal gears[/i] worked well in clocks where the speeds of rotation are low and the loads are light. Later on it was discovered that the cycloidal gears do not scale well to the industrial machinery where the speeds of rotation are much higher and the loads are much heavier. A number of new tooth profiles that dealt with the new requirements better were employed, including an involute of a circle.
+
+An involute of a circle is a plane curve traced by a point at the end of a taut string as it unwinds off of or winds around a circumference of a stationary circle. Put it another way an involute of a circle is a plane curve traced by a point on a straight line rolling along the circumference of a stationary circle without slipping.
+
+The above gear requirements are satisfied by an involute of a circle but it does not mean that we must use it because some of these points are moot due to the peculiarity of our process - we will be cutting our own gears which will turn slowly under light loads.
+
+One of the practical benefits of the involute gears is that they tolerate small deviations from the [i]calculated[/i] distance between their centers [b]O[sub]1[/sub]O[sub]2[/sub][/b] much better than the cycloidal gears do. If your [i]actual[/i] distance [b]O[sub]1[/sub]O[sub]2[/sub][/b] is a little off then the involute gears will still have a constant angular velocity ratio while the cycloidal gears will not - the actual distance between their centers must be kept exactly at [b]O[sub]1[/sub]O[sub]2[/sub][/b].
+
+On the other hand the cycloidal gears generate less sliding friction resulting in less wear and tear, for proper operation they can have less teeth per given size and consequently they can be used to achieve higher ratios with less gears. Bottom line - experiment!
+
+
+[color=Cyan][b]Gear Trains[/b][/color]
+
+Now that we know a little bit about how one pair of gears operates we can string together any number of such pairs into a [i]gear train[/i] with a purpose of converting a given input into a desired output. A desired output could be a change in [i]direction[/i] or [i]rate[/i] of rotation, for example, or both. We observe here that two gears meshing [i]externally[/i] rotate in the [i]opposite[/i] direction while two gears meshing [i]internally[/i] rotate in the [i]same[/i] direction. Moreover, if the number of the externally meshing gears is even then the output (last) gear in such a train will rotate in the direction opposite to that of the input gear. If the number of such gears is odd then the direction of rotation of the output and the input gears is the same. This observation is of importance if we want all the hands on a clock's face to rotate in the same direction.
+
+From the Escapement chapter we remember that a gear to which power is applied directly is called a [i]driver[/i] or an [i]input[/i] gear while the gear which is affected by it is called a [i]driven[/i] or a [i]follower[/i] or an [i]output[/i] gear. A gear ratio of a pair of gears then is the ratio of angular velocities of the corresponding pitch cylinders:
+
+[center][color=Cyan]r[sub]i,o[/sub] = \omega[sub]i[/sub]/\omega[sub]o[/sub] = R[sub]o[/sub]/R[sub]i[/sub] = N[sub]o[/sub]/N[sub]i[/sub][/color][/center]
+
+where the sub index [b]i[/b] stands for Input and [b]o[/b] for Output, [b]R[/b] designates a radius and [b]N[/b] designates a tooth count. The reason we can relate a radius of a gear to its tooth count is because all the teeth on our gears are equally sized and uniformly distributed as was noted above.
+
+We can roughly classify gear trains based on the number of engaged gears per axis. We can have trains with a single gear per axis or multiple gears per axis. When forming the pairs in a single gear per axis train the output gear of the current pair and the (logical) input gear of the next pair are one and the same. In the sample drawing below the first pair is the gears [b]G[sub]1[/sub][/b] and [b]G[sub]2[/sub][/b], [b]G[sub]1[/sub][/b] being an input gear. The second pair is the gears [b]G[sub]2[/sub][/b] and [b]G[sub]3[/sub][/b], [b]G[sub]2[/sub][/b] being a logical input of this pair:
+
+[img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_pgc29.png[/img]
+
+The consequence of such an arrangement is that it does not work too well for high gear ratios but it is suitable for situations when power has to be transmitted over a large distance. To understand why let us conduct the following experiment. Let us assume that we need a gear train with a [b]1,000:1[/b] gear ratio.
+
+Let us assume that our input gear has [b]30[/b] teeth. Though theoretically it is and even technologically it may be possible to achieve any required ratio with just two gears it is simply impractical to do so in most cases. As such we rule out connecting a [b]30,000[/b]-tooth output gear to a [b]30[/b]-tooth input gear. We then factorize [b]1,000[/b] as [b]10*10*10[/b], for example, hoping to achieve a manageable tooth count for the intermediate gears and add one gear to the train per factor. Let us see where it takes us.
+
+The second gear in our train must have [b]30*10 = 300[/b] teeth, the third gear must have [b]300*10 = 3,000[/b] teeth while the fourth gear must have [b]3,000*10 = 30,000[/b] teeth still! So between [b]4[/b] wheels we have a total of [b]33,330[/b] teeth and impractical per gear tooth counts. Further, no matter how we factorize [b]1,000[/b] the tooth count for the last wheel will always be unmanageable. For [b]1,000 = 2*5*2*5*2*5[/b] we get the following tooth counts: [b]60[/b], [b]300[/b], [b]600[/b], [b]3,000[/b], [b]6,000[/b] and [b]30,000[/b] or a total of [b]7[/b] wheels and [b]39,990[/b] teeth and so on. What is going on here?
+
+
+------------------------
+Let us say we have four gears in our train - an input gear [b]G[sub]1[/sub][/b] and three more gears connected edge to edge - [b]G[sub]2[/sub][/b], [b]G[sub]3[/sub][/b] and [b]G[sub]4[/sub][/b]. The ratio between the first two pairs, [b]G[sub]1[/sub][/b] and [b]G[sub]2[/sub][/b], and [b]G[sub]2[/sub][/b] and [b]G[sub]3[/sub][/b], is:
+
+[center][color=Cyan]r[sub]1,2[/sub] = \omega[sub]1[/sub]/\omega[sub]2[/sub]     [/color][color=Yellow](h.14)[/color][/center]
+[center][color=Cyan]r[sub]2,3[/sub] = \omega[sub]2[/sub]/\omega[sub]3[/sub]     [/color][color=Yellow](h.15)[/color][/center]
+
+The gear ratio between [b]G[sub]1[/sub][/b] and [b]G[sub]3[/sub][/b] by definition then is:
+
+[center][color=Cyan]r[sub]1,3[/sub] = \omega[sub]1[/sub]/\omega[sub]3[/sub]     [/color][color=Yellow](h.16)[/color][/center]
+
+which can be re-written as:
+
+[center][color=Cyan]r[sub]1,3[/sub] = \omega[sub]1[/sub]/\omega[sub]3[/sub] = \omega[sub]1[/sub]/\omega[sub]2[/sub] * \omega[sub]2[/sub]/\omega[sub]3[/sub] = r[sub]1,2[/sub] * r[sub]2,3[/sub]     [/color][color=Yellow](h.17)[/color][/center]
+
+In a similar manner for gears [b]G[sub]1[/sub][/b] and [b]G[sub]4[/sub][/b] we get:
+
+[center][color=Cyan]r[sub]1,4[/sub] = \omega[sub]1[/sub]/\omega[sub]4[/sub] = \omega[sub]1[/sub]/\omega[sub]2[/sub] * \omega[sub]2[/sub]/\omega[sub]3[/sub] * \omega[sub]3[/sub]/\omega[sub]4[/sub] = r[sub]1,2[/sub] * r[sub]2,3[/sub] * r[sub]3,4[/sub]     [/color][color=Yellow](h.18)[/color][/center]
+
+In other words a gear ratio of a train is a product of the ratios of its intermediate pairs:
+
+[center][color=Cyan]r[sub]1,N[/sub] = \prod r[sub]i - 1, i[/sub]     [/color][color=Yellow](h.19)[/color][/center]
+
+where [b]i[/b] runs from [b]2[/b] to [b]N[/b].
+
+If in (h.18) we replace the angular velocities with the corresponding tooth counts then for this particular type of train the intermediate tooth counts will cancel each other out:
+
+[center][color=Cyan]r[sub]1,4[/sub] = N[sub]2[/sub]/N[sub]1[/sub] * N[sub]3[/sub]/N[sub]2[/sub] * N[sub]4[/sub]/N[sub]3[/sub] = N[sub]4[/sub]/N[sub]1[/sub]     [/color][color=Yellow](h.20)[/color][/center]
+
+And since the intermediate gears do not contribute to the grand total they are called [i]idlers[/i] and we see why for high gear ratios the last gear in the train has an impractical tooth count.
+
+Now instead of just one let us attach two gears to the same axis - one large gear, a wheel, and one small gear, a pinion. Since both gears are attached to the same axis their angular velocities - angles swept per unit of time - are the same. Which means that by the time the wheel makes one full turn - so does its coaxal pinion even though it has a lower tooth count:
+
+[img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_pgc30.png[/img]
+
+In this arrangement we make a pinion a logical input gear and a wheel (on a different axis) an output gear. Let us say that we attach the [b]7[/b]-leaf pinions to each wheel and use a [b]10:1[/b] gear ratio for each pair. Then the third gear or the second wheel must have [b]7*10 = 70[/b] teeth. The fifth gear or the third wheel must also have [b]70[/b] teeth and so does the seventh gear of the fourth wheel. Now between [b]7[/b] gears and only [b]270[/b] teeth we have achieved the required gear ratio and manageable per gear tooth counts. Compare [b]270[/b] and [b]39,990[/b] - clearly our two gears per axis train has an advantage - less teeth and a smaller space requirement.
+
+Since in this types of trains the output gear of the previous pair ([b]W[sub]2[/sub][/b] in the drawing above) is different from the input gear ([b]P[sub]2[/sub][/b]) of the current one the tooth counts do not cancel out and the ratio of a train is the product of the ratios of tooth counts of all the intermediate pairs. If we designate the tooth counts of the wheels with [b]w[/b] and the tooth counts of the pinions with [b]p[/b] then the ratio of this type of a train is:
+
+[center][color=Cyan]r[sub]1,N[/sub] = w[sub]1[/sub]/p[sub]1[/sub] * w[sub]2[/sub]/p[sub]2[/sub] * ... * w[sub]N[/sub]/p[sub]N[/sub] = \prod w[sub]i[/sub]/p[sub]i[/sub]     [/color][color=Yellow](h.21)[/color][/center]
+
+where [b]i[/b] runs from [b]1[/b] to [b]N[/b].
+
+
+-----------------------------
+[color=Cyan][b]Hunting Tooth[/b][/color]
+
+We know that a gear ratio is formed by two whole positive integers each of which represents a tooth count. Let gear [b]G[sub]1[/sub][/b] have [b]N[sub]1[/sub][/b] teeth and gear [b]G[sub]2[/sub][/b] have [b]N[sub]2[/sub][/b] teeth. Let us temporarily straighten both gears into [b]Nx1[/b] blocks along a number line, join them face to face and designate each tooth with a square. In the drawing below we see a case where [b]N[sub]1[/sub] = 3[/b] and [b]N[sub]2[/sub] = 5[/b]:
+
+[img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_pgc31.png[/img]
+
+It should be fairly obvious that a tooth [b]a[/b] of [b]G[sub]1[/sub][/b] and a tooth [b]b[/b] of [b]G[sub]2[/sub][/b] that are in contact in the initial configuration will come into contact again [b]lcm(N[sub]1[/sub], N[sub]2[/sub])[/b] squares later, where [b]lcm[/b] is the Least Common Multiple - a smallest integer evenly divisible by [b]N[sub]1[/sub][/b] and [b]N[sub]2[/sub][/b]. In the drawing above [b]a[/b] and [b]b[/b] will kiss every [b]15[/b] squares. Here we can introduce the concept of a [i]Mating Length[/i] (ml) - the smallest number of teeth between the rendezvous points of two mating teeth or numerically:
+
+[center][color=Cyan]ml = lcm(N[sub]1[/sub], N[sub]2[/sub])     [/color][color=Yellow](h.22)[/color][/center]
+
+To translate the Mating Length measured in teeth into the number of Mating Steps (ms) of each gear we then simply divide [b]ml[/b] by the number of teeth of each gear:
+
+[center][color=Cyan]ms[sub]1[/sub] = ml/N[sub]1[/sub]     [/color][color=Yellow](h.23)[/color][/center]
+[center][color=Cyan]ms[sub]2[/sub] = ml/N[sub]2[/sub]     [/color][color=Yellow](h.24)[/color][/center]
+
+For [b]G[sub]1[/sub][/b] we get [b]15:3 = 5[/b] full steps and for [b]G[sub]2[/sub][/b] we get [b]15:5 = 3[/b] full steps along the number line.
+
+The reason we assured that [b]ms[/b] is always an integer is because of the basic number theoretic theorem which states that for any two positive integers [b]N[sub]1[/sub][/b] and [b]N[sub]2[/sub][/b]:
+
+[center][color=Cyan]lcm(N[sub]1[/sub], N[sub]2[/sub]) * gcd(N[sub]1[/sub], N[sub]2[/sub]) = N[sub]1[/sub] * N[sub]2[/sub]     [/color][color=Yellow](h.25)[/color][/center]
+
+where [b]gcd()[/b] is the Greatest Common Divisor - the largest common factor of [b]N[sub]1[/sub][/b] and [b]N[sub]2[/sub][/b]. If we divide both sides of the above equation first by, say, N[sub]2[/sub] and then by [b]gcd()[/b] we get:
+
+[center][color=Cyan]ml/N[sub]2[/sub] = N[sub]1[/sub]/gcd(N[sub]1[/sub], N[sub]2[/sub])     [/color][color=Yellow](h.26)[/color][/center]
+
+By definition of [b]gcd()[/b] [b]N[sub]1[/sub] = gcd(N[sub]1[/sub], N[sub]2[/sub]) * m[/b], where [b]m[/b] is some integer. Putting it back into (h.26) the [b]gcd()[/b]s cancel out while the integer [b]m[/b] remains.
+
+Now if we make our gears round again, replace [i]steps[/i] with [i]revolutions[/i] and replace the Mating Steps with the Mating Period (mp) - the number of revolutions of one gear after which one of its teeth finds its mate on the other gear - then:
+
+[center][color=Cyan]mp[sub]1[/sub] = ml/N[sub]1[/sub]     [/color][color=Yellow](h.27)[/color][/center]
+[center][color=Cyan]mp[sub]2[/sub] = ml/N[sub]2[/sub]     [/color][color=Yellow](h.28)[/color][/center]
+
+Divide (h.27) by (h.28):
+
+[center][color=Cyan]mp[sub]1[/sub]/mp[sub]2[/sub] = N[sub]2[/sub]/N[sub]1[/sub] = p/q = r[sub]1,2[/sub]     [/color][color=Yellow](h.29)[/color][/center]
+
+where the above gear ratio is represented in its standard form [b]p:q[/b], [b]p[/b] and [b]q[/b] being relatively prime (meaning their greatest common divisor is one). From this we conclude that:
+
+[i]once we lock two gears into their positions the same teeth on both gears will mate every [b]p[/b] full revolutions of [b]G[sub]1[/sub][/b] and [b]q[/b] full revolutions of [b]G[sub]2[/sub][/b][/i]
+
+We then can distinguish three cases.
+
+1) N[sub]1[/sub] and N[sub]2[/sub] are relatively prime to begin with (p = N[sub]2[/sub], q = N[sub]1[/sub]). In ths case the mating period of one gear is simply the number of teeth on the other gear. For a [b]17[/b]-tooth input gear meshing with a [b]35[/b]-tooth output gear the same teeth will mate every [b]35[/b] revolutions of the [b]17[/b]-tooth gear and every [b]17[/b] revolutions of the [b]35[/b]-tooth gear. Purely for reference sake let us call this type of ratios [i]relatively prime[/i].
+
+2) N[sub]1[/sub] and N[sub]2[/sub] are not relatively prime but neither [b]p[/b] nor [b]q[/b] is [b]1[/b]. For a [b]21[/b]-tooth input gear meshing with a [b]35[/b]-tooth output gear their ratio is [b]5:3[/b] and the same teeth for this pair will mate every [b]5[/b] revolutions of the [b]21[/b]-tooth and every [b]3[/b] revolutions of the [b]35[/b]-tooth gear. Let us call this type of ratios [i]non-whole[/i].
+
+3) Either [b]p[/b] or [b]q[/b] is [b]1[/b]. For a [b]30[/b]-tooth input gear meshing with a [b]60[/b]-tooth output gear their ratio is [b]2:1[/b] and the same teeth for this pair will mate every [b]2[/b] revolutions of the [b]30[/b]-tooth gear and every [b]1[/b] revolution of the [b]60[/b]-tooth gear. Let us call this type of ratios [i]whole[/i].
+
+Quite often [b]N[sub]2[/sub][/b] and [b]N[sub]1[/sub][/b] can be made relatively prime simply by an addition of just one tooth to one of the wheels. If in our last case we add one tooth to the output [b]60[/b]-tooth gear then the ratio becomes [b]61:30[/b] or relatively prime. It means that the same teeth on both gears will mate every [b]61[/b] revolutions of the [b]30[/b]-tooth gear and every [b]30[/b] revolutions of the [b]61[/b]-tooth gear. Comparing the frequencies of tooth mating for various gear ratios we conclude that:
+
+[i]if the ratio of two ingaged gears G[sub]1[/sub](N[sub]1[/sub]) and G[sub]2[/sub](N[sub]2[/sub]) is expressed in a standard form of [b]p/q[/b] then the larger [b]p[/b] and [b]q[/b] are the less frequently the same teeth of G[sub]1[/sub] and G[sub]2[/sub] mate and conversely[/i]
+
+If we look back at the drawing above it may be said that [b]a[/b] and [b]b[/b] are engaged in a periodic process of hunting for each other during which they come into contact, diverge and then find each other again. Possibly because of this association the extra tooth that lengthens the above mating interval was named [i]a hunting tooth[/i]. Its addition to one of the gears will obviously change the ratio of a pair and of the entire train of which this gear is part of. While some mechanisms can tolerate such usually small change without ill effects the clocks normally can not. As such we must incorporate the concept of a hunting tooth into our gears with care.
+
+The rationale behind the hunting tooth is the desire to even out the wear and tear of imperfectly manufactured gears. The hope here is that the lifetime and the operation of gears will benefit if the effect of an imperfection of a tooth is spread across multiple teeth thus avoiding a constant wear inflicted on the same tooth.
+
+Let us look at a realistic example. Let us assume that in this particular clock we have decided to have a second hand and we already have a [b]30[/b]-tooth wheel that makes one full revolution in one minute. Our minute train then has to have a [b]60:1[/b] ratio. We factorize [b]60[/b] as [b]6*10[/b], to the axis of the [b]30[/b]-tooth second wheel we attach an [b]11[/b]-leaf pinion which we mesh with a [b]66[/b]-tooth wheel for a [b]6:1[/b] ratio. To the axis of the [b]66[/b]-tooth wheel we attach a [b]9[/b]-leaf pinion which we mesh with a [b]90[/b]-tooth wheel for a [b]10:1[/b] ratio making the total ratio of the entire train [b]60:1[/b] as required.
+
+With this configuration the same teeth of the first pair mate every [b]6[/b] full revolutions of the pinion and every one full revolution of the wheel while the same teeth of the second pair mate every [b]10[/b] full revolutions of the pinion and every one full revolution of the wheel. Let us see if we can decrease these frequencies.
+
+Since multiplication of two integers is commutative we can swap the order of factors without changing the result:
+
+[center][color=Cyan]r[sub]m[/sub] = 66/11 * 90/9 = (66*90)/(11*9) = (90*66)/(11*9) = 90/11 * 66/9[/color][/center]
+
+In this new arrangement the [b]11[/b]-leaf pinion is meshed with the [b]90[/b]-tooth wheel yielding a [b]90:11[/b] ratio which can not be reduced any further and the [b]9[/b]-leaf pinion is meshed with the [b]66[/b]-tooth wheel yielding a [b]66:9[/b] ratio which can be reduced to a [b]22:3[/b] form. The overall ratio of the minute train is still [b]60:1[/b] as required but the same teeth of the first pair of gears mate every [b]90[/b] full revolutions of the pinion and every [b]11[/b] full revolutions of the wheel while the same teeth of the second pair mate every [b]22[/b] full revolutions of the pinion and every [b]3[/b] full revolutions of the wheel. Even though we did not use a hunting tooth [i]per se[/i] we achieved a decrease in mating frequencies simply by swapping the order in which the wheels and their pinions mesh. Confirm this by calculating the corresponding [b]lcm()[/b]s.
+
+More non-whole ratios can either be found by hand or with computer software. At the end of this chapter I list a C source code for a few simple computer programs to print out the wheel and pinion tooth counts for whole and non-whole ratios, relatively prime tooth counts and factorizations of an integer.
+
+Keep in mind that the idea of a hunting tooth should likely be treated as a mathematical curiosity which is fun to implement and not as a serious weapon against gear manufacturing defects since we are in full control of making of our own gears (which turn slowly under light loads).
+
+
+
+--------------------------------
+[color=Cyan][b]Procedure[/b][/color]
+
+In the Escapement chapter we observed that it is possible to drive the design of a clock by a number of parameters. I will not be covering all the possibilities here but will instead concentrate on the most  likely [b]1-2-30[/b] candidate - a clock with a [b]1[/b]-meter pendulum that has a [b]2[/b]-second period and a [b]30[/b]-tooth escape wheel. You should have no problems adjusting what follows to some other design variation.
+
+1) Given the [b]2[/b]-second period and a [b]30[/b]-tooth escape wheel the latter will make one full revolution in one minute. Attach a second hand to the axis of the escape wheel if desired.
+
+2) The minute train driven by the escape wheel then should have a [b]60:1[/b] ratio while the hour train driven by the last gear of the minute train should have a [b]12:1[/b] ratio. Name either ratio [b]r[/b].
+
+3) Factorize [b]r[/b]: [b]r = f[sub]1[/sub] * f[sub]2[/sub] * ... * f[sub]n[/sub][/b]. Normally you would start with just two factors. If you want to reduce the size of the gears - add more.
+
+4) For each factor [b]f[sub]i[/sub][/b] make two gears - a [b]p[sub]i[/sub][/b]-leaf pinion and a [b]w[sub]i[/sub][/b]-tooth wheel. For a minute train then we will have [b]4[/b] gears and for the hour train we may have either also [b]4[/b] gears (for 8 + 1 = 9 gears total) or just [b]2[/b] gears - if we decide to implement the [b]12:1[/b] ratio directly (for 6 + 1 = 7 gears total).
+
+5) For a pinion pick [b]p[sub]i[/sub][/b] as some small integer at will. In [i]"The Science of Clocks and Watches"[/i] A. L. Rawlings mentions [b]11[/b] as a reasonable minimum but (of course) do experiment with a lower number.
+
+6) To decide on the value of [b]w[sub]i[/sub][/b] decide on the ratio factorization type. Some (but not all) choices are:
+
+- all the factors are whole
+- none are whole
+- some are whole and some are not
+
+More on this below. If using the whole gear ratios then make [b]w[sub]i[/sub] = f[sub]i[/sub] * p[sub]i[/sub][/b].
+
+If using the non-whole gear ratios (including the relatively prime ones) then pick [b]w[sub]i[/sub][/b] in such a way that the product of all the [b]w[sub]i[/sub]/p[sub]i[/sub][/b] ratios yields the train's ratio [b]r[/b].
+
+7) Attach the pinion to the axis of the output wheel of the previous pair. Mesh that pinion with its wheel.
+
+8) Make the last wheel of the current train coaxal with the last wheel of the previous train if desired.
+
+9) Attach the corresponding hand to the last wheel of the train.
+
+
+[color=Cyan][b]Second Hand[/b][/color]
+
+Since the number of distinct hands is [b]3[/b] - second, minute, hour - the total number of subsets in this set is [b]2[sup]3[/sup] = 8[/b] - meaning there are a total of [b]8[/b] possible ways to mix and match the hands in a clock from a design perspective:
+
+1) no hands
+2) second hand
+3) second and minute hands
+4) second and hour hands
+5) second, minute and hour hands
+6) minute hand
+7) minute and hour hands
+8) hour hand
+
+I will not be commenting on the usefulness of any of the above choices - that is up to the author(s) to decide. In the discussion below I will only cover the most popular second, minute, hour hands configuration.
+
+For a clock to have a second hand it must have at least one gear that makes one full revolution per minute. Quite often an escape wheel does exactly that and it is only logical that we attach the second hand directly to it. Keep in mind that the tip of the second hand may or may not fall exactly on a one-second/one-minute gradation mark with each move of the wheel or with each beat of the pendulum. From the Escapement chapter, however, we remember that in a [b]2[/b]-second [b]30[/b]-tooth escape wheel clock it will.
+
+In any case, when designing your own DIY clock with a second hand it would make sense to choose the period [b]T[/b] and the escape wheel tooth count [b]N[sub]ew[/sub][/b] such that [b]T * N[sub]ew[/sub] = 60[/b].
+
+
+-----------------------
+[color=Cyan][b]Minute Hand[/b][/color]
+
+For a clock to have a minute hand it must have at least one gear that makes one full revolution per hour. If we already have a gear that makes one full revolution per minute then we can use it to drive the minute train. As such we have to slow down the last gear of the minute train [b]60[/b] times. Therefore the ratio of this minute train should be [b]60:1[/b].
+
+We factorize that ratio as [b]6*10[/b], for example. Using the software at the end of this chapter we, for example, pick two pairs of relatively prime tooth counts for that factorization: [b]54:11[/b] and [b]110:9[/b]. To the axis of the one full revolution per minute gear we attach, say, the [b]11[/b]-leaf pinion which we mesh with the [b]54[/b]-tooth wheel. To the axis of the [b]54[/b]-tooth wheel we attach the [b]9[/b]-leaf pinion which we mesh with the [b]110[/b]-tooth wheel. Lastly, we attach the minute hand to the axis of the [b]110[/b]-tooth wheel which will make one full revolution every hour.
+
+We may also factorize [b]60[/b] as [b]5*12[/b] and make all the factors whole - as in [b]35:7[/b] and [b]108:9[/b], or make all the factors not whole - as in [b]35:10[/b] and [b]120:7[/b], mix the factor types - as in [b]96:12[/b] and [b]120:16[/b] and so on.
+
+If we decided to not have a one full revolution per minute gear in this particular clock then we can drive the minute train with the escape wheel. In that case the ratio of the minute train will be determined by the rate of turn of the escape wheel. For example, let us assume that we are designing a [b]2[/b]-second clock with a [b]77[/b]-tooth escape wheel which makes one full revolution in [b]77*2 = 144[/b] seconds. Since there are [b]3,600[/b] seconds in one hour this escape wheel will make [b]3,600:144 = 25[/b] revolutions during that period of time. Therefore the train ratio we need is [b]25:1[/b].
+
+It is of course an overkill but for demonstration purposes using the same software we factorize that ratio as [b]5*5[/b] and then feed these factors into the program that will give us the corresponding tooth counts. Say we pick two pairs of relatively prime counts of [b]55:9[/b] and [b]45:11[/b] and proceed as in the previous paragraph - to the axis of the [b]77[/b]-tooth escape wheel we attach the [b]9[/b]-leaf pinion which we mesh with the [b]55[/b]-tooth wheel so on.
+
+As we can see not only the software comes in handy but more importantly the number of design possibilities - gear configurations - is quite considerable.
+
+
+[color=Cyan][b]Hour Hand[/b][/color]
+
+For a clock to have an hour hand it must have at least one gear that makes one full revolution every [b]12[/b] hours. If we already have a gear that makes one full revolution every hour we can use it to drive the hour train. As such we have to slow down the last wheel of the hour train [b]12[/b] times. Therefore the ratio of this minute train should be [b]12:1[/b].
+
+We may factorize that ratio as [b]3*4[/b], for example, and use the software to print out all the relatively prime pairs for these factors. We pick [b]27:11[/b] and [b]44:9[/b], for example. To the axis of the one full revolution per hour gear we attach the [b]11[/b]-leaf pinion which we mesh with the [b]27[/b]-tooth wheel. To the axis of the [b]27[/b]-tooth wheel we attach the [b]9[/b]-leaf pinion which we mesh with the [b]44[/b]-tooth wheel. We attach the hour hand to the axis of the [b]44[/b]-tooth wheel which will make one full revolution every [b]12[/b] hours.
+
+We may also choose to implement the [b]12:1[/b] ratio directly - with just two gears: an [b]8[/b]-leaf pinion and a [b]96[/b]-tooth wheel or a [b]9[/b]-leaf pinion and a [b]108[/b]-tooth wheel and so on.
+
+If we do not have a gear that makes one full revolution every hour then it would make sense to select the slowest available gear and design an appropriate hour train for it.
+
+
+[color=Cyan][b]Coaxal Hands[/b][/color]
+
+If we want to make the last two pinion/wheel pairs of two trains coaxal we observe that the sums of the corresponding pitch circles' radii must be equal. Let [b]P[sub]1[/sub][/b] be a pinion with the radius [b]R[sub]1[/sub][/b] attached to, say, the axis of the escape wheel which makes one full revolution per minute and our objective is to have coaxal second and minute hands. Let [b]W[sub]1[/sub][/b] be a gear with the radius [b]R[sub]2[/sub][/b]. Let [b]W[sub]1[/sub][/b] mesh with [b]P[sub]1[/sub][/b] to produce some needed ratio, say [b]10[/b]:
+
+[img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_pgc32.png[/img]
+
+To complete the minute train we need another pair of gears, a pinion [b]P[sub]2[/sub][/b] with the radius [b]R[sub]3[/sub][/b] and a wheel [b]W[sub]2[/sub][/b] with the radius [b]R[sub]4[/sub][/b], which when meshed produce another needed ratio, say [b]6[/b]. We then need to design [b]P[sub]1[/sub][/b], [b]W[sub]1[/sub][/b], [b]P[sub]2[/sub][/b] and [b]W[sub]2[/sub][/b] in such a way that their respective pitch radii satisfy the following relationship:
+
+[center][color=Cyan]R[sub]1[/sub] + R[sub]2[/sub] = R[sub]3[/sub] + R[sub]4[/sub][/color][/center]
+
+
+-------------------------------
+[color=Cyan][b]Software[/b][/color]
+
+The attached file contains the C code for six programs which print out - 1) factors of given positive integers, 2) whole clock gear ratios, 3) non-whole clock gear ratios, 4) relatively prime clock gear ratios, 5) greatest common divisor and 6) least common multiple of two positive integers. The file also contains the instructions on how to build these programs and run them.
+
+The intended usage of this tiny collection of programs is as follows. While designing a clock gear ratios inevitably enter the picture. The procedure to design a gear train for a given ratio is described above. This procedure starts out with a factorization of a given ratio. According to the fundamental theorem of arithmetic any number greater than [b]1[/b] is either prime or can be represented as a unique product of primes if their order is ignored. In clock gear ratios, however, a representation condensed to just two factors is of most popular interest. That is why the first program prints these out in the [b]p*q[/b] format. If more than two-factor products are needed then simply pick any one factor and feed it to the program again:
+
+[tt][color=Orange]./f 60
+60:
+1 x 60
+2 x 30
+3 x 20
+4 x 15
+5 x 12
+6 x 10[/color][/tt]
+
+Pick a pair out of the list: [b]5*12[/b], for example. Next, decide on the type of the ratio - whole, non-whole, relatively prime. To print all the whole ratios use the [i]wcgr[/i] program:
+
+[tt][color=Orange]./wcgr 5 12
+5:1 ratios:
+25:5 30:6 35:7 40:8 45:9 50:10 55:11 60:12 65:13 70:14
+75:15 80:16 85:17 90:18 95:19 100:20 105:21 110:22 115:23 120:24
+125:25 130:26 135:27 140:28 145:29 150:30
+
+12:1 ratios:
+60:5 72:6 84:7 96:8 108:9 120:10 132:11 144:12[/color][/tt]
+
+In this case it is safe to pick any ratio from one set and use it with any ratio from the other set. I have limited the number of teeth in these ratios to [b]5[/b] as the smallest and [b]150[/b] as the highest, feel free to change them.
+
+To print all the non-whole ratios, which will include the relatively prime ratios as well, use the [i]nwcgr[/i] program. Since these ratios work in pairs that is how they are printed out:
+
+[tt][color=Orange]./nwcgr 5 12
+25:12 144:5
+35:6 72:7
+35:8 96:7
+35:9 108:7
+35:10 120:7
+35:11 132:7
+35:12 144:7
+40:7 84:8[/color][/tt]
+
+The above is just a small snippet of the entire output. To print out [i]only[/i] relatively prime ratios use the [i]rpcgr[/i] program:
+
+[tt][color=Orange]./rpcgr 5 12
+35:12 144:7
+55:6 72:11
+55:7 84:11
+55:8 96:11
+55:9 108:11
+55:12 144:11
+65:6 72:13[/color][/tt]
+
+Again, this is just a small portion of the entire output. Once you play enough with the relatively prime clock gear ratios you will discover that there is a healthy dose of Fibonacci numbers in them: [b]5[/b], [b]8[/b], [b]13[/b], [b]21[/b], [b]55[/b], [b]89[/b], [b]144[/b]. Most are scattered here and there, some are locked into pairs:
+
+[tt][color=Orange]25:12 144:5
+65:12 144:13
+21:13 52:7[/color][/tt]
+
+The [i]gcd[/i] and [i]lcm[/i] programs are there for good measure.
+
+
+[color=Cyan][b]Literature[/b][/color]
+
+Anton, H., Bivens, I. C., Davis, S. L. (2005). [i]Calculus[/i], 8th edition. New York: John Wiley & Sons.
+
+Baker, G. L., & Blackburn, J. A. (2005). [i]The Pendulum, a Case Stiudy in Physics[/i]. New York: Oxford University Press.
+
+Burton, D. M. (2010). [i]Elementary Number Theory[/i], 7th edition. New York: McGraw-Hill Higher Education.
+
+Fichtenholz, G. M. (1962). [i]Differential and Integral Calculus Course[/i], 5th edition. Moscow: State Publishing House of Literature on Physics and Mathematics.
+
+Goodrich, W. L. (1905). [i]The Modern Clock[/i]. Chicago: Hazlitt & Walker.
+
+Huygens, C. (1986). [i]Geometrical Demonstrations Concerning the Motion of Pendula as Applied to Clocks[/i]. (R. J. Blackwell, Trans.). Ames: Iowa State University Press. (Original work [i]Horologium Oscillatorium[/i] published 1673).
+
+Huygens, C. (1951). [i]Three Memoirs on Mechanics[/i]. (K. K. Baumgart, Trans.). Moscow: Publishing House of the Academy of Sciences of the USSR. (Original work [i]Horologium Oscillatorium[/i] published 1673).
+
+Landau, L. D. (1988). [i]Mechanics. Theoretical Physics[/i], 4th edition. Moscow: Nauka (Science).
+
+Logue, C. H. (1922). [i]American Machinist Gear Book[/i], 3rd edition. (Trautschold, R. Ed.). New York: McGraw-Hill.
+
+Rawlings, A. L. (1948). [i]The Science of Clocks and Watches[/i], 2nd edition. New York: Pitman.
+
+Romanov, A. D. (1975). [i]The Design of Time Measuring Devices[/i]. Moscow: The School of Higher Education.
+
+Schwamb, P., & Merrill A. L. (1908). [i]Elements of Mechanism[/i], 2nd edition. New York: John Wiley & Sons.
