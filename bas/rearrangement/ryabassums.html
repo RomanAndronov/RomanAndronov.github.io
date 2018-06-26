@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Rearrangement. Sums
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Rearrangement. Sums</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabastanofadiff.html">prev</a>
+     <a href="ryabasrearrangement.html">next</a>
+    </p>
+
+    <h1>Sums</h1>
+
+    <p>
+    The purpose of rearranging the members of various types of sums is to create
+    a new formation of them in which most members either cancel each other out or
+    sum easily by becoming the same, for example, in which case the sum of like
+    terms can be replaced with a product.
+    </p>
+
+    <p>
+    <strong>Order Rearrangement</strong>
+    </p>
+
+    <p>
+    In this section we will compute certain sums simply be rearranging the order
+    of their terms.
+    </p>
+
+    <p>
+    <strong>Problem 1.1</strong>
+    </p>
+
+    <p>
+    Find the sum of first powers of first \(n\) natural numbers in closed form:
+    </p>
+
+$$\begin{equation}
+S(n) = 1 + 2 + 3 + \ldots + n = \sum_{i = 1}^n i
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    If we rewrite the terms of (1) in reverse order:
+    </p>
+
+$$\begin{equation}
+S(n) = n + \ldots + 3 + 2 + 1
+\end{equation}$$
+
+    <p>
+    and add (1) and (2) together then we will obtain:
+    </p>
+
+$$+\,\left\{\begin{array}{lclllllllll}
+S(n) & = & 1 & + & 2 & + & 3 & + & \ldots & + & n\\
+S(n) & = & n & + & \ldots & + & 3 & + & 2 & + & 1
+\end{array}\right.$$
+
+    <p>
+    Since the magnitudes of both sums remained the same and equal, we have:
+    </p>
+
+$$2\times S(n) = (1 + n) + (2 + n - 1) + (3 + n - 2) + \ldots + (n + 1)$$
+
+    <p>
+    We observe that each term inside the parenthesis is equal to \(1 + n\):
+    </p>
+
+$$2 + n - 1 = 1 + n$$
+$$3 + n - 2 = 1 + n$$
+$$4 + n - 3 = 1 + n$$
+
+    <p>
+    and so on for all the remaining members of the sum:
+    </p>
+
+$$2\times S(n) = \underbrace{(1 + n) + (1 + n) + (1 + n) + \ldots + (1 + n)}_{n}$$
+
+    <p>
+    As we have noted earlier, since all the terms of the above expression are
+    the same, the addition can be replaced with multiplication:
+    </p>
+
+$$2\times S(n) = n \times (1 + n)$$
+
+    <p>
+    and:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n i = \frac {n(n + 1)}{2}}$$
+
+    <p>
+    <br><strong>Problem 1.2</strong>
+    </p>
+
+    <p>
+    Find the sum of first powers of first \(n\) even natural numbers:
+    </p>
+
+$$\begin{equation}
+S_e(n) = 2 + 4 + \ldots + 2n = \sum_{i = i}^n 2i
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    If we rewrite the terms of (3) in reverse order:
+    </p>
+
+$$\begin{equation}
+S_e(n) = 2n + \ldots + 6 + 4 + 2
+\end{equation}$$
+
+    <p>
+    and add (3) and (4) together then we will obtain:
+    </p>
+
+$$+\,\left\{\begin{array}{lclllllllll}
+S_e(n) & = & 2 & + & 4 & + & 6 & + & \ldots & + & 2n\\
+S_e(n) & = & 2n & + & \ldots & + & 6 & + & 4 & + & 2
+\end{array}\right.$$
+
+    <p>
+    Since the magnitudes of both sums remained the same and equal, we have:
+    </p>
+
+$$2\times S_e(n) = (2 + 2n) + (4 + 2n - 2) + (6 + 2n - 4) + \ldots + (2n + 2)$$
+
+    <p>
+    The terms \(2n - 2\), \(2n - 4\), \(2n - 6\) and the like come from the fact
+    that the members of this particular sum are even numbers and if the last term
+    of a sum is \(2n\) then the term just before it is \(2(n - 1) = 2n - 2\), the
+    term just before it is \(2(n - 2) = 2n - 4\) and so on.
+    </p>
+
+    <p>
+    We observe that each term inside the parenthesis is equal to \(2 + 2n\):
+    </p>
+
+$$4 + 2n - 2 = 2 + 2n$$
+$$6 + 2n - 4 = 2 + 2n$$
+$$8 + 2n - 6 = 2 + 2n$$
+
+    <p>
+    and so on for all the remaining members of the sum:
+    </p>
+
+$$2\times S_e(n) = \underbrace{(2 + 2n) + (2 + 2n) + (2 + 2n) + \ldots + (2 + 2n)}_{n}$$
+
+    <p>
+    Since all the terms of the above expression are the same, the addition can
+    be replaced with multiplication:
+    </p>
+
+$$2\times S_e(n) = n \times (2 + 2n)$$
+$$2\times S_e(n) = 2n \times (1 + n)$$
+
+    <p>
+    or:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\sum_{i = i}^n 2i = n(n + 1)}$$
+
+    <p>
+    <br><strong>Problem 1.3</strong>
+    </p>
+
+    <p>
+    Find the sum of first powers of first \(n\) odd natural numbers:
+    </p>
+
+$$S_o(n) = 1 + 3 + \ldots + 2n - 1 = \sum_{i = 1}^n (2i - 1)$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    By now we should be able to do the relevant computations rather mechanically:
+    </p>
+
+$$S_o(n) = 2n - 1 + \ldots + 5 + 3 + 1$$
+
+$$+\,\left\{\begin{array}{lclllllllll}
+S_o(n) & = & 1 & + & 3 & + & 5 & + & \ldots & + & 2n - 1\\
+S_o(n) & = & 2n - 1 & + & \ldots & + & 5 & + & 3 & + & 1
+\end{array}\right.$$
+
+$$2\times S_o(n) = (1 + 2n - 1) + (3 + 2n - 3) + (5 + 2n - 5) + \ldots +
+ (2n - 1 + 1)$$
+
+$$2\times S_o(n) = \underbrace{2n + 2n + 2n + \ldots + 2n}_{n}$$
+
+$$2\times S_o(n) = n \times 2n$$
+$$2\times S_o(n) = 2 n^2$$
+
+$$\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n (2i - 1) = n^2}$$
+
+    <p>
+    <br><strong>Structure Rearrangement</strong>
+    </p>
+
+    <p>
+    In this section we will compute the magnitudes of certain sums in closed
+    form by rearranging the structure of their members.
+    </p>
+
+    <p>
+    <br><strong>Problem 2.1</strong>
+    </p>
+
+    <p>
+    Find the sum of inverse products of two consecutive natural numbers:
+    </p>
+
+$$\begin{equation}
+\frac {1}{1 \times 2} + \frac {1}{2 \times 3} + \frac {1}{3 \times 4} +
+ \ldots + \frac {1}{n(n + 1)} = \sum_{i=1}^n \frac {1}{i(i + 1)}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    We observe that each term of (5) is structured in such a way that it can be
+    rearranged as follows:
+    </p>
+
+$$\frac {1}{1 \times 2} = \frac {1}{1} - \frac {1}{2}$$
+$$\frac {1}{2 \times 3} = \frac {1}{2} - \frac {1}{3}$$
+$$\frac {1}{3 \times 4} = \frac {1}{3} - \frac {1}{4}$$
+
+    <p>
+    and that after adding these members together only the first and the last
+    terms survive because all the intermediate terms cancel each other out since
+    pairwise they have the same magnitudes but opposite signs:
+    </p>
+
+$$\frac {1}{1 \times 2} + \frac {1}{2 \times 3} + \frac {1}{3 \times 4} =
+ \frac {1}{1} - \frac {1}{4}$$
+
+    <p>
+    It follows then that for any \(n\) such terms their sum will be:
+    </p>
+
+$$\sum_{i=1}^n \frac {1}{i(i + 1)} = \frac {1}{1} - \frac {1}{n + 1} =$$
+$$\frac {n + 1 - 1}{n + 1} = \frac {n}{n + 1}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i=1}^n \frac {1}{i(i + 1)} = \frac {n}{n + 1}}
+\end{equation}$$
+
+    <p>
+    If we further rearrange the above formula as follows:
+    </p>
+
+$$\sum_{i=1}^n \frac {1}{i(i + 1)} = \frac {1}{1 + \frac {1}{n}}$$
+
+    <p>
+    then its limit when \(n \to +\infty\) is:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i=1}^n \frac {1}{i(i + 1)} = 1}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 2.2</strong>
+    </p>
+
+    <p>
+    Find the sum of inverse products of two consecutive odd natural numbers:
+    </p>
+
+$$\frac {1}{1 \times 3} + \frac {1}{3 \times 5} + \frac {1}{5 \times 7} +
+\ldots + \frac {1}{(2n - 1)(2n + 1)} = \sum_{i=1}^n \frac {1}{(2i - 1)(2i + 1)}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    We observe that the members of this sum are structured in such a way that
+    each one of them can be rearranged as follows:
+    </p>
+
+$$\frac {1}{1 \times 3} = \frac {1}{2}\Big(\frac {1}{1} - \frac {1}{3}\Big)$$
+$$\frac {1}{3 \times 5} = \frac {1}{2}\Big(\frac {1}{3} - \frac {1}{5}\Big)$$
+$$\frac {1}{1 \times 3} = \frac {1}{2}\Big(\frac {1}{5} - \frac {1}{7}\Big)$$
+
+    <p>
+    and we already know that in the sum of such terms only the first and the last
+    ones survive:
+    </p>
+
+$$\frac {1}{(2i - 1) \times (2i + 1)} = \frac {1}{2}\Big(\frac {1}{2i - 1}
+- \frac {1}{2i + 1}\Big)$$
+
+    <p>
+    Consequently:
+    </p>
+
+$$\sum_{i=1}^n \frac {1}{(2i - 1)(2i + 1)} = \frac {1}{2}\Big( \frac {1}{1} -
+\frac {1}{2n + 1}\Big) =$$
+$$\frac {1}{2} \frac {2n + 1 - 1}{2n + 1} =$$
+$$\frac {n}{2n + 1}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i=1}^n \frac {1}{(2i - 1)(2i + 1)} = \frac {n}{2n + 1}}
+\end{equation}$$
+
+    <p>
+    or:
+    </p>
+
+$$\sum_{i=1}^n \frac {1}{(2i - 1)(2i + 1)} = \frac {1}{2 + \frac {1}{n}}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i=1}^n
+\frac {1}{(2i - 1)(2i + 1)} = \frac {1}{2}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 2.3</strong>
+    </p>
+
+    <p>
+    Find the sum of inverse products of two consecutive odd natural numbers:
+    </p>
+
+$$\frac {1}{2 \times 4} + \frac {1}{4 \times 6} + \frac {1}{6 \times 8} +
+\ldots + \frac {1}{2n(2n + 2)} = \sum_{i=1}^n \frac {1}{2i(2i + 2)}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    This sum can be expressed in terms of the previous sum, (6):
+    </p>
+
+$$2i(2i + 2) = 4i(i + 1)$$
+$$\sum_{i=1}^n \frac {1}{2i(2i + 2)} = \frac {1}{4}
+\sum_{i=1}^n \frac {1}{i(i + 1)}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i=1}^n \frac {1}{2i(2i + 2)} = \frac {n}{4(n + 1)}}
+\end{equation}$$
+
+    <p>
+    and since:
+    </p>
+
+$$\frac {n}{4(n + 1)} = \frac {1}{4 + \frac {4}{n}}$$
+
+    <p>
+    we have:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i=1}^n
+\frac {1}{2i(2i + 2)} = \frac {1}{4}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 3.1</strong>
+    </p>
+
+    <p>
+    Find the sum of growing consecutive powers of a constant integer base
+    \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S = \sum_{i = 0}^n a^i = 1 + a + a^2 + a^3 + \ldots + a^n
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    We modify the structure of each member of (12) by multiplying it by \(a\):
+    </p>
+
+$$\begin{equation}
+aS_a(n) = a + a^2 + a^3 + a^4 + \ldots + a^{n + 1}
+\end{equation}$$
+
+    <p>
+    Subtract (12) from (13):
+    </p>
+
+$$-\,\left\{\begin{array}{lclllllllll}
+aS_a(n) & = & a & + & a^2 & + & a^3 & + & \ldots & + & a^{n + 1}\\
+S_a(n) & = & 1 & + & a & + & a^2 & + & \ldots & + & a^n
+\end{array}\right.$$
+
+$$\begin{equation}
+(a - 1)S_a(n) = a + a^2 + a^3 + \ldots + a^{n + 1} - 1 - a - a^2 - a^3
+- \ldots - a^n
+\end{equation}$$
+
+    <p>
+    Rearrange the members of equal powers in (14) as follows:
+    </p>
+
+$$(a - 1)S_a(n) = a - a + a^2 - a^2 + a^3 - a^3 + \ldots + a^n - a^n +
+a^{n + 1} - 1$$
+
+    <p>
+    and observe that all these members in the above sum will cancel each other
+    out except for the two:
+    </p>
+
+$$S_a(n)(a - 1) = a^{n + 1} - 1$$
+
+    <p>
+    Lastly:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 0}^n a^i = \frac {a^{n + 1} - 1}{a - 1}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 3.2</strong>
+    </p>
+
+    <p>
+    Find the sum of growing odd powers of a constant integer base \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S_{a^o}(n) = \sum_{i = 1}^n a^{2i - 1} = a + a^3 + a^5 + \ldots + a^{2n - 1}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Rearrange the structure of each member of (16) by multiplying it by \(a^2\):
+    </p>
+
+$$\begin{equation}
+a^2S_{a^o}(n) = a^3 + a^5 + a^7 + a^9 + \ldots + a^{2n + 1}
+\end{equation}$$
+
+    <p>
+    Subtract (16) from (17):
+    </p>
+
+$$-\,\left\{\begin{array}{lclllllllll}
+a^2S_{a^o}(n) & = & a^3 & + & a^5 & + & a^7 & + & \ldots & + & a^{2n + 1}\\
+S_{a^o}(n) & = & a & + & a^3 & + & a^5 & + & \ldots & + & a^{2n - 1}
+\end{array}\right.$$
+
+$$(a^2 - 1)S_{a^o}(n) = a^3 + a^5 + a^7 + \ldots + a^{2n + 1} - a - a^3 - a^5
+- \ldots - a^{2n - 1} =$$
+$$a^3 - a^3 + a^5 - a^5 + a^7 - a^7 + \ldots + a^{2n - 1} - a^{2n - 1} +
+ a^{2n + 1} - a$$
+
+    <p>
+    and observe that all the members with like powers will cancel each other out
+    except for the last two:
+    </p>
+
+$$(a^2 - 1)S_{a^o}(n) = a^{2n + 1} - a = a(a^{2n} - 1)$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n a^{2i - 1} = a \frac {a^{2n} - 1}{a^2 - 1}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 3.3</strong>
+    </p>
+
+    <p>
+    Find the sum of growing even powers of a constant integer base \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S_{a^e}(n) = \sum_{i = 1}^n a^{2i} = a^2 + a^4 + a^6 + \ldots + a^{2n}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    At this point we should be able to compute (19) by analogy:
+    </p>
+
+$$a^2S_{a^e}(n) = a^4 + a^6 + a^8 + a^{10} + \ldots + a^{2n + 2}$$
+
+$$-\,\left\{\begin{array}{lclllllllll}
+S_{a^e}(n) \times a^2 & = & a^4 & + & a^6 & + & a^8 & + & \ldots & + & a^{2n + 2}\\
+S_{a^e}(n) & = & a^2 & + & a^4 & + & a^6 & + & \ldots & + & a^{2n}
+\end{array}\right.$$
+
+$$(a^2 - 1)S_{a^e}(n) = a^4 + a^6 + a^8 + \ldots + a^{2n + 2} - a^2 - a^4 -
+a^6 - \ldots - a^{2n} =$$
+$$a^4 - a^4 + a^6 - a^6 + a^8 - a^8 + \ldots + a^{2n} - a^{2n} + a^{2n + 2} -
+ a^2 =$$
+$$a^2(a^{2n} - 1)$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n a^{2i} = a^2 \frac {a^{2n} - 1}{a^2 - 1}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 4.1</strong>
+    </p>
+
+    <p>
+    Find the sum of inverse growing powers of a constant integer base \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S_{a^-}(n) = \sum_{i = 1}^n \frac {1}{a^i} = \frac {1}{a} + \frac {1}{a^2} + \frac {1}{a^3}
++ \ldots + \frac {1}{a^n}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Multiply both sides of (20) by \(a\):
+    </p>
+
+$$\begin{equation}
+aS_{a^-}(n) = 1 + \frac {1}{a} + \frac {1}{a^2} + \ldots + \frac {1}{a^{n - 1}}
+\end{equation}$$
+
+    <p>
+    Subtract (20) from (21):
+    </p>
+
+$$(a - 1)S_{a^-}(n) = 1 + \frac {1}{a} + \frac {1}{a^2} + \ldots + \frac {1}{a^{n - 1}}
+- \frac {1}{a} - \frac {1}{a^2} - \frac {1}{a^3} - \ldots - \frac {1}{a^n} =$$
+$$1 + \frac {1}{a} - \frac {1}{a} + \frac {1}{a^2} - \frac {1}{a^2} +
+ \ldots + \frac {1}{a^{n - 1}} - \frac {1}{a^{n - 1}} - \frac {1}{a^n} =$$
+$$1 - \frac {1}{a^n}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n \frac {1}{a^i} = \frac {a^n - 1}{a^n(a - 1)}}
+\end{equation}$$
+
+    <p>
+    Further:
+    </p>
+
+$$\frac {a^n - 1}{a^n(a - 1)} = \frac {1 - \frac {1}{a^n}}{a - 1}$$
+
+    <p>
+    and hence:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i = 1}^n \frac {1}{a^i} =
+ \frac {1}{a - 1}}
+\end{equation}$$
+
+    <p>
+    By analogy we also obtain the results for odd:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n \frac {1}{a^{2i - 1}} =
+ \frac {a^{2n} - 1}{a^{2n - 1}(a^2 - 1)}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i = 1}^n \frac {1}{a^{2i - 1}} =
+ \frac {a}{a^2 - 1}}
+\end{equation}$$
+
+    <p>
+    and even powers:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n \frac {1}{a^{2i}} =
+ \frac {a^{2n} - 1}{a^{2n}(a^2 - 1)}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i = 1}^n \frac {1}{a^{2i}} =
+ \frac {1}{a^2 - 1}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 4.2</strong>
+    </p>
+
+    <p>
+    Find the sum of patterned inverse consecutive powers of a constant integer
+    base \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S = \sum_{i = 1}^n \frac {i}{a^i} = \frac {1}{a} + \frac {2}{a^2} + \frac {3}{a^3}
++ \ldots + \frac {n}{a^n}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    To calculate this sum we will use the combination of two approaches:
+    rearrangement and reduction. First we will rearrange and then we will reduce.
+    </p>
+
+    <p>
+    Multiply both sides of (29) by \(a\):
+    </p>
+
+$$\begin{equation}
+aS = 1 + \frac {2}{a} + \frac {3}{a^2} + \ldots + \frac {n}{a^{n - 1}}
+\end{equation}$$
+
+    <p>
+    Subtract (29) from (30):
+    </p>
+
+$$aS - S = 1 + \frac {2}{a} + \frac {3}{a^2} + \ldots + \frac {n}{a^{n - 1}}
+ - \frac {1}{a} - \frac {2}{a^2} - \frac {3}{a^3} - \ldots - \frac {n}{a^n} =$$
+$$1 + \frac {2}{a} - \frac {1}{a} + \frac {3}{a^2} - \frac {2}{a^2}
+ + \ldots + \frac {n}{a^{n - 1}} - \frac {n - 1}{a^{n - 1}} - \frac {n}{a^n} =$$
+$$1 + \underbrace{\frac {1}{a} + \frac {1}{a^2} + \frac {1}{a^3} +
+  + \ldots + \frac {1}{a^{n - 1}}}_{n - 1} - \frac {n}{a^n}$$
+
+    <p>
+    We observe that the terms in the middle of the above sum look almost like the
+    sum (23) - almost because in (23) the index \(i\) runs from \(1\) to \(n\)
+    while here \(i\) runs from \(1\) to \(n - 1\).
+    </p>
+
+    <p>
+    To make our current sum complete we add and subtract \(a^{-n}\) to it:
+    </p>
+
+$$(a - 1)S = 1 + \underbrace{\frac {1}{a} + \frac {1}{a^2} + \frac {1}{a^3} +
+ \ldots + \frac {1}{a^{n - 1}} + \frac {1}{a^n}}_{n} - \frac {1}{a^n} -
+ \frac {n}{a^n}$$
+
+    <p>
+    The structure rearrangement portion is over since we have managed to reduce
+    the  current problem to the previously solved one. From (23) it follows:
+    </p>
+
+$$(a - 1)S = 1 + \frac {a^n - 1}{a^n(a - 1)} - \frac {1}{a^n} - \frac {n}{a^n} =$$
+$$1 + \frac {a^n - 1}{a^n(a - 1)} - \frac {1 + n}{a^n} =$$
+$$\frac {a^n(a - 1)}{a^n(a - 1)} + \frac {a^n - 1}{a^n(a - 1)} -
+ \frac {(1 + n)(a - 1)}{a^n(a - 1)} =$$
+$$\frac {a^{n + 1} - a^n + a^n - 1 - a + 1 - na + n} {a^n(a - 1)} =$$
+$$= \frac {a^{n + 1} - a(n + 1) + n}{a^n(a - 1)}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n \frac {i}{a^i} = \frac {a^{n + 1} - a(n + 1) +
+ n}{a^n(a - 1)^2}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty}\sum_{i = 1}^n \frac {i}{a^i} =
+ \frac {a}{(a - 1)^2}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 5.1</strong>
+    </p>
+
+    <p>
+    Find the sum of sines of sequentially growing arguments:
+    </p>
+
+$$\begin{equation}
+S = \sum_{k = 1}^n \sin kx = \sin x + \sin 2x + \sin 3x + \ldots + \sin nx
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    To compute this sum we will use the following product-to-sum identity:
+    </p>
+
+$$\begin{equation}
+\sin \alpha \sin \beta = \frac {1}{2}(\cos (\alpha - \beta) -
+ \cos (\alpha + \beta))
+\end{equation}$$
+
+    <p>
+    Rearrange the structure of each member of (33) by multiplying it by \(\sin
+    \frac {x}{2}\):
+    </p>
+
+$$\begin{equation}
+\sin \frac {x}{2} S = \sin x \sin \frac {x}{2} +
+\sin 2x \sin \frac {x}{2} + \ldots + \sin nx \sin \frac {x}{2}
+\end{equation}$$
+
+    <p>
+    and apply (34) to each member of (35).
+    </p>
+
+    <p>
+    For the first term of (35) we have:
+    </p>
+
+$$\sin x \sin \frac {x}{2} = \frac {1}{2}\Big(\cos \Big(x - \frac {x}{2}\Big) -
+\cos \Big(x + \frac {x}{2}\Big)\Big) =$$
+$$\frac {1}{2}\Big(\cos \frac {x}{2} - \cos \frac {3x}{2}\Big)$$
+
+    <p>
+    For the second term of (35) we have:
+    </p>
+
+$$\sin 2x \sin \frac {x}{2} = \frac {1}{2}\Big(\cos \Big(2x - \frac {x}{2}\Big) -
+\cos \Big(2x + \frac {x}{2}\Big)\Big) =$$
+$$\frac {1}{2}\Big(\cos \frac {3x}{2} - \cos \frac {5x}{2}\Big)$$
+
+    <p>
+    We observe that the last term of the current pair of cosines always cancels
+    out with the first term of the next pair of cosines:
+    </p>
+
+$$\sin x \sin \frac {x}{2} + \sin 2x \sin \frac {x}{2} = \frac {1}{2}\Big(
+\cos \frac {x}{2} - \cos \frac {5x}{2}\Big)$$
+
+    <p>
+    It follows then that in (35) all but the first and the last expanded terms
+    will cancel each other out:
+    </p>
+
+$$\begin{equation}
+\sin \frac {x}{2} S = \frac {1}{2}\Big(\cos \frac {x}{2} -
+ \cos \frac {(2n + 1)x}{2}\Big)
+\end{equation}$$
+
+    <p>
+    We replace the difference of cosines in (36) with its product equivalent via
+    the following difference-to-product identity:
+    </p>
+
+$$\begin{equation}
+\cos \alpha - \cos \beta = -2 \sin \frac {\alpha + \beta}{2}
+ \sin \frac {\alpha - \beta}{2}
+\end{equation}$$
+
+    <p>
+    where:
+    </p>
+
+$$\alpha + \beta = \frac {x}{2} + \frac {(2n + 1)x}{2} = (n + 1)x$$
+$$\alpha - \beta = \frac {x}{2} - \frac {(2n + 1)x}{2} = -nx$$
+
+    <p>
+    to obtain for (36):
+    </p>
+
+$$\sin \frac {x}{2} S = -\sin \frac {(n + 1)x}{2} \sin \frac {-nx}{2} =$$
+$$\sin \frac {(n + 1)x}{2} \sin \frac {nx}{2}$$
+
+    <p>
+    since sine is an odd function.
+    </p>
+
+    <p>
+    Finally:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{k = 1}^n \sin kx = \frac {\sin \frac {(n + 1)x}{2}
+ \sin \frac {nx}{2}} {\sin \frac {x}{2}}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 5.2</strong>
+    </p>
+
+    <p>
+    Find the sum of cosines of sequentially growing arguments:
+    </p>
+
+$$\begin{equation}
+S = \sum_{k = 1}^n \cos kx = \cos x + \cos 2x + \cos 3x + \ldots + \cos nx
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    To compute this sum we will use the following product-to-sum identity:
+    </p>
+
+$$\begin{equation}
+\cos \alpha \sin \beta = \frac {1}{2}(\sin (\alpha + \beta) -
+\sin (\alpha - \beta))
+\end{equation}$$
+
+    <p>
+    Rearrange the structure of each member of (39) by multiplying it by
+    \(\sin \frac {x}{2}\):
+    </p>
+
+$$\begin{equation}
+\sin \frac {x}{2} S = \cos x \sin \frac {x}{2} +
+\cos 2x \sin \frac {x}{2} + \cos 3x \sin \frac {x}{2} + \ldots +
+\cos nx \sin \frac {x}{2}
+\end{equation}$$
+
+    <p>
+    and apply (40) to each member of (41). For example:
+    </p>
+
+$$\cos x \sin \frac {x}{2} = \frac {1}{2}\Big(\sin \frac {3x}{2} -
+\sin \frac {1}{2}\Big)$$
+
+$$\cos 2x \sin \frac {x}{2} = \frac {1}{2}\Big(\sin \frac {5x}{2} -
+\sin \frac {3x}{2}\Big)$$
+
+    <p>
+    We observe that since the first term of the current pair of sines always
+    cancels out with the last term of the next pair of sines, for (41) we will
+    have:
+    </p>
+
+$$\sin \frac {x}{2} S = \frac {1}{2}\Big( \sin \frac {(2n + 1)x}{2} -
+\sin \frac {x}{2}\Big)$$
+
+    <p>
+    in which we have replaced the difference of sines with its product equivalent
+    via the following difference-to-product identity:
+    </p>
+
+$$\begin{equation}
+\sin \alpha - \sin \beta = 2 \cos \frac {\alpha + \beta}{2}
+ \sin \frac {\alpha - \beta}{2}
+\end{equation}$$
+
+    <p>
+    where:
+    </p>
+
+$$\alpha + \beta = \frac {(2n + 1)x}{2} + \frac {x}{2} = (n + 1)x$$
+$$\alpha - \beta = \frac {(2n + 1)x}{2} - \frac {x}{2} = nx$$
+
+    <p>
+    to obtain:
+    </p>
+
+$$\sin \frac {x}{2} S = \cos \frac {(n + 1)x}{2} \sin \frac {nx}{2}$$
+
+    <p>
+    Finally:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{k = 1}^n \cos kx = \frac {\cos \frac {(n + 1)x}{2}
+\sin \frac {nx}{2}} {\sin \frac {x}{2}}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 5.3</strong>
+    </p>
+
+    <p>
+    Find the sum of sines of consecutive odd arguments:
+    </p>
+
+$$\begin{equation}
+S = \sum_{k = 1}^n \sin (2k - 1)x = \sin x + \sin 3x + \sin 5x + \ldots + \sin (2n - 1)x
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Rearrange the structure of each member of (44) by multiplying it by
+    \(\sin x\):
+    </p>
+
+$$\begin{equation}
+\sin x S = \sin x \sin x + \sin 3x \sin x + \ldots + \sin (2n - 1)x \sin x
+\end{equation}$$
+
+    <p>
+    and apply the product-to-sum identity (34) to each member of (45). For
+    example:
+    </p>
+
+$$\sin x \sin x = \frac {1}{2}(\cos 0 - \cos 2x)$$
+$$\sin 3x \sin x = \frac {1}{2}(\cos 2x - \cos 4x)$$
+$$\sin 5x \sin x = \frac {1}{2}(\cos 4x - \cos 6x)$$
+
+    <p>
+    We observe that since the last term of the current pair of cosines always
+    cancels out with the first term of the next pair of cosines, for (45) we will
+    have:
+    </p>
+
+$$\sin x S = \frac {1}{2}(\cos 0 - \cos (2nx)) =$$
+$$\sin (nx) \sin (nx) =$$
+$$\sin^2 (nx)$$
+
+    <p>
+    where we have used the difference-to-product identity (37) and the fact that
+    sine is an odd function:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{k = 1}^n \sin (2k - 1)x = \frac {\sin^2 (nx)}{\sin x}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 5.4</strong>
+    </p>
+
+    <p>
+    Find the sum of sines of consecutive even arguments:
+    </p>
+
+$$\begin{equation}
+S = \sum_{k = 1}^n \sin 2kx = \sin x + \sin 3x + \sin 5x + \ldots + \sin 2nx
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Rearrange the structure of each member of (47) by multiplying it by
+    \(\sin x\):
+    </p>
+
+$$\begin{equation}
+\sin x S = \sin 2x \sin x + \sin 4x \sin x + \ldots + \sin 2nx \sin x
+\end{equation}$$
+
+    <p>
+    Apply the product-to-sum identity (34) to each member of (48). For example:
+    </p>
+
+$$\sin 2x \sin x = \frac {1}{2}(\cos x - \cos 3x)$$
+$$\sin 4x \sin x = \frac {1}{2}(\cos 3x - \cos 5x)$$
+$$\sin 6x \sin x = \frac {1}{2}(\cos 5x - \cos 7x)$$
+
+    <p>
+    We observe that since the last term of the current pair of cosines always
+    cancels out with the first term of the next pair of cosines, for (48) we
+    will have:
+    </p>
+
+$$\sin x S = \frac {1}{2}(\cos x - \cos (2n + 1)x) =$$
+$$\sin ((n + 1)x) \sin (nx)$$
+
+    <p>
+    where we have used the difference-to-product identity (37) and the fact that
+    sine is an odd function:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{k = 1}^n \sin 2kx = \frac {\sin ((n + 1)x)
+ \sin (nx)}{\sin x}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 5.5</strong>
+    </p>
+
+    <p>
+    Find the sum of cosines of consecutive odd arguments:
+    </p>
+
+$$\begin{equation}
+S = \sum_{k = 1}^n \cos (2k - 1)x = \cos x + \cos 3x + \cos 5x + \ldots + \cos (2n - 1)x
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Multiply both sides of (50) by \(\sin x\):
+    </p>
+
+$$\begin{equation}
+\sin x S = \cos x \sin x + \cos 3x \sin x + \cos 5x \sin x +
+\ldots + \cos (2n - 1)x \sin x
+\end{equation}$$
+
+    <p>
+    and apply the product-to-sum identity (40) to each term in (51). For example:
+    </p>
+
+$$\cos x \sin x = \frac {1}{2} (\sin 2x - \sin 0)$$
+$$\cos 3x \sin x = \frac {1}{2} (\sin 4x - \sin 2x)$$
+$$\cos 5x \sin x = \frac {1}{2} (\sin 6x - \sin 3x)$$
+
+    <p>
+    We observe that since the first term of the current pair of the above sines
+    always cancels out with the last term of next next pair of sines, for (51)
+    we will have:
+    </p>
+
+$$\sin x S = \frac {1}{2} (\sin (2nx) - \sin 0) =$$
+$$\cos (nx) \sin (nx)$$
+
+    <p>
+    where we have used the difference-to-product identity (34) and the fact that
+    sine is an odd function:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\sum_{k = 1}^n \cos (2k - 1)x =
+ \frac {\cos (nx) \sin (nx)}{\sin x} =
+\frac {\sin (2nx)}{2\sin x}}$$
+
+    <p>
+    <br><strong>Problem 5.6</strong>
+    </p>
+
+    <p>
+    Find the sum of cosines of consecutive even arguments:
+    </p>
+
+$$\begin{equation}
+S = \sum_{k = 1}^n \cos 2kx = \cos x + \cos 3x + \cos 5x + \ldots + \cos 2nx
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Multiply both sides of (52) \(\sin x\):
+    </p>
+
+$$\begin{equation}
+\sin x S = \cos 2x \sin x + \cos 4x \sin x + \cos 6x \sin x +
+\ldots + \cos 2nx \sin x
+\end{equation}$$
+
+    <p>
+    Apply the product-to-sum identity (40) to each term of (53). For example:
+    </p>
+
+$$\cos 2x \sin x = \frac {1}{2} (\sin 3x - \sin x)$$
+$$\cos 4x \sin x = \frac {1}{2} (\sin 5x - \sin 3x)$$
+$$\cos 6x \sin x = \frac {1}{2} (\sin 7x - \sin 5x)$$
+
+    <p>
+    We observe that since the first term of the current pair of the above sines
+    always cancels out with the last term of next pair of sines, for (53) we
+    will have:
+    </p>
+
+$$\sin x S = \frac {1}{2} (\sin ((2n + 1)x) - \sin x) =$$
+$$\cos ((n + 1)x) \sin (nx)$$
+
+    <p>
+    where we have used the difference-to-sum identity (34) and the fact that
+    sine is an odd function:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{k = 1}^n \cos 2kx = \frac {\cos ((n + 1)x) \sin (nx)}{\sin x}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 6</strong>
+    </p>
+
+    <p>
+    Find the sum of patterned factorials:
+    </p>
+
+$$\begin{equation}
+S = \sum_{i = 1}^n i \times i! = 1 \times 1! + 2 \times 2! + 3 \times 3! +
+ \ldots + n \times n!
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Rearrange the structure of each member of () by observing the following:
+    </p>
+
+$$1 \times 1! = (1 + 0)1! =$$
+$$(1 + 1 - 1)1! =$$
+$$(1 + 1)1! - 1 \times 1! =$$
+$$2 \times 1! - 1! =$$
+$$2! - 1$$
+
+    <p>
+    and:
+    </p>
+
+$$2 \times 2! = (2 + 1 - 1)2! =$$
+$$(2 + 1)2! - 2! =$$
+$$3 \times 2! - 2! =$$
+$$3! - 2!$$
+
+    <p>
+    and:
+    </p>
+
+$$3 \times 3! = (3 + 1 - 1)3! =$$
+$$4 \times 3! - 3! =$$
+$$4! - 3!$$
+
+    <p>
+    and so on. For any \(i\) then:
+    </p>
+
+$$i \times i! = (i + 1)! - i!$$
+
+    <p>
+    and:
+    </p>
+
+$$S = 2! - 1! + 3! - 2! + 4! - 3! + \ldots + (n + 1)! - n!$$
+
+    <p>
+    We observe that all the terms in the above sum cancel each other out except
+    for the second and the one before last:
+    </p>
+
+$$S = -1 + (n + 1)!$$
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n i \times i! = (n + 1)! - 1}
+\end{equation}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabastanofadiff.html">prev</a>
+     <a href="ryabasrearrangement.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrearrangement.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

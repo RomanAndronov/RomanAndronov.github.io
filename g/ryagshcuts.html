@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+g Shortcuts by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">g Shortcuts by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryagsmpls.html">prev</a>
+     <a href="ryag.html">next</a>
+    </p>
+
+    <h1>g Shortcuts</h1>
+
+    <p>
+    While any Euclidean straight edge and compass construction can be documented
+    with \(g\), it may produce a large number of intermediate objects which,
+    however useful, are overall irrelevant. In order to not pollute such a
+    construction with these types of objects it is possible to omit them
+    altogether by using \(g\) shortcuts which are compound statements that,
+    while lacking all the required details, still capture the essence of the
+    operation at hand.
+    </p>
+
+    <p>
+    For example, in <strong>Ruler and Compass 02</strong> section we document
+    the steps for constructing perpendiculars and parallels. Here is a full
+    <strong>3</strong>-step construction of a perpendicular to a given straight
+    line \(l\) through a given point \(A\) on \(l\):
+    </p>
+
+$$Cir(O \notin l, OA) \cap l = A, B$$
+$$Ln(B, O) \cap Cir(O, OA) = B, C$$
+$$Ln(C, A) \bot l$$
+
+    <p>
+    We see that in addition to two given objects we generate five more: three
+    points, a circle and a straight line. Since the sole objective of this
+    construction is to demonstrate exactly how to solve a given problem, we
+    have no choice but enumerate all the steps - without them there is no
+    solution.
+    </p>
+
+    <p>
+    However, if constructing a perpendicular through a point on a straight line
+    is just an intermediate step in a larger solution of a bigger problem and
+    the above mentioned five intermediate objects are not used during the
+    remaining steps it is permissible to compress the above steps into a shortcut.
+    </p>
+
+    <p>
+    We can record this shortcut as:
+    </p>
+
+$$C \notin l \colon Ln(A \in l, C) \bot l$$
+
+    <p>
+    which formally reads as:
+    </p>
+
+    <p class="center">
+    <dfn>construct a point \(C\) not on \(l\) such that a straight line passing
+    through \(A\) on \(l\) and through \(C\) is perpendicular to \(l\)</dfn>
+    </p>
+
+    <p>
+    Such shortcuts, however, will never be used in a vacuum - there will always
+    be enough context in the course of a given construction to unambiguously place
+    or locate the shortcut's objects. As such, it is permissible to compress most
+    of the shortcuts even further. For example:
+    </p>
+
+$$C \colon Ln(A, C) = p \bot l$$
+
+    <p>
+    means:
+    </p>
+
+    <p class="center">
+    <dfn>construct a perpendicular \(p\) to \(l\) through \(A\)</dfn>
+    </p>
+
+    <p>
+    To construct an arbitrary circle through \(A\) perpendicular to \(l\), we
+    may use the following shortcut:
+    </p>
+
+$$O \colon Cir(O, OA) = p \bot l$$
+
+    <p>
+    meaning:
+    </p>
+
+    <p class="center">
+    <dfn>construct a circle \(p\) perpendicular to \(l\) through \(A\)</dfn>
+    </p>
+
+    <p>
+    and so on.
+    </p>
+
+    <p>
+    We see that a shortcut captures exactly what is being constructed in the
+    smallest and most economical way possible without sacrificing the geometrical
+    correctness of the process. However, at any time it is possible to inflate
+    any shortcut and expose all of its underlying details.
+    </p>
+
+    <p>
+    Here are several more shortcuts for popular primitive constructions.
+    </p>
+
+    <p>
+    A perpendicular to a straight line through a point <dfn>not</dfn> on it:
+    </p>
+
+$$D \colon Ln(A \notin l, D) = p \bot l$$
+
+    <p>
+    or simply:
+    </p>
+    
+$$D \colon Ln(A, D) = p \bot l$$
+    
+    <p>
+    A parallel to a straight line through a point:
+    </p>
+
+$$E \colon Ln(A, E) \| l$$
+
+    <p>
+    A perpendicular bisector to a line segment:
+    </p>
+
+$$C, D, E \colon Ln(C, D) \bot Ln(A, B), AE = EB$$
+
+    <p>
+    An angle bisector:
+    </p>
+
+$$D \subset \angle ABC \colon \angle ABD = \angle CBD$$
+
+    <p>
+    A tangent to a circle through a point \(A\) not on the circumference of that
+    circle:
+    </p>
+
+$$T \in Cir(O, r) \colon Ln(A \not\subset Cir(O, r), T) \bot Cir(O, r)$$
+
+    <p>
+    or:
+    </p>
+
+$$T \colon Ln(A, T) = p \bot Cir(O, r)$$
+
+    <p>
+    and so on.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryagsmpls.html">prev</a>
+     <a href="ryag.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryag.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

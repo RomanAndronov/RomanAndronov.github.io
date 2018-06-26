@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Kombinatorix Primordial by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Kombinatorix Primordial by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryakpbasic5.html">next</a>
+    </p>
+
+    <h1>Kombinatorix Primordial</h1>
+
+    <p>
+    1) Purpose<br>
+    2) Item, Collection, Order, Repetition, Set, Multiset<br>
+    3) Basic Five: Addition, Inclusion Exclusion, Multiplication, Subtraction, Division<br>
+    4) Sets<br>
+    5) Multisets<br>
+    6) Applications<br>
+    </p>
+
+    <p>
+    <br><strong>1) Purpose</strong>
+    </p>
+
+    <p>
+    Since academic information is highly hierarchical, it is vital to be introduced
+    to the very basic ideas in any given discipline before moving on to bigger and
+    better things. However, sometimes it so happens that these basic ideas are not
+    introduced in high (or middle) school in the hope that "it will be taught in
+    college" and sometimes these ideas are not mentioned in college on the
+    assumption that "it was supposed to be studied in high (or middle) school".
+    This phenomenon is less likely to occur in such disciplines as geometry,
+    algebra or physics but, based on my personal experience, it is more likely to
+    occur in combinatorial analysis.
+    </p>
+
+    <p>
+    As such, the purpose of this tutorial is to cover this potential gap by
+    exploring the five basic counting principles and four basic problem types -
+    permutations and combinations with and without repetitions which, while giving
+    an introduction to the discipline, can be used to solve a wide range of the
+    entry level combinatorial problems.
+    </p>
+
+    <p>
+    Full disclosure:
+    </p>
+
+    <p>
+    I do not claim to have obtained any of the upcoming results. The information
+    presented here is so basic that it can be treated as tribal knowledge passed
+    by word of mouth from generation to generation. My only input is the
+    organization of the material - thinking of and gathering all the relevant
+    pieces in one place and a slightly more lengthy than usual treatment of the
+    basic concepts of items, comparison and order.
+    </p>
+ 
+    <p>
+    <br><strong>2) Lingo</strong>
+    </p>
+
+    <p>
+    In the modern branches of Mathematics (and Physics) it has become customary
+    to not define certain basic or fundamental concepts since, as the wisdom of
+    ages teaches us, it is simply impossible to define such concepts in a totally
+    unambiguous way, without circular references.
+    </p>
+
+    <p>
+    In his axiomatization of Geometry, for example, Hilbert did not define such
+    fundamental geometric objects as <strong>point</strong>, <strong>straight
+    line</strong> and <strong>plane</strong>. In various Mathematical Analysis
+    and Number Theory courses the concept of <strong>number</strong> is not
+    defined - we are given <dfn>descriptions</dfn> of various <dfn>types</dfn>
+    of numbers - <dfn>whole, rational, irrational, real, complex, prime, even,
+    odd</dfn>, etc. but we dare not to ask what that object that we refer to
+    as <dfn>number</dfn> actually <dfn>is</dfn>.
+    </p>
+
+    <p>
+    On a similar note, when in Physics we ask "What <strong>time</strong> or
+    <strong>space</strong> is?" we are usually told what the object in question
+    <dfn>does</dfn>, <dfn>flows</dfn> or <dfn>bends/curves</dfn>, but not what
+    it actually <dfn>is</dfn>.
+    </p>
+
+    <p>
+    In Combinatorial Analysis we will use such fundamental concepts as
+    <strong>item, order, set</strong>. It is best to state explicitly early on
+    that we will not attempt to define these concepts but will rather present a
+    <dfn>description</dfn> of these concepts.
+    </p>
+
+    <p>
+    <br><strong>2.1) Item</strong>
+    </p>
+
+    <p>
+    An <dfn>item</dfn> is anything we want it to be. Item's synonyms are
+    <dfn>object, entity, element, member</dfn>. An item is a rather sweeping and
+    an all encompassing abstraction birthed by the given problem. For example: a
+    letter, a word, a digit, a number, a marble, a bowl of marbles, a star, a
+    constellation and so on, are all items.
+    </p>
+
+    <p>
+    For any two items \(a\) and \(b\) we define an operation of
+    <dfn>primitive comparison</dfn> which for our purposes yields only one of
+    only two mutually exclusive outcomes:
+    </p>
+
+    <p>
+    - <dfn>"equal"</dfn>, these two items are identical or the same
+    </p>
+
+    <p>
+    - <dfn>"not equal"</dfn>, these two items are different or distinct
+    </p>
+
+    <p>
+    Consequently, let us call the <dfn>"equal"</dfn> items
+    <dfn>indistinguishable</dfn> and let us call the items that are <dfn>"not
+    equal"</dfn> <dfn>distinct</dfn>. Formally:
+    </p>
+
+$$a = b$$
+$$a \neq  b$$
+
+    <p>
+    where the "equal" and "not equal" signs absorb the arbitrary definition of
+    comparison.
+    </p>
+
+    <p>
+    For example, in one case an item "spoon" may be "equal" to another item,
+    "fork", because their commonality, in the current context, is based on the
+    intended usage of these items and then, based on that criteria of comparison,
+    "spoon" is "not equal" to "barbell".
+    </p>
+
+    <p>
+    In a different case "spoon" may very well be "equal" to "barbell" because both
+    items are made out of metal and, since the material of which the items are
+    made is the base for commonality in this particular context, "spoon" is "not
+    equal" to "fork" because "fork" is plastic.
+    </p>
+
+    <p>
+    An early lesson to take away from this is that in combinatorial analysis
+    things change very quickly and very easily. In an academic parlance we would
+    say that, in general, Combinatorial Analysis is a <dfn>low constraint</dfn>
+    discipline. Further, it may be beneficial to attach a concept of
+    <dfn>property</dfn> to an item. Any given item may have multiple properties
+    but items' comparison should be performed on one property at a time basis.
+    </p>
+
+    <p>
+    Though there are always exceptions to the rules, generally - <dfn>within the
+    boundaries of the current problem</dfn> or <dfn>once the problem statement
+    has been formulated</dfn> - we take it that the individual items become and
+    stay <dfn>fixed</dfn> or <dfn>frozen</dfn> qualitywise, meaning that they:
+    </p>
+
+    <p>
+    - preserve their identity and do not morph into something else entirely
+    </p>
+
+    <p>
+    - remain wholesome - undividible any further
+    </p>
+
+    <p>
+    for the "duration" of a given problem.
+    </p>
+
+    <p>
+    A multitude of such items forms a <dfn>collection</dfn>.
+    </p>
+
+    <p>
+    <br><strong>2.2) Collection</strong>
+    </p>
+
+    <p>
+    A <dfn>collection</dfn> is a multitude of items that have something in common.
+    That commonality can be long lasting or it can be temporary and fleeting.
+    </p>
+
+    <p>
+    Collections are very flexible, fluid and dynamic - items can be thrown out
+    of or into a collection any time we want. All the items in a collection are
+    considered to be <dfn>equivalent</dfn> for the counting purposes - even if
+    an item <dfn>"apple"</dfn> is different from an item <dfn>"orange"</dfn> when
+    compared based on its look and feel - still both items are <dfn>fruits</dfn>
+    and hence can be treated uniformly when counted.
+    </p>
+
+    <p>
+    Collection's synonyms are <dfn>list, group, pile, assortment, arrangement</dfn>.
+    A sample collection, for example, can be an assortment of characters in your
+    favorite language that amounts to a meaningful word:
+    </p>
+
+$$S = \{m, a, t, h\}$$
+
+    <p>
+    or not a meaningful "word":
+    </p>
+
+$$S = \{h, t, a, m\}$$
+
+    <p>
+    Here \(S\) is a shorthand notation for a collection. The braces \(\{\) and
+    \(\}\) delineate the boundaries of a collection. The commas \(,\) delineate
+    the boundaries of the items within a collection and the braces do so for
+    the first and the last items. There are other ways to specify a collection
+    but the one above is all we will need.
+    </p>
+
+    <p>
+    To save us some typing we will avoid the braces and the commas often - when
+    the items are single digits or letters.
+    </p>
+
+    <p>
+    For any two collections we define an operation of <dfn>aggregate
+    comparison</dfn> as follows. We assume that a collection of natural numbers
+    \(N\)  is already given to us, axiomatically perhaps. We represent an
+    arbitrary collection of items <dfn>conceptually</dfn> as a tight series of
+    buckets \([ \; ]\) with no space in between them. The sample:
+    </p>
+
+$$math$$
+
+    <p>
+    collection then temporarily becomes:
+    </p>
+
+$$S = \{[ \; ] \; [ \; ] \; [ \; ] \; [ \; ]\}$$
+
+    <p>
+    To each consecutive bucket we assign one consecutive natural number. Which
+    <dfn>end</dfn> or <dfn>extremity</dfn> of the collection we start this
+    <dfn>enumeration</dfn> process from does not really matter as long as we are
+    consistent across the operations on multiple collections. We can enumerate
+    the items <dfn>right-to-left</dfn> or <dfn>left-to-right</dfn>. It also does
+    not really matter which integer we assign to the very <dfn>first</dfn> bucket.
+    Traditionally we start with a \(1\) and we move <dfn>left-to-right</dfn>:
+    </p>
+
+$$S = \{[ \; ]_1 \; [ \; ]_2 \; [ \; ]_3 \; [ \; ]_4\}$$
+
+    <p>
+    Into each bucket in a collection we place exactly one item:
+    </p>
+
+$$S = \{[m]_1 \; [a]_2 \; [t]_3 \; [h]_4 \}$$
+
+    <p>
+    and introduce the following notations:
+    </p>
+
+$$|S| = 4$$
+$$S[3] = a_3 = t$$
+
+    <p>
+    The vertical bars mean <dfn>"the number of items in a collection"</dfn> or
+    collection's <dfn>"size"</dfn> or <dfn>"length"</dfn> which is four in this
+    case.
+    </p>
+
+    <p>
+    The square brackets mean <dfn>"the contents of the bucket whose ordinal
+    position within the collection is given"</dfn> which in this case is \(t\)
+    since in \(S\) it is in the bucket number three.
+    </p>
+
+    <p>
+    Since our bucket-based representation of a collection is only conceptual, we
+    will still use the traditional notation to record a collection:
+    </p>
+
+$$S = \{m, a, t, h\}$$
+
+    <p>
+    but if and when needed the square brackets notation gives us a way to reference
+    items in a collection located in an arbitrary bucket number \(j\) as:
+    </p>
+
+$$S[ j ], \; j = 1, 2, \dots , |S|$$
+
+    <p>
+    To be perfectly clear - <dfn>"bucket's contents", "bucket's number"</dfn> and
+    <dfn>"number of buckets"</dfn> in a collection are three different things.
+    </p>
+
+    <p>
+    We can now compare any two collections \(S_1\) and \(S_2\) by comparing their
+    items in the corresponding buckets as long as buckets from each collection
+    are available:
+    </p>
+
+$$S_1[ j ] = S_2[ j ] \quad \forall \;  j = 1, \dots , min(|S_1|, |S_2|)$$
+
+    <p>
+    where the symbol \(\forall\)  means "for all" or "for any" or "for each".
+    </p>
+
+    <p>
+    If the above statement is true for all \(j\)s and:
+    </p>
+
+$$|S_1| = |S_2|$$
+
+    <p>
+    then these collections are indistinguishable (the same) and distinct (different)
+    otherwise. In the latter case the collections may be of different sizes or
+    they may be of equal size but of different contents for some corresponding
+    buckets. For example, these collections:
+    </p>
+
+$$S_1 = mathematika$$
+$$S_2 = math$$
+
+    <p>
+    are different because their sizes are different - we do not even have to look
+    at buckets' contents. These collections:
+    </p>
+
+$$S_1 = math$$
+$$S_2 = maht$$
+
+    <p>
+    have the same size but they are still different because the contents of the
+    bucket three in each collection are different. These collections are the same:
+    </p>
+
+$$S_1 = math$$
+$$S_2 = math$$
+
+    <p>
+    Just like the primitive comparison of two items, the aggregate comparison of
+    two collections also yields only one of only two mutually exclusive outcomes,
+    of which the positive one can occur only if both collections are of the same
+    size. We did this on purpose - if we always compare collections comprised of
+    the same items, implying - of equal sizes, a frequent task in Kombinatorix
+    Primordial, than the only thing that matters is the <dfn>order</dfn> of these
+    items within the collection.
+    </p>
+
+    <p>
+    <br><strong>2.3) Order</strong>
+    </p>
+
+    <p>
+    We may say that order is <dfn>an arbitrary rule used to control the population
+    of a collection</dfn>.
+    </p>
+
+    <p>
+    For integers, for example, such a rule may be based on the operation of
+    comparison which yields one of three possible outcomes - a given integer is
+    less than, equal to or greater than some other integer. In Kombinatorix
+    Primordial, however, we shall use a bit different flavor of order - its numbed
+    down, one of two outcomes, version described above.
+    </p>
+
+    <p>
+    To sum it up: for us an order is something that makes two collections comprised
+    of the same items different.
+    </p>
+
+    <p>
+    We have done all this work so that it becomes easier to comprehend the meaning
+    of the question <dfn>"does order matter?"</dfn> where order is to be understood
+    in the sense described above.
+    </p>
+
+    <p>
+    Every case is different so the generic answer to the above question - it depends.
+    If a sports commentator reports on the results of some competition then the
+    following three collections comprised of the same items \(1, 2, 3\):
+    </p>
+
+$$123 \quad 321 \quad 213$$
+
+    <p>
+    can be considered the same, collapsed into and counted as one. Why? Because
+    regardless of how the report is delivered to the audience, the person who
+    took the first place will always be attached to a gold medal (even if announced
+    <dfn>last</dfn>), the person who took the second place will always be attached
+    to a silver medal and so on. In that case we would say that <dfn>"order does
+    not matter"</dfn> though based on the aggregate comparison procedure described
+    above these collections are, strictly speaking, not identical - a fact we are
+    willing to ignore in this particular case.
+    </p>
+
+    <p>
+    However, when it comes to passwords, house numbers or apartment numbers within
+    a house, salaries, dates and times, a book's page numbers, serial and version
+    numbers or mileage on our car's odometers then all three collections are
+    different and we must count them as three separate entities. In that case we
+    would say that <dfn>"order matters"</dfn>.
+    </p>
+
+    <p>
+    <br><strong>2.4) Repetitions</strong>
+    </p>
+
+    <p>
+    In a multitude of items it can so happen that one or more items are <dfn>"the
+    same"</dfn> - exact copies of each other - when an item to item comparison
+    within a collection yields "equal to". We call these items indistinguishable:
+    </p>
+
+$$122333$$
+
+    <p>
+    In this collection we have two indistinguishable items: \(2\), repeated twice,
+    and \(3\), repeated trice. When the presence of such items in a collection is
+    allowed it is sometimes said that <dfn>repetitions are allowed</dfn>. To
+    avoid the potential ambiguities in this case we will introduce the notion of
+    a <dfn>type</dfn> of an item. We will then say that an item of type \(2\),
+    for example, is repeated this many times and that an item of type \(3\) is
+    repeated that many times.
+    </p>
+
+    <p>
+    When <dfn>repetitions are not allowed</dfn> then all the items in a collection
+    must be <dfn>unique</dfn> or <dfn>distinct</dfn>. The items can be distinct
+    <dfn>a priory</dfn> or simply given to us that way or <dfn>we can always make
+    a finite number of indistinguishable items distinct</dfn> if and when needed.
+    We accomplish this task in the way similar to the one we used to enumerate
+    the buckets in a collection - we:
+    </p>
+
+    <p id="dbg" class="center">
+    <dfn>assign consecutive natural numbers to each indistinguishable item</dfn>
+    </p>
+
+    <p>
+    For future reference let us refer to the above as <strong>2.4</strong>
+    procedure.
+    </p>
+
+    <p>
+    For example, let us assume that we have five indistinguishable items:
+    </p>
+
+$$\{a, a, a, a, a\}$$
+
+    <p>
+    To make these items distinct we start with an item at one extremity of the
+    collection and assign \(1\) to it in the form of a subscript. We then move
+    on to the <dfn>next</dfn> item in the collection and assign \(2\) to it and
+    so on until we reach the opposite extremity of the collection at which point
+    all the items will be distinct:
+    </p>
+
+$$a_1 \neq  a_2 \neq  a_3 \neq  a_4 \neq  a_5$$
+
+    <p>
+    <br><strong>2.5) Set, Multiset</strong>
+    </p>
+
+    <p>
+    Let us combine all the previous concepts and describe a special collection in
+    which:
+    </p>
+
+    <p>
+    - the order of items does not matter and
+    </p>
+
+    <p>
+    - duplicate items are ignored
+    </p>
+
+    <p>
+    Such a collection is called a <dfn>set</dfn>. As such these two sets are one
+    and the same:
+    </p>
+
+$$\{a, b, b, c, c, c\} \quad \{c, b, a\}$$
+
+    <p>
+    To avoid confusion do realize that when earlier we said "repetitions are
+    allowed" it is <dfn>generally</dfn>, emphasis on generally, understood that
+    we are not just wasting our breath - we are implying that the allowed
+    duplicate items are to be counted toward some grand total. These duplicate
+    items are not just hanging out there, loitering and doing nothing. They are
+    there for a reason - to be used and counted.
+    </p>
+
+    <p>
+    In sets, however, though mechanically we <dfn>may</dfn> add duplicates to
+    our collection - in the end we will ignore them - meaning we will not use
+    them so we might as well throw all the duplicate items out and condense our
+    collection to distinct items only.
+    </p>
+
+    <p>
+    A collection in which:
+    </p>
+
+    <p>
+    - the order of items does not matter but
+    </p>
+
+    <p>
+    - duplicate items <dfn>are</dfn> counted
+    </p>
+
+    <p>
+    is called a <dfn>multiset</dfn> designating which it is customary to precede
+    each item with its <dfn>repetition number</dfn>:
+    </p>
+
+$$\{1*a, 2*b, 3*c\}$$
+
+    <p>
+    Sets can be, among other operations, glued together (unionized) or
+    intersected.
+    </p>
+
+    <p>
+    <br><strong>2.5.1) Union</strong>
+    </p>
+
+    <p>
+    A <dfn>union</dfn> of two sets, designated as:
+    </p>
+
+$$S_1 \cup  S_2$$
+
+    <p id="dbg" class="center">
+    <dfn>is yet another set made up of items that belong to either set \(S_1\)
+    or to set \(S_2\) or to both sets</dfn>
+    </p>
+
+    <p>
+    Graphically unions, and other constructs, are represented as <dfn>Venn
+    Diagrams</dfn>. Let a set \(S_1\) represent <dfn>"all spoons"</dfn> and
+    let \(S_2\) represent <dfn>"all ceramic objects"</dfn>. The union of these
+    two sets then is the plane region occupied by both circles including the
+    overlapping section that represents <dfn>"ceramic spoons"</dfn>:
+    </p>
+
+    <img src="imgs/kp01.png" alt="kp 01" class="center">
+
+    <p>
+    In another, more formal, example:
+    </p>
+
+$$S_1 = \{1, 2, 3, 4\}$$
+$$S_2 = \{x, y, z\}$$
+$$S_1 \cup  S_2 = \{1, 2, 3, 4, x, y, z\}$$
+
+    <p>
+    It is possible to extend the above definition of a union to an arbitrary
+    finite number of sets from where we conclude that for an item to be in a
+    union of some number of sets it must belong to at least one set.
+    </p>
+
+    <p>
+    Intuitively then, we may say that unions are <dfn>inclusive</dfn> and that
+    they relate to a logical <strong>OR</strong> operator.
+    </p>
+
+    <p>
+    <br><strong>2.5.2) Intersection</strong>
+    </p>
+
+    <p>
+    An <dfn>intersection</dfn> of two sets, designated as:
+    </p>
+
+$$S_1 \cap S_2$$
+
+    <p id="dbg" class="center">
+    <dfn>is yet another set made up of items that belong to \(S_1\) and to
+    \(S_2\) simultaneously</dfn>
+    </p>
+
+    <p>
+    Using the graphical example from the Union section, an intersection of its
+    two sets will be only the overlapping section of two circles, representing
+    just <dfn>"ceramic spoons"</dfn> - and nothing else:
+    </p>
+
+    <img src="imgs/kp02.png" alt="kp 02" class="center">
+
+    <p>
+    In another, more formal, example:
+    </p>
+
+$$S_1 = \{1, 2, 3, 4, z\}$$
+$$S_2 = \{4, x, y, z\}$$
+$$S_1 \cap  S_2 = \{4, z\}$$
+
+    <p>
+    We can extend the above definition of an intersection to an arbitrary finite
+    number of sets from which we conclude that for an item to be in an
+    intersection of some number of sets it must belong to each and every set.
+    </p>
+
+    <p>
+    Intuitively then, we may say that intersections are <dfn>exclusive</dfn> and
+    that they relate to a logical <strong>AND</strong> operator.
+    </p>
+
+    <p>
+    <br><strong>2.5.3) Empty Set</strong>
+    </p>
+
+    <p>
+    A set with no items is called an <dfn>empty</dfn> or <dfn>null</dfn> set
+    designated as \(\{\}\) or \(\emptyset\).
+    </p>
+
+    <p>
+    <br><strong>2.5.4) Disjoint Sets</strong>
+    </p>
+
+    <p>
+    Two sets with no common items, \(abc\) and \(defg\) for example, are called
+    <dfn>disjoint</dfn>. From the above definitions it follows that the
+    intersection of such two sets is an empty set. Formally:
+    </p>
+
+$$S_1 \cap  S_2 = \{\}$$
+
+    <p>
+    If we want to say that <dfn>"none of \(n\) sets have any items in common"</dfn>
+    then we would say that they are <dfn>"disjoint pairwise"</dfn> meaning that
+    if we pick any two distinct sets then they will be disjoint. Formally:
+    </p>
+
+$$\forall \;  j, k \in  [1 \dots n], \; j \neq  k \quad S_j \cap S_k = \{\}$$
+
+    <p>
+    <br><strong>2.5.5) Partition</strong>
+    </p>
+
+    <p>
+    Earlier we noted that an item can be anything we want - why not another set?
+    If we take an existing set:
+    </p>
+
+$$S = \{1, 2, 3, 4, 5, 6, 7, 8, 9\}$$
+
+    <p>
+    and rearrange it in such a way that each and every of its items belongs to
+    exactly one <dfn>subset</dfn>:
+    </p>
+
+$$\{\{1\}, \{2, 3, 4\}, \{5, 6\}, \{7, 8, 9\}\}$$
+
+    <p>
+    then the subsets:
+    </p>
+
+$$\{1\}$$
+$$\{2, 3, 4\}$$
+$$\{5, 6\}$$
+$$\{7, 8, 9\}$$
+
+    <p>
+    are disjoint pairwise and we would say that they form a <dfn>partition</dfn>
+    (as a noun) of \(S\). When we use the word <dfn>partition</dfn> as a verb
+    then it means <dfn>"take action"</dfn> and rearrange the given set into a
+    number of subsets disjoint pairwise.
+    </p>
+
+    <p>
+    For comparison:
+    </p>
+
+$$\{\{1\}, \{2, 3, 4\}, \{5, 6\}, \{7, 9\}\}$$
+
+    <p>
+    is not a partition of \(S\). Why? Because the item \(8\) was left out in the
+    cold, hanging high and dry.
+    </p>
+
+$$\{\{1\}, \{2, 3, 4\}, \{5, 6\}, \{6, 7, 8, 9\}\}$$
+
+    <p>
+    is also not a partition of \(S\) since these two greedy subsets:
+    </p>
+
+$$\{5, 6\} \quad \{6, 7, 8, 9\}$$
+
+    <p>
+    decided to share the item \(6\).
+
+    <p>
+    The notion of partition coupled with the up coming <dfn>Addition Counting
+    Principle</dfn> are a thinly disguised everyday truth that:
+    </p>
+
+    <p id="dbg" class="center">
+    <dfn>a whole is the sum of its parts</dfn>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryakpbasic5.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryakp.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

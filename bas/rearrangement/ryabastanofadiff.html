@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Rearrangement. Tangent of
+a Difference
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov.
+  Rearrangement. Tangent of a Difference</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabascosineofadiff.html">prev</a>
+     <a href="ryabassums1.html">next</a>
+    </p>
+
+    <h1>\(\tan (\alpha -\beta)\)</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Express the tangent of a composite angle \(\alpha - \beta\) in terms of
+    trigonometric functions of primitive angles \(\alpha\) and \(\beta\).
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    The arrangement of the right triangles that allows us to deduce the identity
+    for the tangent of a difference of two angles is the same one used to deduce
+    the corresponding identity for the sine and the cosine of a difference of two
+    angles:
+    </p>
+
+    <img src="imgs/trigofdiff.png" alt="Sine of a Difference" class="center">
+
+    <p>
+    By definition we have:
+    </p>
+
+$$\tan (\alpha - \beta) = \frac {EF}{AF} =$$
+$$\frac {GC}{AF} =$$
+$$\frac {GC}{AC + CF} =$$
+$$\frac {BC - BG}{AC + CF} =$$
+$$\frac {BC - BG}{AC + GE} =$$
+
+    <p>
+    Divide both parts of the above fraction by \(AC\):
+    </p>
+
+$$\frac {BC - BG}{AC + GE} = \frac {\frac {BC - BG}{AC}}
+ {\frac {AC + GE}{AC}} =$$
+
+$$\frac {\frac {BC}{AC} - \frac {BG}{AC}}
+ {\frac {AC}{AC} + \frac {GE}{AC}} =$$
+
+$$\frac {\tan \alpha - \frac {BG}{AC}}{1 + \frac {GE}{AC}}$$
+
+    <p>
+    Since:
+    </p>
+
+$$\frac {BC}{AC} = \tan \alpha$$
+
+    <p>
+    by definition.
+    </p>
+
+    <p>
+    In the previous chapters we have already proved that the right triangles
+    \(\triangle ACB\) and \(\triangle BGE\) are similar and hence:
+    </p>
+
+$$\frac {BG}{BE} = \frac {AC}{AB}$$
+$$BG \times AB = AC \times BE$$
+$$\frac {BG}{AC} = \frac {BE}{AB}$$
+
+    <p>
+    From \(\triangle ACB\) we have:
+    </p>
+
+$$\frac {BE}{AB} = \tan \beta$$
+
+    <p>
+    Hence:
+    </p>
+
+$$\frac {BG}{AC} = \tan \beta$$
+
+    <p>
+    and:
+    </p>
+
+$$\tan (\alpha - \beta) = \frac {\tan \alpha - \tan \beta}
+ {1 + \frac {GE}{AC}}$$
+
+    <p>
+    To compute the remaining fraction we observe that \(GE\) is a side of the
+    right triangle \(\triangle BGE\) with hypotenuse \(BE\). \(BE\) is also a
+    side of the right triangle \(\triangle ABE\) with side \(AB\). \(AB\) is a
+    hypotenuse of the right triangle \(\triangle ACB\) with side \(AC\).
+    </p>
+
+    <p>
+    It follows then that the connection between \(GE\) and \(AC\) is the following
+    - from \(GE\) to \(BE\), from \(BE\) to \(AB\), from \(AB\) to \(AC\). Hence,
+    we work \(BE\) and \(AB\) into the remaining fraction in a neutral but useful
+    way as the rearrangement approach prescribes:
+    </p>
+
+$$\frac {GE}{AC} = \frac {GE}{AC} \times 1 \times 1 =$$
+$$\frac {GE}{AC} \times \frac {BE}{BE} \times \frac {AB}{AB} =$$
+$$\frac {GE}{BE} \times \frac {BE}{AB} \times \frac {AB}{AC}$$
+$$\frac {GE}{BE} = \sin \alpha$$
+$$\frac {BE}{AB} = \tan \beta$$
+$$\frac {AB}{AC} = \cos \alpha$$
+
+    <p>
+    and:
+    </p>
+
+$$\frac {GE}{AC} = \frac {\sin \alpha}{\cos \alpha} \tan \beta =$$
+$$\tan \alpha \times \tan \beta$$
+
+    <p>
+    yielding:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\tan (\alpha - \beta) = \frac {\tan \alpha -
+ \tan \beta}{1 + \tan \alpha \tan \beta}}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabascosineofadiff.html">prev</a>
+     <a href="ryabassums1.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrearrangement.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

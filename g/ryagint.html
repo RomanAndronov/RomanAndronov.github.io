@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+g Statements Interpretation by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">g Statements Interpretation by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryagstmnts.html">prev</a>
+     <a href="ryagsmpls.html">next</a>
+    </p>
+
+    <h1>g Statements Interpretation</h1>
+
+    <p>
+    Any recorded Euclidean construction is a collection of an arbitrary number
+    of \(g\) statements. Any \(g\) statement is a collection of an arbitrary
+    number of \(g\) objects and operators.
+    </p>
+
+    <p>
+    If, while reading a \(g\) statement, we come across an object for the first
+    time during the course of this particular construction then the statement
+    means:
+    </p>
+
+    <p id="dbg">
+    <dfn>take action</dfn>
+    </p>
+
+    <p>
+    or
+    </p>
+
+    <p id="dbg">
+    <dfn>construct</dfn>
+    </p>
+
+    <p>
+    the object in question.
+    </p>
+
+    <p>
+    If, on the other hand, we come across a previously encountered object then
+    the statement is a reference to an existing object.
+    </p>
+
+    <p>
+    With the above rule in place let us investigate the exact meaning of the
+    following sample \(g\) statement:
+    </p>
+   
+$$A \in Ln(B, C)$$
+   
+    <p>
+    Start deciphering the meaning of the above statement from its right-most
+    object and move leftward:
+    </p>
+
+    <p>
+    - if a point \(C\) does not exist in the current construction then pick an
+    arbitrary point on a plane and name it \(C\)
+    </p>
+
+    <p>
+    - if a point \(B\) does not exist in the current construction then pick a
+    different from \(C\) arbitrary point on a plane and name it \(B\)
+    </p>
+
+    <p>
+    - if a straight line passing through the points \(B\) and \(C\) does not exist
+    at the current state of this construction then construct it
+    </p>
+
+    <p>
+    - if a point \(A\) does not exist in the current construction then pick an
+    arbitrary point different from \(B\) and \(C\) anywhere on the straight line
+    passing through \(B\) and \(C\) and name that point \(A\)
+    </p>
+
+    <p>
+    However, if all the objects in the above statement do exist in the current
+    state of this construction then it simply states a geometric fact which is a
+    result of the previously taken steps:
+    </p>
+
+    <p id="dbg">
+    <dfn>because of so and so the point \(A\) is located on the straight line
+    passing through the points \(B\) and \(C\)</dfn>
+    </p>
+
+    <p>
+    Alternatively, if all the objects in the above statement exist and this
+    statement is a part of a bigger statement then its meaning is:
+    </p>
+
+    <p id="dbg">
+    <dfn>because the point \(A\) is ... then the following must be true"</dfn>
+    </p>
+
+    <p>
+    We observe that any compound statement can be decomposed into a collection
+    of simple statements:
+    </p>
+
+$$B$$
+$$C$$
+$$Ln(B, C)$$
+$$A \in Ln(B, C)$$
+
+    <p>
+    which are read verbatim as:
+    </p>
+
+    <p>
+    - pick an arbitrary point on a plane and name it \(B\)
+    </p>
+
+    <p>
+    - pick an arbitrary point on a plane other than \(B\) and name it \(C\)
+    </p>
+
+    <p>
+    - construct a straight line passing through \(B\) and \(C\)
+    </p>
+
+    <p>
+    - pick an arbitrary point on the straight line passing through \(B\) and \(C\)
+    and name it \(A\)
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryagstmnts.html">prev</a>
+     <a href="ryagsmpls.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryag.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

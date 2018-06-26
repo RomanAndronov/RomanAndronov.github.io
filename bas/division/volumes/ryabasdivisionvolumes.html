@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Volumes
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Volumes</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabascylinders.html">next</a>
+    </p>
+
+    <h1>Volumes</h1>
+
+    <p>
+    The pages that follow are a demonstration of how the Division basic approach
+    may be applied to the problem of calculating the volumes of certain
+    three-dimensional solids without explicit integration.
+    </p>
+
+    <p>
+    <br><strong>Problem</strong>
+    </p>
+
+    <p>
+    Adding to all the working assumptions of <strong>Square Areas</strong> chapter
+    the fact that the volume of a right rectangular prism with sides \(a, b\) and
+    \(c\) is:
+    </p>
+
+$$a \times b \times c$$
+
+    <p>
+    find the volume of a given three-dimensional solid.
+    </p>
+
+    <p>
+    <br><strong>Solution Template</strong>
+    </p>
+
+    <p>
+    We will use an orthogonal \(xyz\) coordinate system with origin at \(O\). We
+    will divide a given solid into an arbitrary number of primitive parts whose
+    volume we do know how to compute. In <strong>Square Areas</strong> chapters
+    we used rectangles as primitive parts exclusively. In <strong>Volumes</strong>
+    chapters we will have to be more inventive - we will employ right rectangular
+    and triangular prisms and right circular and elliptic cylinders.
+    </p>
+
+    <p>
+    We will choose the size and the orientation of the primitive parts in such a
+    way that their total volume will be larger (\(V_u\)) and smaller (\(V_l\))
+    than the volume sought after. We then will begin the iterative process of
+    decreasing one dimension of each existing primitive part while adding new
+    appropriately sized and positioned primitive parts. We will capture this
+    process mathematically as:
+    </p>
+
+$$n \to +\infty$$
+
+    <p>
+    where \(n\) stands for the number of primitive parts in the current iteration.
+    We will then argue that if:
+    </p>
+
+$$\lim_{n \to +\infty} V_u = \lim_{n \to +\infty} V_l = V$$
+
+    <p>
+    then \(V\) is the volume of the three-dimensional solid in question and the
+    problem is solved.
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabascylinders.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionvolumes.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

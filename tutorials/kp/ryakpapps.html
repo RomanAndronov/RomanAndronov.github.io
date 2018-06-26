@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Kombinatorix Primordial, Applications by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Kombinatorix Primordial, Applications by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryakpmultisets.html">prev</a>
+     <a href="ryakp.html">next</a>
+    </p>
+
+    <h1>Applications</h1>
+
+    <p>
+    6.1) Maxwell-Boltzmann<br>
+    6.2) Bose-Einstein<br>
+    6.3) Fermi-Dirac<br>
+    6.4) From Here<br>
+    </p>
+
+    <p>
+    The combinatorial constructs that we have looked at so far are used in physics
+    in <dfn>Statistical Mechanics</dfn> - a discipline that studies the behavior
+    of systems comprised of a large number of weakly interacting particles in
+    thermal equilibrium. The three major nonrelativistic \((v \ll c)\) statistics
+    of this discipline are Maxwell-Boltzmann (classical), Bose-Einstein and
+    Fermi-Dirac (quantum).
+    </p>
+
+    <p>
+    In all three statistics the role of items is played by the idealized particles
+    and the role of buckets is played by the amount of energy these particles
+    possess. The energy levels are taken to always be distinct while the particles
+    may or may not be distinct. To understand what <dfn>"distinct particle"</dfn>
+    means in this section we have to take a very narrow and specific view of
+    distinction contextualized by the applicability of statistical arguments and
+    inference.
+    </p>
+
+    <p>
+    All three statistics aspire to answer the following question:
+    </p>
+
+    <p id="dbg">
+    <dfn>if some particle is selected at random what is the probability that it
+    will have a specific (allowed) amount of energy?</dfn>
+    </p>
+
+    <p>
+    While calculating that probability we have to count the number of all of the
+    possible intra- and interbucket distributions of the particles given certain
+    statistics-specific constraints.
+    </p>
+
+    <p>
+    Particles can be told apart via their intrinsic attributes like mass, charge
+    and spin or somehow else. For statistical arguments and inference to be
+    meaningful the number of participating items should be huge and the items
+    themselves should be of the same type. As such the particles in this section
+    are not discerned via their intrinsic attributes since these are the same.
+    </p>
+
+    <p>
+    <br><strong>6.1) Maxwell-Boltzmann</strong>
+    </p>
+
+    </p>
+    In Maxwell-Boltzmann statistics the particles (gas molecules) are classical.
+    As such, they possess a fundamental property called <dfn>trajectory</dfn> -
+    a smooth curve, \(\vec r(t)\) in general, representable as a real valued
+    function of real argument that has at least two derivatives - the first
+    (velocity) and the second (acceleration). We (hope that we can) solve the
+    equations of Newton/Lagrange/Hamilton to find these functions.
+    </p>
+
+    <p>
+    As such, even if we have two particles with identical intrinsic attributes,
+    say two soccer/golf/billiard/etc. balls, we currently believe that two
+    phenomena hold:
+    </p>
+
+    <p>
+    1) a given point in space can be occupied by only one particle at any given
+    time and conversely - one particle can be in only one place at any given time
+    </p>
+
+    <p>
+    2) given a particle's trajectory if we caught that particle in one point in
+    space at one time we can - for all practical purposes - with absolute
+    certainty predict where that particle will be at all future times. The
+    classical particles then are taken to be <dfn>distinct</dfn> in that sense
+    - we can number and track them through space over time as described above.
+    </p>
+
+    <p>
+    It follows then that in MB-statistics we are dealing with the distributions
+    of distinct items among distinct buckets. Here multiple particles are allowed
+    to have the same energy level - be in the same bucket. As such, to find the
+    number of all the possible distributions of items in these systems we use
+    (2) from <strong>5.1.2</strong> (permutations of a multiset with finite
+    supply), to count the number of states <dfn>across</dfn> the buckets, and
+    we use (1) from <strong>5.1.1</strong> (permutations of a multiset with
+    infinite supply), to count the number of states <dfn>within</dfn> a single
+    bucket. In other words we combine:
+    </p>
+
+$$P(n, r_1, \dots , r_k)$$
+
+   <p>
+   and:
+   </p>
+
+$$n^r$$
+
+    <p>
+    <br><strong>6.2) Bose-Einstein</strong>
+    </p>
+
+    <p>
+    In quantum mechanics, however, it is currently held that its particles,
+    electrons for short, do not possess a meaningful trajectory. If, in tiny
+    volume of space, we were to record some number of coordinates of an
+    electron as \(\Delta x\) over time intervals \(\Delta t\) then, in general,
+    these can not be laid over a smooth curve as above. In fact, the more
+    precise these measurements get the more haphazard the values of \(\Delta x\)
+    become. Further, the classic definition of a derivative as a tangent also
+    falls apart - if, while keeping the precision constant, we were to tend
+    \(\Delta t\) to zero then the ratios:
+    </p>
+
+$$\frac {\Delta x}{\Delta t}$$
+
+    <p>
+    would <dfn>not</dfn> fall on a straight line.
+    </p>
+
+    <p>
+    In 1927 Heisenberg captured this observation in his <dfn>Uncertainty
+    Principle</dfn> which gives a numeric estimate for the boundaries between
+    classical and wave mechanics - if we are very certain about <dfn>"where"</dfn>
+    then we are just as uncertain about <dfn>"how fast"</dfn> and vice versa:
+    </p>
+
+$$\Delta x \times m \Delta v \gtrapprox  h$$
+
+    <p>
+    where:
+    </p>
+
+$$h = 6,63 \times 10^{-34} J \times s$$
+
+    <p>
+    (give or take) is Planck's Constant.
+    </p>
+
+    <p>
+    This principle tells us that <dfn>simultaneously</dfn> position and velocity
+    of an electron can not be measured with equal meaningful precision and no
+    improvement of measuring devices can cure this limitation because it is so
+    fundamental. <dfn>Separately</dfn> it is possible measure any one of these
+    attributes with an arbitrary precision - but not both at the same time. So,
+    within the above boundaries, if we happen to spot an electron in one location
+    in space at one moment in time then we have no hope of figuring out with
+    absolute certainty where will it appear next.
+    </p>
+
+    <p>
+    In Quantum Mechanics then a <dfn>wave function</dfn> - a complex function of
+    position and time - describes the state of a particle. That description is
+    full and irreducible. Full - meaning that it packs absolutely everything there
+    is to know about this particle. Irreducible - means that "within" the wave
+    function the particle can not be made any smaller. We (hope that we can) solve
+    Shrodinger's wave equation to find the particle's wave function.
+    </p>
+
+    <p>
+    The physical interpretation of a wave function is quite lengthy but its
+    mathematical counterpart, due to Born, is short - it is a probability amplitude.
+    Its complex conjugate times the wave function itself is the probability density.
+    The probability density times an infinitesmal volume of space is the
+    <dfn>probability of finding a particle in that volume of space</dfn>.
+    </p>
+
+    <p>
+    This is a profoundly disturbing news for many - even if we know absolutely
+    everything about a particle (its wave function) that the <dfn>theory</dfn>
+    has to offer - the best we can do is come up short of determinacy of physical
+    reality. In any case, given the above statistical constraints, the particles
+    of the same type in wave mechanics are taken to be <dfn>indistinguishable</dfn>
+    in the sense described above.
+    </p>
+
+    <p>
+    (The Uncertainty Principle was formulated by Heisenberg in 1927 -
+    <dfn>after</dfn> he and Shrodinger developed the mathematical apparatus of
+    wave mechanics in 1925-1926. Separately, do not get confused by the relativity
+    of scales in the above definitions - an electron may very well be treated as
+    a classical particle under certain conditions - in Wilson's cloud chamber,
+    for example. Separately again, two quantum particles of the same type can be
+    made distinct enough - if they are in isolation and are so far apart from
+    each other that their wave functions do not "overlap" or do not interfere
+    with each other)
+    </p>
+
+    <p>
+    In Bose-Einstein statistics multiple particles (photons, atomic nuclei, atoms
+    with an even number of elementary particles or, collectively, bosons) are
+    allowed to have the same energy level - be in the same bucket. Since these
+    particles are indistinguishable, what matters is not what <dfn>kind</dfn> of
+    particles are in any given bucket but rather <dfn>how many</dfn> of them are
+    in it. The number of possible arrangements of this type is given by (3) in
+    <strong>5.2.1</strong> (combinations of a multiset with infinite supply):
+    </p>
+
+$$\frac {(n + r - 1)!}{r! (n - 1)!}$$
+
+    <p>
+    <br><strong>6.3) Fermi-Dirac</strong>
+    </p>
+
+    <p>
+    In Fermi-Dirac statistics multiple particles (electrons, neutrons, protons
+    or, collectively, fermions) are <dfn>not</dfn> allowed to occupy the same
+    energy level. Here any given bucket can have no more than one particle. This
+    is known as the <dfn>Pauli Restriction</dfn> or <dfn>Pauli Exclusion</dfn>.
+    As such at any given time the bucket is either empty or contains exactly one
+    particle. It follows then that in this case the number of possible
+    distributions is equal to the number of ways in which it is possible to
+    distribute \(r\) indistinguishable items among \(n\) distinct buckets given
+    the <strong>4.2.3.1-4.2.3.3</strong> restrictions or:
+    </p>
+
+$$C(n, r)$$
+
+    <p>
+    or (3) from <strong>4.2.1</strong>, combinations of a set.
+    </p>
+
+    <p>
+    Since in all three statistics the resulting numbers contain a factorial of
+    the total number of particles, that factorial will normally be enormous. And
+    if the factorial is enormous then its Sterling's approximation works well -
+    that is how in broad strokes (overlooking some number of gory details) the
+    relevant formulas are deduced.
+    </p>
+
+    <p>
+    <br><strong>6.4) From Here</strong>
+
+    <p>
+    Besides the combinatorial basics this tutorial should also put the reader on
+    good footing with discrete probabilities since a large number of problems in
+    that discipline are thinly disguised counting problems.
+    </p>
+
+    <p>
+    Further beyond the horizon are sets in more depth, recurrence relations,
+    generating functions, permutations and combinations generating algorithms,
+    Bi/Multi/Nomial coefficients, special counting sequences, combinatorial designs,
+    graphs and Polya counting.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryakpmultisets.html">prev</a>
+     <a href="ryakp.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryakp.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

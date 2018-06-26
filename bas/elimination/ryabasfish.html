@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Elimination. Who Owns the Fish?
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Elimination. Who Owns the Fish?</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabascassini.html">prev</a>
+     <a href="ryabasommp1.html">next</a>
+    </p>
+
+    <h1>Who Owns the Fish?</h1>
+
+    <p>
+    This puzzle comes in many guises, this is one of them.
+    </p>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Five people of different ethnic backgrounds - a <strong>Briton</strong>, a
+    <strong>Dane</strong>, a <strong>Swede</strong>, a <strong>Norwegian</strong>
+    and a <strong>German</strong> - live in a row of five houses each of which is
+    painted one of five different colors - <strong>blue</strong>,
+    <strong>red</strong>, <strong>green</strong>, <strong>yellow</strong> and
+    <strong>white</strong>. Each person lives in only one house, owns only one
+    type of pet, drinks only one type of drink and plays only one type of sport.
+    </p>
+
+    <p>
+    The drinks are - <strong>tea</strong>, <strong>coffee</strong>,
+    <strong>milk</strong>, <strong>water</strong>, <strong>beer</strong>.
+    </p>
+
+    <p>
+    The pets are - <strong>horses</strong>, <strong>birds</strong>,
+    <strong>dogs</strong>, <strong>cats</strong> and <strong>fish</strong>.
+    </p>
+
+    <p>
+    The sports are - <strong>baseball</strong>, <strong>volleyball</strong>,
+    <strong>football</strong>, <strong>hockey</strong> and <strong>tennis</strong>.
+    </p>
+
+    <p>
+    Given the following fifteen initial facts:
+    </p>
+
+    <p>
+    \(f1:\) The Briton lives in the red house<br>
+    \(f2:\) The Swede owns dogs<br>
+    \(f3:\) The Dane drinks tea<br>
+    \(f4:\) The green house is on the left of the white house<br>
+    \(f5:\) The owner of the green house drinks coffee<br>
+    \(f6:\) The owner who plays football owns birds<br>
+    \(f7:\) The owner of the yellow house plays baseball<br>
+    \(f8:\) The owner of the center house drinks milk<br>
+    \(f9:\) The Norwegian lives in the first house<br>
+    \(f10:\) The owner who plays volleyball lives next to the one who has
+    cats<br>
+    \(f11:\) The owner who keeps horses lives next to the one who plays
+    baseball<br>
+    \(f12:\) The owner who plays tennis drinks beer<br>
+    \(f13:\) The German plays hockey<br>
+    \(f14:\) The Norwegian lives next to the blue house<br>
+    \(f15:\) The owner who plays volleyball has a neighbor who drinks
+    water<br>
+    </p>
+
+    <p>
+    Answer the following question: who owns the fish?
+    </p>
+
+    <p>
+    To make sure that this problem has only one solution derived at by pure logic
+    without any guessing let us disambiguate the following:
+    </p>
+
+    <p>
+    - \(f4\) means <dfn>immediately</dfn> on the left
+    </p>
+
+    <p>
+    - \(f10, \; f11, \; f14\) and \(f15\) all mean <dfn>immediately</dfn> on either
+    left or right
+    </p>
+    
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    We are given five items - houses - each of which has five attributes attached
+    to it:
+    </p>
+
+    <ul>
+     <li>a color</li>
+     <li>a person</li>
+     <li>a drink</li>
+     <li>a sport</li>
+     <li>a pet</li>
+    </ul>
+
+    <p>
+    We also have the sixth attribute - an ordinal position or number of a house
+    but we will keep this attribute out of the above mix since we will use it
+    to make each house unique or distinct, only once, by arbitrarily assigning
+    house numbers in the traditional left to right fashion: the left-most or the
+    first house will be the house number \(1\), the middle or center house will
+    be the house number \(3\) and the right-most or the last house will be the
+    house number \(5\).
+    </p>
+
+    <p>
+    The order in which the remaining attributes are distributed across the houses
+    is very important - whether, say, the first house is owned by a
+    <strong>Swede</strong> or a <strong>Briton</strong> makes all the difference.
+    </p>
+
+    <p>
+    It follows then that five unique individuals, for example, can be distributed
+    across five uniquely numbered houses in:
+    </p>
+
+$$5! = 120$$
+
+    <p>
+    ways.
+    </p>
+
+    <p>
+    Since the choices of the remaining attributes do not depend on the outcome
+    of the selection of an individual attached to a house, from the Fundamental
+    Multiplication Counting Principle it follows that five unique pets, five
+    unique drinks, five unique sports and five unique colors distributed across
+    five uniquely numbered houses generate a total of:
+    </p>
+
+$$5! \times 5! \times 5! \times 5! \times 5! = (5!)^5 =$$
+$$30,517,578,125$$
+
+    <p>
+    possible arrangements.
+    </p>
+
+    <p>
+    One, brute force, way to attempt to solve this problem is to generate all
+    these arrangements and then check each one against the initial facts.
+    An arrangement of attributes that satisfies all the initial facts is the right
+    one and from that arrangement we can tell who owns the fish.
+    </p>
+
+    <p>
+    If we write a computer program that is capable of testing \(10,000\)
+    arrangements per second then it will take about \(35\) days to find the
+    answer which is reasonable - on a faster computer it, in theory, could be
+    done in about \(3.5\) days or even in about \(8\) hours.
+    </p>
+
+    <p>
+    Let us, however, see if we can solve this problem manually - by using the
+    following elimination algorithm. We will scan the list of initial facts for
+    clues in order to make a useful deduction which we will designate as \(d_1,
+    d_2, d_3\), etc. Once such a deduction is made we shall add this deduction
+    to the bottom of the list and repeat the process again until the problem is,
+    hopefully, solved since the number of constraint, we anticipate, should
+    constantly grow - each deduction should eliminate some number of choices for
+    a given attribute so that eventually only one possible value for an attribute
+    in question remains.
+    </p>
+    
+    <p>
+    While looking for clues we will use the idea perfected by the detectives -
+    if a suspect keeps showing up multiple times in multiple places then he/she
+    deserves a closer inspection. Consequently, if we come across a value of an
+    attribute, <strong>German</strong>, <strong>red</strong>,
+    <strong>tennis</strong>, <strong>birds</strong></dfn> and the like, mentioned
+    in the list more than once then we will try to use that value first to make
+    a useful deduction before moving on.
+    </p>
+
+    <p>
+    What follows is the record of my solution - the order of your deductions may
+    be different but the result should be the same.
+    </p>
+
+    <p>
+    We shall use the following convention to record the deductions: on the left
+    hand side of the equal sign we shall put the sum of all the facts from which
+    the new deduction, recorded on the right hand side of the equal sign, follows.
+    For example:
+    </p>
+
+$$f_4 = d_1$$
+
+    <p>
+    is read:
+    </p>
+
+    <p>
+    <dfn>from the initial fact number four follows the deduction number one
+    because ...</dfn>
+    </p>
+
+    <p>
+    The explanation of why this particular deduction follows from this set of
+    true statements is given in the paragraph right after.
+    </p>
+
+    <p>
+    <br>\(f4 = d1\)
+    </p>
+
+    <p>
+    <dfn>The \(\#1\) house is not <strong>white</strong>:</dfn> by definition no
+    other house can be positioned to the left of the first house.
+    </p>
+
+    <p>
+    <br>\(f4 = d2\)
+    </p>
+
+    <p>
+    <dfn>The \(\#5\) house is not <strong>green</strong>:</dfn> by definition no
+    other house can be positioned to the right of the last house.
+    </p>
+
+    <p>
+    <br>\(f5 + f8 = d3\)
+    </p>
+
+    <p>
+    <dfn>The \(\#3\) house is not <strong>green</strong>:</dfn> because the drinks
+    do not match, <strong>coffee</strong> \(\not =\) <strong>milk</strong>, the
+    color and the ordinal position of the house can not match either.
+    </p>
+
+    <p>
+    <br>\(f9 + f14 = d4\)
+    </p>
+
+    <p>
+    <dfn>The \(\#2\) house is <strong>blue</strong>:</dfn> the first house's only
+    immediate neighbor, on its right, can only be a house \(\#2\) by its ordinal
+    position. This deduction assigns the <strong>blue</strong> color to its
+    absolute position. It also eliminates this position as a choice for all the
+    remaining colors - <strong>red</strong>, <strong>green</strong>,
+    <strong>yellow</strong> and <strong>white</strong> houses are not \(\#2\).
+    </p>
+
+    <p>
+    <br>\(d4 = d5\)
+    </p>
+
+    <p>
+    <dfn>None of the \(\#1, \#3, \#4\) and \(\#5\) houses are <strong>blue</strong>.
+    </p>
+
+    <p>
+    <br>\(f1 + f9 = d6\)
+    </p>
+
+    <p>
+    <dfn>The \(\#1\) house is not <strong>red</strong>:</dfn> because the ethnic
+    backgrounds do not match, <strong>Briton</strong> \(\not =\)
+    <strong>Norwegian</strong>, the color and the ordinal position of a house can
+    not match either.
+    </p>
+
+    <p>
+    <br>\(d4 + f4 = d7\)
+    </p>
+
+    <p>
+    <dfn>The \(\#1\) house is not <strong>green</strong>:</dfn> the house
+    immediately to the right of the <strong>green</strong> house is
+    <strong>white</strong> and the house immediately to the right of the first
+    house is <strong>blue</strong>. Because the colors of the right neighbors do
+    not match, <strong>blue</strong> \(\not =\) <strong>white</strong>, the
+    ordinal position, \(\#1\), and the color, <strong>green</strong>, can not
+    match either.
+    </p>
+
+    <p>
+    <br>\(d1 + d5 + d6 + d7 = d8\)
+    </p>
+
+    <p>
+    <dfn>The \(\#1\) house is <strong>yellow</strong>:</dfn> this is the only color
+    left for the first house. All the other house color choices for that ordinal
+    position have been eliminated.
+    </p>
+
+    <p>
+    <br>\(d2 + d3 + d4 + d8 = d9\)
+    </p>
+
+    <p>
+    <dfn>The <strong>green</strong> house is \(\#4\):</dfn> this is the only
+    ordinal position left for the <strong>green</strong> house. All the other
+    position choices for that color have been eliminated.
+    </p>
+
+    <p>
+    <br>\(f4 + d9 = d10\)
+    </p>
+
+    <p>
+    <dfn>The <strong>white</strong> house is \(\#5\):</dfn> this is the only
+    ordinal position left for the <strong>white</strong> house. All the other
+    ordinal position choices for that color have been eliminated.
+    </p>
+
+    <p>
+    <br>\(d4 + d8 + d9 + d10 = d11\)
+    </p>
+
+    <p>
+    <dfn>The <strong>red</strong> house where the <strong>Briton</strong> lives
+    is \(\#3\):</dfn> this is the only color left for the third (center) house.
+    All the other color choices for that ordinal position have been eliminated.
+    </p>
+
+    <p>
+    <br>\(f1 + f8 + d11 = d12\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Briton</strong> drinks <strong>milk</strong>:</dfn>
+    because the ordinal position and the color of the house match, the center
+    house is <strong>red</strong>, so do the owner and the drink.
+    </p>
+
+    <p>
+    <br>\(f9 + d8 + f7 = d13\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Norwegian</strong> plays <strong>baseball</strong>:</dfn>
+    because the ordinal position and the color of the house match, the first
+    house is <strong>yellow</strong>, so do the owner and the sport.
+    </p>
+
+    <p>
+    Two attributes - the ordinal position and the color - are now fully
+    determined. Considering all the deductions we have made so far here is the
+    state of the problem:
+    </p>
+
+    <img src="imgs/fish1.png" alt="Fish 1" class="center">
+
+    <p>
+    <br>\(f11 + d13 = d14\)
+    </p>
+
+    <p>
+    <dfn>The owner of the <strong>blue</strong> house keeps
+    <strong>horses</strong>:</dfn> <strong>horses</strong> can be on either left
+    or right side of the person who plays <strong>baseball</strong>. That person
+    lives in the very first house. By its definition the first house has no
+    immediate neighbor on its left - only on its right. And that is the
+    <strong>blue</strong> house \(\#2\).
+    </p>
+
+    <p>
+    <br>\(f3 = d15\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Norwegian</strong> does not drink <strong>tea</strong>:</dfn>
+    because the ethnic backgrounds do not match, <strong>Dane</strong> \(\not =\)
+    <strong>Norwegian</strong>, the drinks can not match either.
+    </p>
+
+    <p>
+    <br>\(f5 + d8 = d16\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Norwegian</strong> does not drink <strong>coffee</strong>:
+    </dfn> because the colors do not match, <strong>yellow</strong> \(\not =\)
+    <strong>green</strong>, the drinks can not match either.
+    </p>
+
+    <p>
+    <br>\(f8 + f9 = d17\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Norwegian</strong> does not drink <strong>milk</strong>:
+    </dfn> because the ordinal positions of the houses do not match, first
+    \(\not =\) third (center), the drinks can not match either.
+    </p>
+
+    <p>
+    Another reasoning: <strong>milk</strong> is the drink at the
+    <strong>red</strong> house which is not <strong>yellow</strong>. Since the
+    colors do not match the drinks can not match either.
+    </p>
+
+    <p>
+    And another: since <strong>milk</strong> is the drink at the
+    <strong>red</strong> (center) house it can not be the drink at any,
+    <strong>yellow</strong> including, remaining house color (position).
+    </p>
+
+    <p>
+    <br>\(d13 + f12 = d18\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Norwegian</strong> does not drink <strong>beer</strong>:
+    </dfn> because the sports do not match, <strong>tennis</strong> \(\not =\)
+    <strong>baseball</strong>, the drinks can not match either.
+    </p>
+
+    <p>
+    <br>\(d15 + d16 + d17 + d18 = d19\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Norwegian</strong> drinks <strong>water</strong>:</dfn>
+    that is the only drink left for the <strong>Norwegian</strong>. All the other
+    drink choices for that person have been eliminated.
+    </p>
+
+    <p>
+    <br>\(d19 + f15 = d20\)
+    </p>
+
+    <p>
+    <dfn>The owner of the <strong>blue</strong> house plays
+    <strong>volleyball</strong>:</dfn> the <strong>volleyball</strong> player can
+    be on either left or right side of the house whose owner drinks
+    <strong>water</strong>. Because that person lives in the first house he has
+    only one neighbor - on its right side - the owner of the <strong>blue</strong>
+    house who plays <strong>volleyball</strong>:
+    </p>
+
+    <img src="imgs/fish2.png" alt="Fish 2" class="center">
+
+    <p>
+    <br>\(f12 + d19 + d12 + f5 + d20 = d21\)
+    </p>
+
+    <p>
+    <dfn>The owner of the <strong>white</strong> house drinks
+    <strong>beer</strong>:</dfn> because the drinks do not match,
+    <strong>beer</strong> \(\not =\) <strong>water</strong> \(\not =\)
+    <strong>milk</strong> \(\not =\) <strong>coffee</strong>, the colors,
+    <strong>yellow</strong>, <strong>red</strong> and <strong>green</strong>, can
+    not match either and are eliminated. Because the sports do not match,
+    <strong>tennis</strong> \(\not =\) <strong>volleyball</strong>, the only
+    remaining house color choice, <strong>blue</strong>, is also eliminated.
+    </p>
+
+    <p>
+    <br>\(d21 + f12 = d22\)
+    </p>
+
+    <p>
+    <dfn>The owner of the <strong>white</strong> house plays
+    <strong>tennis</strong>:</dfn> because the drinks match,
+    <strong>beer</strong> \(=\) <strong>beer</strong>, the color and the sport
+    must match also.
+    </p>
+
+    <p>
+    <br>\(d19 + d12 + f5 + d21 = d23\)
+    </p>
+
+    <p>
+    <dfn>The owner of the <strong>blue</strong> house drinks
+    <strong>tea</strong>:</dfn> that is the only drink left for the person who
+    lives in the <strong>blue</strong> house. All the other drink choices for
+    the owner of that house have been eliminated.
+    </p>
+
+    <p>
+    <br>\(d23 + f3 = d24\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Dane</strong> lives in the <strong>blue</strong> house:</dfn>
+    because the drinks match, <strong>tea</strong> \(=\) <strong>tea</strong>,
+    the owner and the color of the house must match also:
+    </p>
+
+    <img src="imgs/fish3.png" alt="Fish 3" class="center">
+
+    <p>
+    <br>\(d8 + d24 + d11 + d22 + f13 = d25\)
+    </p>
+
+    <p>
+    <dfn>The <strong>hockey</strong>-playing <strong>German</strong> lives in
+    the <strong>green</strong> house:</dfn> because the ethnic backgrounds do not
+    match, <strong>German</strong> \(\not =\) <strong>Norwegian</strong>
+    \(\not =\) <strong>Dane</strong> \(\not =\) <strong>Briton</strong>, the
+    house colors and ordinal positions can not match either and are eliminated.
+    Because the sports do not match, <strong>tennis</strong> \(\not =\)
+    <strong>hockey</strong>, the remaining color, <strong>white</strong>, is
+    also eliminated.
+    </p>
+
+    <p>
+    <br>\(d8 + d24 + d11 + d25 = d26\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Swede</strong> lives in the <strong>white</strong> house:</dfn>
+    this is the only ethnic background choice left for the owner of the
+    <strong>white</strong> house. All the other ethnic background choices for the
+    owner of the house of that color have been eliminated.
+    </p>
+
+    <p>
+    <br>\(d13 + d20 + d22 + d25 = d27\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Briton</strong> plays <strong>football</strong>:</dfn> this
+    is the only sport choice left for the <strong>Briton</strong>. All the other
+    sport choices for that person have been eliminated:
+    </p>
+
+    <img src="imgs/fish4.png" alt="Fish 4" class="center">
+
+    <p>
+    <br>\(f6 + d27 = d28\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Briton</strong> raises <strong>birds</strong>:</dfn> because
+    the sports match, <strong>football</strong> \(=\) <strong>football</strong>,
+    the owner and the pet must match also.
+    </p>
+
+    <p>
+    <br>\(d28 + f10 = d29\)
+    </p>
+
+    <p>
+    <dfn>The <strong>Norwegian</strong> keeps <strong>cats</strong>:</dfn> the
+    cat owner can be on either left or right side of the
+    <strong>volleyball</strong> player. The right neighbor of the
+    <strong>volleyball</strong> player raises <strong>birds</strong> and because
+    the pets do not match, <strong>birds</strong> \(\not = \)
+    <strong>cats</strong>, that neighbor is eliminated.
+    </p>
+
+    <p>
+    <br>\(d29 + d14 + d28 + f2 = d30\)
+    </p>
+
+    <p>
+    <dfn>The <strong>German</strong> owns the <strong>fish</strong>:</dfn> that
+    is the only pet choice left for the <strong>German</strong>. All the other
+    pet choices for that person have been eliminated:
+    </p>
+
+    <img src="imgs/fish5.png" alt="Fish 5" class="center">
+
+    <p>
+    So the answer is: the <strong>German</strong> who lives in the number four
+    <strong>green</strong> house, drinks <strong>coffee</strong> and plays
+    <strong>hockey</strong> owns the <strong>fish</strong>.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabascassini.html">prev</a>
+     <a href="ryabasommp1.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabaselimination.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

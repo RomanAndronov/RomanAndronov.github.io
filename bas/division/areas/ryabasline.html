@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Straight Line
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Straight Line</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasdivisionareas.html">prev</a>
+     <a href="ryabasparabola.html">next</a>
+    </p>
+
+    <h1>Straight Line</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the square area of a plane region delineated by the graph of a straight
+    line function \(y = mx, m > 0\), the \(x\)-axis and a perpendicular to \(Ox\)
+    through an arbitrary point \(B\) on \(Ox\):
+    </p>
+
+    <img src="imgs/straightline1.png" alt="Straight Line 1" class="center">
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Let:
+    </p>
+
+$$OB = l$$
+$$BP_n = h$$
+
+    <p>
+    For the
+    </p>
+
+    <p>
+    <strong>Left Sum</strong>
+    </p>
+
+    <img src="imgs/areas04.png" alt="Straight Line 2" class="center">
+
+    <p>
+    the square area of the \(i-\)th Left Riemann Rectangle is:
+    </p>
+
+$$A'_{i, l} = y_i \times \Delta x =$$
+$$y(x_{i-1}) \times \frac {l}{n}=$$
+$$mx_{i-1} \times \frac {l}{n}=$$
+$$m \frac {l}{n} \times (i - 1) \times \frac {l}{n}=$$
+$$\frac {ml^2}{n^2} \times i - \frac {ml^2}{n^2}$$
+
+    <p>
+    Left Riemann Sum of square areas of all the Left Riemann Rectangles then is:
+    </p>
+
+$$A'_l = \sum_{i=1}^n A'_{i, l} =$$
+$$\sum_{i=1}^n \Big(\frac {ml^2}{n^2} \times i - \frac {ml^2}{n^2}\Big)=$$
+$$\begin{equation}
+\frac {ml^2}{n^2} \sum_{i=1}^n i - \frac {ml^2}{n^2} \sum_{i=1}^n 1=
+\end{equation}$$
+$$\begin{equation}
+\frac {ml^2}{n^2} \frac {n(n + 1)}{2} - \frac {ml^2}{n}
+\end{equation}$$
+
+    <p>
+    where in (1) we have used the formula for the sum of first powers of \(i\)
+    (a uniform approach to computing these types of sums is covered in
+    <strong>Scope Expansion</strong> section):
+    </p>
+
+$$\begin{equation}
+\sum_{i=1}^n i = \frac {n(n + 1)}{2}
+\end{equation}$$
+
+    <p>
+    If we factor out \(n\) from the numerator of (3):
+    </p>
+
+$$n(n + 1) = n^2\Big(1 + \frac {1}{n}\Big)$$
+
+    <p>
+    then the \(n^2\)s in the numerator and the denominator of the first term
+    in (2) cancel out:
+    </p>
+
+$$A'_l = \frac {ml^2}{2n^2}n^2\Big(1 + \frac {1}{n}\Big) - \frac {ml^2}{n}=$$
+$$\begin{equation}
+\frac {ml^2}{2} - \frac {ml^2}{2n}
+\end{equation}$$
+
+    <p>
+    Applying the limit to \(A'_l\) when \(n \to +\infty\) we obtain:
+    </p>
+
+$$A_l = \lim_{n \to +\infty} A'_l =$$
+$$\lim_{n \to +\infty} \Big( \frac {ml^2}{2} - \frac {ml^2}{2n}\Big)=$$
+$$\lim_{n \to +\infty} \frac {ml^2}{2} - \lim_{n \to +\infty} \frac {ml^2}{2n} =$$
+$$\frac {ml^2}{2} - \frac {ml^2}{2} \lim_{n \to +\infty} \frac {1}{n}=$$
+$$\frac {ml^2}{2} - 0 =$$
+$$\frac {ml^2}{2}$$
+
+    <p>
+    From the given functional relationship \(y = mx\) it follows that if \(x = l\)
+    then \(h = ml\) and:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{A_l = \frac {ml^2}{2} = \frac {h^2}{2m} = \frac {lh}{2}}$$
+
+    <p>
+    For the
+    </p>
+
+    <p>
+    <br><strong>Right Sum</strong>
+    </p>
+
+    <img src="imgs/areas03.png" alt="Straight Line 3" class="center">
+
+    <p>
+    the square area of the \(i-\)th Right Riemann Rectangle is:
+    </p>
+
+$$A'_{i, r} = y_i \times \Delta x =$$
+$$y(x_i) \times \frac {l}{n}=$$
+$$mx_i \times \frac {l}{n}=$$
+$$m \frac {l}{n} \times i \times \frac {l}{n}=$$
+$$\frac {ml^2}{n^2} \times i$$
+
+    <p>
+    Right Riemann Sum of square areas of all the Right Riemann Rectangles then is:
+    </p>
+
+$$A'_r = \sum_{i=1}^n A'_{i, r} =$$
+$$\sum_{i=1}^n \Big(\frac {ml^2}{n^2} \times i\Big)=$$
+$$\frac {ml^2}{n^2} \sum_{i=1}^n i=$$
+$$\frac {ml^2}{n^2} \frac {n(n + 1)}{2}=$$
+$$\frac {ml^2}{n^2} \frac {n^2(1 + \frac {1}{n})}{2}=$$
+$$\frac {ml^2}{2} + \frac {ml^2}{2n}$$
+
+    <p>
+    Applying the limit to \(A'_r\) when \(n \to +\infty\) we obtain:
+    </p>
+
+$$A_r = \lim_{n \to +\infty} A'_r =$$
+$$\lim_{n \to +\infty} \Big( \frac {ml^2}{2} + \frac {ml^2}{2n}\Big)=$$
+$$\lim_{n \to +\infty} \frac {ml^2}{2} + \lim_{n \to +\infty} \frac {ml^2}{2n} =$$
+$$\frac {ml^2}{2} + \frac {ml^2}{2} \lim_{n \to +\infty} \frac {1}{n}=$$
+$$\frac {ml^2}{2} + 0 =$$
+$$\frac {ml^2}{2}$$
+
+    <p>
+    From the given functional relationship \(y = mx\) it follows that if \(x = l\)
+    then \(h = ml\) and:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{A_r = \frac {ml^2}{2} = \frac {h^2}{2m} = \frac {lh}{2}}$$
+
+    <p>
+    We observe that since the limits of both sums exist and are equal, it follows
+    that:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{A = A_l = A_r = \frac {ml^2}{2} = \frac {h^2}{2m} = \frac {lh}{2}}$$
+
+    <br><p>
+    It turns out that for a straight line a number of other arrangements of
+    primitive rectangles also works.
+    </p>
+
+    <p>
+    <strong>Horizontal Inner Sum</strong>
+    </p>
+
+    <p>
+    For this type of sum we construct the primitive rectangles in an order reverse
+    to the one used to construct the primitive rectangles for the traditional,
+    left and right sums: divide the vertical line segment \(BP_n = h\) into \(n\)
+    line segments of equal length:
+    </p>
+
+$$\frac {h}{n}$$
+
+    <p>
+    These line segments will become the sides of the primitive rectangles.
+    </p>
+
+    <p>
+    Construct \(n\) perpendiculars to \(Oy\) - one \(h_i\) perpendicular through
+    the corresponding point \(y_i\) on \(BP_n\). Each perpendicular \(h_i\) will
+    intersect the graph of the function \(y = mx\) at a point \(P_i\).
+    </p>
+
+    <p>
+    Construct \(n\) perpendiculars to \(Ox\) - one \(v_i\) perpendicular through
+    the corresponding point \(P_i\).
+    </p>
+
+    <p>
+    Finish constructing the primitive rectangles that are fully contained within
+    \(\triangle OBP_n\) and number them in a bottom to top fashion as shown:
+    </p>
+
+    <img src="imgs/straightline2.png" alt="Straight Line 4" class="center">
+
+    <p>
+    Then:
+    </p>
+
+$$A' = \sum_{i=1}^n A'_i =$$
+$$\sum_{i=1}^n w_i \times \frac {h}{n} =$$
+$$\sum_{i=1}^n \Big(l - x_i\Big) \frac {h}{n} =$$
+$$\begin{equation}
+\sum_{i=1}^n \Big(l - \frac {l}{n} \times i\Big) \frac {h}{n} =
+\end{equation}$$
+$$\sum_{i=1}^n \frac{lh}{n} - \sum_{i=1}^n \frac {lh}{n^2} \times i =$$
+$$\frac{lh}{n} \times n - \frac {lh}{n^2} \sum_{i=1}^n i =$$
+$$lh - \frac {lh}{n^2} \frac {n(n+1)}{2}=$$
+$$lh - \frac {lh}{2} - \frac {lh}{2n}=$$
+$$\begin{equation}
+\frac {lh}{2} - \frac {lh}{2n}
+\end{equation}$$
+
+    <p>
+    We observe that (4) and (6) are identical and hence:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{A = \frac {lh}{2}}$$
+
+
+    <p>
+    <br><strong>Diagonal Parallel Inner Sum</strong>
+    </p>
+
+    <p>
+    is a sum of square areas of primitive rectangles each of which is fully
+    contained in \(\triangle OBP_n\) and is positioned in such a way that its
+    long side is parallel to the straight line \(y = mx\):
+    </p>
+
+    <img src="imgs/straightline3.png" alt="Straight Line 5" class="center">
+
+    <p>
+    in which case:
+    </p>
+
+$$EC = \frac {h}{n}$$
+$$DC = EC \times \cos(\alpha) = \frac {h}{n} \times \cos(\alpha)$$
+$$x_iC = w_i = \frac {l - x_i}{\cos(\alpha)} = \frac {l - \frac {l}{n} \times i}{\cos(\alpha)}$$
+$$A'_i = w_i \times DC = \frac {l - x_i}{\cos(\alpha)} \times \frac {h}{n} \times \cos(\alpha)$$
+$$\begin{equation}
+A'_i = \Big(l - \frac {l}{n} \times i\Big) \frac {h}{n}
+\end{equation}$$
+
+    <p>
+    We observe that the terms in (5) and (7) are identical and hence:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{A = \frac {lh}{2}}$$
+
+    <p>
+    You are encouraged to perform similar computations based on other orientations
+    of primitive rectangles. For example:
+    </p>
+
+    <img src="imgs/straightline4.png" alt="Straight Line 4" class="center">
+
+    <p>
+    Figure out how the above primitive rectangles are constructed and to prove
+    that the limit of the sum of their square areas is:
+    </p>
+
+$$\frac {lh}{2}$$
+
+    <p>
+    Hint:
+    </p>
+
+   <p id="hint">
+    Start with dividing one side of the triangle into line segments of equal
+    length
+    </p>
+
+    <p>
+    <a href="ryabaslinesolution.html">Solution</a>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasdivisionareas.html">prev</a>
+     <a href="ryabasparabola.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionareas.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

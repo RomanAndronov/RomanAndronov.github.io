@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Hoof
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Hoof</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabas2shyperboloids.html">prev</a>
+     <a href="ryabassteinmetz.html">next</a>
+    </p>
+
+    <h1>Hoof</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the volume of a hoof (in Archimedes' terms) or a right circular
+    cylindrical wedge - a solid formed by truncating a right circular cylinder
+    with a plane passing through the diameter of the cylinder's base at an
+    arbitrary angle to that base.
+    </p>
+
+    <p>
+    The cylinder's radius \(r\) and hoof's height \(h\) are given, see the
+    drawing.
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Let us use Archimedes' primitive part - a thin triangular prism positioned
+    as shown below.
+    </p>
+
+    <p>
+    Cut the hoof with a plane through \(O\) perpendicular to \(FG\), the diameter
+    of the semi-circle that forms the base of the hoof, and consider its
+    corresponding half:
+    </p>
+
+    <img src="imgs/hoof3d1.png" alt="Hoof" class="center">
+
+    <p>
+    Cut \(OG\) into \(n\) line segments of equal length:
+    </p>
+
+$$\frac {r}{n}$$
+
+    </p>
+    The volume of the \(i-\)th primitive prism then is:
+    </p>
+
+$$V'_i = A(\triangle ABC) \times \frac {r}{n} =$$
+$$\frac {AB \times BC}{2} \times \frac {r}{n} =$$
+
+    <p>
+    Find \(BC\) as follows. By construction the triangles \(\triangle ODE\) and
+    \(\triangle ABC\) have all the corresponding angles equal and, by
+    <strong>AAA</strong>, are similar. From Euclid's <dfn>"Elements"</dfn> Book
+    6 Proposition 4 (the sides about equal angles in similar triangles are in
+    the same proportion) it follows that:
+    </p>
+
+$$\frac {BC}{AB} = \frac {DE}{OD}$$
+$$BC = AB \times \frac {h}{r}$$
+
+    <p>
+    and:
+    </p>
+
+$$V'_i = AB^2 \times \frac {h}{2n}$$
+
+    <p>
+    Find \(AB^2\) from the right, by construction, triangle \(\triangle OAB\) via
+    the Pythagorean theorem:
+    </p>
+
+$$OB^2 = OA^2 + AB^2$$
+$$AB^2 = r^2 - OA^2 =$$
+$$r^2 - \frac {r^2}{n^2}i^2$$
+
+    <p>
+    where we have used the fact that:
+    </p>
+
+$$OA = \frac {r}{n} \times i$$
+
+    <p>
+    Then:
+    </p>
+
+$$V'_i = \frac {h}{2n} \frac {r^2}{n^2} (n^2 - i^2) =$$
+$$\frac {hr^2}{2n^3} (n^2 - i^2)$$
+
+    <p>
+    An approximate volume of the entire hoof is the sum of volumes of its two halves:
+    </p>
+
+$$V' = 2 \times \sum_{i=1}^n V'_i =$$
+$$2 \times\sum_{i=1}^n \frac {hr^2}{2n^3} (n^2 - i^2) =$$
+$$\frac {hr^2}{n^3}\Big(n^2 \sum_{i=1}^n - \sum_{i=1}^n i^2\Big) =$$
+$$\frac {hr^2}{n^3}\Big(n^3 - \frac {n(n + 1)(2n + 1)}{6}\Big) =$$
+$$\frac {hr^2}{n^3}\Big(n^3 - \frac {n^3}{6}\Big(1 + \frac {1}{n}\Big)
+ \Big(2 + \frac {1}{n}\Big)\Big) =$$
+$$hr^2\Big(1 - \frac {1}{6}\Big(1 + \frac {1}{n}\Big)\Big(2 +
+ \frac {1}{n}\Big)\Big) =$$
+$$hr^2\Big(\frac{2}{3} - \frac{1}{2n} - \frac {1}{6n^2}\Big)$$
+
+    <p>
+    Applying the limit to \(V'\) as \(n \to +\infty\) we obtain:
+    </p>
+
+$$V = \lim_{n \to +\infty} V' =$$
+$$\lim_{n \to +\infty} hr^2\Big(\frac{2}{3} - \frac{1}{2n} -
+ \frac {1}{6n^2}\Big) =$$
+$$hr^2\Big(\lim_{n \to +\infty} \frac {2}{3} -
+ \lim_{n \to +\infty}\frac{1}{2n} -
+ \lim_{n \to +\infty}\frac {1}{6n^2}\Big) =$$
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\frac {2}{3} hr^2}
+\end{equation}$$
+
+    <p>
+    Looking at the above formula we can make the following observation - even
+    though the hoof is delineated by a semi-circle, a right circular cylinder
+    and a conic, the irrational number \(\pi\) that usually accompanies these
+    objects is, remarkably, absent from the formula for its volume.
+    </p>
+
+    <p>
+    In <strong>Steinmetz</strong> chapter we will come across a similar
+    arrangement - the volume of an orthogonal intersection of two right cylinders
+    also does not contain the irrational number \(\pi\).
+    </p>
+
+    <p>
+    <br><strong>Limit</strong>
+    </p>
+
+    <p>
+    Now that we know the volume of the hoof we can use that knowledge to obtain
+    the magnitude of the following limit that can be used to compute the amount
+    of pressure exerted by a liquid on the inner surface of vessels of various
+    geometries and the amount of work required to be done to remove a given amount
+    of liquid from these types of vessels:
+    </p>
+
+$$\lim_{n \to +\infty} \frac {1}{n^3}\sum_{i=1}^n i \sqrt{n^2 - i^2}$$
+
+    <p>
+    Instead of Archimedes' triangular we choose rectangular prisms as primitive
+    parts to solve this particular problem and we position these parts as shown:
+    </p>
+
+    <img src="imgs/hoof3d2.png" alt="Hoof" class="center">
+
+    <p>
+    Divide \(OC\) into \(n\) line segments of equal length:
+    </p>
+
+$$\frac {r}{n}$$
+
+    <p>
+    The volume of the \(i-\)th primitive rectangular prism then is:
+    </p>
+
+$$V'_i = FE \times AD \times \frac {r}{n}$$
+
+    <p>
+    Prove that the right triangles \(\triangle OBC\) and \(\triangle OAD\) are
+    similar and use that fact to find \(AD\):
+    </p>
+
+$$\frac {AD}{OD} = \frac {h}{r}$$
+$$AD = OD \times \frac {h}{r} =$$
+$$\frac {r}{n} \times i \times \frac {h}{r} =$$
+$$\frac {h}{n} \times i$$
+
+    <p>
+    where we have used the fact that the point \(D\) is \(i\) widths of primitive
+    prisms away from \(O\).
+    </p>
+
+    <p>
+    Then:
+    </p>
+
+$$V'_i = FE \times \frac {hr}{n^2} \times i$$
+
+    <p>
+    Find \(FE\) from the right, by construction, triangle \(\triangle ODE\) via
+    the Pythagorean theorem:
+    </p>
+
+$$r^2 = OD^2 + \frac {FE^2}{4}$$
+$$FE = 2 \sqrt{r^2 - OD^2} =$$
+$$2 \sqrt {r^2 - \frac {r^2}{n^2} i^2} =$$
+$$\frac {2r}{n} \sqrt{n^2 - i^2}$$
+
+    <p>
+    Then:
+    </p>
+
+$$V'_i = \frac {hr}{n^2} \times i \times \frac {2r}{n} \sqrt{n^2 - i^2} =$$
+$$\frac {2hr^2}{n^3} i \sqrt{n^2 - i^2}$$
+
+    <p>
+    The approximate volume of the hoof then is:
+    </p>
+
+$$V' = \sum_{i=1}^n V'_i =$$
+$$\frac {2hr^2}{n^3} \sum_{i=1}^n i \sqrt{n^2 - i^2}$$
+    </p>
+
+    <p>
+    Applying the corresponding limit to \(V'\) we obtain:
+    </p>
+
+$$V = \lim_{n \to +\infty}  V' =$$
+$$\begin{equation}
+\frac {2hr^2}{n^3} \lim_{n \to +\infty} \sum_{i=1}^n i \sqrt{n^2 - i^2}
+\end{equation}$$
+
+    <p>
+    But (1) and (2) express the volume of the same geometric object:
+    </p>
+
+$$\frac {2hr^2}{3} = 2hr^2 \lim_{n \to +\infty}
+ \frac {1}{n^3} \sum_{i=1}^n i \sqrt{n^2 - i^2}$$
+
+    <p>
+    And hence:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty}
+ \frac {1}{n^3}\sum_{i=1}^n i \sqrt{n^2 - i^2} = \frac {1}{3}}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabas2shyperboloids.html">prev</a>
+     <a href="ryabassteinmetz.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionvolumes.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

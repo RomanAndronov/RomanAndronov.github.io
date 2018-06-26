@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Roliding Bead 1 by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css"/>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Roliding Bead 1 by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasarmies.html">prev</a>
+     <a href="ryabasrlb2.html">next</a>
+    </p>
+
+    <h1>Roliding Bead 1</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    In the initial, steady, state a massless rod of length \(l\) rotating at a
+    constant angular velocity \(\omega_0\) in the horizontal plane about a fixed
+    vertical axis has a point mass (bead) attached to it with a thread of length
+    \(l_0\):
+    </p>
+
+<img src="imgs/rlb01.png" class="center">
+
+    <p>
+    At a certain moment the thread holding the bead in position is cut. The bead
+    starts sliding along the rod away from the axis of rotation without friction.
+    </p>
+
+    <p>
+    1) What will the velocity of the bead relative to the rod be at the moment
+    when the bead separates from and slides off the rod?
+    </p>
+
+    <p>
+    2) How long will it take the bead to separate from the rod?
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    We will use the method of Lagrange to solve this problem. We will make the
+    plane of rotation be the position of the system with zero potential energy.
+    Consequently, since there is no friction in the system, the kinetic energy
+    of the system will be composed of the kinetic energy of the bead's rotation
+    and the kinetic energy of the bead's motion relative to the rod:
+    </p>
+
+$$L = T - U = T$$
+$$T = \frac {J\omega_0^2}{2} + \frac {mv^2}{2}$$
+
+    <p>
+    where \(J\) is the bead's moment of inertia and \(v\) is the beads velocity
+    relative to the rod.
+    </p>
+
+    <p>
+    Let \(x\) be the distance of the rotating and sliding (<dfn>roliding</dfn>
+    or <dfn>slitating</dfn>) bead from the axis of rotation at an arbitrary point
+    of time. Then the moment of the bead's inertia at an arbitrary moment of
+    time after the thread which held the bead in a fixed position was cut is:
+    </p>
+
+$$J = mx^2$$
+
+    <p>
+    Since there is no friction in the system, the angular momentum is conserved
+    and from that it follows that since the rod itself is massless and has no
+    angular momentum, then the angular momentum of the system is equal to the
+    angular momentum of the bead:
+    </p>
+
+$$\frac {ml_0^2\omega_0^2}{2} = \frac {mx^2\omega}{2}$$
+
+    <p>
+    For the above equality to stand, it follows that as \(x\) increases then
+    \(\omega\), the bead's <dfn>current</dfn> angular velocity, must decrease and
+    the system, left to itself, must slow down.
+    </p>
+
+    <p>
+    Here we have two options:
+    </p>
+
+    <p>
+    - the system has an external input of energy tuned perfectly to keep the bead
+    and the rod rotating at constant angular velocity, \(\omega_0\)
+    </p>
+
+    <p>
+    - the system has no external input, it will slow down over time, the bead's
+    angular velocity is a decreasing function of time
+    </p>
+
+    <p>
+    <br><strong>Option 1</strong>
+    </p>
+
+    <p>
+    In this case the Lagrangian of the system is:
+    </p>
+
+$$L = \frac {mx^2\omega_0^2}{2} + \frac {m \dot x^2}{2}$$
+
+    <p>
+    and the Euler-Lagrangian equations are:
+    </p>
+
+$$\frac {d}{dt} \frac {\partial L}{\partial \dot x} =
+\frac {\partial L}{\partial x}$$
+$$\frac {\partial L}{\partial \dot x} = m \dot x, \quad \frac {d(m \dot x)}{dt} = m \ddot x$$
+$$\frac {\partial L}{\partial x} = mx\omega_0^2$$
+$$m \ddot x = mx\omega_0^2$$
+$$\begin{equation}
+\ddot x = \omega_0^2 x
+\end{equation}$$
+
+    <p>
+    since the bead's mass remains constant at all times.
+    </p>
+
+    <p>
+    Now instead of solving (1), which of course we can do without any problems,
+    we use the equivalence approach or principle by observing that purely
+    mathematically or arithmetically (1), a single differential equation of the
+    second order, is equivalent to the pair of differential equations of the
+    first order, (1) and (2), from <strong>Armies</strong> section:
+    </p>
+
+$$\begin{equation}
+\dot a = - \beta b
+\end{equation}$$
+
+$$\begin{equation}
+\dot b = - \alpha a
+\end{equation}$$
+
+    <p>
+    From (2) for \(b\) we have:
+    </p>
+
+$$\begin{equation}
+b = - \frac {1}{\beta} \dot a
+\end{equation}$$
+
+    <p>
+    Differentiating (4) over time, we obtain:
+    </p>
+
+$$\begin{equation}
+\dot b = - \frac {1}{\beta} \ddot a
+\end{equation}$$
+
+    <p>
+    Equating (3) and (5), we have:
+    </p>
+
+$$\begin{equation}
+\ddot a = \omega_0^2 a, \quad \omega_0 = \alpha = \beta
+\end{equation}$$
+
+    <p>
+    rendering (1) and (6) mathematically equivalent even though on the surface
+    these two problems, seemingly, have nothing in common - one is a math problem
+    and the other is a physics problem.
+    </p>
+
+    <p>
+    Consequently, we put forward the following equivalencies:
+    </p>
+
+    <p>
+    - the bead's coordinate \(x\) as measured along the rod is equivalent to the
+    number of troops of the army \(A\):
+    </p>
+
+$$x \equiv a$$
+
+    <p>
+    - the bead's radial velocity relative to the rod, \(\dot x\), according to
+    (2), is equivalent to the number of troops of the army \(B\):
+    </p>
+
+$$\dot x = v \equiv -\beta b = \dot a$$
+
+    <p>
+    Before we claim the solution for the this problem, however, we observe that
+    in the <strong>Armies</strong> problem, in the direct flow of time, the
+    magnitudes in question were diminishing while in this problem \(x\) and
+    \(\dot x\) are growing.
+    </p>
+
+    <p>
+    Consequently, to establish the correct equivalence between these two problems
+    we must reverse the flow of time for one of them and adjust the signs of
+    derivatives:
+    </p>
+
+    <p>
+    - the initial number of troops \(a_0\) of the army \(A\) we correlate with
+    the length of the rod \(l\) or the bead's <dfn>final</dfn> or
+    <dfn>separation</dfn> magnitude of its coordinate along the rod \(x\):
+    </p>
+
+$$a_0 \equiv l$$
+
+    <p>
+    - the final number of surviving troops \(a(b = 0)\) of the army \(A\) we
+    correlate with \(l_0\) or the bead's initial position on the rod:
+    </p>
+
+$$a(b = 0) \equiv l_0$$
+
+    <p>
+    - the initial number of troops \(b_0\) of the army \(B\) we correlate with
+    the bead's radial velocity relative to the rod at separation time, \(v_s\),
+    with its sign adjusted since the negative sign of the rate of change of the
+    army \(A\)'s number of troops means that that number is diminishing while
+    the bead's radial velocity relative to the rod grows with time:
+    </p>
+
+$$b_0 \equiv \frac {v_s}{\beta}$$
+
+    <p>
+    - the final number of surviving troops \(b = 0\) of the army \(B\) we
+    correlate with the bead's initial radial velocity relative to the rod:
+    </p>
+
+$$b = 0 = v_0$$
+
+    <p>
+    <strong>1) Separation Velocity</strong>
+    </p>
+
+    <p>
+    We can now answer the first question of this problem by computing the
+    bead's radial velocity relative to the rod at the moment when the bead
+    reaches the rod's end and flies off of it. From <strong>Armies</strong>
+    equation (5)
+    </p>
+
+$$a(b = 0) = \sqrt{a_0^2 - \frac {\beta}{\alpha}b_0^2}$$
+
+    <p>
+    it follows that:
+    </p>
+
+$$l_0^2 = l^2 - \frac {\beta}{\alpha} \frac {v_s^2}{\beta^2} =$$
+$$l^2 - \frac {v_s^2}{\alpha \beta} =$$
+$$l^2 - \frac {v_s^2}{\omega_0^2}$$
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{v_s = \omega_0 \sqrt{l^2 - l_0^2}}
+\end{equation}$$
+
+    <p>
+    <strong>2) Separation Time</strong>
+    </p>
+
+    <p>
+    To answer the second question of this problem we observe that from the
+    <strong>Armies</strong> equation (19):
+    </p>
+
+$$\ln \Bigg( \frac {b}{k} + \sqrt{\frac {b^2}{k^2} + 1}\Bigg) -
+ \ln \Bigg( \frac {b_0}{k} + \sqrt{\frac {b_0^2}{k^2} + 1}\Bigg) =
+ -\sqrt{\alpha \beta} \; t$$
+
+    <p>
+    it follows that since:
+    </p>
+
+$$b = 0$$
+
+    <p>
+    for the bead's separation time \(t_s\) we have:
+    </p>
+
+$$- \ln \Bigg(\frac {b_0}{k} + \sqrt{\frac {b_0^2}{k^2} + 1}\Bigg) =
+ - \sqrt{\alpha \beta} \; t_s$$
+$$t_s = \frac {1}{\omega_0} \ln \Bigg(\frac {b_0}{k} +
+ \sqrt{\frac {b_0^2}{k^2} + 1}\Bigg)$$
+
+    <p>
+    From the <strong>Armies</strong> equation (8) for \(k\) we have (we took
+    \(\beta = \omega_0\)):
+    </p>
+
+$$k^2 = \frac {\alpha}{\beta}a_0^2 - b_0^2 = l^2 - \frac {v_s^2}{\omega_0^2} =$$
+$$l^2 - \frac {\omega_0^2(l^2 - l_0^2)}{\omega_0^2} = l_0^2$$
+
+    <p>
+    and hence:
+    </p>
+
+$$\frac {b_0^2}{k^2} = \frac{v_s^2}{\omega_0^2 l_0^2} =
+\frac {\omega_0^2(l^2 - l_0^2)}{\omega_0^2 l_0^2} = \frac {l^2}{l_0^2} - 1$$
+$$\frac {b_0}{k} = \sqrt{\frac {l^2}{l_0^2} - 1}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{t_s = \frac {1}{\omega_0} \ln \Bigg(\frac {l}{l_0} +
+ \sqrt{\frac {l^2}{l_0^2} - 1}\Bigg)}
+\end{equation}$$
+
+    <p>
+    <strong>3) \(x(t), \dot x(t), \ddot x(t)\)</strong>
+    </p>
+
+    <p>
+    Lastly, from the <strong>Armies</strong> equation (11), which we adjust to
+    not have the negative sign on its right hand side since the bead's velocity
+    grows with time,  and the equation (18) it follows that in the direct flow
+    of time we integrate from zero, the bead's initial velocity, to some arbitrary
+    value \(v\), while the bead is still on the rod, we obtain:
+    </p>
+
+$$\ln \Bigg(\frac {v}{\omega_0 k} + \sqrt{\frac {v^2}{\omega_0^2 k^2} + 1}\Bigg) =
+ \omega_0t$$
+$$\frac {v}{\omega_0 k} + \sqrt{\frac {v^2}{\omega_0^2 k^2} + 1} = e^{\omega_0t}$$
+$$\sqrt{\frac {v^2}{\omega_0^2 k^2} + 1} = e^{\omega_0t} - \frac {v}{\omega_0 k}$$
+$$\frac {v^2}{\omega_0^2 k^2} + 1 = e^{2\omega_0t} -
+ \frac {2e^{\omega_0t}v}{\omega_0 k} + \frac {v^2}{\omega_0^2 k^2}$$
+$$\frac {2e^{\omega_0t}v}{\omega_0 k} = e^{2\omega_0t} - 1$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{v(t) = \dot x(t) = \omega_0 l_0 \frac {e^{\omega_0 t} -
+ e^{-\omega_0 t}}{2}}
+\end{equation}$$
+
+    <p>
+    Integrating (9) to obtain \(x(t)\) and differentiating (9) to obtain
+    \(\ddot x(t)\), we have:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{x(t) = l_0 \frac {e^{\omega_0 t} + e^{-\omega_0 t}}{2}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\ddot x(t) = \omega_0^2 l_0 \frac {e^{\omega_0 t} +
+ e^{-\omega_0 t}}{2}}
+\end{equation}$$
+
+    <p>
+    One way to interpret the above result is to observe that the trajectory of
+    the bead that <strong>ro</strong>tates and <strong>slid</strong>es
+    simultaneously (<dfn>rolides</dfn> or <dfn>slitates</dfn>) is a type of a
+    logarithmic spiral:
+    </p>
+
+<img src="imgs/rlb02.png" class="center">
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasarmies.html">prev</a>
+     <a href="ryabasrlb2.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasequiv.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

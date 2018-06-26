@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Straight Line Problem Solution
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Straight
+  Line Problem Solution</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+    </p>
+
+    <h1>Straight Line Problem Solution</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Prove that the limit of the sum of square areas of primitive rectangles
+    arranged as shown below is equal to:
+    </p>
+
+$$\frac {lh}{2}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Let:
+    </p>
+
+$$OB = l$$
+$$BP_n = h$$
+
+    <img src="imgs/straightline4.png" alt="Straight Line 4" class="center">
+
+    <p>
+    Divide, for example, \(BP_n\) into \(n\) line segments of equal length and
+    construct \(n - 1\) parallels to the straight line \(y = mx\) through each
+    \(y_i\), see the drawing above:
+    </p>
+
+$$y_{i-1}y_i = \Delta y = \frac {h}{n}$$
+
+    <p>
+    These parallels will intersect \(Ox\) in \(x_1, x_2, \dots, x_{n - 1}\) points
+    cutting \(OB\) into \(n\) line segments of equal length:
+    </p>
+
+$$x_{i-1}x_i = \Delta x = \frac {l}{n}$$
+
+    <p>
+    Construct \(n - 1\) perpendiculars to \(y = mx\) through \(x_1, x_2, \dots,
+    x_{n - 1}\). These perpendiculars will delineate \(n - 2\) primitive rectangles
+    with equal width as measured along the straight line \(y = mx\):
+    </p>
+
+$$\frac {l}{n}\cos(\alpha)$$
+
+    <p>
+    and varying height as measured along the perpendicular to \(y = mx\):
+    </p>
+
+$$\frac {l}{n}\sin(\alpha) \times i$$
+
+    <p>
+    Consequently, numbering such rectangles in a left to right fashion, the square
+    area of the \(i-\)th such rectangle will be:
+    </p>
+
+$$\frac {l^2}{n^2}\sin(\alpha)\cos(\alpha) \times i, \quad x \in [1, n-2]$$
+
+    <p>
+    The square area of a "center" rectangle whose one vertex is at \(x_{n-1}\)
+    and the other is at \(y_1\) will be:
+    </p>
+
+$$(n - 1)\frac {l}{n}\sin(\alpha) \times \frac {l}{n\cos(\alpha)} =$$
+$$(n - 1)\frac {l^2}{n^2}\tan(\alpha) =$$
+$$(n - 1)\frac {ml^2}{n^2}$$
+
+    <p>
+    If we number the primitive rectangles constructed along the vertical \(BP_n\)
+    starting from \(P_n\) and moving along \(y = mx\) towards \(O\) then the
+    square area of the \(i-\)th such rectangle will be:
+    </p>
+
+$$\frac {h^2}{n^2}\sin(\alpha)\cos(\alpha) \times i, \quad x \in [1, n-2]$$
+
+    <p>
+    making a total number of primitive rectangles \(2n - 3\).
+    </p>
+
+    <p>
+    Summing the square areas of all of the primitive rectangles we obtain:
+    </p>
+
+$$\begin{equation}
+A' = \frac {l^2 + h^2}{n^2}\sin(\alpha)\cos(\alpha) \sum_{i=1}^{n - 2}i +
+ ml^2 \frac{n - 1}{n^2}
+\end{equation}$$
+
+    <p>
+    From the previous exercises we already know that in the limiting case when
+    \(n \to +\infty\) the last term in (1) vanishes so we can safely throw it out.
+    </p>
+
+    <p>
+    Rearrange the factor in front of the sum of the remaining term:
+    </p>
+
+$$\Big(l^2 + h^2\Big)\sin(\alpha)\cos(\alpha)$$
+
+    <p>
+    as follows:
+    </p>
+
+$$l^2 + h^2 = \sqrt{l^2 + h^2} \times \sqrt{l^2 + h^2}$$
+
+    <p>
+    to obtain:
+    </p>
+
+$$\Big(l^2 + h^2\Big)\sin(\alpha)\cos(\alpha)=$$
+$$\sqrt{l^2 + h^2} \times \cos(\alpha) \times \sqrt{l^2 + h^2} \times \sin(\alpha)=$$
+$$\begin{equation}
+l \times h
+\end{equation}$$
+
+    <p>
+    Put (2) into (1):
+    </p>
+
+$$A' = \frac {lh}{n^2} \sum_{i=1}^{n - 2}i =$$
+$$\frac {lh}{n^2} \frac {(n - 2)(n - 1)}{2} =$$
+$$\frac {lh}{n^2}\frac {n^2(1 - \frac {2}{n})(1 - \frac {1}{n})}{2} =$$
+$$\frac {lh}{2}\Big(1 - \frac {3}{n} + \frac {2}{n^2}\Big)$$
+
+    <p>
+    Apply the limit to \(A'\) when \(n \to +\infty\):
+    </p>
+
+$$A = \lim_{n \to +\infty} A' =$$
+$$\lim_{n \to +\infty} \frac {lh}{2} -
+\frac {3lh}{2} \lim_{n \to +\infty} \frac {1}{n} +
+lh \lim_{n \to +\infty} \frac {1}{n^2}=$$
+$$\frac {lh}{2}$$
+
+    <p>
+    What was required to prove.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionareas.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

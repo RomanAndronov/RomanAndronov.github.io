@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Equation. Chase Around the Clock
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Equation. Chase Around the Clock</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasequation.html">prev</a>
+     <a href="ryabasequation.html">next</a>
+    </p>
+
+    <h1>Chase Around the Clock</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    How many times will the minute hand catch up to the hour hand during one
+    \(24\)-hour day starting from midnight?
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Let \(v_h\) be the speed of the hour hand and let \(v_m\) be the speed of the
+    minute hand. We know that constant speed, distance and time are connected
+    with each other via the formula:
+    </p>
+
+$$d = v \times t$$
+
+    <p>
+    where \(d\) is the distance traveled and \(t\) is the time it took to
+    travel that distance at a constant rate \(v\).
+    </p>
+
+    <p>
+    In this particular case we will use the markings on the face of the analog
+    clock that measure minutes and seconds as our units of space.
+    </p>
+
+    <p>
+    Since the speed of the minute hand is \(v_m = 60\) units per hour and the
+    speed of the hour hand is \(v_h = 5\) units per hour it follows that the
+    instance the new day, and a \(24-\)hour period, begins the minute hand will
+    be ahead of the hour hand and the "catch up" event will not occur. Further,
+    it means that the first such event will occur some time after the clock
+    strikes \(1\) o'clock.
+    </p>
+
+    <p>
+    At \(1\) o'clock sharp the minute hand will be pointing at the \(12\)
+    o'clock mark while the hour hand will point at the \(1\) o'clock mark and,
+    since we have established already that the minute hand runs faster than the
+    hour hand, the minute hand will be poised to catch up to the hour hand at
+    \(t_1\):
+    </p>
+
+    <img src="imgs/clock01.png" alt="Chase Around the Clock" class="center">
+
+    <p>
+    Let \(x_1\) be the distance covered by the hour hand before it is overtaken
+    by the minute hand. Then the distance covered by the minute hand before it
+    catches up with the hour hand is \(5 + x_1\).
+    </p>
+
+    <p>
+    When the minute hand catches up with the hour hand it would've traveled for
+    exactly the same time \(t_m\) as the hour hand \(t_h\) and hence:
+    </p>
+
+$$t_m = t_h$$
+$$t_m = \frac {5 + x_1}{v_m}$$
+$$t_h = \frac {x_1}{v_h}$$
+$$\frac {5 + x_1}{v_m} = \frac {x_1}{s_h}$$
+
+    <p>
+    Substituting the actual values for \(v_m\) and \(v_h\) into the above equation
+    we obtain:
+    </p>
+
+$$\frac {5 + x_1}{60} = \frac {x_1}{5}$$
+$$5 + x_1 = 12 x_1$$
+$$5 = 11 x_1$$
+$$x_1 = \frac {5}{11}$$
+$$t_1 = 5 + \frac {5}{11} = 5 \times 1 + \frac {5 \times 1}{11}$$
+
+    <p>
+    We now see that since both hands run at a constant rate, the initial distance
+    between them when the clock strikes \(n\) o'clock sharp will be \(5\times n\)
+    units of space: when the clock strikes \(2\) sharp - it will be \(10 = 5
+    \times 2\) units, when the clock strikes \(3\) sharp - it will be \(15 = 5
+    \times 3\) units and so on:
+    </p>
+
+$$t_n = 5n + \frac {5n}{11}$$
+
+    <p>
+    which means that the minute-hour hands' \(11-\)th rendezvous point will be
+    at:
+    </p>
+
+$$t_{11} = 5 \times 11 + \frac {5 \times 11}{11} = 60$$
+
+    <p>
+    which designates high noon for the first twelve hours of the day and the dead
+    of the night for the the second \(12-\)hour period which bring the tally of
+    the "catch up" events in question to \(11\) during the \(12\)-hour period and
+    \(22\) during the \(24\)-hour day:
+    </p>
+
+    <img src="imgs/clockall.png" alt="Chase Around the Clock" class="center">
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasequation.html">prev</a>
+     <a href="ryabasequation.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasequation.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

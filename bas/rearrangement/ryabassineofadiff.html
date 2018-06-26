@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Rearrangement. Sine of a Difference
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov.
+  Rearrangement. Sine of a Difference</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabastanofasum.html">prev</a>
+     <a href="ryabascosineofadiff.html">next</a>
+    </p>
+
+    <h1>\(\sin (\alpha -\beta)\)</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Express the sine of a composite angle \(\alpha - \beta\) in terms of
+    trigonometric functions of primitive angles \(\alpha\) and \(\beta\).
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    In the previous chapters we have discovered that a certain arrangement of
+    right triangles can be used to deduce the identities that express the
+    trigonometric functions of a sum of two angles via trigonometric functions
+    of primitive or single angles.
+    </p>
+
+    <p>
+    In this and the remaining trigonometry-related chapters we continue our
+    investigation of the question of whether the above arrangement of right
+    triangles can be used to deduce the identities that express the trigonometric
+    functions of a difference of two angles via trigonometric functions of
+    single angles.
+    </p>
+
+    <p>
+    Quite remarkably it turns out that the answer to the above question is - yes.
+    The only rearrangement of the angles in question we have to make is to place
+    the smaller angle, \(\beta\), inside the larger one, \(\alpha\):
+    </p>
+
+    <img src="imgs/trigofdiff.png" alt="Sine of a Difference" class="center">
+
+    <p>
+    By definition then we have:
+    </p>
+
+$$\sin (\alpha - \beta) = \frac {EF}{AE} =$$
+$$\frac {GC}{AE} =$$
+$$\frac {BC - BG}{AE} =$$
+$$\frac {BC}{AE} - \frac {BG}{AE}$$
+
+    <p>
+    The ideas that we have developed in the previous chapters, examining the line
+    segments that form a fraction, apply here also. For example, \(BC\) is a side
+    of the right triangle \(\triangle ACB\) and \(AE\) is a hypotenuse of the
+    right triangle \(\triangle ABE\) and both of these right triangles share
+    \(AB\):
+    </p>
+
+$$\frac {BC}{AE} = \frac {BC}{AE} \times 1 =$$
+$$\frac {BC}{AE} \times \frac {AB}{AB} =$$
+$$\frac {BC}{AB} \times \frac {AB}{AE}$$
+
+    <p>
+    From \(\triangle ACB\) we have:
+    </p>
+    
+$$\frac {BC}{AB} = \sin \alpha$$
+
+    <p>
+    From \(\triangle ABE\) we have:
+    </p>
+    
+$$\frac {AB}{AE} = \cos \beta$$
+
+    <p>
+    and:
+    </p>
+    
+$$\frac {BC}{AE} = \sin \alpha \cos \beta$$
+$$\sin (\alpha - \beta) = \sin \alpha \cos \beta - \frac {BG}{AE}$$
+
+    <p>
+    Consequently, \(BG\) is a side of the right triangle \(\triangle BGE\) and
+    \(AE\) is a hypotenuse of the right triangle \(\triangle ABE\) and both of
+    these triangles share \(BE\):
+    </p>
+
+$$\frac {BG}{AE} = \frac {BG}{AE} \times 1 =$$
+$$\frac {BG}{AE} \times \frac {BE}{BE} =$$
+$$\frac {BG}{BE} \times \frac {BE}{AE}$$
+$$\frac {BG}{BE} = \cos \alpha$$
+$$\frac {BE}{AE} = \sin \beta$$
+$$\frac {BG}{AE} = \cos \alpha \sin \beta$$
+
+    <p>
+    and:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\sin (\alpha - \beta) = \sin \alpha \cos \beta -
+\cos \alpha \sin \beta}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabastanofasum.html">prev</a>
+     <a href="ryabascosineofadiff.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrearrangement.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

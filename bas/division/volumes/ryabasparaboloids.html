@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Paraboloids
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Paraboloids</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabastori.html">prev</a>
+     <a href="ryabas1shyperboloids.html">next</a>
+    </p>
+
+    <h1>Paraboloids</h1>
+
+    <p>
+    <strong>Circular Paraboloid</strong>
+    </p>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the volume of a circular paraboloid formed by revolving a \(z = ax^2\)
+    parabola around the \(z\) axis.
+    </p>
+
+    <p>
+    Either the height of the paraboloid along the \(z\) axis \(BC = AO = h\) or
+    the corresponding value along the \(x\) axis \(AB = OC = r\) is given, see
+    the drawing.
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Choose thin right circular cylinders as primitive parts to approximate the
+    volume of the circular paraboloid and position them as shown:
+    </p>
+
+    <img src="imgs/paraboloid3D.png" alt="Paraboloid 3D" class="center">
+
+    <p>
+    Cut \(AO = h\) into \(n\) line segments of equal length:
+    </p>
+
+$$z_{i-1}z_i = \Delta z = \frac {h}{n}$$
+
+    <p>
+    The volume of the \(i-\)th primitive cylinder then is:
+    </p>
+
+$$V'_i = \pi x_i^2 \frac {h}{n} =$$
+$$\frac {\pi h}{n} \frac {z_i}{a} =$$
+$$\frac {\pi h}{n} \frac {h}{an} i =$$
+$$\frac {\pi h^2}{an^2} i$$
+
+    <p>
+    where we have used the following facts:
+    </p>
+
+$$z_i = ax_i^2 = \frac {h}{n} \times i$$
+
+    <p>
+    Then:
+    </p>
+
+$$V' = \sum_{i=1}^n V'_i =$$
+$$\sum_{i=1}^n \frac {\pi h^2}{an^2} i =$$
+$$\frac {\pi h^2}{an^2} \sum_{i=1}^n i =$$
+$$\frac {\pi h^2}{an^2} \frac {n(n + 1)}{2} =$$
+$$\frac {\pi h^2}{an^2} \frac {n^2(1 + \frac {1}{n})}{2} =$$
+$$\frac {\pi h^2}{2a}\Big(1 + \frac {1}{n}\Big)$$
+    </p>
+
+    <p>
+    Apply the limit to \(V'\) as \(n \to +\infty\):
+    </p>
+
+$$V = \lim_{n \to +\infty} \frac {\pi h^2}{2a}\Big(1 + \frac {1}{n} \Big) =$$
+$$\frac {\pi h^2}{2a} \lim_{n \to +\infty}\Big(1 + \frac {1}{n}\Big) =$$
+$$\frac {\pi h^2}{2a}$$
+
+    <p>
+    Considering the fact that from \(x = r\) it follows that \(h = ar^2\) we
+    obtain a remarkable result known to Archimedes:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{V = \frac {\pi r^2 h}{2} = \frac {\pi h^2}{2a} =
+ \frac {\pi a r^4}{2}}$$
+
+    <p> 
+    which may be interpreted as follows:
+    </p>
+
+    <p>
+    <dfn>the volume of a circular paraboloid is exactly one half of the volume
+    of the corresponding right circular cylinder</dfn>
+    </p>
+
+    <p> 
+    Will the above rule hold for elliptic paraboloids?
+    </p>
+
+    <p>
+    <br><strong>Elliptic Paraboloid</strong>
+    </p>
+
+    <p>
+    is a quadratic surface with the following canonical equation in the Cartesian
+    coordinate system:
+    </p>
+
+$$\begin{equation}
+\frac {x^2}{a^2} + \frac {y^2}{b^2} = \frac {z}{c}
+\end{equation}$$
+
+    <p>
+    We choose thin right elliptic cylinders as primitive parts to model the volume
+    of an elliptic paraboloid.
+    </p>
+
+    <p>
+    The volume of the \(i-\)th primitive cylinder is:
+    </p>
+
+$$V'_i = \pi x_i \times y_i \times \frac {h}{n}$$
+
+    <p>
+    where \(h\) is the height of the elliptic paraboloid obtained by cutting the
+    paraboloid with a plane through \(A\) perpendicular to \(Oz\), see the drawing
+    above.
+    </p>
+
+    <p>
+    Since in the \(zx\) plane \(y = 0\), the canonical equation (1) becomes:
+    </p>
+
+$$\frac {x_i^2}{a^2} = \frac {z_i}{c}$$
+$$x_i = a \sqrt{\frac {z_i}{c}}$$
+
+    <p>
+    In the \(zy\) plane \(x = 0\) and (1) becomes:
+    </p>
+
+$$\frac {y_i^2}{b^2} = \frac {z_i}{c}$$
+$$y_i = b \sqrt{\frac {z_i}{c}}$$
+
+    <p>
+    Consequently:
+    </p>
+
+$$V'_i = \pi a \sqrt{\frac {z_i}{c}} \times b \sqrt{\frac {z_i}{c}} \times
+ \frac {h}{n} =$$
+$$\frac {\pi abh}{cn} z_i =$$
+$$\frac {\pi abh^2}{cn^2} i$$
+
+    <p>
+    An approximate volume of the elliptic paraboloid then is:
+    </p>
+
+$$V' = \sum_{i=1}^n V'_i =$$
+$$\sum_{i=1}^n \frac {\pi abh^2}{cn^2} i =$$
+$$\frac {\pi abh^2}{cn^2} \sum_{i=1}^n i =$$
+$$\frac {\pi abh^2}{cn^2} \frac {n(n + 1)}{2} =$$
+$$\frac {\pi abh^2}{ch^2} \frac {n^2(1 + \frac {1}{n})}{2} =$$
+$$\frac {\pi abh^2}{2c}\Big(1 + \frac {1}{n}\Big)$$
+
+    <p>
+    Applying the corresponding limit to \(V'\) we obtain:
+    </p>
+
+$$V = \lim_{n \to +\infty} \frac {\pi abh^2}{2c}\Big(1 + \frac {1}{n}\Big) =$$
+$$\frac {\pi abh^2}{2c} \lim_{n \to +\infty}\Big(1 + \frac {1}{n}\Big)$$
+$$\bbox[#e8e8e8,3pt]{V = \frac {\pi abh^2}{2c}}$$
+
+    <p>
+    A right elliptic cylinder that contains the above elliptic paraboloid of the
+    height \(h\) will have the following semi-major and semi-minor axis (when
+    \(z = h\)):
+    </p>
+
+$$x_h = a \sqrt {\frac {h}{c}}$$
+$$y_h = b \sqrt {\frac {h}{c}}$$
+
+    <p>
+    and it will have the following volume which we have deduced in
+    <strong>Cylinders</strong> chapter:
+    </p>
+
+$$\pi x_h \times y_h \times h =$$
+$$\pi a \sqrt {\frac {h}{c}} \times b \sqrt {\frac {h}{c}} \times h =$$
+$$\frac {\pi abh^2}{c}$$
+
+    <p>
+    which means that the previously discovered rule for a circular paraboloid
+    holds for an elliptic paraboloid also:
+    </p>
+
+    <p>
+    <dfn>the volume of an elliptic paraboloid is exactly one half of the volume
+    of the corresponding right elliptic cylinder</dfn>
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabastori.html">prev</a>
+     <a href="ryabas1shyperboloids.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionvolumes.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

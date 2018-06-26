@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<htm>
+
+<head>
+
+<title>
+Triangle Constructions, asa by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Triangle Constructions, asa by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+
+    <h1>asa: angle, side, angle</h1>
+
+    <p>
+    <strong>Given</strong>
+    </p>
+
+    <p>
+    \(\angle C\), \(a\), \(\angle B\) - two angles and the included side
+    </p>
+
+    <p>
+    <br><strong>Analysis</strong>
+    </p>
+
+    <p>
+    We can locate the first vertex of the triangle, \(C\) or \(B\), by
+    constructing one of the given angles, \(\angle C\) or \(\angle B\)
+    correspondingly. Let us assume that we have picked the given angle \(C\),
+    constructed it and located the vertex \(C\). We can now use this vertex as a
+    center of a circle constructed with the given side \(a\) as its radius. The
+    intersection of this circle with one of the sides of the constructed angle
+    \(C\) will locate the second vertex of the triangle, \(B\).
+    </p>
+
+    <p>
+    To locate the third vertex of the triangle we need to construct the
+    remaining given angle, \(\angle B\) in this case, with the point \(B\) as
+    its vertex. Both given angles, \(\angle C\) and \(\angle B\), share one
+    side with each other - the side \(a\). Two other, not shared, sides intersect
+    at the third vertex, \(A\).
+    </p>
+
+    <p>
+    <br><strong>Construction Outline</strong>
+    </p>
+
+    <p>
+    <dfn>Construct the given angle \(C\) with the vertex at an arbitrary point
+    \(C\). Cut the given side \(a\) on one of the sides of the angle \(C\) at
+    the vertexes \(C\) and \(B\). Construct the given angle \(B\) at the vertex
+    \(B\). The intersection of the not shared sides of the angles \(C\) and \(B\)
+    locates \(A\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Sample Construction</strong>
+    </p>
+
+    <img src="imgs/asa.png" alt="asa" class="center">
+
+$$C, Z$$
+$$Ln(C, Z)$$
+$$Y \colon \quad \angle YCZ = \angle C$$
+$$Ln(C, Y)$$
+$$Cir(C, a)$$
+$$Cir(C, a) \; \cap \; Ln(C, Z) = B \colon \quad CB = a$$
+$$X \colon \quad \angle XBC = \angle B$$
+$$Ln(B, X)$$
+$$Ln(B, X) \; \cap \; Ln(C, Y) = A$$
+$$\triangle ABC$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryatriap1.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

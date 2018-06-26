@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Parabola
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Parabola</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasline.html">prev</a>
+     <a href="ryabassquareroot.html">next</a>
+    </p>
+
+    <h1>Parabola</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the square area of a plane region delineated by the graph of a parabola
+    \(y=ax^2, a>0\), the \(x\)-axis and a perpendicular to \(Ox\) through an
+    arbitrary point \(B\) on \(Ox\).
+    </p>
+
+    <p>
+    <br><strong>Right Sum Solution</strong>
+    </p>
+
+    <img src="imgs/parabola.png" alt="Parabola"  class="center">
+
+    <p>
+    The square area of the \(i-\)th primitive rectangle is:
+    </p>
+
+$$A'_{i, r} = y_i \times \Delta x =$$
+$$ax_i^2 \times \frac {l}{n} =$$
+$$a \frac {l^2}{n^2} \times i^2 \times \frac {l}{n} =$$
+$$\frac {al^3}{n^3} \times i^2$$
+
+    <p>
+    and:
+    </p>
+
+$$A_r = \lim_{n \to +\infty} \sum_{i=1}^n A'_{i, r} =$$
+$$\lim_{n \to +\infty} \sum_{i=1}^n \frac {al^3}{n^3} \times i^2 =$$
+$$\lim_{n \to +\infty} \frac {al^3}{n^3} \sum_{i=1}^n i^2 =$$
+$$\begin{equation}
+\lim_{n \to +\infty} \frac {al^3}{n^3} \frac {n(n + 1)(2n + 1)}{6}
+\end{equation}$$
+
+    <p>
+    Since:
+    </p>
+
+$$\sum_{i=1}^n i^2 = \frac {n(n + 1)(2n + 1)}{6}$$
+
+    <p>
+    If in (1) we factor out \(n\) from the numerator of the second factor:
+    </p>
+
+$$n(n + 1)(2n + 1) = n^3\Big(1 + \frac {1}{n}\Big)\Big(2 + \frac {1}{n}\Big)$$
+
+    <p>
+    then, after the cancellation of the \(n^3\)s, we obtain:
+    </p>
+
+$$A_r = \lim_{n\to +\infty} \frac {al^3}{n^3}
+ \frac {n^3(1 + \frac {1}{n})(2 + \frac {1}{n})}{6} =$$
+$$\frac {al^3}{6} \lim_{n\to +\infty}\Big(2 + \frac {3}{n} + \frac {1}{n^2}\Big) =$$
+$$\frac {al^3}{6}\Big(\lim_{n\to +\infty}2 +
+ 3 \lim_{n\to +\infty}\frac {1}{n} +
+ \lim_{n\to +\infty}\frac {1}{n^2}\Big) =$$
+$$\frac {al^3}{6}(2 + 0 + 0) =$$
+$$\frac {al^3}{3}$$
+
+    <p>
+    And since from the given functional relationship \(y = ax^2\) it follows
+    that if \(x = l\) then \(y = h\):
+    </p>
+
+$$h = al^2$$
+$$l = \sqrt \frac {h}{a}$$
+$$a = \frac {h}{l^2}$$
+
+    <p>
+    we see that:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{A_r = \frac {al^3}{3} =
+ \frac {a^{- \frac {1}{2}}h^{\frac {3}{2}}}{3} = \frac {lh}{3}}$$
+
+    <p>
+    Further, we claim that the limit of the left Riemann sum \(A_l\) exists and
+    is equal to \(A_r\), prove it, and:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{A = A_l = A_r = \frac {al^3}{3} =
+ \frac {a^{- \frac {1}{2}}h^{\frac {3}{2}}}{3} =
+ \frac {lh}{3}}$$
+
+    <p>
+    The geometric interpretation of the above formula is that the square area
+    of a plane region under the graph of the given parabola is equal to one third
+    of the square area of the \(OBP_nC\) rectangle and that the square area of
+    the plane region \(OP_iP_nCy_iO\) trapped by \(Oy\), \(CP_n\) and the right
+    horn of the parabola is:
+    </p>
+
+$$A_{OP_iP_nCy_iO} = lh - \frac {lh}{3} = \frac {2lh}{3}$$
+
+    <p>
+    But in the domain \(x \in [0, +\infty)\) our parabola has a well defined
+    inverse function \(y = k\sqrt {x}, k = a^{- \frac {1}{2}}\). Consequently,
+    by computing the square area of a plane region under the graph of a parabola
+    we also computed the square area of a plane region under the graph of a
+    square root - the fact that we will use in <strong>Square Root</strong>
+    section.
+    </p>
+
+    <p>
+    Lastly, we also observe that due to the symmetry of the parabola's graph with
+    respect to the \(y\)-axis the square area of the plane region \(OP_iP_nCDO\)
+    trapped between the parabola's horns and a perpendicular to \(Oy\) through
+    \(C\) is twice the square area of the \(OP_iP_ny_iO\) region:
+    </p>
+
+    $$\bbox[#e8e8e8,3pt]{A_{OP_iP_ny_iO} = \frac {4al^3}{3}}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasline.html">prev</a>
+     <a href="ryabassquareroot.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionareas.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Reverse Order. Devil, Swans
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Reverse Order. Devil,
+  Swans</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasrevorder.html">prev</a>
+     <a href="ryabasrevorder2eggs.html">next</a>
+    </p>
+
+    <h1>Devil, Swans</h1>
+
+    <p>
+    <strong>The Devil and the Loiterer</strong>
+    </p>
+
+    <p>
+    The Devil offers a loiterer a deal:
+    </p>
+
+    <p>
+    - Every time you cross that bridge the amount of money in your pocket will
+    triple.
+    </p>
+
+    <p>
+    - What is the catch?
+    </p>
+
+    <p>
+    - After each bridge crossing give me back just 27 bucks.
+    </p>
+
+    <p>
+    - Deal!
+    </p>
+ 
+    <p>
+    After three bridge crossings the loiterer was left with empty pockets.
+    </p>
+ 
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    How much money did the loiterer originally have?
+    </p>
+
+    <p>
+    <br><strong>Solution I</strong>
+    </p>
+
+    <p>
+    In an attempt to solve this problem with a traditional or forward logic we
+    let \(x\) be the original amount of money in the loiterer's pocket before
+    the first bridge crossing.
+    </p>
+
+    <p>
+    Immediately after the first bridge crossing the amount of money in loiterer's
+    pockets triples becoming \(3x\). After the Devil takes his first cut the
+    amount of money that the loiterer is left with becomes:
+    </p>
+
+$$3x - 27$$
+
+    <p>
+    Right after the second crossing the loiterer has:
+    </p>
+
+$$3 \times (3x - 27)$$
+
+    <p>
+    After the Devil takes his second cut that sum of money becomes:
+    </p>
+
+$$3 \times (3x - 27) - 27$$
+
+    <p>
+    Right after the third crossing the loiterer has:
+    </p>
+
+$$3 \times (3 \times (3x - 27) - 27)$$
+
+    <p>
+    in his/her pocket and after the devil takes his third cut that sum becomes
+    zero:
+    </p>
+
+$$3 \times (3 \times (3x - 27) - 27) - 27 = 0$$
+
+    <p>
+    Solving the above equation for \(x\) we obtain:
+    </p>
+
+$$x = 13$$
+
+    <p>
+    where I have made up the numbers for a cheap thrill.
+    </p>
+
+    <p>
+    <br><strong>Solution II</strong>
+    </p>
+
+    <p>
+    Solving this problem using the Reverse Order approach we start with the
+    third bridge crossing and proceed backward step by step toward the
+    <dfn>"before the \(1\)-st crossing"</dfn> state. We also reverse the meaning
+    of the arithmetic operators because the nature of the problem calls for it.
+    In a different problem we will reverse something else - whatever is more
+    appropriate. In this particular case subtraction becomes addition,
+    multiplication - division.
+    </p>
+
+    <p>
+    To make keeping track of state transitions easier we write them down in a
+    normal order but follow them in reverse order to obtain a solution:
+    </p>
+
+    <ul>
+     <li>before the \(1-\)st crossing</li>
+     <li>after \(1-\)st crossing</li>
+     <li>Devil takes his \(1-\)st cut</li>
+     <li>after the \(2-\)nd crossing</li>
+     <li>Devil takes his \(2-\)nd cut</li>
+     <li>after the \(3-\)rd crossing</li>
+     <li>Devil takes his \(3-\)rd cut</li>
+    </ul>
+
+    <p>
+    We now start at the very bottom of the list in the <dfn>"Devil takes his
+    \(3-\)rd cut"</dfn> state and move upward one state at a time.
+    </p>
+
+    <p>
+    Since after the <dfn>"Devil takes his \(3-\)rd cut"</dfn> state no money is
+    left in the loiterer's pocket then, working backwards, before that state the
+    loiterer must have:
+    </p>
+
+$$0 + 27 = 27$$
+
+    <p>
+    dollars in his/her pocket. The loiterer now is in the <dfn>"after the
+    \(3-\)rd crossing state"</dfn> with \($27\).
+    </p>
+
+    <p>
+    Let the loiterer cross the bridge backwards with \($27\) into the
+    <dfn>"Devil takes his \(2-\)nd cut"</dfn> state and instead of multiplying
+    the amount of money in his/her pocket divide it by \(3\):
+    </p>
+
+$$27 \div 3 = 9$$
+
+    <p>
+    The loiterer now has \($9\) in the <dfn>"Devil takes his \(2-\)nd cut"</dfn>
+    state.
+    </p>
+
+    <p>
+    To perform the action of the above state in reverse order we add \($27\) to
+    the amount of money in loiterer's possession instead of subtracting it:
+    </p>
+
+$$9 + 27 = 36$$
+
+    <p>
+    which puts the loiterer into the <dfn>"after the \(2\)-nd crossing"</dfn>
+    state with \($36\).
+    </p>
+
+    <p>
+    Perform the \(2-\)nd bridge crossing in reverse order by dividing instead of
+    multiplying:
+    </p>
+
+$$36 \div 3 = 12$$
+
+    <p>
+    The loiterer now is in the <dfn>"Devil takes his \(1\)-st cut"</dfn> state
+    with \($12\). Perform the <dfn>"takes"</dfn> action in reverse order by
+    turning it into the <dfn>"gives"</dfn> action:
+    </p>
+
+$$12 + 27 = 39$$
+
+    <p>
+    The loiterer now is in the <dfn>"after the \(1\)-st crossing"</dfn> state
+    with \($39\).
+    </p>
+
+    <p>
+    Finally, perform the \(1\)-st bridge crossing in reverse order:
+    </p>
+
+$$39 \div 3 = 13$$
+
+    <p>
+    The loiterer now is in the <dfn>"before the \(1\)-st crossing"</dfn> state
+    with \($13\) - the answer to the original question.
+    </p>
+
+    <p>
+    We observe that computationally the steps that lead to a solution via Reverse
+    Order were less intensive than the steps that lead to a solution via the
+    forward logic since we did not have to solve any equations at all - we just
+    had to carry out a single arithmetic operation at a time.
+    </p>
+
+    <p>
+    Since this problem may seem somewhat contrived and not very convincing, let
+    us look at a more revealing problem.
+    </p>
+
+    <p>
+    <br><strong>Swan Lakes</strong>
+    </p>
+
+    <p>
+    A flock of swans is approaching a group of lakes. Every time the swans are
+    flying over a lake one half of them plus half-a-swan land while the
+    remaining swans fly toward the next lake. In that fashion all the swans
+    land on 7 lakes.
+    </p>
+     
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    How many swans were in the flock?
+    </p>
+
+    <p>
+    <br><strong>Solution I</strong>
+    </p>
+
+    <p>
+    In an attempt to solve this problem via forward logic let \(x\) be the number
+    of swans that approached the first lake. Then the number of swans that landed
+    on the first lake is:
+    </p>
+
+$$\frac {x}{2} + \frac {1}{2}$$
+
+    <p>
+    The number of swans that flew toward the second lake is:
+    </p>
+
+$$x - \Big(\frac {x}{2} + \frac {1}{2}\Big) = \frac {x}{2} - \frac {1}{2}$$
+
+    <p>
+    The number of swans that landed on the second lake is:
+    </p>
+
+$$\frac {\Big(\frac {x}{2} - \frac {1}{2}\Big)}{2} + \frac {1}{2} =
+ \frac {x}{4} + \frac {1}{4}$$
+
+    <p>
+    The number of swans that flew toward the third lake is:
+    </p>
+
+$$\frac {x}{2} - \frac {1}{2} - \Big(\frac {x}{4} + \frac {1}{4}\Big) =
+\frac {x}{4} - \frac {3}{4}$$
+
+    <p>
+    If we continue in the above fashion we will eventually arrive at the number
+    of swans that approached the \(7-\)th lake:
+    </p>
+
+$$\frac {x}{64} - \frac {63}{64}$$
+
+    <p>
+    Consequently, the number of swans that landed on this lake will be:
+    </p>
+
+$$\frac {x}{128} + \frac {1}{128}$$
+
+    <p>
+    which must be equal to the number of swans that approached the last lake:
+    </p>
+
+$$\frac {x}{64} - \frac {63}{64} = \frac {x}{128} + \frac {1}{128}$$
+
+    <p>
+    Solving the above equation for \(x\) we obtain:
+    </p>
+
+$$x = 127$$
+
+    <p>
+    We now ask ourselves: "What if all the swans landed over \(1,000\) lakes?"
+    </p>
+
+    <p>
+    <br><strong>Solution II</strong>
+    </p>
+
+    <p>
+    As Reverse Order prescribes let us start with the state in which all the swans
+    have landed. According to the problem statement this event has occurred on the
+    \(7-\)the lake.
+    </p>
+
+    <p>
+    Let \(x\) be the number of swans that approached the \(7-\)th lake. Then the
+    number of swans that landed there:
+    </p>
+
+$$\frac {x}{2} + \frac {1}{2}$$
+
+    <p>
+    must be equal to the number of swans that approached that lake:
+    </p>
+
+$$x = \frac {x}{2} + \frac {1}{2}$$
+$$2x = x + 1$$
+$$x = 1$$
+     
+    <p>
+    We may also obtain the same result by observing that since all the swans have
+    landed across \(7\) lakes it means that exactly zero swans flew toward the
+    \(8-\)th lake:
+    </p>
+
+$$0 = x - \Big(\frac {x}{2} + \frac {1}{2}\Big) = \frac {x}{2} - \frac {1}{2}$$
+$$x = 1$$
+
+    <p>
+    We observe right away that with Reverse Order the above result does not
+    depend on the absolute value of the last lake - even if all the swans would
+    have landed across \(1,000,000\) lakes the value of \(x\) would still be
+    \(1\).
+    </p>
+
+    <p>
+    We now know that \(1\) swan approached and landed on the \(7\)-th lake. That
+    number, \(1\), represents the difference between the number of swans \(x\)
+    that approached the \(6\)-th lake and the number of swans that have landed
+    there which formulaically remains the same:
+    </p>
+
+$$x - \Big(\frac {x}{2} + \frac {1}{2}\Big) = 1$$
+
+    <p>
+    and we obtain that:
+    </p>
+
+$$x = 3$$
+
+    <p>
+    swans approached the \(6\)-th lake. It follows then that for the number of
+    swans that approached the \(5\)-th lake we have:
+    </p>
+
+$$x - \Big(\frac {x}{2} + \frac {1}{2}\Big) = 3$$
+$$x = 7$$
+
+    <p>
+    and so on.
+    </p>
+
+    <p>
+    We argue that even if, for a small number of lakes, we were to run the entire
+    computation by hand it would be less laborious and error-prone than its
+    forward logic counterpart.
+    </p>
+
+    <p>
+    However, even around the \(6-\)th or \(5-\)th lake we should be able to
+    recognize the following pattern: every time we move to the previous lake we
+    multiply the current number of swans by two and subtract one. Consecutive
+    multiplication, by two, is exponentiation, and, hence, we construct the number
+    of swans that Approach the \(k-\)th lake \(A_k^7\) in closed form as:
+    </p>
+
+$$A_k^7 = 2^{7 - k + 1} - 1$$
+
+    <p>
+    from where it follows that for the number of swans that have approached the
+    \(k = 1-\)st lake we have:
+    </p>
+
+$$A_1^7 = 2^7 - 1 = 127$$
+
+    <p>
+    For completeness, the number of swans that Lands on the \(k-\)th lake is:
+    </p>
+
+$$L_k^7 = A_k^7 \times 2^{-1} + 2^{-1} =$$
+$$2^{7 - k} \times 2^1 \times 2^{-1} - 2^{-1} + 2^{-1} =$$
+$$2^{7 - k}$$
+
+    <p>
+    We now generalize the problem for \(7 = n\) as:
+    </p>
+
+$$A_k^n = 2^{n - k + 1} - 1$$
+$$L_k^n = 2^{n - k}, \quad k \in [1, n]$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasrevorder.html">prev</a>
+     <a href="ryabasrevorder2eggs.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrevorder.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

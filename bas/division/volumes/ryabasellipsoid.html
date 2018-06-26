@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Ellipsoid
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Ellipsoid</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabassphere.html">prev</a>
+     <a href="ryabastori.html">next</a>
+    </p>
+
+    <h1>Ellipsoid</h1>
+
+    <img src="imgs/ellipsoid3D.png" alt="Ellipsoid 3D" align="left"
+    style="margin-right: 1em; margin-bottom: 1em;">
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the volume of an ellipsoid with the semi-axes \(a, b\) and \(c\)
+    assuming, without the loss of generality, that: 
+    </p>
+
+$$c > a > b$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Use thin right elliptic cylinders as primitive volumes positioned as shown
+    in the drawing and consider the ellipsoid's corresponding half.
+    </p>
+
+    <p>
+    The height \(h_i\) of the \(i-\)th primitive cylinder as measured along the
+    \(z\) axis is:
+    </p>
+
+$$h_i = \frac {c}{n}$$
+
+    <p>
+    The volume of the \(i-\)th primitive cylinder is:
+    </p>
+
+$$V'_i = \pi x_i \times y_i \times h_i =$$
+$$\pi \times x_i  \times y_i \times \frac {c}{n}$$
+
+    <p>
+    where \(x_i\) and \(y_i\) are the semi-axes of the \(i-\)th primitive
+    cylinder.
+    </p>
+
+    <p>
+    To express the values of \(x_i\) and \(y_i\) in given terms we observe
+    the following.
+    </p>
+
+    <p>
+    If we cut the ellipsoid with the \(zOx\) plane then the resulting cross section
+    will be bound by the largest ellipse that can be constructed on the surface
+    of this particular ellipsoid - an equivalent of Great Circle on a sphere. The
+    canonical equation of this Great Ellipse of sort is:
+    </p>
+
+$$\begin{equation}
+\frac {x^2}{a^2} + \frac {z^2}{c^2} = 1
+\end{equation}$$
+
+    <p>
+    Since the point \(x_i\) is located on the perimeter of the above ellipse,
+    from (1) it follows that for the corresponding \(z_i\) we have:
+    </p>
+
+$$\frac {x_i^2}{a^2} + \frac {z_i^2}{c^2} = 1$$
+
+    <p>
+    But:
+    </p>
+
+$$z_i = \frac {c}{n} \times i$$
+
+    <p>
+    and hence:
+    </p>
+
+$$x_i = \frac {a}{n} \sqrt {n^2 - i^2}$$
+
+    <p>
+    Similarly, by cutting the ellipsoid with the \(zOy\) plane we obtain \(y_i\):
+    </p>
+
+$$y_i = \frac {b}{n} \sqrt {n^2 - i^2}$$
+
+    <p>
+    The volume of the \(i-\)th primitive cylinder then is:
+    </p>
+
+$$V'_i = \pi \frac {abc}{n^3}(n^2 - i^2)$$
+
+    <p>
+    The volume of the entire ellipsoid is the sum of volumes of two of its halves:
+    </p>
+
+$$V' = 2 \times \sum_{n = 1}^n V'_i =$$
+$$\frac {2\pi abc}{n^3}\sum_{i = 1}^n(n^2 - i^2) =$$
+$$\frac {2\pi abc}{n^3}\Big(\sum_{i = 1}^n n^2 -\sum_{i = 1}^n i^2\Big) =$$
+$$\frac {2\pi abc}{n^3}\Bigg(n^3 - \frac {n(n + 1)(2n + 1)}{6}\Bigg) =$$
+$$\frac {2\pi abc}{n^3}\Bigg(n^3 -
+ \frac {n^3(1 + \frac {1}{n})(2 + \frac {1}{n})}{6}\Bigg) =$$
+$$\frac {\pi abc}{3}\Big(4 - \frac {3}{n} - \frac {1}{n^2}\Big)$$
+
+    <p>
+    where again, as in <strong>Sphere</strong> chapter, the index \(i\) runs to
+    \(n\) since the height of the \(n-\)th cylinder is zero:
+    </p>
+
+$$V = \lim_{n \to +\infty} V' =$$
+$$\lim_{n \to +\infty}\frac {\pi abc}{3}\Big(4 - \frac {3}{n} - \frac {1}{n^2}\Big) =$$
+$$\frac {\pi abc}{3}\Big(4 - \lim_{n \to +\infty}\frac {3}{n} -
+ \lim_{n \to +\infty} \frac {1}{n^2}\Big) =$$
+$$\frac {4\pi abc}{3}$$
+
+    <p>
+    And hence:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{V = \frac {4}{3} \pi abc}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabassphere.html">prev</a>
+     <a href="ryabastori.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionvolumes.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

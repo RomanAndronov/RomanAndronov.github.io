@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Armies by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css"/>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Armies by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasequiv.html">prev</a>
+     <a href="ryabasrlb1.html">next</a>
+    </p>
+
+    <h1>Armies</h1>
+
+    <p>
+    (I was alerted to this and the next, <strong>Roliding Bead</strong>, problem
+    by my grade school, college and life-time friend, <strong>Michael
+    Batygov</strong>)
+    </p>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Two armies, \(A\) and \(B\), are engaged in a direct combat in the open within
+    direct view of each other. Initially the army \(A\) has \(a_0\) soldiers while
+    the army \(B\) has \(b_0\) soldiers and:
+    </p>
+
+$$a_0 > b_0$$
+
+    <p>
+    1) How many soldiers will the army \(A\) be left with by the time the army
+    \(B\) is totally annihilated assuming a continuous attrition with constant
+    rates for both armies?
+    </p>
+
+    <p>
+    2) How long will it take the army \(A\) to totally annihilate the army \(B\)?
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Assuming a discrete time combat model for a moment, let \(a(n)\) and \(b(n)\)
+    be the number of soldiers the armies \(A\) and \(B\) have correspondingly at
+    a moment of time \(n\). We then model the number of soldiers each army has
+    standing one unit of time later as a difference between the current number
+    of soldiers and the losses each army suffered after the current fire exchange:
+    </p>
+
+$$a(n + 1) = a(n) - l_a(n)$$
+$$b(n + 1) = b(n) - l_b(n)$$
+
+    <p>
+    where \(l_a(n)\) stands for the losses of the army \(A\) inflicted by the
+    army \(B\) - the number of soldiers of the army \(A\) annihilated by the
+    soldiers of the army \(B\) after one unit of time has passed.
+    </p>
+
+    <p>
+    Correspondingly, \(l_b(n)\) is the number of soldiers of the army \(B\)
+    annihilated by the soldiers of the army \(A\) during the same unit of time.
+    </p>
+
+    <p>
+    Next, we assume that:
+    </p>
+
+$$l_a(n) = \beta \times 1 \times b(n)$$
+$$l_b(n) = \alpha \times 1 \times a(n)$$
+
+    <p>
+    where \(\beta\) is the number of soldiers (of the army \(A\)) one soldier of
+    the army \(B\) can annihilate per unit of time, \(1\), and \(\alpha\) is the
+    number of soldiers (of the army \(B\)) one soldier of the army \(A\) can
+    annihilate per unit of time, also \(1\):
+    </p>
+
+$$a(n + 1) = a(n) - \beta \times 1 \times b(n)$$
+$$b(n + 1) = b(n) - \alpha \times 1 \times a(n)$$
+
+    <p>
+    In other words, we assume that:
+    </p>
+
+    <p>
+    - all the soldiers of a given army have the same lethal skill captured in
+    \(\alpha\) and \(\beta\)
+    </p>
+
+    <p>
+    - \(\alpha\) and \(\beta\) are both constant over time, to be sure the units
+    of measurement of \(\alpha\) and \(\beta\) are <dfn>"soldiers/time"</dfn>
+    </p>
+
+    <p>
+    - the losses inflicted by each army on its opponent depend only on the number
+    of standing soldiers and their lethal skill or offensive fire effectiveness
+    - we explicitly do not account for the (natural) defensive mechanisms
+    </p>
+
+    <p>
+    - the losing army is willing to fight till the bitter end despite facing
+    certain and inevitable annihilation
+    </p>
+
+    <p>
+    - the winning army is willing to fight till the not bitter end despite facing
+    certain and inevitable victory
+    </p>
+
+    <p>
+    Moving from a discrete to a continuous flow of time we take it that after
+    \(\Delta t\) amount of time of the above combat elapses, the losses suffered
+    by each army become:
+    </p>
+
+$$a(t + \Delta t) - a(t) = - \beta \Delta t b(t)$$
+$$b(t + \Delta t) - b(t) = - \alpha \Delta t a(t)$$
+
+    <p>
+    Divide both of the above equations by \(\Delta t\):
+    </p>
+
+$$\frac {a(t + \Delta t) - a(t)}{\Delta t} =
+ \frac {- \beta \Delta t b(t)}{\Delta t} =- \beta b(t)$$
+$$\frac {b(t + \Delta t) - b(t)}{\Delta t} =
+ \frac {- \alpha \Delta a(t)}{\Delta t} = - \alpha a(t)$$
+
+    <p>
+    and apply a limit to them when \(\Delta t \to 0\):
+    </p>
+
+$$\lim_{\Delta t \to 0} \frac {a(t + \Delta t) - a(t)}{\Delta t} =
+ \lim_{\Delta t \to 0} - \beta b(t)$$
+$$\lim_{\Delta t \to 0} \frac {b(t + \Delta t) - b(t)}{\Delta t} =
+ \lim_{\Delta t \to 0} - \alpha a(t)$$
+
+    <p>
+    On the left of the equal sign in each equation we have a derivative - a speed
+    of man power loss. On the right hand of the equal sign in each equation we
+    have a function that does not depend on \(\Delta t\):
+    </p>
+
+$$\begin{equation}
+\frac {da}{dt} = -\beta b
+\end{equation}$$
+$$\begin{equation}
+\frac {db}{dt} = -\alpha a
+\end{equation}$$
+
+    <p>
+    <br><strong>1) A-army survivors</strong>
+    </p>
+
+    <p>
+    Divide (1) by (2):
+    </p>
+
+$$\frac {da}{db} = \frac {\beta b}{\alpha a}$$
+
+    <p>
+    and rearrange the result:
+    </p>
+
+$$\begin{equation}
+a \; da = \frac {\beta}{\alpha} b \; db
+\end{equation}$$
+
+    <p>
+    Since the variables in (3) are separated, integrate both sides of it:
+    </p>
+
+$$\int_{a_0}^a a \; da = \int_{b_0}^b \frac {\beta}{\alpha} b \; db$$
+$$a^2 - a_0^2 = \frac {\beta}{\alpha}\Big(b^2 - b_0^2\Big)$$
+$$\begin{equation}
+a(b) = \sqrt{a_0^2 + \frac {\beta}{\alpha}\Big(b^2 - b_0^2\Big)}
+\end{equation}$$
+
+    <p>
+    where we have kept only the positive value of the square root as the number
+    of troops can not be negative.
+    </p>
+
+    <p>
+    We are told that at a certain point of time \(t = t_a\) the army \(B\) has
+    no more soldiers left:
+    </p>
+
+$$b(t_a) = 0$$
+
+    <p>
+    Substituting the above value for \(b\) into (4), we obtain the number of
+    troops left in the army \(A\) by the time the army \(B\) is totally
+    annihilated:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{a(b = 0) = \sqrt{a_0^2 - \frac {\beta}{\alpha}b_0^2}}
+\end{equation}$$
+
+    <p>
+    The above answer in particular and the pair of differential equations in
+    general are known as <dfn>Lanchester's Square Law</dfn>.
+    </p>
+
+    <p>
+    <br><strong>2) Annihilation Time</strong>
+    </p>
+
+    <p>
+    Here we need to find \(a\) and \(b\) as the actual functions of time, \(a(t)\)
+    and \(b(t)\).
+    </p>
+
+    <p>
+    Substitute the value of \(a(b)\) from (4) into (2):
+    </p>
+
+$$\begin{equation}
+\frac {db}{dt} = -\alpha \sqrt{a_0^2 + \frac {\beta}{\alpha}\Big(b^2 - b_0^2\Big)}
+\end{equation}$$
+
+    <p>
+    Rearrange the expression under the square root:
+    </p>
+
+$$\begin{equation}
+\frac {db}{dt} = - \sqrt{\alpha \beta} \sqrt{b^2 + \frac {\alpha}{\beta}a_0^2 - b_0^2}
+\end{equation}$$
+
+    <p>
+    and, since the following is a constant, temporarily put:
+    </p>
+
+$$\begin{equation}
+k^2 = \frac {\alpha}{\beta}a_0^2 - b_0^2
+\end{equation}$$
+
+    <p>
+    Then (7) becomes:
+    </p>
+
+$$\begin{equation}
+\frac {db}{dt} = - \sqrt{\alpha \beta} \sqrt{b^2 + k^2}
+\end{equation}$$
+
+    <p>
+    Preparing for integration, separate the variables \(b\) and \(t\) in (9):
+    </p>
+
+$$\begin{equation}
+\frac {db}{\sqrt{b^2 + k^2}} = - \sqrt{\alpha \beta} \; dt
+\end{equation}$$
+
+    <p>
+    Integrate both sides of (10): the left side from \(b_0\) to \(b\) and the
+    right side from \(0\) to \(t\):
+    </p>
+
+$$\begin{equation}
+\int_{b_0}^b \frac {db}{\sqrt{b^2 + k^2}} = - \sqrt{\alpha \beta} \; t
+\end{equation}$$
+
+    <p>
+    Compute the integral in (11) using the method of substitution. In general,
+    hyperbolic sine and cosine are profitable substitutions for these types of
+    integrals and for this one in particular hyperbolic sine is the function of
+    choice:
+    </p>
+
+$$\begin{equation}
+b = k \frac {e^x - e^{-x}}{2}
+\end{equation}$$
+
+    <p>
+    Differentiating (12), we have:
+    </p>
+
+$$\begin{equation}
+db = k \frac {e^x + e^{-x}}{2}
+\end{equation}$$
+
+    <p>
+    and using (12) to compute the square root in the denominator of the integral
+    in (11) we obtain:
+    </p>
+
+$$\sqrt{b^2 + k^2} = \sqrt{k^2 \frac {e^{2x} - 2 + e^{-2x}}{4} + k^2} =$$
+$$\frac{k}{2}\sqrt{e^{2x} + 2 + e^{-2x}} =$$
+$$\frac{k}{2}\sqrt{(e^x + e^{-x})^2} =$$
+$$\begin{equation}
+k \frac {e^x + e^{-x}}{2}
+\end{equation}$$
+
+    <p>
+    Putting (14) and (13) into the integral in (11), it collapses into:
+    </p>
+
+$$\begin{equation}
+\int \frac {db}{\sqrt{b^2 + k^2}} = \int \frac {k}{2} \frac {2}{k}
+ \frac {e^x + e^{-x}}{e^x + e^{-x}} \; dx = \int dx = x
+\end{equation}$$
+
+    <p>
+    where we have omitted the boundaries of integration to avoid the clutter.
+    </p>
+
+    <p>
+    To express \(x\) in terms of \(b\) multiply both sides of (12) by \(e^x\):
+    </p>
+
+$$\frac {2b}{k} e^x = e^{2x} - 1$$
+$$\begin{equation}
+e^{2x} - \frac {2b}{k}e^x - 1 = 0
+\end{equation}$$
+
+    <p>
+    (16) is a quadratic equation with respect to \(e^x\). Solving this equation
+    for \(e^x\), we obtain:
+    </p>
+
+$$\begin{equation}
+e^x = \frac {b}{k} + \sqrt{\frac {b^2}{k^2} + 1}
+\end{equation}$$
+
+    <p>
+    where we have kept only one of two roots since the exponential function in
+    question must remain not negative.
+    </p>
+
+    <p>
+    From (17) it follows that:
+    </p>
+
+$$\begin{equation}
+x(b) = \ln \Bigg( \frac {b}{k} + \sqrt{\frac {b^2}{k^2} + 1}\Bigg)
+\end{equation}$$
+
+    <p>
+    Putting (18) into (15) and using the original integration boundaries, we
+    obtain for \(b\):
+    </p>
+
+$$\ln \Bigg( \frac {b}{k} + \sqrt{\frac {b^2}{k^2} + 1}\Bigg) -
+ \ln \Bigg( \frac {b_0}{k} + \sqrt{\frac {b_0^2}{k^2} + 1}\Bigg) =$$
+
+$$\ln \Bigg(\frac {\frac {b}{k} + \sqrt{\frac {b^2}{k^2} + 1}}
+ {\frac {b_0}{k} + \sqrt{\frac {b_0^2}{k^2} + 1}} \Bigg) =$$
+
+$$\begin{equation}
+\ln \Bigg(\frac {b + \sqrt{b^2 + k^2}}{b_0 + \sqrt{b_0^2 + k^2}}\Bigg) =
+ -\sqrt{\alpha \beta} \; t
+\end{equation}$$
+
+    <p>
+    Putting the expression for \(k\) from (8) into the expression for the square
+    root in the denominator of the natural logarithm in (19), we obtain:
+    </p>
+
+$$\sqrt{b_0^2 + k^2} = \sqrt{b_0^2 + \frac {\alpha}{\beta}a_0^2 - b_0^2} =
+ \sqrt{\frac{\alpha}{\beta}}a_0$$
+
+    <p>
+    and hence (19) becomes:
+    </p>
+
+$$\begin{equation}
+\ln \Bigg(\frac {b + \sqrt{b^2 + k^2}}{b_0 + \sqrt{\frac{\alpha}{\beta}}a_0}\Bigg) =
+ -\sqrt{\alpha \beta} \; t
+\end{equation}$$
+
+    <p>
+    from where it follows that:
+    </p>
+
+$$\begin{equation}
+b + \sqrt{b^2 + k^2} = \Big(b_0 + \sqrt{\frac{\alpha}{\beta}}a_0\Big)
+ e^{-\sqrt{\alpha \beta} \; t}
+\end{equation}$$
+
+    <p>
+    Since the right hand side of (21) does not depend on \(b\), let:
+    </p>
+
+$$\begin{equation}
+\Big(b_0 + \sqrt{\frac{\alpha}{\beta}}a_0\Big)
+ e^{-\sqrt{\alpha \beta} \; t} = C
+\end{equation}$$
+
+    <p>
+    in which case (21) becomes:
+    </p>
+
+$$\begin{equation}
+b + \sqrt{b^2 + k^2} = C
+\end{equation}$$
+
+    <p>
+    Rearrange (23) as follows:
+    </p>
+
+$$\begin{equation}
+\sqrt{b^2 + k^2} = C - b
+\end{equation}$$
+
+    <p>
+    and square both sides of (24):
+    </p>
+
+$$b^2 + k^2 = C^2 - 2Cb + b^2$$
+$$k^2 = C^2 - 2Cb$$
+$$\begin{equation}
+b = \frac {C^2 - k^2}{2C} = \frac {C}{2} - \frac{k^2}{2C}
+\end{equation}$$
+
+    <p>
+    \(k^2\) from (8) can be rearranged as follows:
+    </p>
+
+$$k^2 = \frac {\alpha}{\beta}a_0^2 - b_0^2 =$$
+$$\Bigg(\sqrt{\frac {\alpha}{\beta}}a_0 + b_0 \Bigg) \times
+ \Bigg(\sqrt{\frac {\alpha}{\beta}}a_0 - b_0 \Bigg)$$
+
+    <p>
+    from where for the last term in (25) we have:
+    </p>
+
+$$\begin{equation}
+\frac{k^2}{2C} = \frac {1}{2}\Bigg(\sqrt{\frac {\alpha}{\beta}}a_0 -
+ b_0 \Bigg)e^{\sqrt{\alpha \beta} \; t}
+\end{equation}$$
+
+    <p>
+    Putting (26) and (22) into (25), we obtain for \(b(t)\):
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{b(t) = \frac {1}{2}\sqrt{\frac {\alpha}{\beta}}
+\Bigg(\Bigg(a_0 + \sqrt{\frac {\beta}{\alpha}}b_0\Bigg)e^{-\sqrt{\alpha \beta} t} -
+\Bigg(a_0 - \sqrt{\frac {\beta}{\alpha}}b_0 \Bigg)e^{\sqrt{\alpha \beta} t}\Bigg)}
+\end{equation}$$
+
+    <p>
+    For \(a(t)\) we have from (2):
+    </p>
+
+$$a(t) = - \frac {1}{\alpha} \frac {db(t)}{dt}$$
+
+    <p>
+    or from (1):
+    </p>
+
+$$a(t) = - \beta \int b(t)dt$$
+
+    <p>
+    Either way:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{a(t) = \frac {1}{2}\Bigg(\Bigg(a_0 +
+ \sqrt{\frac {\beta}{\alpha}}b_0 \Bigg)e^{- \sqrt{\alpha \beta} t} +
+\Bigg(a_0 - \sqrt{\frac {\beta}{\alpha}}b_0 \Bigg)e^{\sqrt{\alpha \beta} t} \Bigg)}
+\end{equation}$$
+
+    <p>
+    It follows then that for the total annihilation time \(t_a\) we can have
+    either:
+    </p>
+
+$$a(t_a) = 0$$
+
+    <p>
+    or:
+    </p>
+
+$$b(t_a) = 0$$
+
+    <p>
+    For \(a(t_a) = 0\) from (28) it follows that:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{t_a(a = 0) = \frac {1}{2\sqrt{\alpha \beta}}
+\ln\Bigg(- \frac {a_0 + \sqrt{\frac {\beta}{\alpha}}b_0}{a_0 -
+\sqrt{\frac {\beta}{\alpha}}b_0}\Bigg)}
+\end{equation}$$
+
+    <p>
+    For \(b(t_a) = 0\) from (27) it follows that:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{t_a(b = 0) = \frac {1}{2\sqrt{\alpha \beta}}
+\ln\Bigg(\frac {a_0 + \sqrt{\frac {\beta}{\alpha}}b_0}{a_0 -
+\sqrt{\frac {\beta}{\alpha}}b_0}\Bigg)}
+\end{equation}$$
+
+    <p>
+    We observe that when the army \(B\) is annihilated then from (5) it follows
+    that for the number of troops left in the army \(A\) to be not complex the
+    following condition must hold:
+    </p>
+
+$$a_0 > \sqrt{\frac {\beta}{\alpha}}b_0$$
+
+    <p>
+    in which case the natural logarithm in (29) is not defined while the natural
+    logarithm in (30) is well defined.
+    </p>
+
+    <p>
+    Conversely, if the army \(A\) is totally annihilated then from (4) we have:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{b(a = 0) = \sqrt{b_0^2 - \frac {\alpha}{\beta}a_0^2}}$$
+
+    <p>
+    For the number of surviving troops in the army \(B\) to remain real the
+    following condition must hold:
+    </p>
+
+$$b_0 > \sqrt{\frac {\alpha}{\beta}}a_0$$
+
+    <p>
+    in which case the natural logarithm in (30) is not defined while the natural
+    logarithm in (29) is well defined.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasequiv.html">prev</a>
+     <a href="ryabasrlb1.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasequiv.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

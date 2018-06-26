@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Scope Expansion. Power Sums
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Scope Expansion. Power
+  Sums</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasexpansion.html">prev</a>
+     <a href="ryabasexpansion.html">next</a>
+    </p>
+
+    <h1>Power Sums</h1>
+
+    <p>
+    In this chapter we will present a uniform approach to computing the magnitudes
+    of the following power sums:
+    </p>
+
+$$\sum_{i = 1}^n i^p, \quad p \in [1, 2, 3, \dots]$$
+
+    <p>
+    in closed form.
+    </p>
+
+    <p>
+    The main idea of this approach is the following. Assume that \(p\) is the
+    power of the sequence in question. Instead of staying and working with that
+    power alone we shall consider the expansion of a specific sum of power that
+    is one greater than \(p\) which gives the name to the approach that solves
+    the problem:
+    </p>
+
+$$\begin{equation}
+(n + 1)^{p + 1}
+\end{equation}$$
+
+    <p>
+    We then will construct \(n - 1\) more equations by reducing \(n\) in (1) by
+    one every time. Thus we will obtain \(n\) equations which we will add together
+    and observe that the majority of the intermediate terms will cancel out leaving
+    us with a linear equation in \(S_p\) expressed in terms of \(S_{p-1},
+    S_{p-2}, S_{p-3}\) and so on.
+    </p>
+
+    <p>
+    One obvious consequence of this approach is that the sums of lower powers
+    must be computed first. Let us see how exactly does it work.
+    </p>
+
+    <p>
+    <br><strong>First Powers</strong>
+    </p>
+
+    <p>
+    Find the sum of first powers of first \(n\) natural numbers in closed form:
+    </p>
+
+$$\begin{equation}
+S_1 = \sum_{i = 1}^n i
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Starting with (3):
+    </p>
+
+$$\begin{equation}
+(n + 1)^2 = n^2 + 2n + 1
+\end{equation}$$
+
+    <p>
+    construct \(n - 1\) more equations by replacing \(n\) in (3) with, in turn,
+    \(n - 1\), \(n - 2\), \(n - 3\) and so on until \(1\) is reached:
+    </p>
+
+$$\begin{equation}
++\,\left\{\begin{array}{rcllll}
+(n + 1)^2 & = & n^2 & + & 2n & + & 1 \\
+n^2 & = & (n - 1)^2 & + & 2(n - 1) & + & 1 \\
+(n - 1)^2 & = & (n - 2)^2 & + & 2(n - 2) & + & 1 \\
+(n - 2)^2 & = & (n - 3)^2 & + & 2(n - 3) & + & 1 \\
+\dots & = & \dots & + & \dots & + & 1 \\
+2^2 & = & 1^2 & + & 2 \times 1 & + & 1
+\end{array}\right.
+\end{equation}$$
+
+    <p>
+    We observe that diagonally, North-East to South-West, the first term on the
+    right hand side of the equal sign in all the equations will cancel out with
+    the only term on the left hand side of the equation below.
+    </p>
+
+    <p>
+    For example, the term \(n^2\) on the right hand side of the equal sign of
+    the first equation will cancel out with the only term \(n^2\) on the left
+    hand side of the second equation.
+    </p>
+
+    <p>
+    After all such cancellations (4) will collapse into a single first order
+    equation in \(S_1\):
+    </p>
+
+$$(n + 1)^2 = 1^2 +
+ 2 \underbrace{(n + (n - 1) + (n - 2) + \ldots + 1)}_{S_1} +
+ \underbrace{1 + 1 + \dots + 1}_{n} =$$
+$$1 + 2S_1 + n$$
+
+    <p>
+    solving which for \(S_1\) we obtain:
+    </p>
+
+$$2S_1 = (n + 1)^2 - (n + 1) =$$
+$$(n + 1)(n + 1 - 1) =$$
+$$(n + 1)n$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{S_1 = \sum_{i = 1}^n i = \frac {n(n + 1)}{2}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Second Powers</strong>
+    </p>
+
+    <p>
+    Find the sum of second powers of first \(n\) natural numbers:
+    </p>
+
+$$\begin{equation}
+S_2 = \sum_{i = i}^n i^2
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Starting with (7):
+    </p>
+
+$$\begin{equation}
+(n + 1)^3 = n^3 + 3n^2 + 3n + 1
+\end{equation}$$
+
+    <p>
+    construct \(n - 1\) more equations by replacing \(n\) in (7) with, in turn,
+    \(n - 1\), \(n - 2\), \(n - 3\) and so on until \(1\) is reached:
+    </p>
+
+$$\begin{equation}
++\,\left\{\begin{array}{rcllllll}
+(n + 1)^3 & = & n^3 & + & 3n^2 & + & 3n & + & 1 \\
+      n^3 & = & (n - 1)^3 & + & 3(n - 1)^2 & + & 3(n - 1) & + & 1 \\
+(n - 1)^3 & = & (n - 2)^3 & + & 3(n - 2)^2 & + & 3(n - 2) & + & 1 \\
+(n - 2)^3 & = & (n - 3)^3 & + & 3(n - 3)^2 & + & 3(n - 3) & + & 1 \\
+\dots & = & \dots & + & \dots & + & \dots & + & 1 \\
+2^3 & = & 1^3 & + & 3 \times 1^2 & + & 3 \times 1 & + & 1
+\end{array}\right.
+\end{equation}$$
+
+    <p>
+    After the diagonal cancellation that we have described in the previous section,
+    (8) will collapse into a linear equation in \(S_2\) expressed in terms of
+    \(S_1\) the magnitude of which in closed form we have computed already:
+    </p>
+
+$$\begin{equation}
+(n + 1)^3 = 1 + 3S_2 + 3S_1 + n
+\end{equation}$$
+
+    <p>
+    Solving (9) for \(S_2\) using (5) for \(S_1\) we obtain:
+    </p>
+
+$$3S_2 = (n + 1)^3 - (n + 1) - \frac {3n(n + 1)}{2} =$$
+$$(n + 1)\Big((n + 1)^2 - 1 - \frac {3n}{2}\Big) =$$
+$$(n + 1)\Big(n^2 + 2n + 1 - 1 - \frac {3n}{2}\Big) =$$
+$$(n + 1)\Big(n^2 + \frac {n}{2}\Big) =$$
+$$n(n + 1)\Big(n + \frac {1}{2}\Big)$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{S_2 = \sum_{i = i}^n i^2 = \frac {n(n + 1)(2n + 1)}{6}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Third Powers</strong>
+    </p>
+
+    <p>
+    Find the sum of third powers of first \(n\) natural numbers:
+    </p>
+
+$$S_3 = \sum_{i = 1}^n i^3$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    After computing the first and the second powers using the method described,
+    we instantly recognize the collapsing pattern by looking at (3) and (7) and
+    the corresponding equations into which (4) and (8) are transformed.
+    </p>
+
+    <p>
+    Consequently, to compute the sums of the remaining powers we do not even have
+    to construct the system of equations any more. All we have to do is use the
+    binomial expansion of \((n + 1)^{p + 1}\):
+    </p>
+
+$$\begin{equation}
+(n + 1)^4 = n^4 + 4n^3 + 6n^2 + 4n + 1
+\end{equation}$$
+
+    <p>
+    In (11) replace the first term, \(n^{p + 1}\), with \(1\), the last term,
+    \(1\), with \(n\) and the remaining powers of \(n\) with the corresponding
+    sum \(S_p, S_{p - 1}, S_{p - 2}\), etc:
+    </p>
+
+$$(n + 1)^4 = 1 + 4S_3 + 6S_2 + 4S_1 + n$$
+
+    <p>
+    and solve the resulting equation substituting the known closed-form
+    expressions for each intermediate sum:
+    </p>
+
+$$4S_3 = (n + 1)^4 - 1 - 6S_2 - 4S_1 - n =$$
+$$(n + 1)^4 - 1 - n(n + 1)(2n + 1) - 2n(n + 1) - n =$$
+$$(n + 1)((n + 1)^3 - n(2n + 1) - 2n - 1) =$$
+$$(n + 1)((n + 1)^3 - (2n + 1)(n + 1)) =$$
+$$(n + 1)^2((n + 1)^2 - 2n - 1) =$$
+$$(n + 1)^2(n^2 + 2n + 1 - 2n - 1) =$$
+$$n^2(n + 1)^2$$
+
+    <p>
+    to obtain the answer:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{S_3 = \sum_{i = 1}^n i^3 = \frac {n^2(n + 1)^2}{4} = S_1^2}
+\end{equation}$$
+
+    <p>
+    <br><strong>Higher Powers</strong>
+    </p>
+
+    <p>
+    As an exercise, compute the sums of fourth, fifths and sixth powers:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{S_4 = \sum_{i = 1}^n i^4 =
+ \frac {n(n + 1)(2n + 1)(3n^2 + 3n - 1)}{30}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{S_5 = \sum_{i = 1}^n i^5 =
+ \frac {n^2(n + 1)^2(2n^2 + 2n - 1)}{12}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{S_6 = \sum_{i = 1}^n i^6 =
+ \frac {n(n + 1)(2n + 1)(3n^4 + 6n^3 - 3n + 1)}{42}}
+\end{equation}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasexpansion.html">prev</a>
+     <a href="ryabasexpansion.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasexpansion.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

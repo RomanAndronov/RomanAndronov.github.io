@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Triangle Constructions, saSOs by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Triangle Constructions, saSOs by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+
+    <h1>saSOs: side, angle, Sum Of sides</h1>
+
+    <p>
+    <strong>Given</strong>
+    </p>
+
+    <p>
+    \(a\), \(b + c\), \(\angle C\) - one side, the sum of the remaining two sides
+    and the included angle
+    </p>
+
+    <p>
+    <br><strong>Analysis</strong>
+    </p>
+
+    <p>
+    Let us assume that the required triangle \(ABC\) has been constructed. From
+    <strong>ECons</strong> we know how to construct the sum of two line segments.
+    However, since the sides of the assumed triangle are known, all we need to do
+    is extend the line segment \(CA\) and construct a \(Cir(A, c)\) which will
+    intersect the \(CA\)'s extension at the point \(D\) such that the line segment
+    \(CD\) will be equal to the given sum of the sides \(b\) and \(c\).
+    </p>
+
+    <p>
+    If we treat that sum:
+    </p>
+
+$$b + c$$
+
+    <p>
+    as <dfn>a side</dfn> of a triangle then we can construct such a triangle,
+    \(\triangle CDB\) for example, given two sides, \(a\) and \(b + c\), and the
+    included angle \(C\), see <strong>sas</strong> construction:
+    </p>
+
+    <img src="imgs/sasos1.png" alt="sasos1" class="center">
+
+    <p>
+    From the definition of the \(Cir(A, c)\) it follows that the vertex \(A\) is
+    equidistant from \(B\) and \(D\) and the locus of all such points is \(BD\)'s
+    perpendicular bisector whose intersection with \(CD\) or \(b + c\) locates
+    \(A\).
+    </p>
+
+    <p>
+    <br><strong>Construction Outline</strong>
+    </p>
+
+    <p>
+    <dfn>Construct a triangle \(CDB\) using the two given line segments, \(a\)
+    and \(b + c\), and the included angle \(C\). Construct the line segment
+    \(BD\) and bisect it. The intersection of \(CD\) and \(BD\)'s bisector
+    locates \(A\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Sample Construction</strong>
+    </p>
+
+    <img src="imgs/sasos2.png" alt="sasos2" class="center">
+
+$$C, Z$$
+$$Ln(C, Z)$$
+$$Cir(C, a)$$
+$$Cir(C, a) \; \cap \; Ln(C, Z) = B \colon \quad CB = a$$
+$$Y \colon \quad \angle YCB = \angle C$$
+$$Ln(C, Y)$$
+$$Cir(C, b + c)$$
+$$Cir(C, b + c) \; \cap \; Ln(C, Y) = D \colon \quad CD = b + c$$
+$$Ln(B, D)$$
+$$K, L, M \colon \quad Ln(K, M) \; \cap \; Ln(B, D) = L \colon \quad LB = LD$$
+$$Ln(K, M) \; \cap \; Ln(C, Y) = A \colon \quad AC = b, AB = c$$
+$$Ln(A, B)$$
+$$\triangle ABC$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryatriap1.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

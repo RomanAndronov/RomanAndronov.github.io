@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Equation. Pythagorean Theorem
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Equation. Pythagorean Theorem</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasequation.html">prev</a>
+     <a href="ryabaschase.html">next</a>
+    </p>
+
+    <h1>Pythagorean Theorem</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Prove that for any right triangle with sides \(a\) and \(b\) and a hypotenuse
+    \(c\):
+    </p>
+
+$$a^2 + b^2 = c^2$$
+
+    <p>
+    <br><strong>Approach</strong>
+    </p>
+
+    <p>
+    To prove this theorem we will use the Equation approach in the following way.
+    We will compute the magnitude of a radius of the inscribed circle of an
+    arbitrary right triangle in two different ways and then we will equate the
+    two magnitudes since they refer to the same geometric object.
+    </p>
+
+    <p>
+    Let:
+    </p>
+
+$$AB = a$$
+$$BC = b$$
+$$CA = c$$
+$$\angle BAC = \alpha$$
+
+    <p>
+    The center of the inscribed circle of an arbitrary triangle, not necessarily
+    a right one, is located on the intersection of the bisectors of the internal
+    angles of a triangle - the point \(O\):
+    </p>
+
+    <img src="imgs/pythagoras.png" alt="Pythagorean Theorem" class="center">
+
+    <p>
+    <br><strong>Solution I</strong>
+    </p>
+
+    <p>
+    is based on the observation that:
+    </p>
+
+$$c = AC = AF + CF$$
+
+    <p>
+    By construction the triangles \(\triangle OFA\) and \(\triangle OEA\) are
+    right and hence the right angles \(\angle OFA\) and \(\angle OEA\) are equal.
+    </p>
+
+    <p>
+    The angles at \(A\), \(\angle FAO\) and \(\angle EAO\), are also equal by
+    construction. From Euclid's <dfn>"Elements"</dfn> Book 1 Proposition 32 it
+    follows that the remaining internal angles, \(\angle FOA\) and \(\angle EOA\),
+    are also equal. By <strong>AAA</strong> then these triangles are similar.
+    </p>
+
+    <p>
+    From Book 6 Proposition 4 it follows that:
+    </p>
+
+$$AE = AF$$
+
+    <p>
+    since, by construction:
+    </p>
+
+$$OF = OE = r$$
+
+    <p>
+    and the side \(AO\) is common.
+    </p>
+
+    <p>
+    Then:
+    </p>
+ 
+$$AB = a = AE + EB =$$
+$$AE + r$$
+$$\begin{equation}AE = a - r = AF\end{equation}$$
+
+    <p>
+    Since:
+    </p>
+
+$$\begin{equation}AC = c = AF + CF\end{equation}$$
+
+    <p>
+    put \(AF\) from (1) into (2):
+    </p>
+
+$$\begin{equation}c = a - r + CF\end{equation}$$
+
+    <p>
+    We can prove that \(CD = CF\) in the same way we have already proved that
+    \(AE = AF\) and hence:
+    </p>
+
+$$CB = b = CD + DB =$$
+$$CD + r$$
+$$\begin{equation}CD = b - r = CF\end{equation}$$
+
+    <p>
+    Put \(CF\) from (4) into (3):
+    </p>
+ 
+$$c = a - r + CF =$$
+$$a - r + b - r =$$
+$$a + b - 2r$$
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{r = \frac {a + b - c}{2}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution II</strong>
+    </p>
+
+    <p>
+    is based on a combination of Equation and Division approaches - the square
+    area of the entire triangle \(\triangle ABC\):
+    </p>
+
+$$\begin{equation}
+A_{\triangle ABC} = \frac {ab}{2}
+\end{equation}$$
+
+    <p>
+    is equal to the sum of square areas of triangles that comprise it:
+    </p>
+
+$$A_{\triangle ABC} = A_{\triangle BOA} + A_{\triangle BOC} +
+A_{\triangle COA} =$$
+$$\frac {ra}{2} + \frac {rb}{2} + \frac {rc}{2}=$$
+$$\begin{equation}
+r \frac {a + b + c}{2}
+\end{equation}$$
+
+    <p>
+    since the height of each smaller triangle is equal to \(r\):
+    </p>
+
+    <img src="imgs/pythagoras.png" alt="Pythagorean Theorem" class="center">
+
+    <p>
+    Equate (6) and (7):
+    </p>
+ 
+$$\frac {ab}{2} = r \frac {a + b + c}{2}$$
+$$\begin{equation}
+r = \frac {ab}{a + b + c}
+\end{equation}$$
+
+    <p>
+    Now equate (5) and (8):
+    </p>
+
+$$\frac {a + b - c}{2} = \frac {ab}{a + b + c}$$
+$$2ab = a^2 + ab + ac + ba + b^2 + bc - ca - cb - c^2$$
+$$2ab = a^2 + 2ab + b^2 -c^2$$
+$$0 = a^2 + b^2 - c^2$$
+$$\bbox[#e8e8e8,3pt]{a^2 + b^2 = c^2}$$
+
+    <p>
+    what was required to prove.
+    </p>
+
+    <p>
+    We remark in passing that the Pythagorean Theorem for some reason has caught
+    the public eye - by now there are more than \(300\) proofs of this theorem
+    available.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasequation.html">prev</a>
+     <a href="ryabaschase.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasequation.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Triangle Constructions, sDOsa by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Triangle Constructions, sDOsa by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+
+    <h1>sDOsa: side, Difference Of sides, angle</h1>
+
+    <p>
+    <strong>Given</strong>
+    </p>
+
+    <p>
+    \(a\), \(\angle A\), \(b - c\) or \(c - b\) - one side, the non-included angle
+    and the difference of the remaining two sides which means that two cases must
+    be considered: \(c > b\) and \(b > c\)
+    </p>
+
+    <p>
+    <br><strong>Analysis</strong>
+    </p>
+
+    <p>
+    Since the difference of two linear magnitudes is given, it follows that two
+    cases must be considered:
+    </p>
+
+$$c > b$$
+$$b > c$$
+
+    <p>
+    <strong>Case 1: \(c > b\)</strong>
+    </p>
+
+    <p>
+    Let us assume that the required triangle \(ABC\) has been constructed. From
+    <strong>ECons</strong> we know how to construct the difference between two
+    line segments. However, since the sides of the assumed triangle are known,
+    all we need to do is construct a \(Cir(A, c)\) which will intersect the
+    extended side \(AC\) at the point \(D\) marking the given linear difference
+    between the sides \(c\) and \(b\):
+    </p>
+
+    <img src="imgs/sdosa1.png" alt="sdosa1" class="center">
+
+    <p>
+    From the definition of the \(Cir(A, c)\) it follows that \(\triangle DAB\)
+    is isosceles and hence its angles at the base \(DB\), \(\angle ADB\) and
+    \(\angle ABD\), are equal (<strong>B1P5</strong>). since the sum of the
+    internal angles of a triangle is \(180^{\circ}\) (<strong>B1P32</strong>),
+    we have:
+    </p>
+
+$$\angle DAB + \angle ADB + \angle ABD = 180^{\circ}$$
+$$\angle DAB + 2 \times \angle ADB = 180^{\circ}$$
+$$180^{\circ} - \angle DAB =$$
+$$180^{\circ} - \angle A =$$
+$$2 \times \angle ADB$$
+
+    <p>
+    If we construct the given angle \(A\) <dfn>on the extension</dfn> of the
+    line segment whose length is equal to the given difference \(c - b\) with
+    \(D\) as its vertex:
+    </p>
+
+    <img src="imgs/sdosa2.png" alt="sdosa2" class="center">
+
+    <p>
+    by constructing a straight line \(DZ\) parallel to \(AB\), for example, then:
+    </p>
+
+$$\angle ZDY = \angle A$$
+$$\angle ADZ = 180^{\circ} - \angle ZDY =$$
+$$180^{\circ} - \angle A$$
+
+    <p>
+    but using \(\triangle DAB\) we proved that:
+    </p>
+
+$$180^{\circ} - \angle A = 2 \times \angle ADB$$
+
+    <p>
+    and hence:
+    </p>
+
+$$\angle ADZ = 2 \times \angle ADB$$
+
+    <p>
+    but on the other hand:
+    </p>
+
+$$\angle ADZ = \angle ADB + \angle BDZ$$
+$$2 \times \angle ADB = \angle ADB + \angle BDZ$$
+$$\angle ADB = \angle BDZ$$
+
+    <p>
+    which means that the bisector of the supplementary angle \(ADZ\) and the
+    side \(DB\) coincide which, in turn, means that the vertex \(B\) must be
+    located somewhere on that bisector.
+    </p>
+
+    <p>
+    In an attempt to locate \(B\) by constructing the \(Cir(C, a)\) we observe
+    that three outcomes are possible:
+    </p>
+
+    <p>
+    1) \(Cir(C, a)\) may <dfn>intersect</dfn> the bisector at two points, \(B\)
+    and \(B_1\)
+    </p>
+
+    <p>
+    2) \(Cir(C, a)\) may <dfn>touch</dfn> the bisector at one point, \(B_2\)
+    </p>
+
+    <p>
+    3) \(Cir(C, a)\) may not even <dfn>reach</dfn> the bisector at all:
+    </p>
+
+    <img src="imgs/sdosa3.png" alt="sdosa3" class="center">
+
+    <p>
+    In the first two cases from the definition of the \(Cir(C, a)\) it follows
+    that \(A\) is equidistant from \(D\) and whatever the second vertex may be,
+    \(B\) for example (\(C\) being the first vertex). The locus of all such
+    points is \(DB\)'s perpendicular bisector whose intersection with the
+    line segment equal in length to the given difference \(c - b\) or its
+    extension locates \(A\).
+    </p>
+
+    <p>
+    Note the similarity between this and the <strong>sSOsa</strong>
+    construction with the exception that in the latter case we bisect the given
+    angle itself - not its supplementary counterpart.
+    </p>
+
+    <p>
+    We already know that:
+    </p>
+
+$$\angle ADB = 90 - \frac {A}{2}$$
+
+    <p>
+    and from trigonometric identities we know that:
+    </p>
+
+$$\sin(90 - \alpha) = \cos \alpha$$
+
+    <p>
+    From the right triangle \(CB_2D\) it follows that if:
+    </p>
+
+$$\cos \frac {A}{2} < \frac {a}{c - b}$$
+
+    <p>
+    then it is possible to construct two triangles.
+    </p>
+
+    <p>
+    If:
+    </p>
+
+$$\cos \frac {A}{2} = \frac {a}{c - b}$$
+
+    <p>
+    then it is possible to construct one (right) triangle.
+    </p>
+
+    <p>
+    If:
+    </p>
+
+$$\cos \frac {A}{2} > \frac {a}{c - b}$$
+
+    <p>
+    then a triangle construction is impossible.
+    </p>
+
+    <p>
+    <br><strong>Construction Outline</strong>
+    </p>
+
+    <p>
+    <dfn>Construct the given difference of two sides \(c - b\) at the vertexes
+    \(C\) and \(D\). Construct the given angle \(A\) on the extension of \(CD\)
+    with the vertex at the point \(D\). Bisect \(\angle A\)'s supplementary
+    angle. Construct a \(Cir(C, a)\). That circle may conditionally intersect
+    \(\angle A\)'s supplementary angle bisector, it may touch it or it may not
+    reach it. The intersection locates two vertexes, \(B_1\) and \(B_2\), of
+    two possible triangles. The single point of tangency locates one point,
+    \(B\), of one possible (right) triangle. Bisect the line segment formed by
+    the point \(D\) on one side and the point \(B\) or \(B_1\) or \(B_2\) on
+    the other. The intersection of that perpendicular bisector with the given
+    line segment \(c - b\) or its extension locates \(A\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Case 2: \(b > c\)</strong>
+    </p>
+
+    <p>
+    This case is almost identical to the previous one except that since \(b\) is
+    greater than \(c\) then their linear difference will be marked inside the line
+    segment \(CA\) or within the side \(b\) itself - not its extension as in the
+    \(c > b\) case. Here we will be constructing the angle \(A\) at the vertex
+    \(D\) with \(CD\) as one of its sides:
+    </p>
+
+    <img src="imgs/sdosa4.png" alt="sdosa4" class="center">
+
+    <p>
+    From the right triangle \(CB_2D\) it follows that:
+    </p>
+
+$$\angle DCB_2 = 90^{\circ} - \angle CDB_2$$
+
+    <p>
+    but:
+    </p>
+
+$$\angle B_2DY = 180^{\circ}$$
+
+    <p>
+    and hence:
+    </p>
+
+$$\angle CDB_2 = 180^{\circ} - \angle A - \angle ZDB$$
+
+    <p>
+    Since:
+    </p>
+
+$$\angle ZDB = \angle ADB = 90^{\circ} - \frac {A}{2}$$
+
+    <p>
+    we have:
+    </p>
+
+$$\angle CDB_2 = 180^{\circ} - \angle A - 90^{\circ} + \frac {A}{2} =$$
+$$90 - \frac {A}{2}$$
+$$\angle DCB_2 = 90^{\circ} - 90^{\circ} + \frac {A}{2} =$$
+$$\frac {A}{2}$$
+    
+    <p>
+    From the right triangle \(CB_2D\) it follows that if:
+    </p>
+
+$$\cos \frac {A}{2} < \frac {a}{c - b}$$
+
+    <p>
+    then it is possible to construct two triangles.
+    </p>
+
+    <p>
+    If:
+    </p>
+
+$$\cos \frac {A}{2} = \frac {a}{c - b}$$
+
+    <p>
+    then it is possible to construct one (right) triangle.
+    </p>
+
+    <p>
+    If:
+    </p>
+
+$$\cos \frac {A}{2} > \frac {a}{c - b}$$
+
+    <p>
+    then a triangle construction is impossible.
+    </p>
+
+    <p>
+    <br><strong>Construction Outline</strong>
+    </p>
+
+    <p>
+    <dfn>Construct the given difference of two sides \(c - b\) at the vertexes
+    \(C\) and \(D\). Construct the given angle \(A\) with the vertex at the
+    point \(D\) with \(CD\) as one of its sides. Bisect \(\angle A\)'s
+    supplementary angle. Construct a \(Cir(C, a)\). That circle may
+    conditionally intersect \(\angle A\)'s supplementary angle bisector, it may
+    touch it or it may not reach it. The intersection locates two vertexes,
+    \(B_1\) and \(B_2\), of two possible triangles. The single point of
+    tangency locates one point, \(B\), of one possible (right) triangle. Bisect
+    the line segment formed by the point \(D\) on one side and the point \(B\)
+    or \(B_1\) or \(B_2\) on the other. The intersection of that perpendicular
+    bisector with the given line segment \(c - b\) or its extension locates
+    \(A\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Sample Construction</strong>
+    </p>
+
+    <p>
+    Below is the \(b > c\) case construction of two possible triangles when:
+    </p>
+
+$$\cos \frac {A}{2} < \frac {a}{b - c}$$
+
+    <p>
+    You are encouraged to explore the remaining constructions yourself:
+    </p>
+
+    <img src="imgs/sdosa5.png" alt="sdosa5" class="center">
+
+$$C, Z$$
+$$Ln(C, Z)$$
+$$Cir(C, b - c)$$
+$$Cir(C, b - c) \; \cap \; Ln(C, Z) = D \colon \quad CD = b - c$$
+$$Y \colon \quad \angle YDC = \angle A$$
+$$X \colon \quad \angle XDY = \angle XDZ$$
+$$Cir(C, a)$$
+$$Cir(C, a) \; \cap \; Ln(D, X) = B_1, B_2 \colon \quad CB_1 = CB_2 = a$$
+$$Ln(C, B_1)$$
+$$Ln(C, B_2)$$
+$$K, L, M \colon \quad Ln(K, M) \; \cap \; Ln(D, B_1) = L \colon \quad LD = LB_1$$
+$$Ln(K, M) \; \cap \; Ln(D, B_1) = A_1$$
+$$N, O, P \colon \quad Ln(N, P) \; \cap \; Ln(D, B_2) = O \colon \quad OD = OB_2$$
+$$Ln(N, P) \; \cap \; Ln(D, B_2) = A_2$$
+$$Ln(A_1, B_1)$$
+$$Ln(A_2, B_2)$$
+$$\triangle A_1B_1C$$
+$$\triangle A_2B_2C$$
+
+    <p>
+    Note that in the second triangle, \(\triangle A_2B_2C\), the sides \(b\) and
+    \(c\) trade places they occupy in the first triangle, \(\triangle A_1B_1C\),
+    - lengthwise \(c\) becomes \(b\) and \(b\) becomes \(c\).
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryatriap1.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

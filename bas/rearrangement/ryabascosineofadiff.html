@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Rearrangement. Cosine of
+a Difference
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov.
+  Rearrangement. Cosine of a Difference</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabassineofadiff.html">prev</a>
+     <a href="ryabastanofadiff.html">next</a>
+    </p>
+
+    <h1>\(\cos (\alpha -\beta)\)</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Express the cosine of a composite angle \(\alpha - \beta\) in terms of
+    trigonometric functions of primitive angles \(\alpha\) and \(\beta\).
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    The arrangement of the right triangles that allows us to deduce the identity
+    for the cosine of a difference of two angles is the same one used to deduce
+    the corresponding identity for the sine of a difference of two angles:
+    </p>
+
+    <img src="imgs/trigofdiff.png" alt="Sine of a Difference" class="center">
+
+    <p>
+    By definition we have:
+    </p>
+
+$$\cos (\alpha - \beta) = \frac {AF}{AE} =$$
+$$\frac {AC + CF}{AE} =$$
+$$\frac {AC + GE}{AE} =$$
+$$\frac {AC}{AE} + \frac {GE}{AE}$$
+
+    <p>
+    \(AC\) is a side of the right triangle \(\triangle ACB\) and \(AE\) is a
+    hypotenuse of the right triangle \(\triangle ABE\) and both of these right,
+    by construction, triangles share \(AB\):
+    </p>
+
+$$\frac {AC}{AE} = \frac {AC}{AE} \times 1 =$$
+$$\frac {AC}{AE} \times \frac {AB}{AB} =$$
+$$\frac {AC}{AB} \times \frac {AB}{AE}$$
+$$\frac {AC}{AB} = \cos \alpha$$
+$$\frac {AB}{AE} = \cos \beta$$
+$$\frac {AC}{AE} = \cos \alpha \cos \beta$$
+$$\cos (\alpha - \beta) = \cos \alpha \cos \beta + \frac {GE}{AE}$$
+
+    <p>
+    Consequently, \(GE\) is a side of the right triangle \(BGE\) and \(AE\) is
+    hypotenuse of the right triangle \(ABE\) and both of these right triangles
+    share \(BE\):
+    </p>
+
+$$\frac {GE}{AE} = \frac {GE}{AE} \times 1 =$$
+$$\frac {GE}{AE} \times \frac {BE}{BE} =$$
+$$\frac {GE}{BE} \times \frac {BE}{AE}$$
+$$\frac {GE}{BE} = \sin \alpha$$
+$$\frac {BE}{AE} = \sin \beta$$
+$$\frac {GE}{AE} = \sin \alpha \sin \beta$$
+
+    <p>
+    and:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\cos (\alpha - \beta) = \cos \alpha \cos \beta +
+\sin \alpha \sin \beta}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabassineofadiff.html">prev</a>
+     <a href="ryabastanofadiff.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrearrangement.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

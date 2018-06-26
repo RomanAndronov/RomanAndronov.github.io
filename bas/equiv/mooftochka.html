@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Mooftochka by Roman Y. Andronov.
+</title>
+
+<link rel="stylesheet" type="text/css" href="./rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Mooftochka by Roman Y. Andronov.</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+    </p>
+
+    <h1>Mooftochka.</h1>
+
+    <p>
+    1. Based on calculus.
+    </p>
+
+    <p>
+    Based on the law of conservation of angular momentum - IF there is no extra input
+    of energy/forces into the system except for the one required to rotate the system at
+    \(\omega_0\) in a steady state when mooftochka is at position \(a\) - as the distance
+    of mooftochka from the axis of rotation grows its (and the rod's) angular velocity
+    diminishes - the system must slow down.
+    </p>
+
+    <p>
+    However, if I understood you correctly, this is exactly what is NOT happenning - some
+    mysterious external force starts acting on the system as soon as mooftochka is set in
+    motion relative to the rod. So at this point I am assuming that when you say that
+    "<dfn>the rod is rotating at constant angular velocity</dfn>" - it really means a
+    constant angular velocity <dfn>at all times</dfn>, even after mooftochka starts running
+    along the rod.
+    </p>
+
+    <p>
+    If that is not the case then what follows below is obviously wrong but I will write it
+    out anyway. If the angular velocity does change in time then it will be a bit different
+    problem. In that case the angular velocity of the rod would be some function of
+    mooftochka's position along the rod, which itself would be some function of time. The
+    coordinate would increase with \(t\) while the angular velocity would decrease with
+    \(t\).
+    </p>
+
+    <p>
+    Anyway, since we need to find mooftochka's velocity relative to the rod we move into its
+    (rod's) reference frame which itself is not inertial - it rotates around the vertical
+    axis at a constant angular velocity. Hence, the fictisious "force of inertia" is
+    \(m\omega^2x\) and it is the first derivative of \(mv_x\), where \(m\) remains constant
+    at all times. We choose the \(OX\) axis to run along the rod:
+    </p>
+
+$$m\omega_0^2x = \frac {d(mv_x)}{dt} = m\frac {dv_x}{dt}$$
+$$v_x = \frac {dx}{dt}$$
+$$\begin{equation}
+\omega_0^2x = \frac {d^2x}{dt^2} = \frac {d \dot {x}}{dt}
+\end{equation}$$
+
+    <p>
+    Multiply both sides by \(dt\):
+    </p>
+
+$$\omega_0^2xdt = d \dot {x}$$
+
+    <p>
+    Multiply both sides by \(\dot {x}\) and expand its definition on the left hand side
+    of the equation:
+    </p>
+
+$$\omega_0^2xdt \dot {x} = \omega_0^2xdt \frac {dx}{dt} = \dot {x} d \dot {x}$$
+
+    <p>
+    Cancel out \(dt\):
+    </p>
+
+$$\omega_0^2xdx = \dot {x} d \dot {x}$$
+
+    <p>
+    The variables are now separated, integrate both sides:
+    </p>
+
+$$\omega_0^2 \frac {x^2}{2} + C = \frac {\dot {x}^2}{2}$$
+
+    <p>
+    Find \(C\) from initial conditions of \(\dot {x}(0) = 0, x(0) = a\):
+    </p>
+
+$$\omega_0^2 \frac {a^2}{2} + C = 0$$
+$$C = - \frac {a^2\omega_0^2}{2}$$
+
+    <p>
+    Back to the equation:
+    </p>
+
+$$\dot {x}^2 = \omega_0^2(x^2 - a^2)$$
+$$\dot {x} = \omega_0 \sqrt{x^2 - a^2}$$
+
+    <p>
+    Separate the variables one more time:
+    </p>
+
+$$\frac {dx}{\sqrt{x^2 - a^2}} = \omega_0dt$$
+
+    <p>
+    Integrate:
+    </p>
+
+$$\int_a^x {\frac {dx}{\sqrt{x^2 - a^2}}} = \omega_0t$$
+
+    <p>
+    We calculate this integral with a substitution \(x = \cos^{-1}(u)\):
+    </p>
+
+$$\int {\frac {dx}{\sqrt{x^2 - a^2}}} = \ln(x + \sqrt{x^2 - a^2})$$
+$$\int_a^x = \ln(x + \sqrt{x^2 - a^2}) - \ln(a + \sqrt{a^2 - a^2}) =$$
+$$= \ln \Big( \frac {x}{a} + \sqrt{ \frac {x^2}{a^2} - 1} \Big)$$
+
+    <p>
+    To solve for \(x\) we substitute \(\frac {x}{a} = z\):
+    </p>
+
+$$\ln ( z + \sqrt{z^2 - 1}) = \omega_0t$$
+$$z + \sqrt{z^2 - 1} = e^{\omega_0t}$$
+$$z - e^{\omega_0t} = - \sqrt{z^2 - 1}$$
+$$(z - e^{\omega_0t})^2 = z^2 - 1$$
+$$z^2 - 2ze^{\omega_0t} + e^{2\omega_0t} = z^2 - 1$$
+$$e^{2\omega_0t} + 1 = 2ze^{\omega_0t}$$
+$$z(t) = \frac {1}{2}(e^{\omega_0t} + e^{-\omega_0t})$$
+$$x(t) = \frac {a}{2}(e^{\omega_0t} + e^{-\omega_0t})$$
+$$\dot {x}(t) = v_x(t) = \frac {a\omega_0}{2}(e^{\omega_0t} - e^{-\omega_0t})$$
+
+    <p>
+    From this it follows that to find the time \(T\) when mooftochka separates from
+    the rod we need to solve a quadratic equation when \(x = L\) and
+    \(z = e^{\omega_0t}\):
+    </p>
+
+$$\frac {2L}{a} = z + \frac {1}{z}$$
+$$z^2 - \frac {2L}{a}z + 1 = 0$$
+$$z = \frac {L}{a} + \sqrt{\frac {L^2}{a^2} - 1}$$
+$$\bbox[#e8e8e8,3pt]{T = \frac {1}{\omega_0} \ln \Big(\frac {L}{a} + \sqrt{\frac {L^2}{a^2} - 1} \Big)}$$
+
+    <p>
+    We can now find \(v_x(t = T)\):
+    </p>
+
+$$v_x(t = T) = \frac {a\omega_0}{2}(\frac {L}{a} + \sqrt{\frac {L^2}{a^2} - 1} -
+\frac {1}{\frac {L}{a} + \sqrt{\frac {L^2}{a^2} - 1}})$$
+$$\frac {1}{\frac {L}{a} + \sqrt{\frac {L^2}{a^2} - 1}} = 
+\frac {L}{a} - \sqrt{\frac {L^2}{a^2} - 1}$$
+
+    <p>
+    because we have multiplied both sides of the fraction by
+    \(\frac {L}{a} - \sqrt{\frac {L^2}{a^2} - 1}\). Finally we have:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{V = \omega_0\sqrt{L^2 - a^2}}
+\end{equation}$$
+
+    <p>
+    Another way to obtain the same result is to solve the equation (1) making \(v_x\)
+    a function of \(x\) and not \(t\):
+    </p>
+
+$$\omega_0^2x = \frac {dv}{dt} = \frac {dx}{dx} \times \frac {dv}{dt} =$$
+$$= \frac {dx}{dt} \times \frac {dv}{dx} = v \frac {dv}{dx}$$
+
+    <p>
+    Multiply both sides by \(dx\):
+    </p>
+
+$$\omega_0^2xdx = v dv$$
+
+    <p>
+    Integrate the left side from \(a\) to \(L\) and the right from \(0\) to \(V\) ...
+    </p>
+
+    <p>
+    2. Without calculus.
+    </p>
+
+    <p>
+    1). Break the motion of the rod into a series of steps. The location of mooftochka in
+    the next step is pointed to by the mooftochka's velocity vector in the previous
+    step. This forms a right triangle. The hypotenuse of the current triangle becomes
+    just a side in the next iteration ... This looks similar to the well known
+    wolf-chasing-the-rabbit problem:
+    </p>
+
+<img src="mooftochka.png" class="center">
+
+    <p>
+    2). Purely mathematically - assuming that the formula for \(V\) is correct - the only
+    thing I can see is that it is some form of the law of conservation of energy in disguise,
+    which I can not honestly claim to remember very well. Square both sides of (2):
+    </p>
+
+$$V^2 = \omega_0^2L^2 - \omega_0^2a^2$$
+
+    <p>
+    Multiply both sides by \(\frac {m}{2}\):
+    </p>
+
+$$\frac {mV^2}{2} = \frac {m\omega_0^2L^2}{2} - \frac {m\omega_0^2a^2}{2}$$
+$$\frac {m\omega_0^2a^2}{2} = \frac {m\omega_0^2L^2}{2} - \frac {mV^2}{2}$$
+$$\frac {J_a\omega_0^2}{2} = \frac {J_L\omega_0^2}{2} - \frac {mV^2}{2}$$
+
+    <p>
+    or:
+    </p>
+ 
+$$- \frac {J_a\omega_0^2}{2} = - \frac {J_L\omega_0^2}{2} + \frac {mV^2}{2}$$
+
+    <p>
+    Why there should be these minus signs there the way they are - I honestly have no idea.
+    And of course I did this only after finding a solution the calculus way (assuming it
+    is correct).
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapgci.html">prev</a>
+     <a href="ryapgce.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

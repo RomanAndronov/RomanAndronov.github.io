@@ -1,0 +1,1107 @@
+[center][b][color=Orange]Kombinatorix Primordial[/color][/b][/center]
+
+[tt][color=Cyan]1) Purpose[/color]
+[color=Cyan]2) Lingo[/color]
+ [color=LimeGreen]2.1) Item
+ 2.2) Collection
+ 2.3) Order
+ 2.4) Repetitions
+ 2.5) Set, Multiset[/color]
+[color=Cyan]3) Basic Four[/color]
+ [color=LimeGreen]3.1) Addition
+ 3.2) Multiplication
+ 3.3) Subtraction
+ 3.4) Division[/color]
+[color=Cyan]4) Permutations of Sets[/color]
+ [color=LimeGreen]4.1) Circular Permutations
+ 4.2) Interbucket Distributions[/color]
+[color=Cyan]5) Combinations of Sets[/color]
+ [color=LimeGreen]5.1) Symmetry Property
+ 5.2) Number of Subsets
+ 5.3) Interbucket Distributions[/color]
+[color=Cyan]6) Permutations of Multisets[/color]
+ [color=LimeGreen]6.1) Infinite Supply
+  6.1.1) Interbucket Distributions
+ 6.2) Finite Supply
+  6.2.1) Interbucket Distributions
+  6.2.2) C(n, r) and Permutations
+  6.2.3) C(n, r) and Interbucket Distributions[/color]
+[color=Cyan]7) Combinations of Multisets[/color]
+ [color=LimeGreen]7.1) Infinite Supply
+  7.1.1) Interbucket Distributions[/color]
+[color=Cyan]8) Some Applications[/color]
+ [color=LimeGreen]8.1) Maxwell-Boltzmann
+ 8.2) Bose-Einstein
+ 8.3) Fermi-Dirac[/color]
+[color=Cyan]9) From Here[/color]
+[/tt]
+
+
+[b][color=Cyan]1) Purpose[/color][/b]
+
+Since academic information is highly hierarchical it is vital to be introduced to the very basic ideas in any given discipline before moving on to bigger and better things. However, sometimes it so happens that these basic ideas are not introduced in high school in the hope that "it will be taught in college" and sometimes these ideas are not mentioned in college on the assumption that "it was supposed to be studied in high school". This is less likely to happen in geometry, algebra or physics but, based on my personal experience, it is more likely to happen in combinatorial analysis.
+
+As such the purpose of this tutorial is to cover this potential gap by exploring the four basic counting principles and four basic problem types - permutations and combinations with and without repetitions which, while giving an introduction to the discipline, can be used to solve a wide range of the entry level combinatorial problems. Not much is need to follow through this tutorial - a willingness to make an intellectual effort to absorb some new information and the basic arithmetic skills.
+
+The other purpose, as usual, is to remove a pay wall between a curious mind and a fundamental academic information.
+
+Full disclosure:
+
+I do not claim to have obtained any of the upcoming results. The information presented here is so basic that it can be treated as tribal knowledge passed by word of mouth from generation to generation. My only input is the organization of the material - thinking of and gathering all the relevant pieces in one place and a slightly more lengthy than usual treatment of items, comparison and order.
+
+
+[b][color=Cyan]2) Lingo[/color][/b]
+
+To feel warm and fuzzy in any discipline we should have its lingo in our bones. In Kombinatorix Primordial we will start with just four basic concepts:
+
+[center][b][color=Orange]{item, collection, order, repetitions}[/color][/b][/center]
+
+
+[i][b][color=LimeGreen]2.1) Item[/color][/b][/i]
+
+An [i]item[/i] is anything we want it to be. Item synonyms are object, entity, element, member. An item is a rather sweeping and an all encompassing abstraction birthed by the given problem. Examples: a letter, a word, a digit, a number, a marble, a bowl of marbles, a star, a constellation, etc.
+
+For any two items [b]A[/b] and [b]B[/b] we define an operation of [i]primitive comparison[/i] which for our purposes yields one of only two mutually exclusive outcomes - "equal", these two items are identical or the same, or "not equal", these two items are different. Based on that definition let us call the "equal" items [color=LimeGreen][i]indistinguishable[/i][/color] and let us call the items that are "not equal" [color=LimeGreen][i]distinct[/i][/color]. Formally:
+
+[center][b][color=Cyan]A = B[/color]   or   [color=Cyan]A \neq  B[/color][/b][/center]
+
+where the "equal" and "not equal" signs absorb the arbitrary definition of comparison.
+
+For example, in one case "spoon" may be "equal" to "fork" because their commonality is based on the fact that we use these items to eat and then "spoon" is "not equal" to "barbell". In an another case "spoon" may very well be "equal" to "barbell" because both items are made out of metal and, since that is the decisive criteria now, "spoon" is "not equal" to "fork" because "fork" is plastic.
+
+An early lesson to take away from this is that in combinatorics things change quickly and easily. In an academic parlance we would say that, in general, this is a [i]low constraint[/i] discipline.
+
+Though there are always exceptions to the rules, generally - [i]within the boundaries of the current problem[/i] or [i]once the problem statement has been formulated[/i] - we take the individual items to be [i]fixed[/i] or [i]frozen[/i] meaning that they do not morph into something else and that they remain wholesome - undividible any further - for the "duration" of a given problem. A multitude of such items forms a [i]collection[/i].
+
+-----(01)-----
+
+
+[i][b][color=LimeGreen]2.2) Collection[/color][/b][/i]
+
+A [i]collection[/i] is a multitude of items that have something in common. That commonality can be long lasting or it can be temporary and fleeting. Collections are very flexible, fluid and dynamic - items can be thrown out of or into a collection any time we want. All the items in a collection are considered to be [i]equivalent[/i] for the counting purposes - even if the item [i]"apple"[/i] is different from the item [i]"orange"[/i] when somehow compared - still both items are [i]fruits[/i] and hence can be treated uniformly when counted. Collection synonyms are list, group, pile, assortment, arrangement. A sample collection, for example, can be an assortment of characters in your favorite language that amounts to a meaningful word:
+
+[center][b][color=Cyan]S = {M, A, T, H}[/color][/b][/center]
+
+or not a meaningful "word":
+
+[center][b][color=Cyan]S = {H, T, A, M}[/color][/b][/center]
+
+Here [b]S[/b] is a shorthand notation for a collection. The braces [b]{[/b] and [b]}[/b] delineate the boundaries of a collection. The commas [b],[/b] delineate the boundaries of the items within a collection and the braces do so for the first and the last items. There are other ways to specify a collection but the one above is all we will need.
+
+To save me some typing I will avoid the braces and the commas often - when the items are single digits or letters.
+
+For any two collections we define an operation of [i]aggregate comparison[/i] as follows. We assume that a collection of natural numbers \bbn  is somehow given to us, axiomatically perhaps. We represent an arbitrary collection of items [i]conceptually[/i] as a tight series of buckets ([]) with no space in between them. The sample [i]"MATH"[/i] collection then temporarily becomes:
+
+[center][b][color=Cyan]S = {[][][][]}[/color][/b][/center]
+
+To each consecutive bucket we assign one consecutive natural number. Which [i]end[/i] or [i]extremity[/i] of the collection we start this [i]enumeration[/i] process from does not really matter as long as we are consistent across the operations on multiple collections. We can move [i]right[/i] to [i]left[/i] or [i]left[/i] to [i]right[/i]. It also does not really matter which integer we assign to the [i]first[/i] bucket. Traditionally we start with a [b]1[/b] and we move [i]left to right[/i]:
+
+[center][b][color=Cyan]S = {[][][][]}[/color][/b][/center]
+[center][b][color=Cyan]     1 2  3 4[/color][/b][/center]
+
+Into each bucket in a collection we place one item:
+
+[center][b][color=Cyan]S = {[M][A][T][H]}[/color][/b][/center]
+[center][b][color=Cyan]      1  2  3  4[/color][/b][/center]
+
+and introduce the following notations:
+
+[center][b][color=Cyan]|S| = 4[/color][/b][/center]
+[center][b][color=Cyan]S[3] = a[sub]3[/sub] = T[/color][/b][/center]
+
+The vertical bars mean [i]"the number of items in a collection"[/i] or collection's [i]size[/i] or [i]length[/i] which is four in this case. The square brackets mean [i]"the contents of the bucket whose number within the collection is given"[/i] which in this case is [b]T[/b] since in [b]S[/b] it is in the bucket number three. Since the bucket-based representation is only conceptual we still use the traditional notation to record a collection - [b]S = {M, A, T, H}[/b] - but if needed the square brackets notation gives us a way to reference items in a collection located in an arbitrary bucket number [b]j[/b] as [color=Cyan][b]S[ j ], j = 1, 2, ... , |S|[/b][/color].
+
+To be perfectly clear - [i]"bucket's contents", "bucket's number" and "number of buckets"[/i] in a collection are three different things.
+
+We can now compare two collections [b]S[sub]1[/sub][/b] and [b]S[sub]2[/sub][/b] by comparing their items in the corresponding buckets as long as buckets from each collection are available:
+
+[center][b][color=Cyan]S[sub]1[/sub][ j ] = S[sub]2[/sub][ j ], \forall  j = 1, ... , min(|S[sub]1[/sub]|, |S[sub]2[/sub]|)[/color][/b][/center]
+
+If the above statement is true for all [b]j[/b]s and [b]|S[sub]1[/sub]| == |S[sub]2[/sub]|[/b] then these collections are indistinguishable (the same) and distinct (different) otherwise. In the latter case the collections may be of different sizes or they may be of equal sizes but of different contents for some corresponding buckets. For example, these collections:
+
+[center][b][color=Cyan]S[sub]1[/sub] = MATHEMATIKA[/color][/b][/center]
+[center][b][color=Cyan]S[sub]2[/sub] = MATH[/color][/b][/center]
+
+are different because their sizes are different - we do not even have to look at buckets' contents. These collections:
+
+[center][b][color=Cyan]S[sub]1[/sub] = MATH[/color][/b][/center]
+[center][b][color=Cyan]S[sub]2[/sub] = MAHT[/color][/b][/center]
+
+have the same size but they are still different because the contents of the bucket three in each collection are different. These collections are the same:
+
+[center][b][color=Cyan]S[sub]1[/sub] = MATH[/color][/b][/center]
+[center][b][color=Cyan]S[sub]2[/sub] = MATH[/color][/b][/center]
+
+Just like the primitive comparison of two items the aggregate comparison of two collections also yields one of only two mutually exclusive outcomes of which the positive one can occur only if both collections are of the same size. We did this on purpose - if we always compare collections comprised of the same items, implying - of equal sizes, a frequent task in Kombinatorix Primordial, than the only thing that matters is the [i]order[/i] of these items within the collection.
+
+-----(02)-----
+
+[i][b][color=LimeGreen]2.3) Order[/color][/b][/i]
+
+We may say that order is [i]an arbitrary rule used to control the population of a collection[/i]. For integers, for example, such a rule may be based on the operation of comparison which yields one of three possible outcomes - a given integer is less than, equal to or greater than some other integer. In Kombinatorix Primordial, however, we shall use a bit different flavor of order - its numbed down version described above. To sum it up: for us an order is something that makes two collections comprised of the same items different.
+
+We did all this work so that it becomes easy to comprehend the meaning of the question [i]"does order matter?"[/i] where order is to be understood in the sense described above.
+
+Every case is different so the generic answer - it depends. If a sports commentator reports on the results of some competition then the following three collections comprised of the same items [b]1, 2, 3[/b]:
+
+[center][b][color=Cyan]123     321     213[/color][/b][/center]
+
+can be considered the same, collapsed into and counted as one. Why? Because regardless of how the report is delivered to the audience the person who took the first place will always be attached to a gold medal (even if announced [i]last[/i]), the person who took the second place will always be attached to a silver medal and so on. In that case we would say that [i]"order does not matter"[/i] though based on the aggregate comparison procedure described above these collections are strictly speaking not identical - a fact we are willing to ignore in this particular case.
+
+However, when it comes to passwords, house numbers or apartment numbers within a house, salaries, this forum's post counts, a book's page numbers, serial and version numbers or mileage on your car's odometer then all three collections are different and we must count them as three separate entities. In that case we would say that [i]"order matters"[/i].
+
+
+[i][b][color=LimeGreen]2.4) Repetitions[/color][/b][/i]
+
+In a multitude of items it can so happen that one or more items are [i]"the same"[/i] - exact copies of each other - when an item to item comparison within a collection yields "equal to". We call these items indistinguishable:
+
+[center][b][color=Cyan]122333[/color][/b][/center]
+
+In this collection we have an indistinguishable item "2" - repeated twice - and "3" - repeated trice. When the presence of such items in a collection is allowed it is sometimes said that [i]repetitions are allowed[/i]. To avoid the potential ambiguities in this case we will introduce the notion of a [i]type[/i] of an item. We will then say that the item of type "2", for example, is repeated this many times and that the item of type "3" is repeated that many times.
+
+When [i]repetitions are not allowed[/i] then all the items in a collection must be [i]unique[/i] or [i]distinct[/i]. The items can be distinct [i]a priory[/i] or simply given to us that way or [i]we can always make a finite number of indistinguishable items distinct[/i] if and when needed. We accomplish this task in the way similar to the one we used to enumerate the buckets in a collection - we:
+
+[center][color=LimeGreen][i]assign consecutive natural numbers to each indistinguishable item[/i][/color]     [color=Orange](2.4)[/color][/center]
+
+For example, let us assume that we have five indistinguishable items [b]{A, A, A, A, A}[/b]. To make them distinct we start with the item in the first bucket and assign [b]1[/b] to it in the form of a subscript. We then move on to the item in the next bucket and assign [b]2[/b] to it and so on. Now all these items are distinct: [b]A[sub]1[/sub] \neq  A[sub]2[/sub] \neq  A[sub]3[/sub] \neq  A[sub]4[/sub] \neq  A[sub]5[/sub][/b].
+
+
+[i][b][color=LimeGreen]2.5) Set, Multiset[/color][/b][/i]
+
+Let us combine all the previous concepts and define a special collection in which the [i]order[/i] of [i]items does not matter[/i] and the [i]repetitions[/i] of items are ignored. Such a collection is called a [i]set[/i]. As such these two sets are one and the same:
+
+[center][b][color=Cyan]{A, B, B, C, C, C}   {C, B, A}[/color][/b][/center]
+
+To avoid confusion do realize that when earlier we said "repetitions are allowed" it is [i]generally[/i] - emphasis on generally - understood that we are not just wasting our breath - we are implying that the allowed duplicates are to be counted toward some grand total. These duplicate items are not just haning out there, loitering and doing nothing. They are there for a reason - to be used and counted. In sets, however, though mechanically we [i]may[/i] add duplicates to our collection (see above) - in the end we will ignore them - meaning we will not use them so we might as well throw all the duplicate items out and condense our collection to distinct items only.
+
+A special collection where duplicate items [i]are[/i] used and counted is called a [i]multiset[/i] designating which it is customary to precede each item with its [i]repetition number[/i]: [color=Cyan][b]{1*A, 2*B, 3*C}[/b][/color].
+
+A set with no items is called an [i]empty[/i] or [i]null[/i] set designated as [color=Cyan][b]{}[/b][/color] or \emptyset.
+
+Sets can be glummed together (unionized) or intersected.
+
+A [i]union[/i] of two sets, designated as [color=Cyan][b]S[sub]1[/sub] \cup  S[sub]2[/sub][/b][/color], is yet another set made up of items that belong to either set [b]S[sub]1[/sub][/b] or to set [b]S[sub]2[/sub][/b] or to both sets. We can extend this definition to an arbitrary finite number of sets from which we conclude that for an item to be in a union of some number of sets it must belong to at least one set:
+
+[center][b][color=Cyan]S[sub]1[/sub] = {1, 2, 3, 4}[/color][/b][/center]
+[center][b][color=Cyan]S[sub]2[/sub] = {X, Y, Z}[/color][/b][/center]
+[center][b][color=Cyan]S[sub]1[/sub] \cup  S[sub]2[/sub] = {1, 2, 3, 4, X, Y, Z}[/color][/b][/center]
+
+An [i]intersection[/i] of two sets, designated as [color=Cyan][b]S[sub]1[/sub] \cap  S[sub]2[/sub][/b][/color], is yet another set made up of items that belong to [b]S[sub]1[/sub][/b] and to [b]S[sub]2[/sub][/b] simultaneously. We can extend this definition to an arbitrary finite number of sets from which we conclude that for an item to be in an intersection of some number of sets it must belong to each and every set:
+
+[center][b][color=Cyan]S[sub]1[/sub] = {1, 2, 3, 4, Z}[/color][/b][/center]
+[center][b][color=Cyan]S[sub]2[/sub] = {4, X, Y, Z}[/color][/b][/center]
+[center][b][color=Cyan]S[sub]1[/sub] \cap  S[sub]2[/sub] = {4, Z}[/color][/b][/center]
+
+Unions, intersections and other constructs are frequently depicted graphically as [i]Venn Diagrams[/i] - look these up elsewhere.
+
+-----(03)-----
+
+Two sets with no common items, [b]"ABC"[/b] and [b]"DEFG"[/b] for example, are called [i]disjoint[/i]. From the above definitions it follows that the intersection of such two sets is an empty set. Formally:
+
+[center][b][color=Cyan]S[sub]1[/sub] \cap  S[sub]2[/sub] = {}[/color][/b][/center]
+
+If we want to say that [i]"none of [b]N[/b] sets have any items in common"[/i] we would say that they are [i]"disjoint pairwise"[/i] meaning that if we pick any two distinct sets then they will be disjoint. Formally:
+
+[center][b][color=Cyan]\forall  j, k \in  [1 ... N], j \neq  k   S[sub]j[/sub] \cap  S[sub]k[/sub] = {}[/color][/b][/center]
+
+where the symbol \forall  means "for all" or "for any" so the above reads [i]"for any pair of distinct indexes between [b]1[/b] and [b]N[/b]"[/i] ...
+
+Earlier we noted that an item can be anything we want - why not another set? If we take an existing set:
+
+[center][b][color=Cyan]S = {1, 2, 3, 4, 5, 6, 7, 8, 9}[/color][/b][/center]
+
+and rearrange it in such a way that each and every of its items belongs to exactly one [i]subset[/i]:
+
+[center][b][color=Cyan]{{1}, {2, 3, 4}, {5, 6}, {7, 8, 9}}[/color][/b][/center]
+
+then the subsets:
+
+[center][b][color=Cyan]{1}[/color][/b][/center]
+[center][b][color=Cyan]{2, 3, 4}[/color][/b][/center]
+[center][b][color=Cyan]{5, 6}[/color][/b][/center]
+[center][b][color=Cyan]{7, 8, 9}[/color][/b][/center]
+
+are disjoint pairwise and we would say that they form a [i]partition[/i] (as a noun) of [b]S[/b]. When we use the word [i]partition[/i] as a verb then it means [i]take action[/i] and rearrange the given set into a number of subsets disjoint pairwise.
+
+For comparison:
+
+[center][b][color=Cyan]{{1}, {2, 3, 4}, {5, 6}, {7, 9}}[/color][/b][/center]
+
+is not a partition of [b]S[/b]. Why? Because the item "8" was left out in the cold, hanging high and dry.
+
+[center][b][color=Cyan]{{1}, {2, 3, 4}, {5, 6}, {6, 7, 8, 9}}[/color][/b][/center]
+
+is also not a partition of [b]S[/b] since these two greedy subsets, {5, 6} and {6, 7, 8, 9}, decided to share the item "6".
+
+The notion of partition coupled with the up coming Addition Counting Principle are a thinly disguised everyday truth that [i]a whole is the sum of its parts[/i].
+
+
+[b][color=Cyan]3) Basic Four[/color][/b]
+
+The four basic counting principles are based on the ideas of growth and reduction. The Addition and Multiplication Counting Principles cover growth while the Subtraction and Division Counting Principles cover reduction.
+
+Before we deep dive into counting principles let us stop and ponder - exactly what combinatorial analysis [i]is[/i]? In other words [i]why[/i] do we need these counting principles in the first place? In very very broad strokes, at the introductory level, combinatorial analysis deals with arrangements of a finite number of discrete items with the goal of answering the following questions:
+
+1) Is it even possible to construct the given arrangements?
+2) What is their [i]number[/i] and what [i]are[/i] they (list them all)?
+3) What are their properties?
+4) Is it possible to optimize them - come up with the "best" arrangement?
+
+In this tutorial we will automatically assume that the answer to the first question is always "yes". We will ignore the questions three and four. We will mostly look at the first part of the second question - how many given arrangements are possible and that is where the basic counting principles enter the picture - they help us count. At one extreme we may even compress this tutorial into just one word - count!
+
+We will quickly discover that while the combinatorial formulas are good at producing the [i]number[/i] of possible arrangements they leave us in the dark when it comes to generating an [i]exhaustive list[/i] of these arrangements. We may even draw a parallel here with the Method of Mathematical Induction which can be used to prove some formula but does not reveal the path to discovery of where did the formula come from to begin with. We can also find a similarity with the Pigeonhole Principle - it tells us that at least one bucket must contain more than one item but it does not reveal - exactly which bucket is it? In any case, while deducing the formulas we will, here and there, do the unthinkable - generate the arrangements on paper by hand. There are efficient, machine-ready algorithms to do just that - but you can study those on your own later on.
+
+Where appropriate we will formulate a principle in simple everyday terms and in a formal way using the sets notation. If we treat each possible arrangement that satisfies the requirements of a given problem as a subset - an item of a larger set then we can formalize the answer to the question "how many?" in terms of the size of that larger set.
+
+-----(04)-----
+
+
+[b][color=LimeGreen]3.1) Addition Counting Principle (ACP)[/color][/b]
+
+Simply:
+
+[i]if an item can be selected from one collection in [b]m[/b] ways and an item can be selected from a different collection in [b]n[/b] ways then one item can be selected from either collection in [b]m + n[/b] ways[/i]
+
+[b]ACP[/b] can be generalized for any finite number of collections. Formally verbally:
+
+[i]the number of items in a union of pairwise disjoint sets is the sum of the number of items in each of the sets[/i]
+
+Formally symbolically:
+
+[i]if a set [b]S[/b] is partitioned into a finite number of [b]n[/b] subsets [b]S[sub]1[/sub], S[sub]2[/sub], ... , S[sub]n[/sub][/b] disjoint pairwise then the total number of items in [b]S[/b] is equal to the sum of item counts in each subset [b]S[sub]j[/sub], j = 1, 2, ... , n[/b]:[/i]
+
+[center][b][color=Cyan]|S| = |S[sub]1[/sub]| + |S[sub]2[/sub]| + ... + |S[sub]n[/sub]|[/color][/b][/center]
+
+The "disjoint pairwise" requirement is formalized as above and is of paramount importance - if it is not met then [b]ACP[/b] does not apply and a different - Inclusion Exclusion Counting Principle (not discussed here) - must be used.
+
+[b]Example E1.[/b] A bookcase contains 23 books on math, 19 on physics and 17 on computer science. Planning to do a good job you will read only one book at a time. In how many different ways can you choose which book to read?
+
+Break the whole (bookcase) into [b]n = 3[/b] pairwise disjoint parts (math, physics, compsci), calculate the number of items in each part ([b]23, 19, 17[/b]) and add them up. The answer is [b]59[/b] ways.
+
+If, however, the bookcase also contained, say, one book on the subject of [i]"The Equations of Mathematical Physics"[/i] (yours truly took that course back in the day) then [b]ACP[/b] would not apply since the three sets of books would not be disjoint pairwise. The book on the equations of mathematical physics can be counted as a book on math and as a book on physics. While the math and compsci and physics and compsci sets are still disjoint the math and physics sets are not any more.
+
+
+[b][color=LimeGreen]3.2)Multiplication Counting Principle (MCP)[/color][/b]
+
+This principle is a consequence of [b]ACP[/b] since for integers repetitive addition is multiplication.
+
+Simply for two events:
+
+[i]if the first event has [b]m[/b] outcomes and, regardless of the outcome of the first event, the second event has [b]n[/b] outcomes then both events occuring in that sequence have a total of [b]m x n[/b] outcomes[/i]
+
+Formally verbally:
+
+[i]the number of items in a union of [b]m[/b] pairwise disjoint sets each of which has [b]n[/b] items is [b]m x n[/b][/i]
+
+Formally symbolically for two sets:
+
+[i]let [b]S[sub]1[/sub][/b] be a set of items [b]a[sub]j[/sub], j = 1, ... , |S[sub]1[/sub]| = m[/b] and let [b]S[sub]2[/sub][/b] be a set of items [b]b[sub]k[/sub], k = 1, ... , |S[sub]2[/sub]| = n[/b]. Assume that for each choice of item [b]a[sub]j[/sub][/b] from [b]S[sub]1[/sub][/b] there are [b]n[/b] choices of items [b]b[sub]k[/sub][/b] from [b]S[sub]2[/sub][/b]. If [b]S[/b] is a set of ordered pairs [b](a[sub]j[/sub], b[sub]k[/sub])[/b] then the number of items in [b]S[/b] is [b]m x n[/b]:[/i]
+
+[center][b][color=Cyan]|S| = |S[sub]1[/sub]| x |S[sub]2[/sub]| = m x n[/color][/b][/center]
+
+An ordered pair of items [b](a, b)[/b] is a formation (collection) of two items whose order is specified. Obviously in this case order matters. We can use the same aggregate comparison procedure to compare two ordered pairs so technically [b](a, b)[/b] and [b](b, a)[/b] are different.
+ 
+Instead of viewing [b]S[/b] as a set of ordered pairs let us partition it into some number of pairwise disjoint subsets in which [b]a[sub]j[/sub][/b] always goes first while the choices for [b]b[sub]k[/sub][/b] run their course:
+
+[center][b][color=Cyan]{(a[sub]j[/sub], b[sub]1[/sub]), (a[sub]j[/sub], b[sub]2[/sub]), ... , (a[sub]j[/sub], b[sub]n[/sub])}[/color][/b][/center]
+
+Since there are [b]n b[sub]k[/sub][/b] items in total the [i]size[/i] of such a subset will be [b]n[/b]. And how [i]many[/i] these subsets will there be? As many as there are choices for [b]a[sub]j[/sub][/b] or [b]m[/b]. Which means that to calculate [b]|S|[/b] we will be adding [b]n[/b] to itself [b]m[/b] times (by [b]ACP[/b]):
+
+[center][b][color=Cyan]|S| = n + n + n + ... (m times) = m x n[/color][/b][/center]
+
+Note that in practice these [b]S[sub]1[/sub][/b] and [b]S[sub]2[/sub][/b] will quite often be disjoint but they do not have to be.
+
+-----(05)-----
+
+[b]Example E2.[/b] In our library we have several large bays - floor sections filled with some number of bookcases. We are preparing the library's quick reference guide for the incoming students and we want to label each bay with a capital letter followed by a digit. We settle on the letters A, B, C, D and digits 1, 2, 3. How many bays can be uniquely labeled?
+
+In this case we have [b]S[sub]1[/sub] = {A, B, C, D}[/b] and [b]S[sub]2[/sub] = {1, 2, 3}[/b]. We observe that for each current choice of a letter - regardless of the previously made choices - we have [b]|S[sub]2[/sub]| = 3[/b] choices for a digit. Choices for [b]A:{(A, 1), (A, 2), (A, 3)}[/b]. Choices for [b]B:{(B, 1), (B, 2), (B, 3)}[/b] and so on. We can now construct our set [b]S[/b] of ordered pairs [b](a[sub]j[/sub], b[sub]k[/sub])[/b]:
+
+[center][b][color=Cyan]S = {{A1, A2, A3}, {B1, B2, B3}, {C1, C2, C3}, {D1, D2, D3}}[/color][/b][/center]
+
+where we have partitioned [b]S[/b] into pairwise disjoint subsets and skipped the parenthesis for ordered pairs. Based on [b]MCP[/b] we reason that we can label [b]4 x 3 = 12[/b] bays. Note here that for demonstration purposes we may rearrange [b]S[/b] in a form of a table - a two-dimensional matrix - whose rows are driven by letters and whose columns are driven by digits:
+
+[center][b][color=Cyan]A1 A2 A3[/color][/b][/center]
+[center][b][color=Cyan]B1 B2 B3[/color][/b][/center]
+[center][b][color=Cyan]C1 C2 C3[/color][/b][/center]
+[center][b][color=Cyan]D1 D2 D3[/color][/b][/center]
+
+We have omitted all the delimiteres here. We see that we have [b]4 = |S[sub]1[/sub]|[/b] rows [b]3 = |S[sub]2[/sub]|[/b] columns each and a total of [b]12[/b] ordered pairs.
+
+Recall that for [b]ACP[/b] to be applicable we had the "pairwise disjoint" requirement. For [b]MCP[/b] to be applicable we have the "independence" requirement - [i]the number of current choices [b]can not depend[/b] on the previously made choices[/i]. That requirement is of paramount importance for [b]MCP[/b]. 
+
+If during a solution of a problem you find yourself saying "... number of choices of blah depends on what was chosen before ..." then [b]MCP[/b] is not applicable [i]in this particular chain of reasoning[/i] - it may still be applicable in a given problem if we can find a way to rejigger the situation so that the choices are "independent", see [b]E7[/b].
+
+In the above matrix this independence requirement is packed into "for every [b]a[/b] (letter) there are [b]m[/b] [b]b[/b]s (digits)" requirement.
+
+Based on the above demonstration we can rephrase [b]MCP[/b] as follows:
+
+[i]if [b]S[sub]1[/sub][/b] is a set of items [b]a[sub]j[/sub], j = 1, ... , |S[sub]1[/sub]| = m[/b] and [b]S[sub]2[/sub][/b] is a set of items [b]b[sub]k[/sub], k = 1, ... , |S[sub]2[/sub]| = n[/b] then the number of ordered pairs [b](a[sub]j[/sub], b[sub]k[/sub])[/b] that can be constructed with the items taken from each set is [b]m x n[/b][/i]
+
+I will mention in passing here that the above set formed by the ordered pairs [b](a[sub]j[/sub], b[sub]k[/sub])[/b] is called a [i]Cartesian Product[/i] of [b]S[sub]1[/sub][/b] and [b]S[sub]2[/sub][/b].
+
+We can now extend [b]MCP[/b] to an arbitrary finite number of events/sets.
+
+Simply:
+
+[i]if in a sequence of [b]k[/b] events the number of outcomes [b]m[sub]j[/sub][/b] of the [b]j[/b]-th event does not depend on the outcomes of the  previous [b]j - 1[/b] events (for all the events) then the number of outcomes of the entire sequence of events is equal to the product of the numbers of the individual outcomes of all the events in the sequence: [b]m[sub]1[/sub] x m[sub]2[/sub] x ... x m[sub]k[/sub][/b][/i]
+
+Just as we formed ordered pairs [color=Cyan][b](a, b)[/b][/color] we can form ordered [b]n-tuple[/b]s where [b]n[/b] items are arranged in a specified order: [color=Cyan][b](a, b, c, ... )[/b][/color].
+
+Formally:
+
+[i]let [b]C[/b] be an ordered collection of [b]k[/b] sets [b]S[sub]j[/sub], j = 1, 2, ... , k[/b] such that [b]|S[sub]j[/sub]| = m[sub]j[/sub][/b]. Assume that for each item from [b]S[sub]j[/sub][/b] there are [b]m[sub]j+1[/sub][/b] choices of the items from [b]S[sub]j+1[/sub][/b] (for all the subsets). If [b]S[/b] is a set of ordered n-tuples formed by the items from each [b]S[sub]j[/sub][/b] from [b]C[/b] then the number of items in [b]S[/b] is [b]m[sub]1[/sub] x m[sub]2[/sub] x ... x m[sub]k[/sub][/b]:[/i]
+
+[center][b][color=Cyan]|S| = |S[sub]1[/sub]| x |S[sub]2[/sub]| x ... x |S[sub]k[/sub]|[/color][/b][/center]
+
+[b]Example E3.[/b] In [b]E1[/b] we now want to read three books at a time - one on each subject. How many different three-title reading lists can be compiled?
+
+When and if planning to apply [b]MCP[/b] we must always check if the "independence" requirement is met. It is in this case - whatever math book we choose will not affect the [i]number[/i] of physics or compsci books we can choose from. Hence by [b]MCP[/b] the answer is [b]23 x 19 x 17 = 7,429[/b] reading lists.
+
+[b]Example E4.[/b] In this particular state the passenger vehicles are tagged with a license plate that follows the [b]6[/b]-position [b]LddLLL[/b] pattern, where [b]L[/b] designates one capital letter from the English alphabet and [b]d[/b] - a single zero through nine digit. How many different license plates of this type can be issued?
+
+Verify that the independence requirement is met. By [b]MCP[/b] the answer is [b]26 x 10 x 10 x 26 x 26 x 26 = 45,697,600[/b] different license plates.
+
+-----(06)-----
+
+[b]Example E5.[/b] How many positive factors of the number:
+
+[center][b][color=Cyan]13[sup]3[/sup] x 17[sup]5[/sup] x 29[sup]4[/sup] x 31[sup]6[/sup][/color][/b][/center]
+
+are there?
+
+The number in question is quite large - I do not even know what it is. Finding the answer by hand will take a while. However, we observe that the bases of all the powers are prime numbers. From the prime factorization theorem it follows that all the factors of this number must be in a form:
+
+[center][b][color=Cyan]13[sup]a[/sup] x 17[sup]b[/sup] x 29[sup]c[/sup] x 31[sup]d[/sup][/color][/b][/center]
+[center][b][color=Cyan]a = [0 ... 3], b = [0 ... 5], c = [0 ... 4], d = [0 ... 6][/color][/b][/center]
+
+The independence requirement is met, by [b]MCP[/b] the answer is [b]4 x 6 x 5 x 7 = 840[/b] factors and we did not even have to know what the original number is.
+
+[b]Example E6.[/b] [i]How many two-digit numbers are there?[/i]
+
+In a qualifying number the tens digit can not be zero hence there are [b]9[/b] choices for the first item. The units digit can be anything we want - for every non-zero tens digit there are [b]10[/b] choices of the unit items. By [b]MCP[/b] the answer is [b]9 x 10 = 90[/b] two-digit numbers.
+
+[i]How many two-digit numbers with distinct digits are there?[/i]
+
+Whatever non-zero digit we choose for tens - we can not choose it for units. Hence the size of the units set shrinks by one - we now have only [b]9[/b] choices for units.
+
+It may sound trivial but do observe here that the [i]contents[/i] of the units set do depend on the previously made choices. If we picked [b]1[/b] for tens the units set can not have [b]1[/b] and the next time if we pick [b]2[/b] for tens the units set can not have [b]2[/b] and so on. You may want to prove it to yourself by writing down the various unit sets for each chosen tens digit and then comparing these sets observing along the way the mentioned earlier collections' fluidity. However, [b]MCP[/b] is only concerned with the [b]number[/b] of choices - not their content. As such, the [b]size[/b] of the units set is always the same, [b]9[/b], and hence [b]MCP[/b] is applicable and the answer is [b]9 x 9 = 81[/b] numbers.
+
+[i]How many two-digit numbers with distinct and non-zero digits are there?[/i]
+
+At this point we feel confident that the answer should be [b]9 x 8 = 72[/b] numbers since the size of the units set shrunk by one - we can not use zero as a unit.
+
+[b]Example E7.[/b] Let us now bring to light the reason why [b]MCP[/b] deals with the [i]ordered[/i] formations - ordered pairs, ordered n-tuples, and why the independence requirement is so important.
+
+[i]How many odd numbers between [b]1,000[/b] and [b]9,999[/b] have distinct digits?[/i]
+
+For this type of number to be odd we have the following choices for the THousands, Hundreds, Tens and Units sets:
+
+[center][b][color=Cyan]TH = {1, 2, 3, 4, 5, 6, 7, 8, 9}, |TH| = 9[/color][/b][/center]
+[center][b][color=Cyan]H = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, |H| = 10[/color][/b][/center]
+[center][b][color=Cyan]T = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, |T| = 10[/color][/b][/center]
+[center][b][color=Cyan]U = {1, 3, 5, 7, 9}, |U| = 5[/color][/b][/center]
+
+We start solving this problem in the same order we did it in the previous one. For [b]TH[/b] we have [b]9[/b] choices. For [b]H[/b] then there are [b]9[/b] choices regardless of the previous choice and for [b]T[/b] there are [b]8[/b] choices regardless of the previous two choices made.
+
+However, the number of choices for the units is in deep trouble - if we chose an even digit prior then there are [b]5[/b] choices for unit items and if we chose an odd digit prior then there are [b]4[/b] choices for units. The number of choices for units "depends" - [b]MCP[/b] does not apply and the ordered 4-tuple [b](TH, H, T, U)[/b] is no good.
+
+What if instead we turn it around and form an ordered [b](U, T, H, TH)[/b] 4-tuple?
+
+We then have [b]5[/b] choices for units. Whatever that digit is - it is in [b]T[/b], we can eliminate it and so there are [b]10 - 1 = 9[/b] choices for tens regardless. By the same logic regardless of the previous two choices there are now [b]10 - 2 = 8[/b] choices for hundreds. But the number of choices for thousands is now in deep trouble - if we ever chose zero prior then, since zero is not in [b]TH[/b], it can not be eliminated and the number of choices we have for [b]TH[/b] is [b]9[/b]. If we never chose zero prior then that digit can be eliminated from [b]TH[/b] which now has [b]8[/b] choices. The independence requirement is not met, [b]MCP[/b] does not apply.
+
+Is there any hope? A lesson to learn from this is that sometimes failures are not that bad. If we somehow are sure that a solution does exist (a tricky bit) then each failure tells us what not to try next time and it brings us one step closer to a solution.
+
+After the first failure we decided to deal with (odd) units first. The second failure tells us that zeros in [b]T[/b] and [b]H[/b] are the source of grief. What if we deal with them last and form an ordered 4-tuple [b](U, TH, H, T)[/b]?
+
+[b]5[/b] choices for units. Regardless of the previous choice there are now [b]9 - 1 = 8[/b] choices for thousands. Regardless of the previous two choices - some two distinct digits each of which is in [b]H[/b] and can be eliminated - there are now [b]10 - 2 = 8[/b] choices for hundreds. Regardless of the previous three choices - some three distinct digits one of which may be zero and each of which can be eliminated from [b]T[/b] - there are [b]10 - 3 = 7[/b] choices for tens.
+
+After giving the ordered 4-tuple and the independence requirement a thorough workout we feel confident that the answer is [b]5 x 8 x 8 x 7 = 2,240[/b] numbers. We also take home a guideline or what I call a Basic Problem Solving Approach:
+
+[center][color=Orange][i]make the most restrictive choices early[/i][/color][/center]
+
+-----(07)-----
+
+[b][color=LimeGreen]3.3) Subtraction Counting Principle (SCP)[/color][/b]
+
+Let [b]U[/b] be a set containing a subset [b]A[/b]:
+
+[center][b][color=Cyan]U = {1, 2, 3, {4, 5, 6}, 7, 8, 9}[/color][/b][/center]
+[center][b][color=Cyan]A = {4, 5, 6}[/color][/b][/center]
+
+We define a [i]complement of A in U[/i], denoted as [color=Cyan][b]U \ A[/b][/color], as a set comprised of all the items from [b]U[/b] that are not in [b]A[/b]:
+
+[center][b][color=Cyan]U \ A = {1, 2, 3, 7, 8, 9}[/color][/b][/center]
+
+As a shorthand notation a complement set is sometimes denoted as a capital letter of the original set with a horizontal bar just above it, or as [b]A'[/b] or as [b]A[sup]c[/sup][/b]. If [b]U[/b] is a set of "all the items" - whatever that means - it is sometimes called a [i]universal set[/i] and the corresponding complement is then [i]absolute[/i]. If [b]U[/b] is some generic set, not a universal set of all items, name it [b]B[/b] to avoid confusion, then the complement is sometimes called [i]relative[/i].
+
+By Subtraction Counting Principle:
+
+[i]the number of items in the original set [b]A[/b] is equal to the difference between the number of items in the larger set [b]U[/b] and in the [b]A[/b]'s complement set in [b]U[/b] [b]A[sup]c[/sup][/b]:[/i]
+
+[center][b][color=Cyan]|A| = |U| - |A[sup]c[/sup]|[/color][/b][/center]
+
+The idea may seem trivial but it has some profound consequences. We will discuss some of them later but to prepare the ground a little bit just think about it - whatever items are in [b]A[sup]c[/sup][/b] they are not in [b]A[/b]. As such a subset [b]A[/b] of [b]U[/b] is uniquely defined by the [b]|A[sup]c[/sup]|[/b] items that are not in [b]A[/b].
+
+The reason [b]SCP[/b] comes in handy is because sometimes it is easier to calculate the size of the complement set than the size of the original set. For demonstration purposes let us do
+
+[b]Example E8.[/b] by solving [b]E6[/b] using [b]SCP[/b]. We already know that [b]|U| = 90[/b] and we know that it contains all the possible two-digit numbers without exception.
+
+Let [b]A[/b] be a set of all the numbers in the second question: two-digit numbers with distinct digits. We can easily construct [b]A[/b]'s complement in [b]U: A[sup]c[/sup] = { 11, 22, 33, ... , 99}, |A[sup]c[/sup]| = 9[/b]. By [b]SCP[/b] we have: [b]|A| = 90 - 9 = 81[/b].
+
+For the third question we turn the above [b]A[/b] into [b]U[/b]. We let a new [b]A[/b] be a set of all the two-digit numbers with distinct and non-zero digits. Again, we can easily construct [b]A[/b]'s complement in [b]U: A[sup]c[/sup] = { 10, 20, 30, ... , 90}, |A[sup]c[/sup]| = 9[/b]. By [b]SCP[/b] we have: [b]|A| = 81 - 9 = 72[/b].
+
+[b]Example E9.[/b] Three are [b]5[/b] red and [b]7[/b] green marbles. If we require that there should be no empty jars - there should be at least one marble in a jar - how many jars can we fill with different arrangements of these marbles?
+
+We observe that the marbles of the same color are indistinguishable. As such the only thing that matters in an arrangement is the [i]number[/i] of marbles of each color we put in a jar.
+
+However, if we decide to use [b]MCP[/b] as is: [b]5 x 7[/b] then its independence requirement will complain long and loud since the number of choices of the green marbles will be [b]7[/b] or [b]8[/b] - depending on whether we used any red marbles prior or not and conversely.
+
+To avoid this we temporarily ignore the "no empty jar" requirement. Then the number of choices of the red marbles is always [b]6[/b] (including zero red marbles used) and the number of choices of the green marbles is always [b]8[/b] (including zero green marbles used). By [b]MCP[/b] we can fill [b]6 x 8 = 48[/b] jars with different marble arrangements including one empty jar. But an empty jar is a complement of the "non-empty jars" set in a set of "all jars" and by [b]SCP[/b] we arrive at the answer: [b]48 - 1 = 47[/b] non-empty jars.
+
+
+[b][color=LimeGreen]3.4) Division Counting Principle (DCP)[/color][/b]
+
+Let [b]S[/b] be partitioned into [b]k[/b] subsets [b]S[sub]j[/sub][/b] such that the number of items in each subset is the same: [b]\forall  j = 1, 2, ... , k |S[sub]j[/sub]| = m[/b] where [b]k[/b] is finite.
+
+By Division Counting Principle:
+
+[i]the number of subsets [b]k[/b] is equal to the total number of items in [b]S[/b] divided by [b]m[/b]:[/i]
+
+[center][b][color=Cyan]k = |S|/m[/color][/b][/center]
+
+[b]Example E10. 21[/b] pigeons are distributed among the birdcages in such a way that there are exactly [b]3[/b] pigeons in each birdcage. How many birdcages are there? By [b]DCP[/b] the answer is [b]21/3 = 7[/b] birdcages.
+
+[b]Example E11.[/b] Let us solve [b]E9[/b] using [b]DCP[/b]. We partition the set of non-empty jars into two sets: [b]G[/b] - with no red marbles and [b]GR[/b] - with at least one red marble. Then [b]|G| = 7[/b] - trivially. The [b]GR[/b] set we partition further in such a way that it has [b]5[/b] subsets each of which has [b]7 + 1 = 8[/b] items in it. The plus one is for the "no green marbles" choice. Two sample subsets of this kind, for example, are:
+
+[center][b][color=Cyan]S[sub]1[/sub] = {1R, 2R, 3R, 4R, 5R, 1R1G, 1R2G, 1R3G}[/color][/b][/center]
+[center][b][color=Cyan]S[sub]2[/sub] = {1R4G, 1R5G, 1R6G, 1R7G, 2R1G, 2R2G, 2R3G, 2R4G}[/color][/b][/center]
+
+where to conserve space we have used the repetition number in front of the letter representing each color, [b]R[/b] is for read and [b]G[/b] is for green.
+
+By [b]DCP |GR| = 5 x 8 = 40[/b] and by [b]ACP[/b] the answer to the problem is [b]7 + 40 = 47[/b] non-empty jars.
+
+-----(08)-----
+
+So far we have used the various counting principles to solve various problems by coming up with a custom tailored chain of reasoning for each problem. Next we will look at a number of situations that allow a sweeping generalization to be made as long as we can fold the problem into a prepackaged scenario. We will mostly use [b]MCP[/b] to deduce the formulas for these scenarios. If it helps, you may think of them as follows - if the counting principles are scalpels then the upcoming scenarios are hammers.
+
+Let us also agree that from now on when we say [i]"input items"[/i] or [i]"input (multi)set"[/i] we mean [i]"[b]n[/b] items used to construct a certain arrangement according to a prescribed rule"[/i]. Let us name that resulting arrangement an [i]"output arrangement/(multi)set"[/i]. When the output arrangement is order-sensitive then we will name it a [i]permutation[/i] - as a noun. When the output arrangement is order-[b]in[/b]sensitive then we will name it a [i]combination[/i] - also as a noun.
+
+We may then think about the upcoming situations as rules or black boxes - some number of input items goes in and a certain arrangement comes out. Our objective then is:
+
+[i]find a closed-form formula which will make it possible to find the total number of possible arrangements [b]without[/b] generating their exhaustive list and calculating that list's size by hand[/i]
+
+If you stop and think about this for a while it should appear to be nothing short of magic.
+
+
+[b][color=Cyan]4) Permutations of Sets[/color][/b]
+
+We defined a permutation (as a noun) to be such an arrangement of some finite number of input items in which order matters. Using [b]S = "123", |S| = 3[/b] as an example a permutation (or 3-permutation) of [b]S[/b] is a list of all of its items ([b]n = 3[/b] at a time) in some order. There are six of those:
+
+[center][b][color=Cyan]123   132   213   231   312   321[/color][/b][/center]
+
+where the individual subsets [b]123, 132, 213[/b], etc. are "output arrangements".
+
+There are six 2-permutations:
+
+[center][b][color=Cyan]12   21   13   31   23   32[/color][/b][/center]
+
+There are three 1-permutations:
+
+[center][b][color=Cyan]1   2   3[/color][/b][/center]
+
+And there is one 0-permutation or an empty set.
+
+One "Permutation of a Set" then is an output arrangement made up of distinct input items in which:
+
+- the order of items matters;
+- no input item may appear more than once (no repetitions);
+
+In an exhaustive list of all the "Permutations of a Set":
+
+- all the input items must eventually be used;
+- the sizes of the arrangements are identical - some finite arbitrary given ahead of time positive integer [b]r[/b] between zero and [b]n = |S|[/b];
+
+[i]Scenario:[/i] given a set of three digits [b]1, 2, 3[/b] how many different [b]2[/b]-digit order-sensitive arrangements can be constructed if each digit can appear in any one output arrangement only once? For example, [b]23[/b] and [b]32[/b] are allowed and are taken to be different while [b]123[/b] or [b]11[/b] are not allowed.
+
+Formally: [i]what is the number of r-permutations of a set of [b]n[/b] items?[/i]
+
+If we were to construct one such permutation then with every current selection of some item the number of choices for the next selection diminishes by one. If we first chose [b]1[/b] - we can not use it again - to fill in the next position in a permutation we must choose between [b]2[/b] and [b]3[/b]. Once we pick [b]2[/b] - we can not use it again - to fill in the next position we may only take [b]3[/b] and so on.
+
+In general then we choose from [b]n[/b] items the first time, from [b](n - 1)[/b] items - the second time, ... and from [b](n - (r - 1))[/b] items - the [b]r[/b]-th time. Verifying that the independence requirement is met, by direct application of [b]MCP[/b] - making [b]r[/b] consecutive choices - we get:
+
+[center][b][color=Cyan]P(n, r) = n x (n - 1) x (n - 2) x ... x (n - r + 1)[/color][/b][/center]
+
+To express [b]P(n, r)[/b] in closed form we observe that it has the first [b]r[/b] diminishing by one terms starting from [b]n[/b]. So to turn it into a full factorial of [b]n[/b] we have to multiply it by the remaining [b](n - r)[/b] diminishing by one terms: [b](n - r) x (n - r - 1) x ... x 2 x 1 = (n - r )![/b]. To keep [b]P(n, r)[/b] the same we also divide it by the same factor:
+
+[center][b][color=Cyan]P(n, r) = n x (n - 1) x ... x (n - r + 1) x (n - r) x (n - r - 1) x ... x 2 x 1/(n - r )! = n!/(n - r )![/color][/b][/center]
+[center][b][color=Cyan]P(n, r) = n!/(n - r )![/color]     [color=Orange](4)[/color][/b][/center]
+
+[b]P(n, r)[/b] is sometimes pronounced [i]"n permute r"[/i] and there are several other notations you may see: [sup]n[/sup]P[sub]r[/sub], [sub]n[/sub]P[sub]r[/sub], P[sub]r[/sub][sup]n[/sup], etc. For the record we note the edge conditions: 
+
+[center][b][color=Cyan]P(n, 0) = 1[/color][/b][/center]
+[center][b][color=Cyan]P(n, 1) = n[/color][/b][/center]
+[center][b][color=Cyan]P(n, n) = n![/color][/b][/center]
+
+-----(09)-----
+
+[b]Example E12.[/b] To develop a better feel for this scenario let us start with the [b]r = n[/b] case - how many different [b]|S|[/b]-sized "words", including the nonsensical ones, can be made from a set of letters [b]S = {M, A, T, H}[/b]? [b]P(4, 4) = 4! = 24[/b] different 4-letter "words".
+
+To create an exhaustive list of all such "words" interpret [b]MCP[/b] literally. Make the first choice - letter [b]M[/b], [b]3[/b] more remain. Write down as many [b]M[/b]s as there are remaining choices:
+
+[center][b][color=Cyan]M   M   M[/color][/b][/center]
+
+For each [b]M[/b] make the choices for the second letter:
+
+[center][b][color=Cyan]MA   MT   MH[/color][/b][/center]
+
+Two choices remain for the third letter [i]for each ordered pair[/i] compiled so far - pick one such pair and add these choices to the list:
+
+[center][b][color=LimeGreen]MAT   MAH[/color][color=Cyan]   MT   MH[/color][/b][/center]
+
+pick the next pair:
+
+[center][b][color=Cyan]MAT   MAH[/color]   [color=LimeGreen]MTA   MTH[/color]   [color=Cyan]MH[/color][/b][/center]
+
+and the last one:
+
+[center][b][color=Cyan]MAT   MAH   MTA   MTH   [/color][color=LimeGreen]MHA   MHT[/color][/b][/center]
+
+Now only one choice remains for the fourth letter:
+
+[center][b][color=Cyan]MATH   MAHT   MTAH   MTHA   MHAT   MHTA[/color][/b][/center]
+
+This concludes the sequence of choices driven by the first letter. Since three such choices remain - [b]A, T, H[/b] - repeat the above process three more times:
+
+[center][b][color=LimeGreen]MATH   MAHT   MTAH   MTHA   MHAT   MHTA[/color][/b][/center]
+[center][b][color=Cyan]AMTH   AMHT   ATMH   ATHM   AHMT   AHTM[/color][/b][/center]
+[center][b][color=LimeGreen]TAMH   TAHM   TMAH   TMHA   THAM   THMA[/color][/b][/center]
+[center][b][color=Cyan]HAMT   HATM   HMAT   HMTA   HTAM   HTMA[/color][/b][/center]
+
+We get [b]4[/b] rows [b]6[/b] columns each or a total of [b]24 = 4![/b] 4-letter "words".
+
+[b]Example E13.[/b] If we take a standard deck of cards to be our "alphabet" how many different [b]52[/b]-card "words" can be made from it? P(52, 52) = 52!.
+
+[b]Example E14.[/b] How many different [b]16[/b]-ball "words" can be made if all [b]16[/b] billiard balls are used? P(16, 16) = 16!.
+
+These are huge numbers - do not try to write all these "words" down. Instead. Assuming one such "word" is arranged every second how long will it take to generate the entire dictionary?
+
+[b]Example E15.[/b] How many different [b]2[/b]-permutations of the set [b]"MATH"[/b] are there? P(4, 2) = 4!/(4 - 2)! = 12:
+
+[center][b][color=LimeGreen]MA   MT   MH[/color][/b][/center]
+[center][b][color=Cyan]AM   AT   AH[/color][/b][/center]
+[center][b][color=LimeGreen]TM   TA   TH[/color][/b][/center]
+[center][b][color=Cyan]HM   HA   HT[/color][/b][/center]
+
+There should be [b]4[/b] rows [b]3[/b] columns each for a total of [b]12 2[/b]-permutations.
+
+[i][color=LimeGreen]4.1) Circular Permutations[/color][/i]
+
+If we bend our (normally) [i]linear[/i] arrangement of items into a [i]circular[/i] arrangement - how many of these are possible if the circle must remain fixed in its plane?
+
+We fix an orthogonal [b]XYZ[/b] coordinate system in space. We pick the [b]XOY[/b] plane. In that plane we fix a circle centered at the origin [b]O[/b]. We glue our items onto the circumference of the circle. If we rotate that circle about the [b]Z[/b] axis then even though the [b](x, y)[/b] coordinates of the items will differ from one rotation to the other their arrangement will still be considered "the same" since the items' immediate "left" and "right" neighbors remain the same, Fig. [b]A[/b]. In other words two circular permutations are different if one can not be obtained from the other via the rotation process described above:
+
+[center][img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_kp01.png[/img][/center]
+
+To deduce the formula for this case we observe that "many" linear arrangements correspond to "one" circular arrangement. If we pick any one linear arrangement and keep shifting its items one at a time in some constant direction until we "come full circle" we will obtain all the [i]linear[/i] arrangements corresponding to one [i]circular[/i] arrangement meaning all the linear arrangements that will not compare "different" when bent into a circle.
+
+Using [b]"MATH"[/b] linear arrangement, for example, let us always shift its items Westward one at a time. When the leftmost item falls off the edge of the Earth we grab it and place it into the rightmost bucket:
+
+[center][color=Yellow][b]M[/b][i]ATH    ATH[/i][b]M[/b][i]    TH[/i][b]M[/b][i]A    H[/i][b]M[/b][i]AT[/i][/color][/center]
+
+We see that there will always be [b]4 = n[/b] such arrangements. We now go back to our original set of [b]24[/b] linear permutations, partition it in such a way that each subset contains exactly [b]4[/b] linear permutations that will not compare "different" if bent into a circle and by [b]DCP[/b] we get that:
+
+[center][color=Cyan][b]P(n, n)/n = (n - 1)![/b][/color][/center]
+
+is the number of circular permutations of [b]n[/b] distinct items. This informal proof also provides a way to generate the circular permutations: with our permutations generation approach these will be the [b]6[/b] items of the top row, Fig. [b]B[/b]. If you look closely at Fig. [b]B[/b] which other combinatorial reasoning can you suggest to prove the above formula? Hint: [hide]MCP[/hide].
+
+[i][color=LimeGreen]4.2) Interbucket Distributions[/color][/i]
+
+[b]P(n, r)[/b] is applicable to the distribution of [b]r[/b] distinct items among [b]n[/b] distinct buckets with the following restrictions:
+
+4.2.1) each item must be in some bucket;
+4.2.2) at most one item per bucket is allowed;
+4.2.3) the order of items across the buckets matters;
+
+For a proof we observe that we have [b]n[/b] buckets to choose from for the placement of the first item, [b](n - 1)[/b] buckets to choose from for the placement of the second item ... and [b](n - r + 1)[/b] buckets to choose from for the placement of the [b]r[/b]-th item. By [b]MCP[/b] then the number of such distributions is [b]P(n, r)[/b].
+
+As an exercise write down all [b]6[/b] distributions of [b]A[/b] and [b]B[/b] among [b]3[/b] buckets [b]B[sub]1[/sub], B[sub]2[/sub], B[sub]3[/sub][/b].
+
+
+[b][color=Cyan]5) Combinations of Sets[/color][/b]
+
+We defined a combination (as a noun) to be such an arrangement of some finite number of input items in which order does not matter. We can say then that a combination is a permutation whose "order matters" requirement was stolen. Using [b]S = "123", |S| = 3[/b] as an example there is only one 3-combination:
+
+[center][b][color=Cyan]123[/color][/b][/center]
+
+There are three 2-combinations:
+
+[center][b][color=Cyan]12   13   23[/color][/b][/center]
+
+There are three 1-combinations:
+
+[center][b][color=Cyan]1   2   3[/color][/b][/center]
+
+And there is one 0-combination or an empty set.
+
+The above r-combinations are generally taken to be the subsets of [b]S[/b] so instead of saying "r-combination" we may also say "r-subset" or simply "subset".
+
+One "Combination of a Set" then is an output arrangement made up of distinct input items in which:
+
+- the order of items does not matter;
+- no input item may appear more than once (no repetitions);
+
+In an exhaustive list of all the "Combinations of a Set":
+
+- all the input items must eventually be used;
+- the sizes of the arrangements are identical - some finite arbitrary given ahead of time positive integer [b]r[/b] between zero and [b]n = |S|[/b].
+
+[i]Scenario:[/i] given a set of three digits [b]1, 2, 3[/b] how many different [b]2[/b]-digit order-[b]in[/b]sensitive arrangements can be constructed if each digit can appear in any one output arrangement only once? For example, [b]12[/b] and [b]21[/b] are allowed but are taken to be the same while [b]11[/b] or [b]123[/b] are not allowed.
+
+Formally: [i]what is the number of r-subsets of a set of [b]n[/b] items?[/i]
+
+To deduce the formula for this case we temporarily cancel the "order does not matter" requirement. Assume that order does matter. Then we are dealing with permutations and by the previous scenario, ([b]4[/b]), the number of possible r-permutations of such items is [b]P(n, r)[/b].
+
+We next observe that the construction of each such r-permutation can be broken into two consecutive events: choosing [b]r[/b] items from [b]n[/b] first and then arranging them in some order.
+
+The number of outcomes of the first event is what we are after - let us name it [b]C(n, r)[/b]. The number of outcomes of the second event we already know - by [b](4)[/b] it is [b]P(r, r) = r![/b]. We verify the independence requirement and by [b]MCP[/b] we get:
+
+[center][b][color=Cyan]P(n, r) = C(n, r) x r![/color][/b][/center]
+
+or 
+
+[center][b][color=Cyan]C(n, r) = P(n, r) / r! = n!/(r! x (n - r)!)[/color]     [color=Orange](5)[/color][/b][/center]
+
+[b]C(n, r)[/b] is sometimes pronounced [i]"n choose r"[/i] and there are several other notations you may see: [sup]n[/sup]C[sub]r[/sub], [sub]n[/sub]C[sub]r[/sub], C[sub]r[/sub][sup]n[/sup], ([sub]r[/sub][sup]n[/sup]) etc. For the record we note the edge conditions:
+
+[center][b][color=Cyan]C(n, 0) = 1[/color][/b][/center]
+[center][b][color=Cyan]C(n, 1) = n[/color][/b][/center]
+[center][b][color=Cyan]C(n, n) = 1[/color][/b][/center]
+
+-----(10)-----
+
+You should have no problems figuring out how to generate an exhaustive list of all the possible combinations by hand. One way to do that is to fall back on the previously solved problem - generate all the permutations - and then reduce its solution set by throwing out all the duplicates. For our sample [b]123[/b] problem we get: [b]12, 13, 23[/b] or [b]C(3, 2) = 3!/(2! x (3 - 2)!) = 3[/b] 2-combinations.
+
+[b]Example E16.[/b] [b]17[/b] points are sprinkled on a plane in such a way that no three are collinear. How many straight lines can be drawn through these points? Since a straight line is uniquely determined by a pair of points regardless of their order in the pair then the answer is the number of 2-subsets of [b]17[/b] items: [b]C(17, 2) = 17!/(2! x 15!) = 136[/b] straight lines. Triangles? [b]C(17, 3) = 17!/(3! x 14!) = 680[/b].
+
+[b]C(n, r)[/b]s are also known as [i]Binomial Coefficients[/i] - they are used in the expansion of [b](x + y)[sup]n[/sup][/b]. Their values can be found with [i]Pascal's Triangle[/i]. They show up in solutions of various problems - "Three Eggs and a 100-story Building" and "Equidistant Spheres" to name just a few on this forum. They have a number of interesting properties which you can investigate on your own. I will mention just two.
+
+[i][color=LimeGreen]5.1) Symmetry Property[/color][/i]
+
+Recall our complement sets discussion in the [b]SCP[/b] section where we noted that a subset of [b]S[/b] that contains all but [b]r[/b] items is uniquely determined by the very [b]r[/b] items that are not in it. In fact nothing prevents us from "switching the things around" - we can claim [b]A[sup]c[/sup][/b] to be the "original" set and [b]A[/b] to be its "complement", formally [b](A[sup]c[/sup])[sup]c[/sup] = A[/b]. It follows then that the number of ways in which [b](n - r)[/b] items can be chosen from a set of [b]n[/b] is exactly the same as the number of ways in which [b]r[/b] items can be chosen from the same set:
+
+[center][b][color=Cyan]C(n, n - r) = n!/((n - r)! x (n - n + r)!) = C(n, r)[/color][/b][/center]
+
+The above is sometimes called the [i]symmetry property of C(n, r)[/i] and we can rewrite it as follows: if [b]n = a + b[/b] then [b]C(n, a) = C(n, b)[/b].
+
+[i][color=LimeGreen]5.2) Number of Subsets[/color][/i]
+
+Let us now ask ourselves - what is the total number of subsets of a set of [b]n[/b] items? Here by "subsets" we mean "all": 0-subsets, 1-subsets, 2-subsets and so on. On the one hand, we can answer that question via [b]MCP[/b]. Our first input item can either be in the output subset or not - two choices only. Regardless of the previous choice the second input item can either be in the output subset or not - again, two choices only. And so is the third input item, the fourth and so on. By [b]MCP[/b] we get:
+
+[center][b][color=Cyan]2 x 2 x 2 x ... x 2 (n times) = 2[sup]n[/sup][/color][/b][/center]
+
+subsets. On the other hand, we can always partition the output set of all the subsets of the input set in such a way that each item of the output set represents exactly one r-subset. For example:
+
+[center][b][color=Cyan]S[sub]i[/sub] = {A, B, C}[/color][/b][/center]
+[center][b][color=Cyan]S[sub]o[/sub] = {{}, {A}, {B}, {C}, {AB}, {AC}, {BC}, {ABC}}[/color][/b][/center]
+
+Since the number of such r-subsets is given by [b]C(n, r)[/b] from [b]ACP[/b] it follows that the sum of [b]C(n, r)[/b]s for all the [b]r[/b]s is also the answer to the above question:
+
+[center][b][color=Cyan]C(n, 0) + C(n, 1) + C(n, 2) + ... + C(n, n) = 2[sup]n[/sup] = (1 + 1)[sup]n[/sup][/color][/b][/center]
+
+If we require the number of [i]non-empty[/i] subsets then it is [b]2[sup]n[/sup] - 1[/b]. This task of counting of the number of subsets in a set also opens the door for [i]recurrence relations[/i] and [i]generating functions[/i] ideas not discussed here.
+
+[i][color=LimeGreen]5.3) Interbucket Distributions[/color][/i]
+
+[b]C(n, r)[/b] is applicable to the distribution of [b]r[/b] [i]indistinguishable[/i] items among [b]n[/b] distinct buckets with the following restrictions:
+
+5.3.1) each item must be in some bucket;
+5.3.2) at most one item per bucket is allowed;
+5.3.3) the concept of order of items across the buckets does not apply;
+
+For a proof we observe that since all the input items are indistinguishable for a unique description of any given distribution all we need is bucket numbers that have exactly one item in them because each bucket's number from \bbn  is unique. We then throw out the original input items and make the buckets' numbers our new input items. The problem then is rephrased as [i]"in how many ways can we choose [b]r[/b] items out of [b]n[/b]"[/i]? By [b](5)[/b] that number is [b]C(n, r)[/b].
+
+As an exercise write down all [b]3[/b] distributions of two [b]A[/b]s among [b]3[/b] buckets [b]B[sub]1[/sub], B[sub]2[/sub], B[sub]3[/sub][/b].
+
+Before we conclude this section we note that when it comes to indistinguishable input items the multifaceted [b]C(n, r)[/b] has yet another interpretation, see [b]6.2[/b].
+
+
+[b][color=Cyan]6) Permutations of Multisets[/color][/b]
+
+Recall that in a multiset the order of items does not matter (just like in sets) but the items themselves are allowed to be repeated some number of times: [b]{1*A, 2*B, 3*C}[/b]. Even though the individual input items may appear to be distinct - [b]A, B, C[/b] - we can have any number of copies of any one of them.
+
+As such we will say that we have a finite number of distinct [i]types[/i] of items. The number of copies of each distinct type we will call its repetition number. The repetition numbers may be finite or infinite.
+
+One "Permutation of a Multiset" then is an output arrangement made up of distinct input types in which:
+
+- the order of items matters;
+- any type may have multiple copies (repetitions are allowed);
+
+In an exhaustive list of all the "Permutations of a Set":
+
+- all the copies of all the types must eventually be used;
+- the sizes of the arrangements are identical - some finite arbitrary given ahead of time positive integer [b]r[/b];
+
+
+[b][i][color=LimeGreen]6.1) Infinite Supply[/color][/i][/b]
+
+To ensure that we never run out of input items to fill in the current position in the output arrangement we will require here that each such item is to be available in infinite supply - we can have as many copies of any distinct input type as we need.
+
+[i]Scenario:[/i] given a set of three digits [b]1, 2, 3[/b] how many different [b]5[/b]-digit order-sensitive arrangements can be constructed if any of the digits may appear in any one output arrangement more than once? For example, [b]11111[/b] and [b]21213[/b] are allowed while [b]1[/b], [b]12[/b] or [b]123[/b] are not allowed. Here we have the following multiset: [b]{\infty  *1, \infty  *2, \infty  *3}[/b].
+
+Formally: [i]what is the number of r-permutations of a multiset of [b]n[/b] items given an infinite supply of each item?[/i]
+
+-----(11)-----
+
+If we were to construct one such permutation then for every current output position we fully exhaust the collection of distinct input types in its entirety - [b]1, 2, 3[/b] for the first choice, [b]1, 2, 3[/b] for the next, [b]1, 2, 3[/b] for the next, and the next, and the next ... The reason we can do this is because of the infinite supply of the input items requirement. In theory then this process can go on forever but we cut it off after some arbitrary finite number of consecutive choices [b]r[/b] - that is how we fulfill the requirement that the size of the output arrangements must be given ahead of time. Verifying that the independence requirement is met, by direct application of [b]MCP[/b] we get:
+
+[center][b][color=Cyan]p(n, r) = n x n x n x ... x n (r times) = n[sup]r[/sup][/color]    [color=Orange](6.1)[/color][/b][/center]
+
+[b]Example E17.[/b] Using the digits [b]1, 2, 3[/b] how many different 1-digit passwords can we construct? List them all: [b]1, 2, 3[/b] for a total of [b]3[sup]1[/sup][/b] passwords.
+
+2-digit passwords? To list them all we again interpret [b]MCP[/b] literally. We fix the choice for the first digit and then "... for each item [b]a[/b] there are [b]n[/b] choices for item [b]b[/b] ...":
+
+[center][b][color=Cyan]11 12 13[/color][/b][/center]
+
+and then repeat this for every choice for the first digit:
+
+[center][b][color=Cyan]11 12 13[/color][/b][/center]
+[center][b][color=Cyan]21 22 23[/color][/b][/center]
+[center][b][color=Cyan]31 32 33[/color][/b][/center]
+
+for a total of [b]3[sup]2[/sup][/b] passwords. 3-digit passwords? 4-digit?
+
+[b]Example E18.[/b] My bike chain lock has four rings with the digits zero through six embossed on each ring and only one permutation allows the lock to be opened. How long will it take to try all the possible passwords for this lock?
+
+Here [b]n = 7, r = 4[/b] so there are [b]7[sup]4[/sup] = 2,401[/b] passwords possible with this lock. If it takes someone [b]5[/b] seconds to set one permutation and then test it then it will take [b]2,401 / 12 = about 200[/b] minutes or about [b]3.33[/b] hours to go through all the possible permutations.
+
+[b]Example E19.[/b] A computer processor can bite, chew and digest [b]64[/b] bits of information at one time. Each bit can take on the values of zero or one only. How many different [b]64[/b]-bit words are in this computer's vocabulary? Here [b]n = 2, r = 64[/b] so the answer is [b]2[sup]64[/sup][/b] different words.
+
+[b]Example E20.[/b] A ten-character computer password is to be made up of ten digits, upper and lower case characters of the English alphabet plus one of these special characters: [b]S = {!, @, #, $, %}, |S| = 5[/b]. How many of these passwords will have a repeated symbol?
+
+To solve this problem we combine several constructs that we already know about: permutations with and without repetitions, universal set, complement of a set and [b]SCP[/b].
+
+Let [b]U[/b] be a set of [i]all[/i] the passwords - the ones that do, set [b]A[/b], and do not, set [b]B[/b], contain a repeated symbol. We note that [b]A[/b] and [b]B[/b] are the complements of each other in [b]U[/b]. We know the size of [b]U: |U| = n[sup]r[/sup] = 67[sup]10[/sup], 67 = 10 + 26 + 26 + 5[/b]. We also know the size of [b]B[/b] - 10-permutations of [b]67[/b] distinct items - [b]|B| = P(67, 10)[/b]. By [b]SCP[/b] then:
+
+[center][b][color=Cyan]|A| = |U| - |B| = 67[sup]10[/sup] - 67!/57![/color][/b][/center]
+
+passwords will have a repeated symbol - a very large number.
+
+[i][color=LimeGreen]6.1.1) Interbucket Distributions[/color][/i]
+
+Though in this section we are dealing with an infinite supply of input items the [b]n[sup]r[/sup][/b] formula is also applicable to the distribution of a finite number of distinct items [b]r[/b] among a finite number of distinct buckets [b]n[/b] with the following restrictions: 
+
+6.1.1.1) each item must be in some bucket;
+6.1.1.2) multiple items per bucket are allowed;
+6.1.1.3) some buckets may be empty;
+6.1.1.4) the order of items within a single bucket is irrelevant;
+6.1.1.5) the order of items across the buckets is relevant;
+
+For example, we can distribute the input items [b]X[/b] and [b]Y[/b] across two buckets [b]B[sub]1[/sub][/b] and [b]B[sub]2[/sub][/b] subject to the above restrictions in the following [b]2[sup]2[/sup] = 4[/b] ways:
+
+[center][b][color=Orange]B[sub]1[/sub]     B[sub]2[/sub][/color][/b][/center]
+[center][b][color=Cyan]XY     -[/color][/b][/center]
+[center][b][color=Cyan]-     XY[/color][/b][/center]
+[center][b][color=Cyan]X    Y[/color][/b][/center]
+[center][b][color=Cyan]Y    X[/color][/b][/center]
+
+If we add the third input item [b]Z[/b] then there are [b]2[sup]3[/sup] = 8[/b] distributions. List them all.
+
+For a proof we first write down the names of all the items. Since each item [i]must[/i] belong to some bucket then underneath each item we can always write down the bucket number it is in. For example:
+
+[center][b][color=Orange]X Y Z[/color][/b][/center]
+[center][b][color=Cyan]1 1 1[/color][/b][/center]
+
+means that all three items are in [b]B[sub]1[/sub][/b]. And [b]112[/b] means that [b]X[/b] and [b]Y[/b] are in [b]B[sub]1[/sub][/b] while [b]Z[/b] is in [b]B[sub]2[/sub][/b], etc. Now we forget about our original input items [b]X, Y, Z[/b] and treat the string of bucket numbers (the bottom row) as [b]r = 3[/b]-permutations of a set of [b]n = 2[/b] (new) input items - bucket numbers. But by the above logic the number of such permutations is [b]n[sup]r[/sup][/b].
+
+One practical example of this type of distribution can be found in the game of billiard. By the end of one game all [b]15[/b] numbered billiard balls must be somehow distributed among [b]6[/b] pockets which we can always make distinct via the [b](2.4)[/b] operation: P[sub]1[/sub], P[sub]2[/sub], ... , P[sub]6[/sub]. Assuming that each pocket is large enough to hold all [b]15[/b] billiard balls we can have a total of [b]6[sup]15[/sup][/b] distributions.
+
+-----(12)-----
+
+
+[b][i][color=LimeGreen]6.2) Finite Supply[/color][/i][/b]
+
+Here the input items of distinct types have a finite repetition number. As such the size of any one output arrangement is equal to the size of the input set - that is how we fulfill the requirement that the size of the output arrangements must be given ahead of time.
+
+[i]Scenario:[/i] given three letters [b]M, O, M[/b] how many different [b]3[/b]-letter order-sensitive arrangements can be constructed? For example, are [b]MOM[/b] and [b]MOM[/b] different? Here we have the following multiset: [b]MS = {2*M, 1*O}, |MS| = 3[/b].
+
+Formally: [i]what is the number of permutations of a multiset of [b]n[/b] items given a finite supply of each item?[/i]
+
+Let us assume that we have [b]k[/b] distinct types of input items and that each item of a given type is repeated some finite number of times. Let there be [b]r[sub]1[/sub][/b] copies of items of the first type, [b]r[sub]2[/sub][/b] copies of items of the second type, [b]r[sub]i[/sub][/b] copies of items of the [b]i[/b]-th type and [b]r[sub]k[/sub][/b] copies of items of the [b]k[/b]-th type. Since we have a total of [b]n[/b] of such items:
+
+[center][b][color=Cyan]r[sub]1[/sub] + r[sub]2[/sub] + ... + r[sub]k[/sub] = n[/color][/b][/center]
+
+Note that even if some input item is "repeated" only once - it is perfectly fine - we still count it as having [b]r[sub]j[/sub] = 1[/b] "copies". In the sample problem above [b]k = 2, r[sub]1[/sub] = r(M) = 2, r[sub]2[/sub] = r(O) = 1, n = 2 + 1 = 3[/b].
+
+To deduce the formula for this case we first make each and every item in a collection distinct via the [b](2.4)[/b] operation: [b]M[sub]1[/sub]OM[sub]2[/sub][/b].
+
+We now have [b]n[/b] [i]distinct[/i] input items - a set - and we already know how many different arrangements of such items are possible when the repetitions in the output are not allowed, all the input items are distinct and used, order matters. By [b](4)[/b] (permutations of sets) that number is [b]P(n, n) = n![/b].
+
+Next, planning to remove the items' uniqueness, we observe that in these [b]n![/b] arrangements the soon-to-be-indistinguishable items introduce a certain amount of repetitive arrangements:
+
+[center][b][color=LimeGreen]M[sub]1[/sub]OM[sub]2[/sub]   M[sub]1[/sub]M[sub]2[/sub]O   OM[sub]1[/sub]M[sub]2[/sub][/color][/b][/center]
+[center][b][color=Cyan]M[sub]2[/sub]OM[sub]1[/sub]   M[sub]2[/sub]M[sub]1[/sub]O   OM[sub]2[/sub]M[sub]1[/sub][/color][/b][/center]
+
+How many such repetitive arrangements are there? Again, for [b]r[sub]1[/sub] = 2[/b] distinct items, no repetitions, all the items are used, order matters - by the same [b](4)[/b] that number is [b]r[sub]1[/sub]! = 2! = 2[/b].
+
+It follows then that [i]each input item[/i] that has [b]r[sub]j[/sub][/b] input copies will produce [b]r[sub]j[/sub]![/b] output arrangements that will not compare "different" when the item's uniqueness is removed.
+
+Here, for example, is a set of all the permutations of [b]"NOON"[/b] where each item is made distinct:
+
+[center][b][color=LimeGreen]N[sub]1[/sub]O[sub]1[/sub]O[sub]2[/sub]N[sub]2[/sub][/color]   N[sub]1[/sub]O[sub]1[/sub]N[sub]2[/sub]O[sub]2[/sub]   [color=LimeGreen]N[sub]1[/sub]O[sub]2[/sub]O[sub]1[/sub]N[sub]2[/sub][/color]   N[sub]1[/sub]O[sub]2[/sub]N[sub]2[/sub]O[sub]1[/sub]   N[sub]1[/sub]N[sub]2[/sub]O[sub]1[/sub]O[sub]2[/sub]   N[sub]1[/sub]N[sub]2[/sub]O[sub]2[/sub]O[sub]1[/sub][/b][/center]
+[center][b]O[sub]1[/sub]N[sub]1[/sub]O[sub]2[/sub]N[sub]2[/sub]   O[sub]1[/sub]N[sub]1[/sub]N[sub]2[/sub]O[sub]2[/sub]   O[sub]1[/sub]O[sub]2[/sub]N[sub]1[/sub]N[sub]2[/sub]   O[sub]1[/sub]O[sub]2[/sub]N[sub]2[/sub]N[sub]1[/sub]   O[sub]1[/sub]N[sub]2[/sub]N[sub]1[/sub]O[sub]2[/sub]   O[sub]1[/sub]N[sub]2[/sub]O[sub]2[/sub]N[sub]1[/sub][/b][/center]
+[center][b]O[sub]2[/sub]N[sub]1[/sub]O[sub]1[/sub]N[sub]2[/sub]   O[sub]2[/sub]N[sub]1[/sub]N[sub]2[/sub]O[sub]1[/sub]   O[sub]2[/sub]O[sub]1[/sub]N[sub]1[/sub]N[sub]2[/sub]   O[sub]2[/sub]O[sub]1[/sub]N[sub]2[/sub]N[sub]1[/sub]   O[sub]2[/sub]N[sub]2[/sub]N[sub]1[/sub]O[sub]1[/sub]   O[sub]2[/sub]N[sub]2[/sub]O[sub]1[/sub]N[sub]1[/sub][/b][/center]
+[center][b]N[sub]2[/sub]N[sub]1[/sub]O[sub]1[/sub]O[sub]2[/sub]   N[sub]2[/sub]N[sub]1[/sub]O[sub]2[/sub]O[sub]1[/sub]   N[sub]2[/sub]O[sub]1[/sub]N[sub]1[/sub]O[sub]2[/sub]   [color=LimeGreen]N[sub]2[/sub]O[sub]1[/sub]O[sub]2[/sub]N[sub]1[/sub][/color]   N[sub]2[/sub]O[sub]2[/sub]N[sub]1[/sub]O[sub]1[/sub]   [color=LimeGreen]N[sub]2[/sub]O[sub]2[/sub]O[sub]1[/sub]N[sub]1[/sub][/color][/b][/center]
+
+The highlighted permutations will form indistinguishable pairs when the uniqueness is removed for one letter but not the other. Verify this for other permutations. Since two [i]types[/i] of indistinguishable items form a "word", [b]N[/b] and [b]O[/b], and each of those produces [b]2![/b] duplicate "words" the total number of such duplicates by [b]MCP[/b] is [b]2! x 2! = 4[/b].
+
+It follows then that to count these repetitive permutations only once - after the items' uniqueness is removed - we then have to reduce the total count [b]n![/b] by [b]r[sub]j[/sub]![/b] - for all [b]j[/b]s:
+
+[center][b][color=Cyan]P(n, r[sub]1[/sub], ... , r[sub]k[/sub]) = n!/(r[sub]1[/sub]! x r[sub]2[/sub]! x ... x r[sub]k[/sub]!)[/color]     [color=Orange](6.2)[/color][/b][/center]
+[center][b][color=Cyan]r[sub]1[/sub] + r[sub]2[/sub] + ... + r[sub]k[/sub] = n[/color][/b][/center]
+
+The reason we can do this is because of [b]DCP[/b]: we partition the above set of [b]24[/b] subsets in such a way that each subset has [b]4[/b] soon-to-be-duplicate permutations giving us a total of [b]6[/b] such subsets.
+
+-----(13)-----
+
+In [b]"MOM"[/b] case the total number of different arrangements then is:
+
+[center][b][color=Cyan]n!/(r[sub]1[/sub]! x r[sub]2[/sub]!) = 3!/(2! x 1!) = 3[/color][/b][/center]
+[center][b][color=LimeGreen]MOM   MMO   OMM[/color][/b][/center]
+
+In [b]"NOON"[/b] case [b]k = 2, r[sub]1[/sub] = r(N) = 2, r[sub]2[/sub] = r(O) = 2, n = 2 + 2 = 4[/b] so the total number of different arrangements is:
+
+[center][b][color=Cyan]n!/(r[sub]1[/sub]! x r[sub]2[/sub]!) = 4!/(2! x 2!) = 6[/color][/b][/center]
+[center][b][color=LimeGreen]NOON   NONO   NNOO   ONON   ONNO   OONN[/color][/b][/center]
+
+What about [b]"ROOT"[/b]? [b]k = 3, r[sub]1[/sub] = r(R) = 1, r[sub]2[/sub] = r(O) = 2, r[sub]3[/sub] = r(T) = 1, n = 1 + 2 + 1 = 4[/b] so the awnser is [b]4!/(1! x 2! x 1!) = 12[/b] different "words". Make all the input items distinct, generate all their permutations, eliminate the duplicates:
+
+[center][b][color=LimeGreen]ROOT   ROTO   RTOO[/color][/b][/center]
+[center][b][color=Cyan]OROT   ORTO   OORT[/color][/b][/center]
+[center][b][color=LimeGreen]OOTR   OTRO   OTOR[/color][/b][/center]
+[center][b][color=Cyan]TROO   TORO   TOOR[/color][/b][/center]
+
+PEPPER? CALCULUS? SASSAFRAS? [b]9!/(4! x 3! x 1! x 1!) = 2,520[/b]. MISSISSIPPI? [b]11!/(4! x 4! x 2! x 1!) = 34,560[/b]. BOOKKEEPER? HIPPOPOTOMONSTROSESQUIPEDALIOPHOBIA (the fear of long words)?
+
+Incidentally it so happens that the [i]name[/i] for the formula for this case is [i]Multinomial Coefficient[/i]. The multinomial coefficients are used in the expansion of [b](x[sub]1[/sub] + x[sub]2[/sub] + ... + x[sub]k[/sub])[sup]n[/sup][/b].
+
+We can obtain [b](6.2)[/b] formally - via [b]MCP[/b] and [b]C(n, r)[/b] - as follows. We know that the size of any one output arrangement is fixed at [b]n[/b]. We then have [b]n[/b] positions to fill with the given items. We now treat each output position as an input item. Since each position corresponds to a unique integer from \bbn  we are assured that all the input items are distinct as required by [b](5)[/b]. We now plan to place exactly one input item into one position.
+
+We orchestrate event [b]1[/b] as follows - in how many ways can we choose [b]r[sub]1[/sub][/b] positions from [b]n[/b] available? By [b](5)[/b] - in [b]C(n, r[sub]1[/sub])[/b] ways. Once [b]r[sub]1[/sub][/b] positions are taken [b](n - r[sub]1[/sub])[/b] remain available for the taking.
+
+Event [b]2[/b] - in how many ways can we choose [b]r[sub]2[/sub][/b] positions from [b](n - r[sub]1[/sub])[/b] available? By [b](5)[/b] - in [b]C(n - r[sub]1[/sub], r[sub]2[/sub])[/b] ways. Once [b]r[sub]2[/sub][/b] more positions are taken [b](n - r[sub]1[/sub] - r[sub]2[/sub])[/b] remain available.
+
+Event [b]3[/b] - in how many ways can we choose [b]r[sub]3[/sub][/b] positions from [b](n - r[sub]1[/sub] - r[sub]2[/sub])[/b] available? By [b](5)[/b] - in [b]C(n - r[sub]1[/sub] - r[sub]2[/sub], r[sub]3[/sub])[/b] ways. Once [b]r[sub]3[/sub][/b] more positions are taken [b](n - r[sub]1[/sub] - r[sub]2[/sub] - r[sub]3[/sub])[/b] remain.
+
+And so on. By [b]MCP[/b] we get:
+
+[center][b][color=Cyan]C(n, r[sub]1[/sub]) x C(n - r[sub]1[/sub], r[sub]2[/sub]) x ... x C(n - r[sub]1[/sub] - ... - r[sub]k[/sub], r[sub]k[/sub])[/color][/b][/center]
+
+Once you spell out each [b]C(n..., r...)[/b] there will be a lot of cancellations of like terms after which the above answer will emerge since the last factorial in the denominator - [b](n - r[sub]1[/sub] - r[sub]2[/sub] - ... - r[sub]k[/sub])![/b] - will be equal to [b]1[/b] because the sum of all the [b]r[sub]j[/sub][/b]s is equal to [b]n[/b]. At the gut level you may remember this formula as [i]"factorial of the sum over the product of factorials"[/i].
+
+[b]Example E21.[/b] When I go to Manhattan by train to visit the Central Park Zoo I walk [b]m = 3[/b] blocks from point [b]A[/b] (34-th St. and 8-th Ave.) Eastbound and [b]n = 25[/b] blocks to point [b]B[/b] (59-th St. and 5-th Ave.) Northbound. If I always walk either North or East how many different [b]A[/b] to [b]B[/b] paths can I take?
+
+[center][img]www.ocf.berkeley.edu/~wwu/YaBBAttachments/rlu_kp02.png[/img][/center]
+
+Assuming that Manhattan in this area is a perfect [b]m x n[/b] grid (ignore Broadway) we can record any one such path as a "word" consisting of [b]m E[/b]s and [b]n N[/b]s. The order of letters in such a "word" matters - different order is a different path. But now this problem sounds exactly like the one that we have already solved - it is just another "MOM" or "NOON". By [b](6.2)[/b] the answer then is [b]P(m + n, m, n) = (m + n)!/(m! x n!) = 28!/(3! x 25!) = 3,276[/b] different paths. Extend this problem to 3D.
+
+What if I must travel through the point [b]C[/b] (42-nd and 6-th) which is [b]p = 2[/b] blocks East and [b]q = 8[/b] blocks North of [b]A[/b]? The answer then is compound. Using the previously obtained result we calculate the number of different paths from [b]A[/b] to [b]C: P(p + q, p, q)[/b] and observe that for each such path there are [b]P(m - p + n - q, m - p, n - q)[/b] paths from [b]C[/b] to [b]B[/b]. By [b]MCP[/b] the answer is [b]P(p + q, p, q) x P(m - p + n - q, m - p, n - q)[/b]. 
+
+[b]Example E22.[/b] [url=https://www.ocf.berkeley.edu/~wwu/cgi-bin/yabb/YaBB.cgi?board=riddles_easy;action=display;num=1440687962]"You Can Turn but You Can't Hide"[/url].
+
+[i][color=LimeGreen]6.2.1) Interbucket Distributions[/color][/i]
+
+Though we are dealing with indistinguishable items in this section [b](6.2)[/b] is applicable to the distribution of distinct items among distinct buckets with the following restrictions:
+
+6.2.1.1) the distribution rule must be given ahead of time;
+6.2.1.2) each item must be in some bucket;
+6.2.1.3) multiple items per bucket are allowed;
+6.2.1.4) the order of items within a single bucket is irrelevant;
+6.2.1.5) the concept of order of items across the buckets does not apply;
+
+Let us assume that we have an input set of five items: [b]S = {A, B, C, D, E}[/b] and two distinct buckets: [b]B[sub]1[/sub][/b] and [b]B[sub]2[/sub][/b]. We can distribute these items by placing one of them in [b]B[sub]1[/sub][/b] and four in [b]B[sub]2[/sub][/b] or four in [b]B[sub]1[/sub][/b] and one in [b]B[sub]2[/sub][/b] or two in [b]B[sub]1[/sub][/b] and three in [b]B[sub]2[/sub][/b], etc. Note that in this case we can not pull the new copies of items out of the thin air - what we have is it - after a given distribution is complete the number of items in all the buckets better add up to exactly five.
+
+The number of such distributions [i]for any one given rule[/i] is [b]P(n, r[sub]1[/sub], ... , r[sub]k[/sub])[/b]. Say we want to distribute the items according to this rule: [b]r[sub]1[/sub] = 2[/b] items in [b]B[sub]1[/sub][/b] and [b]r[sub]2[/sub] = 3[/b] items in [b]B[sub]2[/sub][/b]. We can do this in [b]P(5, 2, 3) = 5!/(2! x 3!) = 10[/b] ways. It is enough to generate all the pairs for [b]B[sub]1[/sub][/b] and all the triplets for [b]B[sub]2[/sub][/b] will follow automatically:
+
+[center][b][color=Orange]B[sub]1[/sub]     B[sub]2[/sub][/color][/b][/center]
+[center][b][color=Cyan]AB     CDE[/color][/b][/center]
+[center][b][color=Cyan]AC     BDE[/color][/b][/center]
+[center][b][color=Cyan]AD     BCE[/color][/b][/center]
+[center][b][color=Cyan]AE     BCD[/color][/b][/center]
+[center][b][color=Cyan]BC     ADE[/color][/b][/center]
+[center][b][color=Cyan]BD     ACE[/color][/b][/center]
+[center][b][color=Cyan]BE     ACD[/color][/b][/center]
+[center][b][color=Cyan]CD     ABE[/color][/b][/center]
+[center][b][color=Cyan]CE     ABD[/color][/b][/center]
+[center][b][color=Cyan]DE     ABC[/color][/b][/center]
+
+We can formalize this as follows:
+
+[i]if [b]n[/b] distinct items are distributed among [b]k[/b] distinct buckets [b]B[sub]1[/sub][/b], ... , [b]B[sub]k[/sub][/b] in such a way that [b]r[sub]1[/sub][/b] items are placed in [b]B[sub]1[/sub][/b], [b]r[sub]2[/sub][/b] items are placed in [b]B[sub]2[/sub][/b] ... [b]r[sub]k[/sub][/b] items are placed in [b]B[sub]k[/sub][/b] and [b]n = r[sub]1[/sub] + r[sub]2[/sub] + ... + r[sub]k[/sub][/b] then the number of such distributions is [b]P(n, r[sub]1[/sub], ... , r[sub]k[/sub]) = n!/(r[sub]1[/sub]! x r[sub]2[/sub]! x ... x r[sub]k[/sub]!)[/b][/i]
+
+The proof of this statement is essentially a copy of the formal proof of [b](6.2)[/b] via [b]MCP[/b] and [b]C(n, r)[/b] that we already discussed. We first place [b]r[sub]1[/sub][/b] items into [b]B[sub]1[/sub][/b] in [b]C(n, r[sub]1[/sub])[/b] ways after which [b]n - r[sub]1[/sub][/b] items remain. We then place [b]r[sub]2[/sub][/b] items in [b]B[sub]2[/sub][/b] in [b]C(n - r[sub]1[/sub], r[sub]2[/sub])[/b] ways ...
+
+If [b]k[/b] buckets are [i]not[/i] distinct [i]and[/i] it is possible to place the same number [b]r[sub]1[/sub] = r[sub]2[/sub] = ... = r[sub]k[/sub][/b] of items in each bucket (implying [i]k*q = n[/i]) then each distribution will be duplicated [b]k![/b] times so by [b]DCP P(n, r[sub]1[/sub], ... , r[sub]k[/sub])[/b] must be divided by [b]k![/b].
+
+[i][color=LimeGreen]6.2.2) C(n, r) as a Number of Permutations[/color][/i]
+
+Let us examine a special multiset that has just two distinct [i]types[/i] of items - [b]r[sub]1[/sub][/b] copies of the first type and [b](n - r[sub]1[/sub])[/b] copies of the second type since there are [b]n[/b] items in a multiset in total. From [b](6.2)[/b] then we get:
+
+[center][b][color=Cyan]P(n, r[sub]1[/sub], n - r[sub]1[/sub]) = n!/(r[sub]1[/sub]! x (n - r[sub]1[/sub])!) = C(n, r[sub]1[/sub])[/color][/b][/center]
+
+In other words [b]C(n, r)[/b] can also be interpreted as a number of permutations of a multiset of two distinct types of items. One way to look at this interconnection is as follows. Say we have a set [b]S = "ABCDE", |S| = 5[/b] and we seek the number of 2-combinations of [b]S[/b]. Let us record the "choice" of [i]any[/i] item as [b]1[/b] and the "not choice" of the remaining items as [b]0[/b]. Then a sample [b]AB[/b] 2-combination will be recorded as [b]11000[/b], [b]AE[/b] - as [b]10001[/b], [b]BC[/b] - [b]01100[/b], etc. Conversely - given a legal string of [b]0[/b]s and [b]1[/b]s we can always tell which two letters were picked. It follows then that the number of 2-combinations of letters is equal to the number of permutations of two [b]1[/b]s and three [b]0[/b]s which is [b]P(5, 2, 3) = 10[/b].
+
+Note that we, of course, could not have used this idea to deduce the [b]C(n, r)[/b] in [b](5)[/b] since then we would have introduced a circular dependency - to deduce [b](6.2)[/b] we need [b](5)[/b] and to deduce [b](5)[/b] we need [b](6.2)[/b].
+
+[i][color=LimeGreen]6.2.3) C(n, r) as a Number of Interbucket Distributions[/color][/i]
+
+This is just another way of looking at the previously obtained result - the number of distributions of [b]r[/b] indistinguishable items among [b]n[/b] distinct buckets given the [b]5.3.1-5.3.3[/b] restrictions.
+
+Since all the items are indistinguishable let [b]1[/b] designate the presence of an item in a bucket and let [b]0[/b] designate an empty bucket. Then any required distribution can be captured with a string of [b]0[/b]s and [b]1[/b]s which matches the above notation exactly - for example, a string [b]"11000"[/b] means that the items are in [b]B[sub]1[/sub][/b] and [b]B[sub]2[/sub][/b]. The converse is also true - given a legal string of [b]0[/b]s and [b]1[/b] we can always tell which buckets have one item in them and which are not. It follows then that the number of possible distributions of this type is [b]C(n, r)[/b].
+
+
+[b][color=Cyan]7) Combinations of Multisets[/color][/b]
+
+One "Combination of a Multiset" is an output arrangement made up of distinct input types in which:
+
+- the order of items does not matter;
+- any type may have multiple copies (repetitions are allowed);
+
+In an exhaustive list of all the "Combinations of a Multiset":
+
+- all the copies of all the types must eventually be used;
+- the sizes of the arrangements are identical - some finite arbitrary given ahead of time positive integer [b]r[/b];
+
+
+[i][color=LimeGreen]7.1) Infinite Supply[/color][/i]
+
+[i]Scenario:[/i] given five distinct fruits [b]Apple, Banana, Orange, Peach, Watermelon[/b] how many different [b]3[/b]-fruit order-[b]in[/b]sensitive arrangements (3-fruit salads) can be constructed if any of the fruits may be used more than once per arrangement assuming an infinite supply of each fruit? For example, [b]AAA, ABO, PPW[/b] are allowed 3-combintations while [b]A[/b] or [b]BO[/b] or [b]WWWW[/b] are not. Here we have the following multiset: [b]{\infty  *A, \infty  *B, \infty  *O, \infty  *P, \infty  *W}[/b].
+
+Keeping up with the tradition one would expect that such r-combinations of a multiset will be named [i]r-submultisets[/i]. The rules, however, are made to broken and this particular arrangement is often called ... , you guessed it, a "combination".
+
+Formally: [i]what is the number of r-combinations of a multiset of [b]n[/b] items given an infinite supply of each item?[/i]
+
+To deduce the formula for this case we will use the "ones and zeros" idea we employed with success earlier.
+
+We observe that while constructing a required arrangement we have two decisions to make. The first decision is "choose" or "not choose". If the first decision was "choose" then the second decision is "how many copies"?
+
+Let us record the "not choose" decision as [b]0[/b] and let us unfold the "[b]j[/b] copies" decision into [b]j[/b] consecutive [b]1[/b]s.
+
+For example, the following [b]3[/b]-fruit salad of two Bananas and one Watermelon will then be recorded as [b]011001[/b]. Three Apples - [b]1110000[/b]. One Orange, one Peach, one Watermelon - [b]00111[/b].
+
+Hm. Something does not smell right. Why does the total number of zeros and ones vary? Why do we have [b]6[/b], [b]7[/b] or [b]5[/b] digits [i]depending on the choices made[/i]? We know that "depends on" is not our friend. When it shows up in a chain of reasoning [b]MCP[/b], for example, is not applicable. Can we rejigger our recording notation in such a way that the number of units of information that captures [i]any[/i] string of choices remains the same regardless?
+
+We observe that if we introduce the delimiters between the items:
+
+[center][b][color=Cyan]A[/color] [color=Orange]*[/color] [color=Cyan]B[/color] [color=Orange]*[/color] [color=Cyan]O[/color] [color=Orange]*[/color] [color=Cyan]P[/color] [color=Orange]*[/color] [color=Cyan]W[/color][/b][/center]
+
+then it trivially follows that for any positive integer [b]n[/b] there will always be exactly [b](n - 1)[/b] such delimiters. We then change our choices recording notation slightly - we still use [b]1[/b]s to record the "[b]j[/b] copies" decision and we simply do not record the "not choose" decision at all which will push two adjacent delimiters towards each other for the inner "not chosen" items and will leave an empty spot for either extreme "not chosen" item. You may also think of delimiters as the shared walls between the adjacent buckets into which the [b]1[/b]s are placed.
+
+We can start recording any required combination then by first writing down all [b](n - 1)[/b] delimiters tight - [b]****[/b] - and then insert the ones where needed. Here is what the previous combinations look like in the new notation:
+
+[center][b][color=Cyan]*11***1   111****   **1*1*1[/color][/b][/center]
+
+We now have the desired item counts constancy - we always have [b](n - 1)[/b] delimiters and we always have [b]r 1[/b]s to sprinkle amongst these delimiters for a total of [b](n - 1 + r)[/b] items. If it does not confuse you you can replace my asterisks with zeros - it does not really matter.
+
+What matters is the fact that we already saw and solved this type of problem before: permutations of a multiset that has exactly two distinct [i]types[/i] of indistinguishable items, [b]0[/b]s and [b]1[/b]s in this case. The number of such permutations is either [b]P(n + r - 1, r, n - 1)[/b] or [b]C(n + r - 1, r)[/b] - pick your favorite:
+
+[center][b][color=Cyan]P(n + r - 1, r, n - 1) = C(n + r - 1, r) = C(n + r - 1, n - 1) = (n + r - 1)!/(r! x (n - 1)!)[/color]     [color=Orange](7.1)[/color][/b][/center]
+
+The answer to our sample problem then is [b](5 + 3 - 1)!/(3! x (5 - 1)!) = 35[/b] different 3-fruit salads.
+
+One way to interpret the obtained result is as follows. If we translate the verbal requirement of the problem into "algebraic" we have:
+
+[center][b][color=Cyan]A + B + O + P + W = 3[/color][/b][/center]
+
+where [b]A, B, O, P, W[/b] are [i]nonnegative[/i] integers. The above formula then gives the number of integer solutions of this equation which can be generalized as:
+
+[center][b][color=Cyan]x[sub]1[/sub] + x[sub]2[/sub] + ... + x[sub]n[/sub] = r[/color][/b][/center]
+
+If we whine a little and require that the above integers must be [i]positive[/i], meaning nonzero, then it will imply that [b]r[/b] must be at least as large as [b]n[/b] (may be larger) or rephrasing - we must choose at least one item of each distinct type. We then can replace the [b]1[/b]s and [b]0[/b]s notation with the [b]1[/b]s and [b]+[/b]s. We represent [b]r[/b] as a sum of [b]r 1[/b]s, for [b]r = 9[/b], for example, we get:
+
+[center][b][color=Cyan]1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 = 9[/color][/b][/center]
+
+where it takes [b](r - 1)[/b] plus signs to record the sum. We then choose any [b](n - 1)[/b] plus signs, color them for distinction, and claim that the assortment of [b]1[/b]s caught between the colored plus signs is the desired "combination". For example:
+
+[center][b][color=Cyan]1 [color=Orange]+[/color] 1 + 1 + 1 + 1 [color=Orange]+[/color] 1 + 1 [color=Orange]+[/color] 1 [color=Orange]+[/color] 1= 9[/color][/b][/center]
+
+means that this [b]9[/b]-fruit salad is made up of [b]1[/b] Apple, [b]4[/b] Bananas, [b]2[/b] Oranges, [b]1[/b] Peach and [b]1[/b] Watermelon. In general then the number of nonzero integer solutions for a given equation or the number of combinations with this restriction is [b]C(r - 1, n - 1)[/b].
+
+[i][color=LimeGreen]7.1.1) Interbucket Distributions[/color][/i]
+
+As in [b]6.2 (7.1)[/b] can also be repurposed - to count the number of ways in which [b]r[/b] indistinguishable items can be distributed among [b]n[/b] distinct buckets with the following restrictions:
+
+7.1.1.1) each item must be in some bucket;
+7.1.1.2) multiple items per bucket are allowed;
+7.1.1.3) some buckets may be empty;
+7.1.1.4) the concept of order of items in a single bucket and across the buckets does not apply;
+
+For example, five identical Apples can be distributed between two distinct buckets [b]B[sub]1[/sub][/b] and [b]B[sub]2[/sub][/b] in [b]C(2 + 5 - 1, 5) = 6[/b] ways:
+
+[center][b][color=Orange]B[sub]1[/sub]     B[sub]2[/sub][/color][/b][/center]
+[center][b][color=Cyan]5A     0A[/color][/b][/center]
+[center][b][color=Cyan]4A     1A[/color][/b][/center]
+[center][b][color=Cyan]3A     2A[/color][/b][/center]
+[center][b][color=Cyan]2A     3A[/color][/b][/center]
+[center][b][color=Cyan]1A     4A[/color][/b][/center]
+[center][b][color=Cyan]0A     5A[/color][/b][/center]
+
+The proof of this statement is essentially the copy of the above "1s and *s" proof. We designate each indistinguishable item with a [b]1[/b] and the borders between the buckets with a [b]*[/b] ...
+
+If we require that the buckets can not be empty then we first place one item into each bucket. Since all the items are indistinguishable there is only one way to do that distribution. That leaves us with [b](r - n)[/b] items to distribute which we can accomplish in [b]P(r - 1, r - n, n - 1) = C(r - 1, r - n) = C(r - 1, n - 1)[/b] ways.
+
+
+[b][color=Cyan]8) Some Applications[/color][/b]
+
+The above combinatorial constructs are used in physics in [i]statistical mechanics[/i] which studies the behavior of systems comprised of a large number of weakly interacting particles in thermal equilibrium. The three major nonrelativistic (v<<c) statistics of this discipline are Maxwell-Boltzmann (classical), Bose-Einstein and Fermi-Dirac (quantum).
+
+In all three statistics the role of items is played by the idealized particles and the role of buckets is played by the amount of energy these particles possess. The energy levels are taken to always be distinct while the particles may or may not be distinct. To understand what [i]"distinct particle"[/i] means in this section we have to take a very narrow and specific view of distinction contextualized by the applicability of statistical arguments and inference.
+
+All three statistics aspire to answer the following question: if some particle is selected at random what is the probability that it will have a specific (allowed) amount of energy? While calculating that probability we have to count the number of all of the possible intra- and interbucket distributions of the particles given certain statistics-specific constraints.
+
+Particles can be told apart via their intrinsic attributes like mass, charge and spin or somehow else. For statistical arguments and inference to be meaningful the number of participating items should be huge and the items themselves should be of the same type. As such the particles in this section are not discerned via their intrinsic attributes since these are the same.
+
+[i][color=LimeGreen]8.1) Maxwell-Boltzmann[/color][/i]
+
+In Maxwell-Boltzmann statistics the particles (gas molecules) are classical. They possess a fundamental property called [i]trajectory[/i] - a smooth curve, [b]r(t)[/b] in general, representable as a real valued function of real argument that has at least two derivatives - the first (velocity) and the second (acceleration). We (hope that we can) solve the equations of Newton/Lagrange/Hamilton to find these functions.
+
+As such even if we have two particles with identical intrinsic attributes, say two soccer/golf/billiard/etc. balls, we currently believe that two phenomena hold: 1) a given point in space can be occupied by only one particle at any given time and conversely - one particle can be in only one place at any given time and 2) given a particle's trajectory if we caught that particle in one point in space at one time we can - for all practical purposes - with absolute certainty predict where that particle will be at all future times. The classical particles then are taken to be [i]distinct[/i] in that sense - we can number and track them through space over time as described above.
+
+It follows then that in MB-statistics we are dealing with the distributions of distinct items among distinct buckets. Here multiple particles are allowed to have the same energy level - be in the same bucket. As such to find the number of all the possible distributions of items in these systems we use [b]6.2[/b], to count the number of states [i]across[/i] the buckets, and [b]6.1[/b], to count the number of states [i]within[/i] a single bucket. In other words we combine [b]P(n, r[sub]1[/sub], ... , r[sub]k[/sub])[/b] and [b]n[sup]r[/sup][/b].
+
+[i][color=LimeGreen]8.2) Bose-Einstein[/color][/i]
+
+In quantum mechanics, however, it is currently held that its particles, electrons for short, do not possess a meaningful trajectory. If, in tiny volume of space, we were to record some number of coordinates of an electron as \Delta  x over time intervals \Delta  t then, in general, these can not be laid over a smooth curve as above. In fact, the more precise these measurements get the more haphazard the values of \Dleta  x become. Further, the classic definition of a derivative as a tangent also falls apart - if, while keeping the precision constant, we were to tend \Delta  t to zero then the ratios (\Delta  x/\Delta  t) would [i]not[/i] fall on a straight line.
+
+In 1927 Heisenberg captured this observation in his [i]Uncertainty Principle[/i] which gives a numeric estimate for the boundaries between classical and wave mechanics - if we are very certain about [i]where[/] then we are just as uncertain about [i]how fast[/i] and vice versa:
+
+[center][b][color=Orange]\Delta  x * m\Delta  v \gtrapprox  h[/color][/b][/center]
+
+where [b]h = 6,63 x 10[sup]-34[/sup]J*s[/b] (give or take) is Planck's Constant.
+
+This principle tells us that [i]simultaneously[/i] position and velocity of an electron can not be measured with equal meaningful precision and no improvement of measuring devices can cure this limitation because it is so fundamental. [i]Separately[/i] it is possible measure any one of these attributes with an arbitrary precision - but not both at the same time. So, within the above boundaries, if we happen to spot an electron in one location in space at one moment in time then we have no hope of figuring out with absolute certainty where will it appear next.
+
+In QM then a [i]wave function[/i] - a complex function of position and time - describes the state of a particle. That description is full and irreducible. Full - meaning that it packs absolutely everything there is to know about this particle. Irreducible - means that "within" the wave function the particle can not be made any smaller. We (hope that we can) solve Shrodinger's wave equation to find the particle's wave function.
+
+The physical interpretation of a wave function is quite lengthy but its mathematical counterpart, due to Born, is short - it is a probability amplitude. Its complex conjugate times the wave function itself is the probability density. The probability density times an infinitesmal volume of space is the [i]probability of finding a particle in that volume of space[/i]. This is a profoundly disturbing news for many - even if we know absolutely everything about a particle (its wave function) that the [i]theory[/i] has to offer - the best we can do is come up short of determinacy of physical reality. In any case, given the above statistical constraints, the particles of the same type in wave mechanics are taken to be [i]indistinguishable[/i] in the sense described above.
+
+(The Uncertainty Principle was formulated by Heisenberg in 1927 - [i]after[/i] he and Shrodinger developed the mathematical apparatus of wave mechanics in 1925-1926. Separately, do not get confused by the relativity of scales in the above definitions - an electron may very well be treated as a classical particle under certain conditions - in Wilson's cloud chamber, for example. Separately again, two quantum particles of the same type can be made distinct enough - if they are in isolation and are so far apart from each other that their wave functions do not "overlap" or do not interfere with each other)
+
+In Bose-Einstein statistics multiple particles (photons, atomic nuclei, atoms with an even number of elementary particles or, collectively, bosons) are allowed to have the same energy level - be in the same bucket. Since these particles are indistinguishable what matters is not what [i]kind[/i] of particles are in any given bucket but rather [i]how many[/i] of them are in it. The number of possible arrangements of this type is given by [b](7.1): (n + r - 1)!/(r! x (n - 1)!)[/b].
+
+[i][color=LimeGreen]8.3) Fermi-Dirac[/color][/i]
+
+In Fermi-Dirac statistics multiple particles (electrons, neutrons, protons or, collectively, fermions) are [i]not[/i] allowed to occupy the same energy level. Here any given bucket can have no more than one particle. This is called the [i]Pauli Restriction[/i] or [i]Pauli Exclusion[/i]. As such at any given time the bucket is either empty or contains exactly one particle. It follows then that in this case the number of possible distributions is equal to the number of ways in which it is possible to distribute [b]r[/b] indistinguishable items among [b]n[/b] distinct buckets given the [b]5.3.1-5.3.3[/b] restrictions or, as we have seen it in [b]5[/b], [b]C(n, r)[/b].
+
+Since in all three statistics the resulting numbers contain a factorial of the total number of particles that factorial will normally be enormous. And if the factorial is enormous then its Sterling's approximation works well - that is how in broad strokes (overlooking some number of gory details) the relevant formulas are deduced.
+
+If you have additional interesting applications of the combinatorial constructs add them as 8.n below and I will update the TOC.
+
+
+[b][color=Cyan]9) From Here[/color][/b]
+
+Besides the combinatorial basics this tutorial should also put you on good footing with discrete probabilities since a large number of problems in that discipline are thinly disguised counting problems.
+
+Further beyond the horizon are sets in more depth, Inclusion Exclusion Counting Principle, recurrence relations, generating functions, permutations and combinations generating algorithms, Bi/Multi/Nomial coefficients, special counting sequences, combinatorial designs, graphs and Polya counting.
+
+Good luck.

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Rearrangement. Strip Teez
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Rearrangement. Strip Teez</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabassums3.html">prev</a>
+     <a href="ryabasrearrangement.html">next</a>
+    </p>
+
+    <h1>Strip Teez</h1>
+
+    <p>
+    <br><strong>Problem</strong>
+    </p>
+
+    <p>
+    A strip of paper \(2^n\) sequentially numbered unit squares long is placed
+    on a table in such a way that its left-most square, numbered as \(1\), is
+    fixed at origin in the \(XOY\) plane.
+    </p>
+
+    <p>
+    The strip then undergoes \(n\) like transformations as follows:
+    </p>
+
+    <p>
+    - the strip is folded in half upward and its current right-most square is
+    rotated counterclockwise \(180^{\circ}\) in the \(ZOX\) plane about the
+    current strip's middle until it is placed on top of the strip's left-most
+    square
+    </p>
+
+    <p>
+    After the \(n\)-th fold is complete, the strip is one square-long along the
+    \(OX\) axis with \(2^n\) squares piled one on top of the other along the
+    \(OZ\) axis*:
+    </p>
+
+    <p>
+    - if \(n = 1\) fold is performed then the initial length of the strip is \(2\)
+    and at the end of the transformation the distribution of numbers in the
+    vertical direction is:
+    </p>
+
+$$1 \quad 2$$
+
+    <p>
+    - if \(n = 2\) folds are performed then the initial length of the strip is
+    \(4\) and at the end of the transformation the distribution of numbers in the
+    vertical direction is:
+    </p>
+
+$$1 \quad 4 \quad 3 \quad 2$$
+
+    <p>
+    - for \(n = 3\) folds:
+    </p>
+
+$$1 \quad 8 \quad 5 \quad 4 \quad 3 \quad 6 \quad 7 \quad 2$$
+
+    <p>
+    - for \(n = 4\) folds:
+    </p>
+
+$$1 \quad 16 \quad 9 \quad 8 \quad 5 \quad 12 \quad 13 \quad 4 \quad
+3 \quad 14 \quad 11 \quad 6 \quad 7 \quad 10 \quad 15 \quad 2$$
+
+    <p>
+    - for \(n = 5\) folds:
+    </p>
+
+$$1 \quad 32 \quad 17 \quad \dots$$
+
+    <p>
+    and so on.
+    </p>
+
+    <p>
+    * Another way to obtain the new sequence of numbers is as follows: holding
+    the folded strip by its 'book' end, cut all the forward facing folds, thumb
+    through the 'pages' to reveal their numbers.
+    </p>
+
+    <p>
+    <br><dfn>- what type(s) of toy model emulating the actual folding process can
+    be thought of?</dfn>
+    </p>
+
+    <p>
+    <dfn>- given a square in the original strip numbered with the current year,
+    what will its position be in the folded strip after 30 folds?</dfn>
+    </p>
+
+    <p>
+    <br>We observe that the actual answer to the last question is irrelevant - the
+    objective here is to devise a way to compute the new position of an arbitrary
+    number in a folded strip after an arbitrary number of folds very fast - without
+    modeling the strip's folding process.
+    </p>
+
+    <p>
+    We also mention in passing that this problem may be stated in a multitude of
+    alternate ways: how the squares in the folded strip must be numbered so that
+    in the unfolded strip they are sequential or, conversely, if the squares of
+    the folded strip are numbered sequentially, what will their sequence be in
+    the unfolded strip?
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Given the nature of this particular problem, it is obvious from the outset
+    that we will be dealing with inductive reasoning which, while having its
+    benefits, has a serious drawback - even if applied cautiously it may lead to
+    wrong conclusions. For example, in the following problem:
+    </p>
+
+    <p>
+    <dfn>what is the maximal number of plane regions formed by the line segments
+    that connect \(n\) distinct points located on a circumference of a
+    circle?</dfn>
+    </p>
+
+    <p>
+    we may come to a wrong conclusion if we only look at the first \(5\) points:
+    </p>
+
+$$1 \quad 2 \quad 4 \quad 8 \quad 16$$
+
+    <p>
+    since it may seem that the answer to the maximal number of plane regions
+    problem is the exact power of \(2\), when in reality it is something else
+    entirely - <a href="http://oeis.org/A000127">A000127</a>.
+    </p>
+
+    <p>
+    Conclusion: it is beneficial to write a software program that, while modelling
+    the actual paper strip's folding process, outputs the new sequence of numbers
+    for an arbitrary number of folds decided on ahead of time - given as program's
+    input. To that end we come up with
+    </p>
+
+    <p>
+    <strong>Model 1, Literal</strong>
+    </p>
+
+    <p>
+    In this model we treat the entire process quite literally by:
+    </p>
+
+    <p>
+    - emulating the paper strip with a linear container known as <dfn>array</dfn>
+    </p>
+
+    <p>
+    - placing each number into a separate bucket in the array
+    </p>
+
+    <p>
+    - recording for each number its two immediate neighbors - the one above and
+    the one below:
+    </p>
+
+<p id="srccode">typedef struct
+{
+	int		numAbove;
+	int		numBelow;
+} num_t;</p>
+
+    <p>
+    Initially, all the <dfn>above</dfn> and <dfn>below</dfn> links point to \(NIL\).
+    We divide the current length of the strip logically into two <dfn>halves</dfn>,
+    left and right, and we perform the actual paper folding in two interconnected
+    stages. In the first stage we move horizontally, along the \(OX\) axis, left
+    to right, from the strip's left-most <dfn>column</dfn> (not square/number)
+    toward the strip's current middle computing the ordinal position of the
+    corresponding right column that is to be rotated up and over and placed on
+    top of the left column.
+    </p>
+
+    <p>
+    In the second stage, captured in <span id="inlncode">fold()</span>, for each
+    pair of columns, we move vertically, along the \(OZ\) axis, placing the
+    numbers in the given right column, stack of layers, on top of the numbers in
+    the current left column, stack of layers, reversing the order of numbers in
+    the right stack to reflect their folding/rotation:
+    </p>
+
+<p id="srccode">for ( currFold = 1; currFold <= nFolds; currFold++ )
+{
+	half = N / 2;
+
+	for ( leftCol = 1; leftCol <= half; leftCol++ )
+	{
+		rightCol = N - leftCol + 1;
+
+		fold( strip, leftCol, rightCol );
+	}
+
+	N /= 2;
+} </p>
+
+    <p>
+    <dfn>Horizontal Motion</dfn>
+    </p>
+
+    <p>
+    To compute the ordinal position of the corresponding right column, we observe
+    that it is a mirror image of the current left column with respect to the
+    current strip's middle. Consequently, if \(N\) is the current length of the
+    strip then the distance \(d\) of the left column \(l\) from the left-most
+    extremity of the strip to its middle is:
+    </p>
+
+$$d = \frac{N}{2} - l + 1$$
+
+    <p>
+    The corresponding right column \(r\) is located \(d\) units away from the
+    strip's middle:
+    </p>
+
+$$r = \frac{N}{2} + d = \frac{N}{2} + \frac{N}{2} - l + 1 = N - l + 1$$
+
+    <p>
+    <dfn>Vertical Motion</dfn>
+    </p>
+
+    <p>
+    In <span id="inlncode">fold()</span>, using the
+    <span id="inlncode">numAbove</span> link, we first move vertically, upward
+    along the \(OZ\) axis, to the very top layer of the given left column and
+    then, in a similar fashion, we move to the very top layer of the given right
+    column.
+    </p>
+
+    <p>
+    Using the <span id="inlncode">numAbove</span> link we connect the number at
+    the top of the left column to the number at the top of the right column.
+    </p>
+
+    <p>
+    Using the <span id="inlncode">numBelow</span> link we move vertically,
+    downward along the \(OZ\) axis, through the layers of the right column
+    and flip the numbers' <dfn>below</dfn> and <dfn>above</dfn> links to reflect
+    their folding/rotation, effectively reversing their order - the numbers in
+    the right stack that used to be 'above' are now 'below' and conversely.
+    </p>
+
+    <p>
+    The full source code, with comments, is at my public GitHub repository
+    <a href="https://github.com/RomanAndronov/stripteez">streepteez</a>, in the
+    <span id="inlncode">sfoldlit.c</span> file.
+    </p>
+
+    <p>
+    <br><strong>Model 2, Linear</strong>
+    </p>
+
+    <p>
+    In this model, instead of actually folding the strip, we keep it in a linear
+    formation at all times, eliminating the need for any type of links used in
+    the previous model - all we ever manipulate is C's
+    <span id="inlncode">int</span>s in two arrays - an actual array that stores
+    the current state of the strip and a stack.
+    </p>
+
+    <p>
+    Using an array of size \(2^n\) and a stack of size \(2^{n-1}\), for each fold
+    we:
+    </p>
+
+    <p>
+    - reverse the numbers in the 'right' half of the strip by pushing them onto
+    the stack in a right-to-left fashion: the right-most number is pushed first
+    </p>
+
+    <p>
+    - insert the popped numbers at the proper location within the strip: the
+    number of consecutive pops/inserts grows as:
+    </p>
+
+$$2^{currFold-1}$$
+
+    <p>
+    The length of the 'right half' of the strip remains constant at all times.
+    That, partially, is what keeps the strip in a linear formation. With every
+    consecutive fold, for insertion, we skip:
+    </p>
+
+$$2^{currFold-1}$$
+
+    <p>
+    items counting from the logical beginning of the strip - its left-most
+    extremity or square \(1\).
+    </p>
+
+    <p>
+    For example, let the initial length of the strip be \(8\):
+    </p>
+
+$$1 \quad 2 \quad 3 \quad 4 \quad 5 \quad 6 \quad 7 \quad 8$$
+
+    <p>
+    During the first fold, the array and the stack have the following contents:
+    </p>
+
+<p id="srccode">1 2 3 4 5 6 7 8		8
+			7
+			6
+			5</p>
+
+    <p>
+    We carry out \(2^{3-1}\) steps through the stack while popping, inserting
+    and skipping \(2^{1-1}\) items at a time:
+    </p>
+
+<p id="srccode">1 8 2 7 3 6 4 5</p>
+
+    <p>
+    During the second fold, the array and the stack have the following contents:
+    </p>
+
+<p id="srccode">1 8 2 7 3 6 4 5		5
+			4
+			6
+			3</p>
+
+    <p>
+    We carry out \(2^{3-2}\) steps through the stack while popping, inserting
+    and skipping \(2^{2-1}\) items at a time:
+    </p>
+
+<p id="srccode">1 8 5 4 2 7 6 3</p>
+
+    <p>
+    During the last, third, fold, the array and the stack have the following
+    contents:
+    </p>
+
+<p id="srccode">1 8 5 4 2 7 6 3		3
+			6
+			7
+			2</p>
+
+    <p>
+    We carry out \(2^{3-3}\) steps through the stack while popping, inserting
+    and skipping \(2^{3-1}\) items at a time:
+    </p>
+
+<p id="srccode">1 8 5 4 3 6 7 2</p>
+
+    <p>
+    The full source code, with comments, is at my public GitHub repository
+    <a href="https://github.com/RomanAndronov/stripteez">streepteez</a>, in the
+    <span id="inlncode">sfoldlin.c</span> file.
+    </p>
+
+    <p>
+    <br><strong>Model 3, Matrix</strong>
+    </p>
+
+    <p>
+    In this model we manipulate the strip in two dimensions. You are encouraged
+    to implement this model yourself while we will only describe the algorithm:
+    </p>
+
+    <p>
+    - for the current number of rows in the matrix:
+    </p>
+
+$$2^{currFold-1}$$
+
+    <p>
+    - start from the top-most row and move downward, toward the bottom-most row
+    </p>
+
+    <p>
+    - cut the current number of columns into two logical halves: left and right
+    </p>
+
+    <p>
+    - reverse the numbers in the right half and place them on the very top of
+    the matrix
+    </p>
+
+    <p>
+    Using the strip from the previous example, here is what the matrix looks
+    like before the first fold:
+    </p>
+
+<p id="srccode">1 2 3 4 5 6 7 8</p>
+
+    <p>
+    After the first fold:
+    </p>
+
+<p id="srccode">8 7 6 5
+1 2 3 4</p>
+
+    <p>
+    After the second fold:
+    </p>
+
+<p id="srccode">4 3
+5 6
+8 7
+1 2</p>
+
+    <p>
+    After the third fold:
+    </p>
+
+<p id="srccode">2
+7
+6
+3
+4
+5
+8
+1</p>
+
+    <p>
+    <br><strong>No Modelling</strong>
+    </p>
+
+    <p>
+    Now that we have a program that can print out a new sequence of numbers for
+    an arbitrary number of folds we observe that the input and output sequences
+    have a fair amount of symmetry:
+    </p>
+
+<p id="srccode">1 2 3 4 5 6 7 8
+1 8 5 4 3 6 7 2</p>
+
+    <p>
+    We notice that pairwise the numbers in the output sequence sum to \(9\):
+    </p>
+
+$$1 + 8 = 5 + 4 = 3 + 6 = 7 + 2 = 9 = 2^3 + 1$$
+
+    <p>
+    Let us name that pairwise sum <dfn>the output sequence's invariant</dfn> or,
+    simply, <dfn>the invariant</dfn>.
+    </p>
+
+    <p>
+    We next perform the rearrangement of the parts of the problem, as this problem
+    solving approach prescribes, by switching from the decimal to the binary form.
+    We observe that at the end of the transformation \(8\) is taken into \(2\) and
+    conversely:
+    </p>
+
+$$2_{10} = 0010_2 \to 1000_2 = 8_{10}$$
+
+    <p>
+    One simple rule that governs the above transformation that comes to mind is:
+    </p>
+
+    <p class="center">
+    <dfn>divide by \(2\) then reverse the order of bits</dfn>
+    </p>
+
+    <p>
+    where by reversing the order of bits we mean an equivalent geometric
+    transformation of rotation of the entire bit pattern about its vertical axis
+    of symmetry, after which, for example:
+    </p>
+
+$$abcd \to dcba$$
+
+    <p>
+    To take \(2\) into \(8\), in binary form, we divide \(2\) by \(2\):
+    </p>
+
+$$2_{10} \div 2_{10} \equiv 0010_2 \to 0001_2$$
+
+    <p>
+    and then we reverse the order of bits in the last \(4-\)bit long pattern:
+    </p>
+
+$$0001_2 \to 1000_2 = 8_{10}$$
+
+    <p>
+    To take \(8\) into \(2\):
+    </p>
+
+$$8_{10} \div 2_{10} \equiv 1000_2 \to 0100_2$$
+$$0100_2 \to 0010_2 = 2_{10}$$
+
+
+    <p>
+    Though the above rule works for \(2\) and \(8\), it does not work for all
+    the numbers in the input and output sequences. To address this problem, we
+    observe the annoing absence of a one-to-one correspondance between the number
+    of bits required to record the invariant and the number of folds - the former
+    is by one larger than the latter: \(4\) versus \(3\) in the example above.
+    </p>
+
+    <p>
+    If we require that the two numbers match exactly then we should switch from
+    \(1-\)based counting to \(0-\)based counting, in which case the input and
+    output sequences become:
+    </p>
+
+<p id="srccode">0 1 2 3 4 5 6 7
+0 7 4 3 2 5 6 1</p>
+
+    <p>
+    and the invariant becomes:
+    </p>
+
+$$2^n - 1 = 0 + 7 = 4 + 3 = 2 + 5 = 6 + 1 = 7_{10} = 111_2$$
+
+    <p>
+    which means that if we know one number then we can obtain its counterpart by
+    applying the C's one's compliment operator, <span id="inlncode">~</span>,
+    to the given number, changing the values of all of its bits to their
+    opposites: \(0\)s to \(1\)s and vice versa. For example, if \(3\) is given
+    then:
+    </p>
+
+$$4 = 2^n - 1 - 3 = \text{~} (3_{10}) = \text{~} (011_2) = 100_2 = 4_{10}$$
+
+    <p>
+    Now the rule that we have discovered earlier seems to work for any and all
+    the even numbers. For example, let the input \(0-\)based number be \(6\) and
+    the number of foldings be \(4\):
+    </p>
+
+<p id="srccode">00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+00 15 08 07 04 11 12 03 02 13 10 05 06 09 14 01</p>
+
+    <p>
+    Then, we first divide \(6\) by \(2\):
+    </p>
+
+$$6_{10} \div 2_{10} = 3_{10} \equiv 0110_2 \to 0011_2$$
+
+    <p>
+    and then we reverse the order of bits in the last \(4-\)bit long pattern:
+    </p>
+
+$$0011_2 \to 1100_2 = 12_{10}$$
+
+    <p>
+    We next reason that, since, by definition, \(2^n\) is necessarily even then
+    \((2^n - 1)\) is necessarily odd. The only case when a sum of two natural
+    numbers is odd is when the two terms are of opposite parity - one is even and
+    the other is odd:
+    </p>
+
+$$2p + (2q + 1) = 2(p + q) + 1 = 2r + 1$$
+
+    <p>
+    It follows then that to compute the new position of an odd input number we
+    should transform it into its even image with respect to the invariant
+    \((2^n - 1)\) before reversing the order of its bits - a task that can be
+    accomplished by applying the C's one's complement operator,
+    <span id="inlncode">~</span>, to the odd number.
+    </p>
+
+    <p>
+    Using the \(4-\)foldings strip as an example, we see that \(0-\)based \(5\)
+    is taken into \(11_{10}\):
+    </p>
+
+$$5_{10} \div 2_{10} = 2_{10} \equiv 0101_2 \to 0010_2$$
+
+    <p>
+    Applying the C's one's complement operator to the last \(4-\)bit long pattern,
+    we obtain:
+    </p>
+
+$$\text{~}(0010_2) = 1101_2$$
+
+    <p>
+    Reversing the order of bits in the last pattern, we obtain the output number:
+    </p>
+
+$$1101_2 \to 1011_2 = 11_{10}$$
+
+    <p>
+    <br><strong>Algorithm</strong>
+    </p>
+
+    <p>
+    To compute the new position of an arbitrary \(1-\)based number after an
+    arbitrary number of strip's foldings are performed:
+    </p>
+
+    <p>
+    - since the input number is \(1-\)based, switch to \(0-\)based counting by
+    subtracting \(1\) from the input number:
+    </p>
+
+<p id="srccode">x = x - 1</p>
+
+    <p>
+    - divide the resulting number by \(2\):
+    </p>
+
+<p id="srccode">half = x >> 1</p>
+
+    <p>
+    - if <span id="inlncode">x</span> is odd then change the values of all the
+    bits in <span id="inlncode">half</span> to their opposites by applying the
+    C's one's complement operator to <span id="inlncode">half</span>
+    (<span id="inlncode">nFolds</span> is the number of times the strip is
+    folded):
+    </p>
+
+<p id="srccode">if ( x % 2 )
+{
+	half = ~half;
+	mask = mkMask( nFolds );
+	half = half & mask;
+}</p>
+
+    <p>
+    where <span id="inlncode">mask</span> is needed to cut off the upper
+    <span id="inlncode">(INT_BIT_SZ - nFolds)</span> bits since all the bitwise
+    operations are carried out on the binary object whose size in bits is equal
+    to the number of foldings performed (recall our earlier requirement); at
+    the time of this writing, circa 2016,
+    <span id="inlncode">INT_BIT_SZ = 32</span>
+    </p>
+
+    <p>
+    - reverse the order of bits in <span id="inlncode">half</span>:
+    </p>
+
+<p id="srccode">xprime = reverseBits( half, nFolds );</p>
+
+    <p>
+    where the reversal of bits' order is performed on an
+    <span id="inlncode">INT_BIT_SZ</span>-sized entity after which the resulting
+    bits are shifted right <span id="inlncode">(INT_BIT_SZ - nFolds)</span> times.
+    </p>
+
+    <p>
+    - add \(1\) to the result before outputting it:
+    </p>
+
+<p id="srccode">printf( "x'(%u, %u) = %u\n",
+	x + 1, nFolds, xprime + 1 );</p>
+
+    <p>
+    The full source code, with comments, is at my public GitHub repository
+    <a href="https://github.com/RomanAndronov/stripteez">streepteez</a>, in the
+    <span id="inlncode">sfoldfind.c</span> file.
+    </p>
+
+    <p>
+    <br><strong>Sample Computation</strong>
+    </p>
+
+    <p>
+    Let the input \(1-\)based number be:
+    </p>
+
+$$12_{10}$$
+
+    <p>
+    and let the strip be foled \(4\) times. Then:
+    </p>
+
+$$x = 12_{10}$$
+$$x = 12_{10} - 1_{10} = 11_{10}$$
+$$half = 11_{10} \div 2_{10} = 5_{10} = 0101_2$$
+
+    <p>
+    Since \(11_{10}\) is odd:
+    </p>
+
+$$half = \text{~}(0101_2) = 1010_2$$
+
+    <p>
+    Reversing the order of bits in <span id="inlncode">half</span>, we obtain:
+    </p>
+
+$$1010_2 \to 0101_2 = 5_{10}$$
+
+    <p>
+    Before outputting the answer we add \(1\) to the result:
+    </p>
+
+$$5_{10} + 1_{10} = 6_{10}$$
+
+    <p>
+    After \(4\) foldings \(12\) is taken into \(6\) and, consequently, \(6\)
+    is taken into \(12\).
+    </p>
+
+    <p>
+    Lastly, after \(30\) foldings \(2015\) is taken into \(1,039,138,817\) -
+    a number that was computed, according to Unix's
+    <span id="inlncode">time</span>, in \(0\) minutes and \(0\) seconds.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabassums3.html">prev</a>
+     <a href="ryabasrearrangement.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrearrangement.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

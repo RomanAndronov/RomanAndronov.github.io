@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. One-sheeted Hyperboloids
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. One-sheeted
+   Hyperboloids</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasparaboloids.html">prev</a>
+     <a href="ryabas2shyperboloids.html">next</a>
+    </p>
+
+    <h1>One-sheeted Hyperboloids</h1>
+
+    <p>
+    <strong>Circular One-sheeted Hyperboloid</strong>
+    </p>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the volume of a one-sheeted circular hyperboloid of revolution given by
+    its Cartesian equation:
+    </p>
+
+    <img src="imgs/1shyperboloid.png" alt="One-sheeted hyperboloid" align="left"
+    style="margin-right: 1em; margin-bottom: 1em;">
+
+$$\frac {x^2}{a^2} + \frac {y^2}{a^2} - \frac {z^2}{c^2} = 1$$
+
+    <p>
+    Either the height of the hyperboloid along the \(z\) axis \(h = AB\) or
+    the corresponding value along the \(x\) axis \(r = AE\) is given,
+    see the drawing.
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Choose a thin right circular cylinder as a primitive part to approximate the
+    volume of the one-sheeted circular hyperboloid and position it as shown.
+    </p>
+
+    <p>
+    Consider the corresponding half of the hyperboloid and cut \(AO\) into \(n\)
+    line segments of equal length:
+    </p>
+
+$$\frac {h}{2n}$$
+
+    </p>
+    The volume of the \(i-\)the primitive cylinder then is:
+    </p>
+
+$$V'_i = \pi x_i^2 \frac {h}{2n}$$
+
+    <p>
+    To obtain the value of \(x_i^2\) cut the hyperboloid with the \(y = 0\) plane
+    and substitute \(y = 0\) into its Cartesian equation:
+    </p>
+
+$$\frac {x_i^2}{a^2} - \frac {z_i^2}{c^2} = 1$$
+$$x_i^2 = a^2\Big(1 + \frac {z_i^2}{c^2}\Big)$$
+    </p>
+
+    <p>
+    where:
+    </p>
+
+$$z_i = \frac {h}{2n} \times i$$
+
+    <p>
+    and:
+    </p>
+
+$$x_i^2 = a^2\Big(1 + \frac {h^2}{4c^2n^2} i^2\Big)$$
+$$\begin{equation}
+V'_i = \frac {\pi a^2 h}{2n}\Big(1 + \frac {h^2}{4c^2n^2} i^2\Big)
+\end{equation}$$
+
+    <p>
+    The volume of the entire hyperboloid is the sum of volumes of its two halves:
+    </p>
+
+$$V' = 2 \times \sum_{i=1}^n V'_i =$$
+$$2 \times \sum_{i=1}^n \frac {\pi a^2 h}{2n}\Big(1 + \frac {h^2}{4c^2n^2} i^2\Big) =$$
+$$\frac {\pi a^2 h}{n}\Big(\sum_{i=1}^n + \sum_{i=1}^n \frac {h^2}{4c^2n^2} i^2\Big) =$$
+$$\frac {\pi a^2 h}{n}\Big(n + \frac {h^2}{4c^2n^2} \sum_{i=1}^n i^2 \Big) =$$
+$$\frac {\pi a^2 h}{n}\Big(n + \frac {h^2}{4c^2n^2} \frac {n(1 + n)(2n + 1)}{6}\Big) =$$
+$$\frac {\pi a^2 h}{n}\Big(n + \frac {h^2}{4c^2n^2}
+    \frac {n^3(1 + \frac {1}{n})(2 + \frac {1}{n})}{6}\Big) =$$
+$$\frac {\pi a^2 h}{n}\Big(n + \frac {h^2}{4c^2}
+    \frac {n(1 + \frac {1}{n})(2 + \frac {1}{n})}{6}\Big) =$$
+$$\pi a^2 h\Big(1 + \frac {h^2}{24c^2}\Big(1 + \frac {1}{n}\Big)\Big(2 + \frac {1}{n}\Big)\Big) =$$
+$$\pi a^2 h\Big(1 + \frac {h^2}{24c^2}\Big(2 + \frac {3}{n} + \frac {1}{n^2}\Big)\Big)$$
+
+    <p>
+    Apply the corresponding limit to \(V'\):
+    </p>
+
+$$V = \lim_{n\to +\infty} V' =$$
+$$\lim_{n\to +\infty} \pi a^2 h
+ \Big(1 + \frac {h^2}{24c^2}\Big(2 + \frac {3}{n} + \frac {1}{n^2}\Big)\Big) =$$
+$$\pi a^2 h\lim_{n\to +\infty}
+ \Big(1 + \frac {h^2}{24c^2}\Big(2 + \frac {3}{n} + \frac {1}{n^2}\Big)\Big) =$$
+$$\bbox[#e8e8e8,3pt]{V = \pi a^2 h\Big(1 + \frac {h^2}{12c^2}\Big)}$$
+
+    <p>
+    <br><strong>Elliptic One-sheeted Hyperboloid</strong>
+    </p>
+
+    <p>
+    has the following Cartesian equation:
+    </p>
+
+$$\begin{equation}
+\frac {x^2}{a^2} + \frac {y^2}{b^2} - \frac {z^2}{c^2} = 1
+\end{equation}$$
+
+    <p>
+    We choose thin right elliptic cylinders as primitive parts positioned in the
+    same way right circular cylinders are positioned within the circular hyperboloid.
+    The volume of the \(i-\)th primitive cylinder then is:
+    </p>
+
+$$V'_i = \pi x_i \times y_i \times \frac {h}{2n}$$
+
+    <p>
+    where we again only considering the corresponding half of the elliptic
+    hyperboloid.
+    </p>
+
+    <p>
+    To obtain the values of \(x_i\) and \(y_i\) in given terms we first cut the
+    hyperboloid with the \(y = 0\) plane and substitute \(y = 0\) into (2):
+    </p>
+
+$$\frac {x_i^2}{a^2} - \frac {z_i^2}{c^2} = 1$$
+$$x_i = a \sqrt {1 + \frac {z_i^2}{c^2}}$$
+
+    <p>
+    and then we cut the hyperboloid with the \(x = 0\) plane and substitute
+    \(x = 0\) into (2):
+    </p>
+
+$$\frac {y_i^2}{b^2} - \frac {z_i^2}{c^2} = 1$$
+$$y_i = b \sqrt {1 + \frac {z_i^2}{c^2}}$$
+
+    <p>
+    where for \(z_i\) we have:
+    </p>
+
+$$z_i = \frac {h}{2n} \times i$$
+
+    <p>
+    Then:
+    </p>
+
+$$V'_i = \pi a \sqrt{1 + \frac {z_i^2}{c^2}} \times b \sqrt{1 + \frac {z_i^2}{c^2}}
+ \times \frac {h}{2n} =$$
+$$\begin{equation}
+\frac {\pi abh}{2n}\Big(1 + \frac {h^2}{4c^2n^2} i^2\Big)
+\end{equation}$$
+
+    <p>
+    We observe that (1) and (3) are almost identical: the \(a^2\) in (1) is
+    replaced with \(a \times b\) in (3) and hence:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{V = \pi abh\Big(1 + \frac {h^2}{12c^2}\Big)}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasparaboloids.html">prev</a>
+     <a href="ryabas2shyperboloids.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionvolumes.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

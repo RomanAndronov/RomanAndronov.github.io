@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Triangle Constructions, sss by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Triangle Constructions, sss by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+
+    <h1>sss: side, side, side</h1>
+
+    <p>
+    <strong>Given</strong>
+    </p>
+
+    <p>
+    \(a\), \(b\), \(c\) - all three sides of a triangle with a stipulation that
+    the sum of any two sides is greater than the remaining one:
+    </p>
+
+$$a + b > c$$
+$$a + c > b$$
+$$c + b > a$$
+
+    <p>
+    This is an all time classic - Euclid carries out this construction in
+    <strong>B1P22</strong> which itself is a generalization of
+    <strong>B1P1</strong> - an equilateral triangle construction.
+    </p>
+
+    <p>
+    <br><strong>Analysis</strong>
+    </p>
+
+    <p>
+    We start with an observation that three vertexes are needed to construct a
+    triangle. In this particular case we can locate two vertexes by choosing an
+    arbitrary given side and cutting its length on an arbitrary line. We can then
+    use these vertexes as centers of circles built with the remaining sides as
+    their radii to locate the third vertex of the triangle. These circles will
+    intersect at two points but one is enough.
+    </p>
+
+    <p>
+    For this construction to work two postulates missing from Euclid's
+    <dfn>"Elements"</dfn> are needed. The first one should state:
+    </p>
+
+    <p id="dbg" class="center">
+    <dfn>if the distance between the centers of two circles is less than the sum
+    and greater than the difference of their radii then these two circles
+    intersect</dfn>
+    </p>
+
+    <p>
+    The second postulate should state:
+    </p>
+
+    <p id="dbg" class="center">
+    <dfn>two straight lines intersect at one point at the most</dfn>
+    </p>
+
+    <p>
+    The first postulate gives the intersecting circles the right to exist and
+    spells out the conditions under which this event can occur. In the construction
+    below this postulate gives the right for the point \(A\) (and its counterpart)
+    to exist. The second postulate is needed to ensure that the straight lines
+    on which the radii of the circle lie intersect at exactly point \(A\) and
+    nowhere else.
+    </p>
+
+    <p>
+    <br><strong>Construction Outline</strong>
+    </p>
+
+    <p>
+    <dfn>Construct the given side \(a\) at the vertexes \(C\) and \(B\).
+    Construct a \(Cir(C, b)\) and a \(Cir(B, c)\). The intersection of
+    these two circles locates \(A\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Sample Construction</strong>
+    </p>
+
+    <img src="imgs/sss.png" alt="sss" class="center">
+
+$$C, Z$$
+$$Ln(C, Z)$$
+$$Cir(C, a)$$
+$$Cir(C, a) \; \cap \; Ln(C, Z) = B \colon \quad CB = a$$
+$$Cir(C, b)$$
+$$Cir(B, c)$$
+$$Cir(C, b) \; \cap \; Cir(B, c) = A \colon \quad CA = b, BA = c$$
+$$Ln(A, C)$$
+$$Ln(A, B)$$
+$$\triangle ABC$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryatriap1.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Mooftochka by Roman Y. Andronov.
+</title>
+
+<link rel="stylesheet" type="text/css" href="./rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Mooftochka by Roman Y. Andronov.</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+    </p>
+
+    <h1>Mooftochka.</h1>
+
+    <p>
+    1. Based on calculus.
+    </p>
+
+    <p>
+    Based on the law of conservation of angular momentum - since there is no extra input
+    of energy/forces into the system except for the one required to rotate the system at
+    \(\omega_0\) in a steady state when mooftochka is at position \(a\) - as the distance
+    of mooftochka from the axis of rotation grows its (and the rod's) angular velocity
+    diminishes - the system is slowing down. It means that the angular velocity \(\omega\)
+    of the system after mooftochka starts moving along the rod is not constant but rather
+    is a function of mooftochka's position along the rod \(x\) which in turn is some
+    function of time.
+    </p>
+
+    <p>
+    Since the rod is massless it has no moment of inertia and hence no kinetic energy. The
+    law of conservation of energy in this case is:
+    </p>
+
+$$\frac {J\omega_0^2}{2} = \frac{J\omega^2}{2} + \frac {mV_x^2}{2}$$
+$$\begin{equation}\frac {ma^2\omega_0^2}{2} = \frac{mx^2\omega^2}{2} + \frac {mV_x^2}{2}
+\end{equation}$$
+
+    <p>
+    where \(\omega_0\) is the angular velocity of the system in the initial (steady) state,
+    \(V_x\) is the velocity of mooftochka with respect to the rod which we choose to run
+    along its \(OX\) axis, \(\omega\) is variable angular velocity of the system at any given
+    time.
+    </p>
+
+    <p>
+    Since we need to find the velocity relative to the rod we move into its reference frame
+    which itself is not inertial - it rotates around the the axis at some angular velocity.
+    Hence, the fictisious "force of inertia" is \(m\omega^2x\) and it is the first derivative
+    of \(mV_x\), where \(m\) remains constant at all times:
+    </p>
+
+$$\begin{equation}
+m\omega^2x = \frac {d(mV_x)}{dt} = m\frac {dV_x}{dt}
+\end{equation}$$
+
+    <p>
+    Two unknowns, two equations. From (1):
+    </p>
+
+$$\omega^2(x) = \frac {a^2\omega_0^2 - V_x^2}{x^2}$$
+
+    <p>
+    Putting it into (2) we get:
+    </p>
+
+$$\frac {dV_x}{dt} = \frac {a^2\omega_0^2 - V_x^2}{x}$$
+$$\frac {dV_x}{a^2\omega_0^2 - V_x^2} = \frac {dt}{x} = \frac {dx}{dx} \times \frac {dt}{x} = \frac {dx}{x} \times \frac {dt}{dx} = \frac {dx}{x} \times \frac {1}{V_x}$$
+$$\frac {V_xdV_x}{a^2\omega_0^2 - V_x^2} = \frac {dx}{x}$$
+
+    <p>
+    Integrate both sides, left - from zero to \(V\), right - from \(a\) to \(L\):
+    </p>
+
+$$\int_a^L {\frac {dx}{x}} = \ln L - \ln a = \ln \Big( \frac {L}{a} \Big)$$
+$$\int_0^V {\frac {V_xdV_x}{a^2\omega_0^2 - V_x^2}}$$
+$$V_xdV_x = \frac {1}{2}dV_x^2$$
+$$\int {\frac {V_xdV_x}{a^2\omega_0^2 - V_x^2}} = \frac {1}{2} \int {\frac {dV_x^2}{a^2\omega_0^2 - V_x^2}} =$$
+$$(V_x^2 = z)$$
+$$\frac {1}{2} \int {\frac {dz}{a^2\omega_0^2 - z}} =$$
+$$(a^2\omega_0^2 - z = u, dz = -du)$$
+$$- \frac {1}{2} \int {\frac {du}{u}} =$$
+$$- \frac {1}{2} \ln (u) = - \frac {1}{2} \ln (a^2\omega_0^2 - z) = - \frac {1}{2} \ln (a^2\omega_0^2 - V_x^2) =$$
+$$\ln \Big( \frac {1}{\sqrt{a^2\omega_0^2 - V_x^2}}\Big)$$
+$$\int_0^V = \ln \Big( \frac {a\omega_0}{\sqrt {a^2\omega_0^2 - V^2}}\Big)$$
+$$\ln \Big( \frac {a\omega_0}{\sqrt {a^2\omega_0^2 - V^2}}\Big) = \ln \Big( \frac {L}{a} \Big)$$
+$$\frac {a\omega_0}{\sqrt {a^2\omega_0^2 - V^2}} = \frac {L}{a}$$
+
+    <p>
+    Solving it for \(V\) we get:
+    </p>
+
+$$a^2\omega_0 = L \sqrt {a^2\omega_0^2 - V^2}$$
+$$a^4\omega_0^2 = L^2 a^2\omega_0^2 - L^2V^2$$
+$$L^2V^2 = L^2 a^2\omega_0^2 - a^4\omega_0^2$$
+$$\bbox[#e8e8e8,3pt]{V = a\omega_0\sqrt{1 - \frac {a^2}{L^2}}}$$
+
+    <p>
+    In general, \(V(x)\) and \(\omega(x)\):
+    </p>
+
+$$V(x) = a\omega_0\sqrt{1 - \frac {a^2}{x^2}}$$
+$$\omega(x) = \omega_0 \frac {a^2}{x^2}$$
+
+    <p>
+    To find \(x(t)\) we need to solve (2):
+    </p>
+
+$$\omega^2(x)\times x = \frac {\omega_0^2a^4}{x^3} = \frac {d^2x}{dt^2}$$
+
+    <p>
+    Using the method of separation of variables I get:
+    </p>
+
+$$x(t) = \frac {a}{2}\sqrt{\omega_0^2t^2 + 1}$$
+
+    <p>
+    And the time \(T\) till separation with the rod is:
+    </p>
+
+$$T = \frac{2}{a\omega_0}\sqrt{L^2 - a^2}$$
+
+    <p>
+    2. Without calculus.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapgci.html">prev</a>
+     <a href="ryapgce.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

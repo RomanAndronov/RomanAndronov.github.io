@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Ellipse
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Ellipse</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabascircle.html">prev</a>
+     <a href="ryabassine.html">next</a>
+    </p>
+
+    <h1>Ellipse</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the square area of a plane region trapped inside an ellipse with \(a\)
+    semi-major and \(b\) semi-minor axis.
+    </p>
+
+    <p>
+    <br><strong>Right Sum Solution</strong>
+    </p>
+
+    <p>
+    Let us construct Right Riemann Sum for one quarter of the ellipse located
+    in the first quadrant where \(x \in [0, a]\):
+    </p>
+
+    <img src="imgs/ellipse.png" alt="Ellipse" class="center">
+
+    <p>
+    Let:
+    </p>
+
+$$OB = a$$
+$$OA = b$$
+$$\begin{equation}
+\frac {x^2}{a^2}+\frac {y^2}{b^2} = 1
+\end{equation}$$
+
+    <p>
+    The square area of the \(i-\)th primitive rectangle is:
+    </p>
+
+$$A'_{i, r} = \frac {a}{n} \times y_i =$$
+$$\frac {a}{n} \sqrt {b^2 - \frac {b^2}{a^2}x_i^2} =$$
+$$\frac {a}{n} \sqrt {b^2 - \frac {b^2}{a^2} \frac {a^2}{n^2} i^2} =$$
+$$\frac {ab}{n^2} \sqrt {n^2 - i^2}$$
+
+    <p>
+    where from (1) we have used the fact that:
+    </p>
+
+$$y(x) = \sqrt {b^2 - \frac {b^2}{a^2}x^2}$$
+
+    <p>
+    Right Riemann Sum is:
+    </p>
+
+$$A'_r = \frac {ab}{n^2} \sum_{i=1}^n \sqrt {n^2 - i^2}$$
+
+    <p>
+    Four above sums make up the approximation of the square area of the entire
+    ellipse:
+    </p>
+
+$$A = \lim_{n\to +\infty} 4 \times A'_r =$$
+$$\begin{equation}
+4ab \lim_{n\to +\infty} \frac {1}{n^2} \sum_{i=1}^n \sqrt {n^2 - i^2}
+\end{equation}$$
+
+    <p>
+    But we already found the magnitude of the limit in (2) in
+    <strong>Circle</strong> chapter:
+    </p>
+
+$$\lim_{n\to +\infty} \frac {1}{n^2} \sum_{i=1}^n \sqrt {n^2 - i^2} =
+ \frac {\pi}{4}$$
+
+    <p>
+    and hence:
+    </p>
+
+$$A = 4ab \frac {\pi}{4}$$
+$$\bbox[#e8e8e8,3pt]{A = \pi ab}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabascircle.html">prev</a>
+     <a href="ryabassine.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionareas.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

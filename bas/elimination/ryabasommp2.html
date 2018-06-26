@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Elimination. Omnia Mea Mecum Porto 2
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Elimination. Omnia Mea
+   Mecum Porto 2</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasfish.html">prev</a>
+     <a href="ryabaselimination.html">next</a>
+    </p>
+
+    <h1>Omnia Mea Mecum Porto 2</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    A math professor \(R\)(iddler) tells two math students, \(S\)(um) and
+    \(P\)(roduct), so that both can hear:
+    </p>
+
+    <p>
+    - I have two non-equal natural numbers in mind: both are greater than one and
+    their sum is less than \(100\). To \(P\) I will whisper their product so that
+    \(S\) can not hear it (and \(R\) does). To \(S\) I will whisper their sum so
+    that \(P\) can not hear it (and \(R\) does). 
+    </p>
+
+    <p>
+    Later on the following dialog between \(P\) and \(S\) ensues:
+    </p>
+
+    <p>
+    \(P\): I can not name these numbers.
+    </p>
+
+    <p>
+    \(S\): I knew ahead of time that you would not be able to.
+    </p>
+
+    <p>
+    \(P\): But then I know them!
+    </p>
+
+    <p>
+    \(S\): But then so do I!
+    </p>
+
+    <p>
+    Assuming that all the participants speak the truth at all times, what are
+    these numbers?
+    </p>
+
+    <p>
+    <br><strong>Analytic Solution</strong>
+    </p>
+
+    <p>
+    Let \(x\) and \(y\) be the natural numbers in question and let \(\sigma\) and
+    \(\rho\) be their sum and product correspondingly:
+    </p>
+
+$$\begin{equation} 2 \leqslant x \leqslant 97 \end{equation}$$
+$$\begin{equation} 2 \leqslant y \leqslant 97 \end{equation}$$
+$$\sigma = x + y$$
+$$\begin{equation} 4 \leqslant \sigma \leqslant 99 \end{equation}$$
+$$\rho = x \times y$$
+$$\begin{equation} 4 \leqslant \rho \leqslant 2,450 \end{equation}$$
+
+    <p>
+    An upper bound of \(\rho\) can be obtained programmatically or analytically.
+    In the latter case we observe that when a sum of two numbers is fixed:
+    </p>
+
+$$x + y = \sigma$$
+$$y = \sigma - x$$
+
+    <p>
+    then their product can be written as:
+    </p>
+
+$$\rho(x) = x \times y = x(\sigma - x) = \sigma x - x^2$$
+
+    <p>
+    which may have a maximum if \(\rho(x)\) is continuous on a closed interval,
+    which it is:
+    </p>
+
+$$\rho_x'(x) = \sigma - 2x$$
+$$\sigma - 2x = 0$$
+$$x_{max} = \frac{\sigma}{2}$$
+
+    <p>
+    from where we conclude that when a sum of two (natural nonnegative) numbers
+    is fixed then their product reaches a maximum when the numbers are equal one
+    another.
+    </p>
+
+    <p>
+    The same result may be obtained without calculus by recalling the theorem
+    which states that a geometric mean of two nonnegative numbers never exceeds
+    the corresponding arithmetic mean:
+    </p>
+
+$$\sqrt{x \times y} \leqslant \frac {x + y}{2} = \frac {\sigma}{2}$$
+
+    <p>
+    It follows then that since the product of two such numbers is bound from
+    above:
+    </p>
+
+$$x \times y \leqslant \frac {\sigma^2}{4} =
+ \frac{\sigma}{2} \times \frac{\sigma}{2}$$
+
+    <p>
+    it reaches its maximum when:
+    </p>
+
+$$x = y = \frac {\sigma}{2}$$
+
+    <p>
+    In our case:
+    </p>
+
+$$x = y = \frac{99}{2} = 49.5$$
+
+    <p>
+    Since our numbers must be natural, we take the fractional part away from one
+    of them and give it to the other:
+    </p>
+
+$$50 \times 49 = 2,450$$
+
+    <p>
+    <br>1) For ease of reference let us number the statements made by each
+    student as:
+    </p>
+
+$$P_1, P_2, S_1, S_2$$
+
+    <p>
+    so that for the record:
+    </p>
+
+    <p>
+    \(P_1 = \) "I can not name these numbers"<br>
+    \(S_2 =\) "I knew ahead of time that you would not be able to"<br>
+    \(P_2 =\) "But then I know them!"<br>
+    \(S_2 =\) "But then so do I!"
+    </p>
+
+    <p>
+    <br>2) Let us negate \(P_1\) (by putting an exclamation mark in front of it):
+    </p>
+
+    <p id="dbg">
+    \(!P_1 =\) "I can name these numbers and they are ..."
+    </p>
+
+    <p>
+    When \(P\) would be able to announce \(!P_1\)?
+    </p>
+
+    <p>
+    2.1) The Fundamental Theorem of Arithmetic or the Prime Factorization Theorem
+    (PFT) states that any natural number greater than one is either prime
+    already or is representable as a unique product of primes if the order of
+    primes is ignored. The guarantee of uniqueness of factorization is what
+    makes this theorem so useful to us.
+    </p>
+
+    <p>
+    From PFT it follows that \(P\) would able to announce \(!P_1\) if \(x\) and
+    \(y\) were both prime numbers that sum to \(99\) or less. For example, if
+    \(21\) was whispered to \(P\) then, since:
+    </p>
+
+$$\rho = 21 = 3 \times 7$$
+$$\sigma = 3 + 7 = 10 \leqslant 99$$
+
+    <p>
+    and \(3\) and \(7\) are both prime, \(P\) would have done the above
+    computations and would have announced \(!P_1\).
+    </p>
+
+    <p>
+    2.2) \(P\) would also be able to announce \(!P_1\) if (s)he were given a
+    number that can be represented as:
+    </p>
+
+$$\rho = p \times p^2 = p^3 \; \colon \; p^2 < 100$$
+
+    <p>
+    where \(p\) is prime. For example, if one of the following numbers were
+    whispered to \(P\):
+    </p>
+
+$$\rho = 8 = 2 \times 4, \quad \sigma = 2 + 4 = 6 \leqslant 99$$
+$$\rho = 27 = 3 \times 9, \quad \sigma = 3 + 9 = 12 \leqslant 99$$
+$$\rho = 125 = 5 \times 25, \quad \sigma = 5 + 25 = 30 \leqslant 99$$
+$$\rho = 343 = 7 \times 49, \quad \sigma = 7 + 49 = 56 \leqslant 99$$
+
+    <p>
+    then (s)he would have done the above computations and would have announces
+    \(!P_1\).
+    </p>
+
+    <p>
+    2.3) \(P\) would also be able to announce \(!P_1\) if (s)he were given a
+    number that can be represented as:
+    </p>
+
+$$\rho = p \times q^2 \; \colon \; q^2 < 100, p + q < 100$$
+
+    <p>
+    where \(p\) and \(q\) are both prime. For example:
+    </p>
+
+$$\rho = 3 \times 11^2 = 3 \times 121 = 363$$
+$$363 = 3 \times 121 = 11 \times 33, \quad \sigma = 11 + 33 = 44$$
+
+    <p>
+    from where \(P\) would eliminate the first pair of factors and announce
+    \(!P_1\).
+    </p>
+
+    <p>
+    2.4) However, we know that instead of saying \(!P_1\) what \(P\) really said
+    was \(P_1\). Hence, \(!P_1\) is false and by negating the above observations
+    we conclude that:
+    </p>
+
+    <p id="dbg">
+    <dfn>\(EF_1\): it is not the case that \(x\) and \(y\) are both prime</dfn>
+    </p>
+
+    <p id="dbg">
+    <dfn>\(EF_2\): \(\rho\) can not be expressed as a product of a unique pair
+    of factors that sum to \(99\) or less</dfn>
+    </p>
+
+    <p>
+    where \(EF\) designates <dfn>Elimination Filter</dfn> which we will use later
+    and by "unique pair" we mean two numbers that, while satisfying all the (1)-(4)
+    restrictions, can be deduced by \(P\) right away.
+    </p>
+
+    <p>
+    <br>3) We interpret \(S_1\) as follows:
+    </p>
+
+    <p id="dbg">
+    <dfn>\(EF_3\): any product of two numbers that sum to \(\sigma\) obey
+    \(EF_1\) and \(EF_2\)</dfn>
+    </p>
+
+    <p>
+    <br>4) When \(S\) would not be able to announce \(S_1\)? In two cases:
+    </p>
+
+    <p>
+    - when \(\sigma\) is representable as a sum of two primes
+    </p>
+
+    <p>
+    - when there exists such a representation of \(\sigma = p + (\sigma - p)\)
+    that the product \(p \times (\sigma - p)\) is representable as a unique pair
+    of factors that sum to \(99\) or less
+    </p>
+
+    <p>
+    In the first case two primes multiply to a unique product from which \(P\)
+    can deduce the correct answer immediately. For example, if \(10\) was
+    whispered to \(S\) then one possible pair of numbers that sums to \(10\) is:
+    </p>
+
+$$3 + 7 = 10$$
+
+    <p>
+    and since both terms are prime and sum to \(99\) or less, their product,
+    possibly whispered to \(P\), violates \(EF_1\) and \(EF_2\), in which case
+    \(P\) would be able to announce the correct answer right away and \(S\) would
+    not be able to announce \(S_1\).
+    </p>
+
+    <p>
+    In the second case the two numbers that sum to \(\sigma\) need not be both
+    prime as long as they may multiply to a product \(\rho\) representable as a
+    unique pair of factors that sum to \(99\) or less. For example, if \(12\)
+    was whispered to \(S\) then there exists such a representation of \(\sigma\):
+
+$$\sigma = 12 = 3 + 9 = 3 + (12 - 3)$$
+
+    <p>
+    that the product:
+    </p>
+
+$$\rho = 3 \times (12 - 3) = 3 \times 9 = 27$$
+
+    <p>
+    is representable as a unique pair of factors that sums to \(99\) or less.
+    </p>
+
+    <p>
+    In another example, if \(77\) was whispered to \(S\) then:
+    </p>
+
+$$\sigma = 59 + 18 = 59 + (77 - 59)$$
+
+    <p>
+    and:
+    </p>
+
+$$\rho = 59 \times 18 = 1, 062$$
+
+    <p>
+    has the following pairs of factors:
+    </p>
+
+$$1 \times 1,062 \quad 2 \times 531 \quad 3 \times 354 \quad 6 \times 177
+ \quad 9 \times 118 \quad 18 \times 59$$
+
+    <p>
+    looking at which \(P\) can eliminate all but the last pair and announce a
+    correct answer, \(18\) and \(59\), since this is the only pair of factors
+    that sums to \(99\) or less.
+    </p>
+
+    <p>
+    In either case \(S\) would not be able to announce \(S_1\).
+    </p>
+
+    <p>
+    However, we know that \(S\) did announce \(S_1\) from which we can draw two
+    conclusions.
+    </p>
+
+    <p id="dbg">
+    <dfn>\(EF_4\): \(\sigma\) can not be expressed as a sum of two primes</dfn>
+    </p>
+
+    <p id="dbg">
+    <dfn>\(EF_5\): there does not exist such a representation of \(\sigma = p +
+    (\sigma - p)\) that the product \(p \times (\sigma - p)\) is representable
+    as a unique pair of factors that sum to \(99\) or less</dfn>
+    </p>
+
+    <p>
+    <br>5) Now we recall the Golbach's Conjecture:
+    </p>
+
+    <p id="dbg">
+    <dfn>every even integer greater than \(2\) can be expressed as the sum of
+    two primes</dfn>
+    </p>
+
+    <p>
+    From \(EF_4\) and (verified for numbers \(4\) through \(98\)) Goldbach's
+    Conjecture it follows that we know the parity of the sum \(\sigma\) with
+    absolute certainty:
+    </p>
+
+    <p id="dbg">
+    <dfn>\(EF_6\): the sum \(\sigma\) must be odd</dfn>
+    </p>
+
+    <p>
+    Out of \(96\) initial candidates for \(\sigma\):
+    </p>
+
+$$4, 5, 6, 7, 8, \dots , 99$$
+
+    <p>
+    we can now eliminate \(48\) candidates - all the natural numbers between \(4\)
+    and \(99\) that are even.
+    </p>
+
+    <p>
+    The candidates for \(\sigma\) now are \(48\) natural numbers each of which
+    is odd:
+    </p>
+
+$$5, 7, 9, \dots 99$$
+
+    <p>
+    <br>6) From \(EF_1\), \(x\) and \(y\) are not both prime, and \(EF_4\) it
+    follows that since \(2\) is prime then:
+    </p>
+
+    <p id="dbg">
+    <dfn>\(EF_7\): \((\sigma - 2)\) can not be prime</dfn>
+    </p>
+
+    <p>
+    We now step through all the \(48\) odd numbers from \(n = 5\) to \(n = 99\)
+    and eliminate all those numbers for which \((n - 2)\) is prime. For example:
+    </p<>
+
+$$5 - 2 = 3$$
+
+    <p>
+    where \(3\) is prime, hence we eliminate \(n = 5\) and so on.
+    </p>
+
+    <p>
+    We now have only \(24\) candidates for \(\sigma\):
+    </p>
+
+$$11, 17, 23, 27, 29, 35, 37, 41, 47, 51, 53, 57, 59, 65, 67, 71, 77,
+ 79, 83, 87, 89, 93, 95, 97$$
+
+    <p>
+    <br>7) From \(EF_5\) we can prove that:
+    </p>
+
+    <p id="dbg">
+    <dfn>\(EF_8\): \(\sigma < 55\)</dfn>
+    </p>
+
+    <p>
+    We observe that for a given upper bound for \(\sigma\), \(100\), the following
+    two prime numbers:
+    </p>
+
+$$47 \quad 53$$
+
+    <p>
+    sit on the "factorization cusp":
+    </p>
+
+$$47 \times 2 = 84 < 100$$
+$$53 \times 2 = 106 > 100$$
+
+    <p>
+    Why does it matter and where did the magic number \(2\) come from?
+    </p>
+
+    <p>
+    Let \(p\) designate a prime number. Then \(\sigma\) can be represented as
+    follows:
+    </p>
+
+$$\sigma = p + (\sigma - p)$$
+
+    <p>
+    From where it follows that \(\rho\) is represented as follows:
+    </p>
+
+$$\rho = p \times (\sigma - p)$$
+
+    <p>
+    In this scenario, since \(p\) is prime, the number \((\sigma - p)\) is not.
+    But then, according to PFT, \((\sigma - p)\) can be represented as a product
+    of primes of which the smallest one is \(2\):
+    </p>
+
+$$\rho = p \times 2 \times q$$
+
+    <p>
+    where \(q\) collectively represents the remaining prime factors. Further, if
+    \(p\) is such that:
+    </p>
+
+$$p \times 2 > 100$$
+
+    <p>
+    then the number \(2p\), treated as one possible term, is already greater than
+    \(99\) and if \(2p\) is added to another greater than \(1\) number, whatever
+    it is, the result is guaranteed to be:
+    </p>
+
+$$\sigma = 2p + q > 99$$
+
+    <p>
+    The remaining prime numbers in \(q\) are guaranteed to be greater than \(2\)
+    guarantying that no matter what other factors from \(q\) we choose, the above
+    inequality will always hold. For example:
+    </p>
+
+$$\sigma = 3p + q' > 99$$
+$$\sigma = 5p + q'' > 99$$
+
+    <p>
+    and so on. This type of representation of \(\sigma\) thus ensures that at
+    least one factor of the corresponding \(\rho\) will always be greater than
+    \(99\) thus guarantying that the corresponding \(\sigma\) will always be
+    greater than \(99\) thus invalidating \(EF_5\).
+    </p>
+
+    <p>
+    Since \(p = 53\) is the smallest prime for which:
+    </p>
+
+$$p \times 2 > 100$$
+
+    <p>
+    holds, it follows that \(\sigma\) is representable as:
+    </p>
+
+$$\sigma = 53 + (\sigma - 53) = x + y$$
+
+    <p>
+    According to \(R\), \(x\) and \(y\) both must be greater than \(1\):
+    </p>
+
+$$\sigma - 53 \geqslant 2$$
+$$\sigma \geqslant 55$$
+
+    <p>
+    Consequently, all such sums violate \(EF_5\) and must be eliminated. What was
+    required to prove.
+    </p>
+
+    <p>
+    We now have \(11\) candidates for \(\sigma\):
+    </p>
+
+$$11, 17, 23, 27, 29, 35, 37, 41, 47, 51, 53$$
+
+    <p>
+    <br>8) From the above set we can eliminate \(51\) because that number
+    violates \(EF_2\) as discussed in 2.3):
+    </p>
+
+$$\sigma = 51 = 17 + 34$$
+$$\rho = 17 \times 34 = 2 \times 17^2$$
+
+    <p>
+    but:
+    </p>
+
+$$17^2 > 100$$
+
+    <p>
+    and hence our candidates for \(\sigma\) are:
+    </p>
+
+$$11, 17, 23, 27, 29, 35, 37, 41, 47, 53$$
+
+    <p>
+    <br>9) From \(P_2\) and \(S_2\) we can prove that:
+    </p>
+
+    <p id="dbg">
+    <dfn>\(EF_9\): \(\sigma < 33\)</dfn>
+    </p>
+
+    <p>
+    Let us assume the opposite:
+    </p>
+
+$$\sigma \geqslant 33$$
+
+    <p>
+    and let us assume that \(P\) announced \(P_2\). Then:
+    </p>
+
+$$\sigma - 31 \geqslant 2$$
+
+    <p>
+    as required and, after hearing \(P_2\), \(S\), examining all the possible
+    pairs of numbers that sum to \(\sigma\), would come across the following
+    representations:
+    </p>
+
+$$\sigma = (\sigma - 29) + 29 = (\sigma - 31) + 31$$
+
+    <p>
+    However, since both numbers, \(29\) and \(31\), are prime, \(P\), knowing
+    that \(\sigma < 55\), would have realized that the following products:
+    </p>
+
+$$\rho = (\sigma - 29) \times 29$$
+$$\rho = (\sigma - 31) \times 31$$
+
+    <p>
+    have a unique pair of factors that \(P\) would have been able to deduce
+    using the logic similar to the one we used when proving \(EF_8\)
+    (\(\sigma < 55\)).
+    </p>
+
+    <p>
+    In other words, in either case \(P\) would have been able to deduce the
+    correct answer to this problem while \(S\) would not have been able to
+    announce \(S_2\) even after \(P_2\). But \(S\) did announce \(S_2\) and
+    hence:
+    </p>
+
+$$\sigma < 33$$
+
+    <p>
+    Consequently, our candidates for \(\sigma\) are:
+    </p>
+
+$$\begin{equation}
+11, 17, 23, 27, 29
+\end{equation}$$
+
+    <p>
+    <br>10) From \(EF_6\) (\(\sigma\) must be odd) it follows that, since the
+    numbers that sum to \(\sigma\) must be of opposite parity, one must be even
+    while the other must be odd, their product \(\rho\) must be even. Hence, if
+    \(\rho\) has the following form:
+    </p>
+
+$$\begin{equation}
+\rho = 2^n \times p
+\end{equation}$$
+
+    <p>
+    where \(p\) is an odd prime, then \(P\) can deduce the numbers in question
+    since of all the sums of the form:
+    </p>
+
+$$2^{n - i} + 2^i \times p$$
+   
+    <p>
+    the only one that is odd (obeys \(EF_6\)) is of the form:
+    </p>
+
+$$2^n + p$$
+
+    <p>
+    Consequently, if \(\sigma\) has more than one representation of the form:
+    </p>
+
+$$2^n + p$$
+
+    <p>
+    \(S\) would not be able to announce \(S_2\) even after \(P_2\). But \(S\)
+    did announce \(S_2\) and, hence, we can throw out all the numbers from (5)
+    that have more than one representation of the form (6):
+    </p>
+
+$$\sigma = 11 = 2^2 + 7 = 2^3 + 3$$
+$$\sigma = 23 = 2^2 + 19 = 2^4 + 7$$
+$$\sigma = 27 = 2^2 + 23 = 2^3 + 19$$
+
+    <p>
+    and we now have only two candidates for \(\sigma\):
+    </p>
+
+$$17, 29$$
+
+    <p>
+    <br>11) We can eliminate \(29\) because:
+    </p>
+
+$$\sigma = 29 = 13 + (29 - 16) = 13 + 16$$
+$$\rho = 13 \times 16 = 208$$
+$$208 = 2 \times 104 = 4 \times 52 = 8 \times 26 = 13 \times 16$$
+
+    <p>
+    but:
+    </p>
+
+$$\sigma = 2 + 104 = 106 > 33$$
+$$\sigma = 4 + 52 = 56 > 33$$
+$$\sigma = 8 + 26 = 34 > 33$$
+
+    <p>
+    and since only one pair of legal factors is left, (\(13, 16\)), \(29\)
+    violates \(EF_5\). 
+    </p>
+
+    <p>
+    <br>12) Since only one candidate for \(\sigma\) is left, either:
+    </p>
+
+$$\sigma = 17$$
+
+    <p>
+    or this problem does not have a solution.
+    </p>
+
+    <p>
+    To find out if this problem has a solution let us decompose \(\sigma\) into
+    all the possible legal two-term sums, compute the corresponding \(\rho\) and
+    then record only those factors of \(\rho\) that sum to an odd number:
+    </p>
+
+$$17 = 2 + 15, \quad \rho = 30 = 2 \times 15 = 5 \times 6$$
+$$17 = 3 + 14, \quad \rho = 42 = 2 \times 21 = 3 \times 14 = 6 \times 7$$
+$$17 = 4 + 13, \quad \rho = 52 = 4 \times 13$$
+$$17 = 5 + 12, \quad \rho = 60 = 3 \times 20 = 4 \times 15 = 5 \times 12$$
+$$17 = 6 + 11, \quad \rho = 66 = 2 \times 33 = 3 \times 22 = 6 \times 11$$
+$$17 = 7 + 10, \quad \rho = 70 = 2 \times 35 = 5 \times 14 = 7 \times 10$$
+$$17 = 8 + 9, \quad \rho = 72 = 3 \times 24 = 8 \times 9$$
+
+    <p>
+    We see that the only two numbers that multiply to a product that has only
+    one pair of factors that sum to an odd number are:
+    </p>
+
+$$4, 13$$
+
+    <p>
+    Hence, \(P\) would be able to announce \(P_2\) only if (s)he was given
+    \(\rho = 52\) since only then (s)he would have been able to eliminate all
+    the two-term sums but one. Consequently, the answer is:
+    </p>
+
+$$x = 4$$
+$$y = 13$$
+$$\sigma = 17$$
+$$\rho = 52$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasfish.html">prev</a>
+     <a href="ryabaselimination.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabaselimination.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

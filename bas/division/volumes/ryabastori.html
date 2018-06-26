@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Tori
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Tori</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasellipsoid.html">prev</a>
+     <a href="ryabasparaboloids.html">next</a>
+    </p>
+
+    <h1>Ring Tori</h1>
+
+    <p>
+    <strong>Circular Ring Torus</strong>
+    </p>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the volume of a circular ring torus with \(O_1H = a\) and \(OO_1 = c\).
+    </p>
+
+    <p>
+    A circular ring torus is a three-dimensional solid formed by revolving a
+    circle with the radius \(a\) and the center \(O_1\) about the \(z\) axis in
+    such a way that \(c > a\) while \(O_1H\) remains parallel to \(Oz\).
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Choose a thin right circular ring as a primitive part represented in the
+    drawing below as an \(ABCD\) rectangle and its counterpart with a vertex
+    \(E\). Each primitive ring, topologically, is the difference between two
+    right circular cylinders: the cylinder with the radius \(KA\) and the
+    cylinder with the radius \(KB = KE\) which we can name a <dfn>virtual</dfn>
+    cylinder since it represents the void - absence of torus - between the
+    points \(B\) and \(E\):
+    </p>
+
+    <img src="imgs/torus.png" alt="Circular Ring Torus" class="center">
+
+    <p>
+    Consider the corresponding half of the torus and divide \(O_1H = a\) into
+    \(n\) line segments of equal length:
+    </p>
+
+$$AD = BC = \Delta z = \frac {a}{n}$$
+
+    <p>
+    which will play the role of heights of primitive parts.
+    </p>
+
+    <p>
+    To compute the volume of the \(i-\)th primitive ring we cut the torus with
+    a plane through \(K\) perpendicular to \(Oz\):
+    </p>
+
+    <img src="imgs/toruspart.png" alt="Torus Part" class="center">
+
+    <p>
+    Then:
+    </p>
+
+$$V'_i = V'_i(r=KA) - V'_i(r=KB) =$$
+$$\pi (c + r_i)^2\frac {a}{n} - \pi (c - r_i)^2 \frac {a}{n} =$$
+$$\frac {\pi a}{n}((c + r_i)^2 - (c - r_i)^2) =$$
+$$\frac {4\pi acr_i}{n}$$
+
+    <p>
+    Find \(r_i\) from the right, by construction, triangle \(\triangle O_1GB\)
+    via the Pythagorean theorem:
+    </p>
+
+$$r_i = \sqrt{a^2 - O_1G^2} =$$
+$$\sqrt{a^2 - z_i^2} =$$
+$$\sqrt{a^2 - \frac {a^2}{n^2}i^2} =$$
+$$\frac {a}{n}\sqrt{n^2 - i^2}$$
+
+    <p>
+    and:
+    </p>
+
+$$V'_i = \frac {4\pi a^2c}{n^2}\sqrt{n^2 - i^2}$$
+
+    <p>
+    The volume of the entire torus is the sum of volumes of its two halves:
+    </p>
+
+$$V' = 2 \times \sum_{i = 1}^n V'_i =$$
+$$\frac {8\pi a^2c}{n^2}\sum_{i = 1}^n\sqrt{n^2 - i^2}$$
+
+    <p>
+    Apply the limit to \(V'\) as \(n \to +\infty\):
+    </p>
+
+$$V = \lim_{n\to +\infty} V' =$$
+$$8\pi a^2c \lim_{n\to +\infty}\frac {1}{n^2}\sum_{i = 1}^n\sqrt{n^2 - i^2}$$
+
+    <p>
+    But in <strong>Circle</strong> chapter we have already found that the magnitude
+    of the above limit is \(\frac {\pi}{4}\) and hence:
+    </p>
+
+$$V = 8\pi a^2c \times \frac {\pi}{4} = 2\pi^2a^2c$$
+
+    <p>
+    and:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{V = 2 \pi^2 a^2c}$$
+
+    <p> 
+    If we rearrange the above formula as follows:
+
+$$V = 2 \pi c \times \pi a^2$$
+
+    <p>
+    then it can be interpreted as a volume of a right circular cylinder with the
+    radius \(a\) and the height \(2 \pi c\).
+    </p>
+
+    <p>
+    <br><strong>Elliptic Ring Torus</strong>
+    </p>
+
+    <p>
+    is a three-dimensional solid formed by revolving an ellipse with the center
+    at \(O_1\) and a semi-major axis \(a\) (measured along the \(x\) axis) and a
+    semi-minor axis \(b\) (measured along the \(z\) axis) about \(Oz\) in such a
+    way that \(c > a\) while \(O_1H\) remains parallel to \(Oz\):
+    </p>
+
+    <img src="imgs/elliptictorus.png" alt="Elliptic Ring Torus" class="center">
+
+    <p>
+    Choose a thin right circular ring as a primitive part to approximate the
+    volume of an elliptic ring torus with and position it in the same way as it
+    was positioned within the circular ring torus. Then:
+    </p>
+
+$$V'_i = V'_i(r=KA) - V'_i(r=KB) =$$
+$$\pi (c + r_i)^2 \frac {b}{n} - \pi (c - r_i)^2 \frac {b}{n} =$$
+$$\frac {4 \pi bc}{n} r_i$$
+
+    <p>
+    The canonical equation of the left, for example, ellipse in the \(zx\) plane
+    is:
+    </p>
+
+$$\frac {(x + c)^2}{a^2} + \frac {z^2}{b^2} = 1$$
+
+    <p>
+    where we take \(c > 0\).
+    </p>
+
+    <p>
+    For the point \(B\) on the perimeter of the ellipse then:
+    </p>
+
+$$\frac {(x_i + c)^2}{a^2} + \frac {z_i^2}{b^2} = 1$$
+$$x_i + c = \frac {a}{b} \sqrt {b^2 - z_i^2} =$$
+$$\frac {a}{b} \sqrt {b^2 - \frac {b^2}{n^2}i^2} =$$
+$$\frac {a}{n} \sqrt {n^2 - i^2}$$
+
+    <p>
+    Since \(x_i < 0\) for \(r_i\) we have:
+    </p>
+
+$$r_i = |-c - x_i| = c + x_i = \frac {a}{n} \sqrt {n^2 - i^2}$$
+
+    <p>
+    The volume of the \(i-\)th primitive ring then is:
+    </p>
+
+$$V'_i = \frac {4 \pi abc}{n^2} \sqrt {n^2 - i^2}$$
+
+    <p>
+    The approximate volume of the entire elliptic ring torus is the sum of volumes
+    of its two halves:
+    </p>
+
+$$V' = 2 \times \sum_{i=1}^n V'_i =$$
+$$\frac {8 \pi abc}{n^2} \sum_{i=1}^n \sqrt {n^2 - i^2}$$
+
+    <p>
+    Applying the corresponding limit to \(V'\) we obtain:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{V = 2 \pi^2 abc}$$
+
+    <p>
+    or:
+    </p>
+
+$$V = \pi ab \times 2 \pi c$$
+
+    <p>
+    which can be interpreted as a volume of a right elliptic cylinder of height
+    \(2 \pi c\).
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasellipsoid.html">prev</a>
+     <a href="ryabasparaboloids.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionvolumes.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

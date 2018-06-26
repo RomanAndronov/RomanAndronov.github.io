@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Triangle Constructions, aas by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Triangle Constructions, aas by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+
+    <h1>aas: angle, angle, side</h1>
+
+    <p>
+    <strong>Given</strong>
+    </p>
+
+    <p>
+    \(\angle A\), \(\angle C\), \(a\) - two angles and the non-included side
+    </p>
+
+    <p>
+    <br><strong>Analysis</strong>
+    </p>
+
+    <p>
+    We can locate the first vertex of the triangle, \(A\) or \(C\), by
+    constructing one of the given angles, \(\angle A\) or \(\angle C\)
+    correspondingly. Let us assume that we have picked the given angle \(C\),
+    constructed it and located the vertex \(C\). We can now use this vertex as
+    a center of a circle built with the given side \(a\) as its radius. The
+    intersection of that circle with one of the sides of the constructed angle
+    \(C\) will locate the second vertex of the triangle, \(B\).
+    </p>
+
+    <p>
+    To locate the third vertex of the triangle we need to construct the
+    remaining given angle, \(\angle A\) in this case, with one of its sides
+    passing through the point \(B\). Both given angles, \(\angle A\) and
+    \(\angle C\), share one side with each other. We do not have this shared
+    side constructed yet. However, we do know that the side of the angle \(A\)
+    not shared with the side of the angle \(C\) must pass through the point \(B\).
+    </p>
+
+    <p>
+    There are several ways to construct that side. One way would be to use a
+    type of planar geometric transformation known as translation. Translation
+    is the process of carrying every point of an object the same distance in the
+    same direction.
+    </p>
+
+    <p>
+    In this particular case we can construct the remaining given angle,
+    \(\angle A\), with a temporary vertex at an arbitrary point \(X\) anywhere
+    on the side shared with the previously constructed angle \(C\). We then can
+    slide the non-shared side of the angle \(A\) towards the point \(B\) until
+    that side passes through that point. In the straight edge and compass
+    constructions parlance it means constructing a straight line parallel to a
+    given straight line passing through a given point. That line will intersect
+    the non-shared side of the angle \(C\) at the third vertex, \(A\).
+    </p>
+
+    <p>
+    <br><strong>Construction Outline</strong>
+    </p>
+
+    <p>
+    <dfn>Construct the given angle \(C\) with the vertex at an arbitrary point
+    \(C\). Cut the given side \(a\) on one of the sides of the given angle \(C\)
+    at the vertexes \(C\) and \(B\). Construct the second given angle, \(A\), on
+    the side of the angle \(C\) opposite to \(a\) with the vertex at an arbitrary
+    point \(X\). Construct a straight line passing through the vertex \(B\) parallel
+    to the side of the angle \(A\) not shared with the angle \(C\). The intersection
+    of that line with the side of the given angle \(C\) opposite to \(a\) locates
+    \(A\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Sample Construction</strong>
+    </p>
+
+    <img src="imgs/aas.png" alt="aas" class="center">
+
+$$C, Z$$
+$$Ln(C, Z)$$
+$$Y \colon \quad \angle YCZ = \angle C$$
+$$Ln(C, Y)$$
+$$Cir(C, a)$$
+$$Cir(C, a) \; \cap \; Ln(C, Z) = B \colon \quad CB = a$$
+$$X \in Ln(C, Y)$$
+$$W \colon \quad \angle WXC = \angle A$$
+$$Ln(W, X)$$
+$$U \colon \quad Ln(B, U) \; \| \; Ln(W, X)$$
+$$Ln(B, U) \; \cap \; Ln(C, Y) = A$$
+$$\triangle ABC$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryatriap1.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

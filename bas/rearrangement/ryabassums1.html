@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Rearrangement. Sums 1
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Rearrangement. Sums 1</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabastanofadiff.html">prev</a>
+     <a href="ryabassums2.html">next</a>
+    </p>
+
+    <h1>Sums 1</h1>
+
+    <p>
+    The purpose of rearranging the members of various types of sums is to create
+    a new formation of them in which most members either cancel each other out or
+    sum easily by becoming the same, for example, in which case the sum of like
+    terms can be replaced with a product.
+    </p>
+
+    <p>
+    <strong>Order Rearrangement</strong>
+    </p>
+
+    <p>
+    In this section we will compute certain sums simply be rearranging the order
+    of their terms.
+    </p>
+
+    <p>
+    <strong>Problem 1.1</strong>
+    </p>
+
+    <p>
+    Find the sum of first powers of first \(n\) natural numbers in closed form:
+    </p>
+
+$$\begin{equation}
+S(n) = 1 + 2 + 3 + \ldots + n = \sum_{i = 1}^n i
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    If we rewrite the terms of (1) in reverse order:
+    </p>
+
+$$\begin{equation}
+S(n) = n + \ldots + 3 + 2 + 1
+\end{equation}$$
+
+    <p>
+    and add (1) and (2) together then we will obtain:
+    </p>
+
+$$+\,\left\{\begin{array}{lclllllllll}
+S(n) & = & 1 & + & 2 & + & 3 & + & \ldots & + & n\\
+S(n) & = & n & + & \ldots & + & 3 & + & 2 & + & 1
+\end{array}\right.$$
+
+    <p>
+    Since the magnitudes of both sums remained the same and equal, we have:
+    </p>
+
+$$2\times S(n) = (1 + n) + (2 + n - 1) + (3 + n - 2) + \ldots + (n + 1)$$
+
+    <p>
+    We observe that each term inside the parenthesis is equal to \(1 + n\):
+    </p>
+
+$$2 + n - 1 = 1 + n$$
+$$3 + n - 2 = 1 + n$$
+$$4 + n - 3 = 1 + n$$
+
+    <p>
+    and so on for all the remaining members of the sum:
+    </p>
+
+$$2\times S(n) = \underbrace{(1 + n) + (1 + n) + (1 + n) + \ldots + (1 + n)}_{n}$$
+
+    <p>
+    As we have noted earlier, since all the terms of the above expression are
+    the same, the addition can be replaced with multiplication:
+    </p>
+
+$$2\times S(n) = n \times (1 + n)$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n i = \frac {n(n + 1)}{2}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 1.2</strong>
+    </p>
+
+    <p>
+    Find the sum of first powers of first \(n\) even natural numbers:
+    </p>
+
+$$\begin{equation}
+S_e(n) = 2 + 4 + \ldots + 2n = \sum_{i = i}^n 2i
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    If we rewrite the terms of (4) in reverse order:
+    </p>
+
+$$\begin{equation}
+S_e(n) = 2n + \ldots + 6 + 4 + 2
+\end{equation}$$
+
+    <p>
+    and add (4) and (5) together then we will obtain:
+    </p>
+
+$$+\,\left\{\begin{array}{lclllllllll}
+S_e(n) & = & 2 & + & 4 & + & 6 & + & \ldots & + & 2n\\
+S_e(n) & = & 2n & + & \ldots & + & 6 & + & 4 & + & 2
+\end{array}\right.$$
+
+    <p>
+    Since the magnitudes of both sums remained the same and equal, we have:
+    </p>
+
+$$2\times S_e(n) = (2 + 2n) + (4 + 2n - 2) + (6 + 2n - 4) + \ldots + (2n + 2)$$
+
+    <p>
+    The terms \(2n - 2\), \(2n - 4\), \(2n - 6\) and the like come from the fact
+    that the members of this particular sum are even numbers and if the last term
+    of a sum is \(2n\) then the term just before it is \(2(n - 1) = 2n - 2\), the
+    term just before it is \(2(n - 2) = 2n - 4\) and so on.
+    </p>
+
+    <p>
+    We observe that each term inside the parenthesis is equal to \(2 + 2n\):
+    </p>
+
+$$4 + 2n - 2 = 2 + 2n$$
+$$6 + 2n - 4 = 2 + 2n$$
+$$8 + 2n - 6 = 2 + 2n$$
+
+    <p>
+    and so on for all the remaining members of the sum:
+    </p>
+
+$$2\times S_e(n) = \underbrace{(2 + 2n) + (2 + 2n) + (2 + 2n) + \ldots + (2 + 2n)}_{n}$$
+
+    <p>
+    Since all the terms of the above expression are the same, the addition can
+    be replaced with multiplication:
+    </p>
+
+$$2\times S_e(n) = n \times (2 + 2n)$$
+$$2\times S_e(n) = 2n \times (1 + n)$$
+
+    <p>
+    or:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = i}^n 2i = n(n + 1)}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 1.3</strong>
+    </p>
+
+    <p>
+    Find the sum of first powers of first \(n\) odd natural numbers:
+    </p>
+
+$$S_o(n) = 1 + 3 + \ldots + 2n - 1 = \sum_{i = 1}^n (2i - 1)$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    By now we should be able to do the relevant computations rather mechanically:
+    </p>
+
+$$S_o(n) = 2n - 1 + \ldots + 5 + 3 + 1$$
+
+$$+\,\left\{\begin{array}{lclllllllll}
+S_o(n) & = & 1 & + & 3 & + & 5 & + & \ldots & + & 2n - 1\\
+S_o(n) & = & 2n - 1 & + & \ldots & + & 5 & + & 3 & + & 1
+\end{array}\right.$$
+
+$$2\times S_o(n) = (1 + 2n - 1) + (3 + 2n - 3) + (5 + 2n - 5) + \ldots +
+ (2n - 1 + 1)$$
+
+$$2\times S_o(n) = \underbrace{2n + 2n + 2n + \ldots + 2n}_{n}$$
+
+$$2\times S_o(n) = n \times 2n$$
+$$2\times S_o(n) = 2 n^2$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n (2i - 1) = n^2}
+\end{equation}$$
+
+    <p>
+    <br><strong>Structure Rearrangement</strong>
+    </p>
+
+    <p>
+    In this section that continues through chapters <strong>Sums 2</strong> and
+    <strong>Sums 3</strong> we will compute the magnitudes of certain sums in
+    closed form by rearranging the structure of their members.
+    </p>
+
+    <p>
+    <br><strong>Problem 1.4</strong>
+    </p>
+
+    <p>
+    Find the sum of inverse products of two consecutive natural numbers:
+    </p>
+
+$$\begin{equation}
+\frac {1}{1 \times 2} + \frac {1}{2 \times 3} + \frac {1}{3 \times 4} +
+ \ldots + \frac {1}{n(n + 1)} = \sum_{i=1}^n \frac {1}{i(i + 1)}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    We observe that each term in (8) is structured in such a way that it can be
+    rearranged as follows:
+    </p>
+
+$$\frac {1}{1 \times 2} = \frac {1}{1} - \frac {1}{2}$$
+$$\frac {1}{2 \times 3} = \frac {1}{2} - \frac {1}{3}$$
+$$\frac {1}{3 \times 4} = \frac {1}{3} - \frac {1}{4}$$
+
+    <p>
+    and that after adding these members together only the first and the last
+    terms survive because all the intermediate terms cancel each other out since
+    pairwise they have the same magnitudes but opposite signs:
+    </p>
+
+$$\frac {1}{1 \times 2} + \frac {1}{2 \times 3} + \frac {1}{3 \times 4} =
+ \frac {1}{1} - \frac {1}{4}$$
+
+    <p>
+    It follows then that for any \(n\) such terms their sum will be:
+    </p>
+
+$$\sum_{i=1}^n \frac {1}{i(i + 1)} = \frac {1}{1} - \frac {1}{n + 1} =$$
+$$\frac {n + 1 - 1}{n + 1} = \frac {n}{n + 1}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i=1}^n \frac {1}{i(i + 1)} = \frac {n}{n + 1}}
+\end{equation}$$
+
+    <p>
+    If we further rearrange the above formula as follows:
+    </p>
+
+$$\sum_{i=1}^n \frac {1}{i(i + 1)} = \frac {1}{1 + \frac {1}{n}}$$
+
+    <p>
+    then its limit as \(n \to +\infty\) is:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i=1}^n \frac {1}{i(i + 1)} = 1}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 1.5</strong>
+    </p>
+
+    <p>
+    Find the sum of inverse products of two consecutive odd natural numbers:
+    </p>
+
+$$\begin{equation}
+\frac {1}{1 \times 3} + \frac {1}{3 \times 5} + \frac {1}{5 \times 7} +
+\ldots + \frac {1}{(2n - 1)(2n + 1)} = \sum_{i=1}^n \frac {1}{(2i - 1)(2i + 1)}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    We observe that each term in (11) is structured in such a way that it can be
+    rearranged as follows:
+    </p>
+
+$$\frac {1}{1 \times 3} = \frac {1}{2}\Big(\frac {1}{1} - \frac {1}{3}\Big)$$
+$$\frac {1}{3 \times 5} = \frac {1}{2}\Big(\frac {1}{3} - \frac {1}{5}\Big)$$
+$$\frac {1}{1 \times 3} = \frac {1}{2}\Big(\frac {1}{5} - \frac {1}{7}\Big)$$
+
+    <p>
+    and we already know that in the sum of such terms only the first and the last
+    ones survive:
+    </p>
+
+$$\frac {1}{(2i - 1) \times (2i + 1)} = \frac {1}{2}\Big(\frac {1}{2i - 1}
+- \frac {1}{2i + 1}\Big)$$
+
+    <p>
+    Consequently:
+    </p>
+
+$$\sum_{i=1}^n \frac {1}{(2i - 1)(2i + 1)} = \frac {1}{2}\Big( \frac {1}{1} -
+\frac {1}{2n + 1}\Big) =$$
+$$\frac {1}{2} \frac {2n + 1 - 1}{2n + 1} =$$
+$$\frac {n}{2n + 1}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i=1}^n \frac {1}{(2i - 1)(2i + 1)} = \frac {n}{2n + 1}}
+\end{equation}$$
+
+    <p>
+    or:
+    </p>
+
+$$\sum_{i=1}^n \frac {1}{(2i - 1)(2i + 1)} = \frac {1}{2 + \frac {1}{n}}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i=1}^n
+\frac {1}{(2i - 1)(2i + 1)} = \frac {1}{2}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 1.6</strong>
+    </p>
+
+    <p>
+    Find the sum of inverse products of two consecutive odd natural numbers:
+    </p>
+
+$$\begin{equation}
+\frac {1}{2 \times 4} + \frac {1}{4 \times 6} + \frac {1}{6 \times 8} +
+\ldots + \frac {1}{2n(2n + 2)} = \sum_{i=1}^n \frac {1}{2i(2i + 2)}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    The sum (14) can be expressed in terms of the previously computed sum, (10):
+    </p>
+
+$$2i(2i + 2) = 4i(i + 1)$$
+$$\sum_{i=1}^n \frac {1}{2i(2i + 2)} = \frac {1}{4}
+\sum_{i=1}^n \frac {1}{i(i + 1)}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i=1}^n \frac {1}{2i(2i + 2)} = \frac {n}{4(n + 1)}}
+\end{equation}$$
+
+    <p>
+    and since:
+    </p>
+
+$$\frac {n}{4(n + 1)} = \frac {1}{4 + \frac {4}{n}}$$
+
+    <p>
+    we have:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i=1}^n
+\frac {1}{2i(2i + 2)} = \frac {1}{4}}
+\end{equation}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabastanofadiff.html">prev</a>
+     <a href="ryabassums2.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrearrangement.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

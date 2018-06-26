@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Triangle Constructions, sas by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Triangle Constructions, sas by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+
+    <h1>sas: side, angle, side</h1>
+
+    <p>
+    <strong>Given</strong>
+    </p>
+
+    <p>
+    \(b\), \(\angle C\), \(a\) - two sides and the included angle
+    </p>
+
+    <p>
+    <br><strong>Analysis</strong>
+    </p>
+
+    <p>
+    We can locate the first vertex of the triangle, \(C\), by constructing the
+    given angle \(C\). We can then use this vertex as a center of two circles
+    constructed with the given sides \(b\) and \(c\) as their radii. The
+    intersection of these circles with the sides of the constructed angle \(C\)
+    locates the remaining two vertexes of the triangle, \(A\) and \(B\).
+    </p>
+
+    <p>
+    <br><strong>Construction Outline</strong>
+    </p>
+
+    <p>
+    <dfn>Construct the given angle \(C\) with the vertex at an arbitrary point
+    \(C\). Construct a \(Cir(C, a)\) and a \(Cir(C, b)\). The intersection of
+    these two circles with the sides of the angle \(C\) locates the remaining
+    two vertexes of the triangle, \(A\) and \(B\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Sample Construction</strong>
+    </p>
+
+    <img src="imgs/sas.png" alt="sas" class="center">
+
+$$C, Z$$
+$$Ln(C, Z)$$
+$$Y \colon \quad \angle YCZ = \angle C$$
+$$Ln(C, Y)$$
+$$Cir(C, a)$$
+$$Cir(C, a) \; \cap \; Ln(C, Z) = B \colon \quad CB = a$$
+$$Cir(C, b)$$
+$$Cir(C, b) \; \cap \; Ln(C, Y) = A \colon \quad CA = b$$
+$$Ln(A, B)$$
+$$\triangle ABC$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryatriap1.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

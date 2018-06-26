@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Circle
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Circle</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabassquareroot.html">prev</a>
+     <a href="ryabasellipse.html">next</a>
+    </p>
+
+    <h1>Circle</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Knowing that the square area of a circle with a radius \(r\) is \(\pi r^2\)
+    find the value of the following limit:
+    </p>
+
+$$\lim_{n\to +\infty} \frac {1}{n^2} \sum_{i=1}^n \sqrt {n^2 - i^2}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    We know that the limits for both sums, left and right, exist and are equal.
+    Let us construct Right Riemann Sum for a quarter of the given circle located
+    in the first quadrant where \(x \in [0, r]\):
+    </p>
+
+    <img src="imgs/circle.png" alt="Circle" class="center">
+
+    <p>
+    Let:
+    </p>
+
+$$OB = OA = r$$
+
+    <p>
+    The square area of the \(i-\)th primitive rectangle is:
+    </p>
+
+$$A'_{i, r} = \frac {r}{n} \times y_i =$$
+$$\frac {r}{n} \times \sqrt {r^2 - x_i^2} =$$
+$$\frac {r}{n} \times \sqrt {r^2 - \frac {r^2}{n^2}i^2} =$$
+$$\frac {r^2}{n^2} \times \sqrt {n^2 - i^2}$$
+
+    <p>
+    where we have used the fact that:
+    </p>
+
+$$y(x) = \sqrt {r^2 - x^2}$$
+
+    <p>
+    Right Riemann Sum then is:
+    </p>
+
+$$A'_r = \sum_{i=1}^n A'_{i, r} =$$
+$$\frac {r^2}{n^2} \sum_{i=1}^n \sqrt {n^2 - i^2}$$
+
+    <p>
+    Four above sums make up the approximation of the square area of the entire
+    circle:
+    </p>
+
+$$A_r = \lim_{n \to +\infty} 4 \times A'_r =$$
+$$\begin{equation}
+4r^2 \lim_{n \to +\infty} \frac {1}{n^2} \sum_{i=1}^n \sqrt {n^2 - i^2}
+\end{equation}$$
+
+    <p>
+    Equate (1) to \(\pi r^2\):
+    </p>
+
+$$\begin{equation}
+4r^2 \lim_{n\to +\infty} \frac {1}{n^2} \sum_{i=1}^n \sqrt {n^2 - i^2} =
+ \pi r^2
+\end{equation}$$
+
+    <p>
+    Divide both sides of (2) by \(4r^2\):
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\lim_{n\to +\infty} \frac {1}{n^2} \sum_{i=1}^n
+ \sqrt {n^2 - i^2} = \frac {\pi}{4}}$$
+
+    <p>
+    We will use that limit elsewhere, including <strong>Ellipse</strong> chapter.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabassquareroot.html">prev</a>
+     <a href="ryabasellipse.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionareas.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

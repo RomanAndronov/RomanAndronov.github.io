@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Rearrangement. Sums 2
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Rearrangement. Sums 2</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabassums1.html">prev</a>
+     <a href="ryabassums3.html">next</a>
+    </p>
+
+    <h1>Sums 2</h1>
+
+    <p>
+    <br><strong>Problem 2.1</strong>
+    </p>
+
+    <p>
+    Find the sum of growing consecutive powers of a constant integer base
+    \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S = \sum_{i = 0}^n a^i = 1 + a + a^2 + a^3 + \ldots + a^n
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Modify the structure of each member of (1) by multiplying it by \(a\):
+    </p>
+
+$$\begin{equation}
+aS_a(n) = a + a^2 + a^3 + a^4 + \ldots + a^{n + 1}
+\end{equation}$$
+
+    <p>
+    Subtract (1) from (2):
+    </p>
+
+$$-\,\left\{\begin{array}{lclllllllll}
+aS_a(n) & = & a & + & a^2 & + & a^3 & + & \ldots & + & a^{n + 1}\\
+\\
+S_a(n) & = & 1 & + & a & + & a^2 & + & \ldots & + & a^n\\
+\end{array}\right.$$
+
+$$\begin{equation}
+(a - 1)S_a(n) = a + a^2 + a^3 + \ldots + a^{n + 1} - 1 - a - a^2 - a^3
+- \ldots - a^n
+\end{equation}$$
+
+    <p>
+    Rearrange the members of equal powers in (3) as follows:
+    </p>
+
+$$(a - 1)S_a(n) = a - a + a^2 - a^2 + a^3 - a^3 + \ldots + a^n - a^n +
+a^{n + 1} - 1$$
+
+    <p>
+    and observe that all such members will cancel each other out except for the
+    last two:
+    </p>
+
+$$(a - 1)S_a(n) = a^{n + 1} - 1$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 0}^n a^i = \frac {a^{n + 1} - 1}{a - 1}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 2.2</strong>
+    </p>
+
+    <p>
+    Find the sum of growing odd powers of a constant integer base \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S_{a^o}(n) = \sum_{i = 1}^n a^{2i - 1} = a + a^3 + a^5 + \ldots + a^{2n - 1}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Rearrange the structure of each member of (5) by multiplying it by \(a^2\):
+    </p>
+
+$$\begin{equation}
+a^2S_{a^o}(n) = a^3 + a^5 + a^7 + a^9 + \ldots + a^{2n + 1}
+\end{equation}$$
+
+    <p>
+    Subtract (5) from (6):
+    </p>
+
+$$-\,\left\{\begin{array}{lclllllllll}
+a^2S_{a^o}(n) & = & a^3 & + & a^5 & + & a^7 & + & \ldots & + & a^{2n + 1}\\
+S_{a^o}(n) & = & a & + & a^3 & + & a^5 & + & \ldots & + & a^{2n - 1}
+\end{array}\right.$$
+
+$$(a^2 - 1)S_{a^o}(n) = a^3 + a^5 + a^7 + \ldots + a^{2n + 1} - a - a^3 - a^5
+- \ldots - a^{2n - 1} =$$
+$$a^3 - a^3 + a^5 - a^5 + a^7 - a^7 + \ldots + a^{2n - 1} - a^{2n - 1} +
+ a^{2n + 1} - a$$
+
+    <p>
+    and observe that all the members with like powers will cancel each other out
+    except for the last two:
+    </p>
+
+$$(a^2 - 1)S_{a^o}(n) = a^{2n + 1} - a = a(a^{2n} - 1)$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n a^{2i - 1} = a \frac {a^{2n} - 1}{a^2 - 1}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 2.3</strong>
+    </p>
+
+    <p>
+    Find the sum of growing even powers of a constant integer base \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S_{a^e}(n) = \sum_{i = 1}^n a^{2i} = a^2 + a^4 + a^6 + \ldots + a^{2n}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    At this point we should be able to compute (8) by analogy:
+    </p>
+
+$$a^2S_{a^e}(n) = a^4 + a^6 + a^8 + a^{10} + \ldots + a^{2n + 2}$$
+
+$$-\,\left\{\begin{array}{lclllllllll}
+S_{a^e}(n) \times a^2 & = & a^4 & + & a^6 & + & a^8 & + & \ldots & + & a^{2n + 2}\\
+S_{a^e}(n) & = & a^2 & + & a^4 & + & a^6 & + & \ldots & + & a^{2n}
+\end{array}\right.$$
+
+$$(a^2 - 1)S_{a^e}(n) = a^4 + a^6 + a^8 + \ldots + a^{2n + 2} - a^2 - a^4 -
+a^6 - \ldots - a^{2n} =$$
+$$a^4 - a^4 + a^6 - a^6 + a^8 - a^8 + \ldots + a^{2n} - a^{2n} + a^{2n + 2} -
+ a^2 =$$
+$$a^2(a^{2n} - 1)$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n a^{2i} = a^2 \frac {a^{2n} - 1}{a^2 - 1}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 2.4</strong>
+    </p>
+
+    <p>
+    Find the sum of inverse growing powers of a constant integer base \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S_{a^-}(n) = \sum_{i = 1}^n \frac {1}{a^i} = \frac {1}{a} + \frac {1}{a^2} + \frac {1}{a^3}
++ \ldots + \frac {1}{a^n}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Multiply both sides of (10) by \(a\):
+    </p>
+
+$$\begin{equation}
+aS_{a^-}(n) = 1 + \frac {1}{a} + \frac {1}{a^2} + \ldots + \frac {1}{a^{n - 1}}
+\end{equation}$$
+
+    <p>
+    Subtract (10) from (11):
+    </p>
+
+$$(a - 1)S_{a^-}(n) = 1 + \frac {1}{a} + \frac {1}{a^2} + \ldots + \frac {1}{a^{n - 1}}
+- \frac {1}{a} - \frac {1}{a^2} - \frac {1}{a^3} - \ldots - \frac {1}{a^n} =$$
+$$1 + \frac {1}{a} - \frac {1}{a} + \frac {1}{a^2} - \frac {1}{a^2} +
+ \ldots + \frac {1}{a^{n - 1}} - \frac {1}{a^{n - 1}} - \frac {1}{a^n} =$$
+$$1 - \frac {1}{a^n}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n \frac {1}{a^i} = \frac {a^n - 1}{a^n(a - 1)}}
+\end{equation}$$
+
+    <p>
+    Further:
+    </p>
+
+$$\frac {a^n - 1}{a^n(a - 1)} = \frac {1 - \frac {1}{a^n}}{a - 1}$$
+
+    <p>
+    and hence:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i = 1}^n \frac {1}{a^i} =
+ \frac {1}{a - 1}}
+\end{equation}$$
+
+    <p>
+    By analogy we also obtain the results for odd:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n \frac {1}{a^{2i - 1}} =
+ \frac {a^{2n} - 1}{a^{2n - 1}(a^2 - 1)}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i = 1}^n \frac {1}{a^{2i - 1}} =
+ \frac {a}{a^2 - 1}}
+\end{equation}$$
+
+    <p>
+    and even powers:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n \frac {1}{a^{2i}} =
+ \frac {a^{2n} - 1}{a^{2n}(a^2 - 1)}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty} \sum_{i = 1}^n \frac {1}{a^{2i}} =
+ \frac {1}{a^2 - 1}}
+\end{equation}$$
+
+    <p>
+    <br><strong>Problem 2.5</strong>
+    </p>
+
+    <p>
+    Find the sum of patterned inverse consecutive powers of a constant integer
+    base \(a > 1\):
+    </p>
+
+$$\begin{equation}
+S = \sum_{i = 1}^n \frac {i}{a^i} = \frac {1}{a} + \frac {2}{a^2} + \frac {3}{a^3}
++ \ldots + \frac {n}{a^n}
+\end{equation}$$
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    To calculate this sum we will use the combination of two approaches:
+    rearrangement and reduction. First we will rearrange and then we will reduce.
+    </p>
+
+    <p>
+    Multiply both sides of (18) by \(a\):
+    </p>
+
+$$\begin{equation}
+aS = 1 + \frac {2}{a} + \frac {3}{a^2} + \ldots + \frac {n}{a^{n - 1}}
+\end{equation}$$
+
+    <p>
+    Subtract (18) from (19):
+    </p>
+
+$$aS - S = 1 + \frac {2}{a} + \frac {3}{a^2} + \ldots + \frac {n}{a^{n - 1}}
+ - \frac {1}{a} - \frac {2}{a^2} - \frac {3}{a^3} - \ldots - \frac {n}{a^n} =$$
+$$1 + \frac {2}{a} - \frac {1}{a} + \frac {3}{a^2} - \frac {2}{a^2}
+ + \ldots + \frac {n}{a^{n - 1}} - \frac {n - 1}{a^{n - 1}} - \frac {n}{a^n} =$$
+$$1 + \underbrace{\frac {1}{a} + \frac {1}{a^2} + \frac {1}{a^3} +
+  + \ldots + \frac {1}{a^{n - 1}}}_{n - 1} - \frac {n}{a^n}$$
+
+    <p>
+    We observe that the terms in the middle of the above sum look almost like the
+    sum (12) - almost because in (12) the index \(i\) runs from \(1\) to \(n\)
+    while here \(i\) runs from \(1\) to \(n - 1\).
+    </p>
+
+    <p>
+    To make our current sum complete we add to and subtract from it the lacking
+    term of \(a^{-n}\):
+    </p>
+
+$$(a - 1)S = 1 + \underbrace{\frac {1}{a} + \frac {1}{a^2} + \frac {1}{a^3} +
+ \ldots + \frac {1}{a^{n - 1}} + \frac {1}{a^n}}_{n} - \frac {1}{a^n} -
+ \frac {n}{a^n}$$
+
+    <p>
+    The structure rearrangement portion is over since we have managed to reduce
+    the  current problem to the previously solved one. From (12) it follows:
+    </p>
+
+$$(a - 1)S = 1 + \frac {a^n - 1}{a^n(a - 1)} - \frac {1}{a^n} - \frac {n}{a^n} =$$
+$$1 + \frac {a^n - 1}{a^n(a - 1)} - \frac {1 + n}{a^n} =$$
+$$\frac {a^n(a - 1)}{a^n(a - 1)} + \frac {a^n - 1}{a^n(a - 1)} -
+ \frac {(1 + n)(a - 1)}{a^n(a - 1)} =$$
+$$\frac {a^{n + 1} - a^n + a^n - 1 - a + 1 - na + n} {a^n(a - 1)} =$$
+$$= \frac {a^{n + 1} - a(n + 1) + n}{a^n(a - 1)}$$
+
+    <p>
+    and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\sum_{i = 1}^n \frac {i}{a^i} = \frac {a^{n + 1} - a(n + 1) +
+ n}{a^n(a - 1)^2}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\lim_{n \to +\infty}\sum_{i = 1}^n \frac {i}{a^i} =
+ \frac {a}{(a - 1)^2}}
+\end{equation}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabassums1.html">prev</a>
+     <a href="ryabassums3.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrearrangement.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

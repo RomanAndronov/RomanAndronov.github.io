@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Armies by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css"/>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Armies by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+    </p>
+
+    <h1>Armies</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Two armies, \(A\) and \(B\), are engaged in a direct combat in the open within
+    direct view of each other. Initially the army \(A\) has \(a_0\) soldiers while
+    the army \(B\) has \(b_0\) soldiers and:
+    </p>
+
+$$a_0 > b_0$$
+
+    <p>
+    1) How many soldiers will the army \(A\) be left with by the time the army
+    \(B\) is totally annihilated assuming a continuous attrition with constant
+    rates for both armies?
+    </p>
+
+    <p>
+    2) How long will it take the army \(A\) to totally annihilate the army \(B\)?
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Assuming a discrete time combat model for a moment, let \(a(n)\) and \(b(n)\)
+    be the number of soldiers the armies \(A\) and \(B\) have correspondingly at
+    a moment of time \(n\). We then model the number of soldiers each army has
+    standing one unit of time later as a difference between the current number
+    of soldiers and the losses each army suffered after the current fire exchange:
+    </p>
+
+$$a(n + 1) = a(n) - l_a(n)$$
+$$b(n + 1) = b(n) - l_b(n)$$
+
+    <p>
+    where \(l_a(n)\) stands for the losses of the army \(A\) inflicted by the
+    army \(B\) - the number of soldiers of the army \(A\) annihilated by the
+    soldiers of the army \(B\) after one unit of time has passed.
+    </p>
+
+    <p>
+    Correspondingly, \(l_b(n)\) is the number of soldiers of the army \(B\)
+    annihilated by the soldiers of the army \(A\) during the same unit of time.
+    </p>
+
+    <p>
+    Next, we assume that:
+    </p>
+
+$$l_a(n) = \beta \times 1 \times b(n)$$
+$$l_b(n) = \alpha \times 1 \times a(n)$$
+
+    <p>
+    where \(\beta\) is the number of soldiers (of the army \(A\)) one soldier of
+    the army \(B\) can annihilate per unit of time, \(1\), and \(\alpha\) is the
+    number of soldiers (of the army \(B\)) one soldier of the army \(A\) can
+    annihilate per unit of time, also \(1\):
+    </p>
+
+$$a(n + 1) = a(n) - \beta \times 1 \times b(n)$$
+$$b(n + 1) = b(n) - \alpha \times 1 \times a(n)$$
+
+    <p>
+    In other words, we assume that:
+    </p>
+
+    <p>
+    - all the soldiers of a given army have the same lethal skill captured in
+    \(\alpha\) and \(\beta\)
+    </p>
+
+    <p>
+    - \(\alpha\) and \(\beta\) are both constant over time, to be sure the units
+    of measurement of \(\alpha\) and \(\beta\) are <dfn>"soldiers/time"</dfn>
+    </p>
+
+    <p>
+    - the losses inflicted by each army on its opponent depend only on the number
+    of standing soldiers and their lethal skill or offensive fire effectiveness
+    - we explicitly do not account for the (natural) defensive mechanisms
+    </p>
+
+    <p>
+    - the losing army is willing to fight till the bitter end despite facing
+    certain and inevitable annihilation
+    </p>
+
+    <p>
+    - the winning army is willing to fight till the not bitter end despite facing
+    certain and inevitable victory
+    </p>
+
+    <p>
+    Moving from a discrete to a continuous flow of time we take it that after
+    \(\Delta t\) amount of time of the above combat elapses, the losses suffered
+    by each army become:
+    </p>
+
+$$a(t + \Delta t) - a(t) = - \beta \Delta t b(t)$$
+$$b(t + \Delta t) - b(t) = - \alpha \Delta t a(t)$$
+
+    <p>
+    Divide both of the above equations by \(\Delta t\):
+    </p>
+
+$$\frac {a(t + \Delta t) - a(t)}{\Delta t} =
+ \frac {- \beta \Delta t b(t)}{\Delta t} =- \beta b(t)$$
+$$\frac {b(t + \Delta t) - b(t)}{\Delta t} =
+ \frac {- \alpha \Delta a(t)}{\Delta t} = - \alpha a(t)$$
+
+    <p>
+    and apply a limit to them when \(\Delta t \to 0\):
+    </p>
+
+$$\lim_{\Delta t \to 0} \frac {a(t + \Delta t) - a(t)}{\Delta t} =
+ \lim_{\Delta t \to 0} - \beta b(t)$$
+$$\lim_{\Delta t \to 0} \frac {b(t + \Delta t) - b(t)}{\Delta t} =
+ \lim_{\Delta t \to 0} - \alpha a(t)$$
+
+    <p>
+    On the left of the equal sign in each equation we have a derivative - a speed
+    of man power loss. On the right hand of the equal sign in each equation we
+    have a function that does not depend on \(\Delta t\):
+    </p>
+
+$$\begin{equation}
+\frac {da(t)}{dt} = -\beta b(t)
+\end{equation}$$
+$$\begin{equation}
+\frac {db(t)}{dt} = -\alpha b(t)
+\end{equation}$$
+
+    <p>
+    <br><strong>1)</strong>
+    </p>
+
+    <p>
+    Divide (1) by (2):
+    </p>
+
+$$\frac {da(t)}{db(t)} = \frac {\beta b(t)}{\alpha a(t)}$$
+
+    <p>
+    and rearrange the result:
+    </p>
+
+$$\begin{equation}
+a(t)da = \frac {\beta}{\alpha} b(t)db
+\end{equation}$$
+
+    <p>
+    Since the varialbes in (3) are separated, integrate both sides of it:
+    </p>
+
+$$\int_{a_0}^{a(t)}a(t)da = \int_{b_0}^{b(t)} \frac {\beta}{\alpha} b(t)db$$
+$$\begin{equation}
+a^2(t) - a_0^2 = \frac {\beta}{\alpha}\Big(b^2(t) - b_0^2\Big)
+\end{equation}$$
+
+    <p>
+    We are told that at a certain point of time \(t = t_a\) the army \(B\) has
+    no more soldiers left:
+    </p>
+
+$$b(t_a) = 0$$
+
+    <p>
+    Substituting the above value for \(b(t)\) in (4), we obtain:
+    </p>
+
+$$a^2(t_a) - a_0^2 = \frac {\beta}{\alpha}\Big(0 - b_0^2\Big)$$
+
+    <p>
+    from where it follows that the number of soldiers left in the army \(A\) by
+    the time the army \(B\) is totally annihilated is:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{a(b = 0) = \sqrt{a_0^2 - \frac {\beta}{\alpha}b_0^2}}
+\end{equation}$$
+
+    <p>
+    <br><strong>2)</strong>
+    </p>
+
+    <p>
+    Here we need to find \(a\) and \(b\) as the acutal functions of time, \(a(t)\)
+    and \(b(t)\).
+    </p>
+
+    <p>
+    Take the first derivative of (1) over time:
+    </p>
+
+$$\begin{equation}
+\frac {d^2a}{dt^2} = -\beta \frac {db}{dt}
+\end{equation}$$
+
+    <p>
+    Take the first derivative of \(b(t)\) from (2) and put it into (6):
+    </p>
+
+$$\begin{equation}
+\frac {d^2a}{dt^2} = -\beta \times (- \alpha a) = \alpha \beta a
+\end{equation}$$
+
+$$\begin{equation}
+\frac {d^2a}{dt^2} = \alpha \beta a
+\end{equation}$$
+
+    <p>
+    Temporarily, to save us some typing, substitue:
+    </p>
+
+$$\begin{equation}
+\alpha \beta = \omega^2
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\frac {d^2a}{dt^2} = \omega^2 a}
+\end{equation}$$
+
+    <p>
+    Purely mathematically this equation is the same as the mooftochka's equation:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\frac {d^2x}{dt^2} = \omega^2x}$$
+
+    <p>
+    Over here \(a(t)\) is the number of surviving troops, over there it is a linear coordinate
+    of a material point. The equations are fundamentally the same but the <dfn>solutions</dfn>
+    come out a bit different becaue of different initial conditions in the direct flow of time.
+    We divide (1) by (2):
+    </p>
+
+$$\begin{equation}
+\frac {da}{db} = \frac {\beta b}{\alpha a}
+\end{equation}$$
+
+    <p>
+    Rearrange (8) to put the like variables on the same side:
+    </p>
+
+$$\begin{equation}
+ada = \frac {\beta}{\alpha} bd
+\end{equation}$$
+
+    <p>
+    Inetgrate both sides of (9):
+    </p>
+
+$$\begin{equation}
+a^2 + C = \frac {\beta}{\alpha} b^2
+\end{equation}$$
+
+    <p>
+    To find \(C\) we use the initial conditions:
+    </p>
+
+$$a(0) = A_0$$
+$$b(0) = B_0$$
+$$C = \frac {\beta}{\alpha} B_0^2 - A_0^2$$
+
+    <p>
+    Express \(a\) in terms of \(b\) in (10):
+    </p>
+
+$$\begin{equation}
+a = \sqrt{\frac {\beta}{\alpha} b^2 - C}
+\end{equation}$$
+
+    <p>
+    Put (11) back into (2):
+    </p>
+
+$$\begin{equation}
+\frac {db}{dt} = -\alpha \sqrt{\frac {\beta}{\alpha} b^2 - C} = -\sqrt{\alpha \beta}\sqrt{b^2 - \frac{\alpha}{\beta}C}
+\end{equation}$$
+
+    <p>
+    Rearrange (12) to put the like variables on the same side:
+    </p>
+
+$$\frac {db}{\sqrt{b^2 - \frac{\alpha}{\beta}C}} = -\sqrt{\alpha \beta} dt$$
+$$K^2 = \frac{\alpha}{\beta}C$$
+$$\frac {db}{\sqrt{b^2 - K^2}} = -\sqrt{\alpha \beta} dt$$
+$$\int_{B_0}^b \frac {db}{\sqrt{b^2 - K^2}} = \int_0^t -\sqrt{\alpha \beta} dt = -\sqrt{\alpha \beta} t$$
+
+    <p>
+    To calculate the integral on the left we use the \(b = K \cos ^{-1}(z)\) substitution:
+    </p>
+
+$$db = \frac {K \sin(z)}{\cos^2(z)}dz$$
+$$\sqrt{b^2 - K^2} = K \frac {\sqrt{1 - \cos^2(z)}}{\cos(z)} = \frac {K \sin(z)}{\cos(z)}$$
+$$\int \frac {db}{\sqrt{b^2 - K^2}} = \int \frac {K \sin(z)}{\cos^2(z)} \frac {\cos(z)}{K \sin(z)} dz = \int \frac {dz}{\cos(z)}$$
+$$\int \frac {dz}{\cos(z)} = \int \frac {1}{\cos(z)} \frac {\frac {1}{\cos(z)} + \tan(z)}{\frac {1}{\cos(z)} + \tan(z)} dz =$$
+$$= \int \frac {\frac {1}{\cos^2(z)} + \frac {1}{\cos(z)}\tan(z)}{\frac {1}{\cos(z)} + \tan(z)}dz$$
+$$u = \frac {1}{\cos(z)} + \tan(z)$$
+$$du = \Big(\frac {1}{\cos^2(z)} + \frac {1}{\cos(z)}\tan(z)\Big) dz$$
+$$\int \frac {dz}{\cos(z)} = \int \frac {du}{u} = \ln(u) + C =$$
+$$= \ln\Big(\frac {1}{\cos(z)} + \tan(z)\Big) + C$$
+$$\frac {1}{\cos(z)} = \frac {b}{K}$$
+$$\tan(z) = \frac {\sqrt{1 - \cos^2(z)}}{\cos(z)} =$$
+$$= \frac {\cos(z)\sqrt{\frac{1}{\cos^2(z)} - 1}}{\cos(z)} =$$
+$$= \sqrt{\frac{b^2}{K^2} - 1} = \frac {1}{K} \sqrt{b^2 - K^2}$$
+$$\int \frac {dz}{\cos(z)} = \ln\Big(\frac {b}{K} + \frac {1}{K} \sqrt{b^2 - K^2}\Big) =$$
+$$= \ln(b + \sqrt{b^2 - K^2}) - \ln(K) + const$$
+$$\int_{B_0}^b \frac {db}{\sqrt{b^2 - K^2}} = \ln(b + \sqrt{b^2 - K^2}) -
+\ln(B_0 + \sqrt{B_0^2 - K^2})$$
+$$\sqrt{B_0^2 - K^2} = \sqrt{B_0^2 - B_0^2 + \frac {\alpha}{\beta}A_0^2} = \sqrt{\frac {\alpha}{\beta}}A_0$$
+$$\frac {b + \sqrt{b^2 - K^2}}{B_0 + \sqrt{\frac {\alpha}{\beta}}A_0} = e^{-\sqrt{\alpha \beta} t}$$
+$$b + \sqrt{b^2 - K^2} = (B_0 + \sqrt{\frac {\alpha}{\beta}}A_0)e^{-\sqrt{\alpha \beta} t}$$
+$$b - (B_0 + \sqrt{\frac {\alpha}{\beta}}A_0)e^{-\sqrt{\alpha \beta} t} = -\sqrt{b^2 - K^2}$$
+
+    <p>
+    Square both sides:
+    </p>
+
+$$b^2 - 2b(B_0 + \sqrt{\frac {\alpha}{\beta}}A_0)e^{-\sqrt{\alpha \beta} t} + (B_0 + \sqrt{\frac {\alpha}{\beta}}A_0)^2e^{-2\sqrt{\alpha \beta} t} = b^2 - K^2$$
+$$(B_0 + \sqrt{\frac {\alpha}{\beta}}A_0)^2e^{-2\sqrt{\alpha \beta} t} + K^2 = 2b(B_0 + \sqrt{\frac {\alpha}{\beta}}A_0)e^{-\sqrt{\alpha \beta} t}$$
+$$K^2 = B_0^2 - \frac {\alpha}{\beta}A_0^2 =
+(B_0 - \sqrt{\frac {\alpha}{\beta}}A_0) \times (B_0 + \sqrt{\frac {\alpha}{\beta}}A_0)$$
+$$b(t) = \frac {1}{2}((\sqrt{\frac {\alpha}{\beta}}A_0 + B_0)e^{-\sqrt{\alpha \beta} t} +
+(B_0 - \sqrt{\frac {\alpha}{\beta}}A_0)e^{\sqrt{\alpha \beta} t})$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{b(t) = \frac {1}{2}\sqrt{\frac {\alpha}{\beta}}((A_0 +
+\sqrt{\frac {\beta}{\alpha}}B_0)e^{-\sqrt{\alpha \beta} t} -
+(A_0 - \sqrt{\frac {\beta}{\alpha}}B_0)e^{\sqrt{\alpha \beta} t})}
+\end{equation}$$
+
+    <p>
+    From (2) it follows that for \(a(t)\) we have:
+    </p>
+
+$$a(t) = - \frac {1}{\alpha} \frac {db(t)}{dt}$$
+
+    <p>
+    Or from (1) it follows that for \(a(t)\) we have:
+    </p>
+
+$$a(t) = - \beta \int b(t)dt$$
+
+    <p>
+    Either way we get:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{a(t) = \frac {1}{2}((A_0 + \sqrt{\frac {\beta}{\alpha}}B_0)e^{- \sqrt{\alpha \beta} t} +
+(A_0 - \sqrt{\frac {\beta}{\alpha}}B_0)e^{\sqrt{\alpha \beta} t})}
+\end{equation}$$
+
+    <p>
+    It follows then that we can have either \(a(t) = 0\) or \(b(t) = 0\). If \(a(T) = 0\)
+    then from (14) it follows that:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{T(a = 0) = \frac {1}{2\sqrt{\alpha \beta}}
+\ln\Big(- \frac {A_0 + \sqrt{\frac {\beta}{\alpha}}B_0}{A_0 -
+\sqrt{\frac {\beta}{\alpha}}B_0}\Big)}
+\end{equation}$$
+
+    <p>
+    If \(b(T) = 0\) from (13) it follows that:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{T(b = 0) = \frac {1}{2\sqrt{\alpha \beta}}
+\ln\Big(\frac {A_0 + \sqrt{\frac {\beta}{\alpha}}B_0}{A_0 -
+\sqrt{\frac {\beta}{\alpha}}B_0}\Big)}
+\end{equation}$$
+
+    <p>
+    So which one works? From (11) we have:
+    </p>
+
+$$a = \sqrt{\frac {\beta}{\alpha} b^2 - C} =
+\sqrt{\frac {\beta}{\alpha} b^2 - \frac {\beta}{\alpha} B_0^2 + A_0^2}$$
+
+$$\begin{equation}
+a = \sqrt{\frac {\beta}{\alpha}b^2 + A_0^2 - \frac {\beta}{\alpha}B_0^2}
+\end{equation}$$
+
+    <p>
+    From this it follows that if the army \(B\) gets annihilated then \(b = 0\) and from
+    (17) we have the number of troops of the army \(A\) still standing:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{a(b = 0) = \sqrt{A_0^2 - \frac {\beta}{\alpha}B_0^2}}
+\end{equation}$$
+
+    <p>
+    From which it follows that if the number of surviving troops to be Real and not Complex
+    then the expression under the square root must be greater than zero:
+    </p>
+
+$$A_0 > \sqrt{\frac {\beta}{\alpha}}B_0$$
+
+    <p>
+    Then (15) is not defined and (16) is the answer for the time question - how long does it take
+    for the army \(A\) to totally annihilate the army \(B\). If, however, we say that the army
+    \(B\) is more numerous then we put \(a == 0\) in (17) and:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{b(a = 0) = \sqrt{B_0^2 - \frac {\alpha}{\beta}A_0^2}}
+\end{equation}$$
+
+    <p>
+    Then the \(\ln()\) in (16) is not defined because for number of troops to remain Real:
+    </p>
+
+$$B_0 > \sqrt{\frac {\alpha}{\beta}}A_0$$
+
+    <p>
+    and the answer for \(T\) is (15).
+    </p>
+
+    <p>
+    Putting the equations and their solutions side by side we can correlate the number of the
+    surviving troops of the winning army (say \(A\)) to the radius \(x\) of the mooftochka
+    problem and we can correlate the troops of the losing army (say \(B\)) to mooftochka's
+    radial velocity:
+    </p>
+
+$$\frac {d^2a}{dt^2} = \alpha \beta a \qquad a(b = 0) = \sqrt{A_0^2 - \frac {\beta}{\alpha}B_0^2}$$
+$$\frac {d^2x}{dt^2} = \omega^2x \qquad v_x(x = L) = \omega\sqrt{L^2 - L_0^2}$$
+
+    <p>
+    In the armies problem \(a(t)\) and \(b(t)\) diminish with time while in the mooftochka
+    problem \(x(t)\) and \(v_x(t)\) grow with time. To make the two problems mathematically
+    equiavalent we reverse the flow of time for either problem and claim that \(A_0\)
+    corresponds to \(x = L\), \(a(b = 0)\) corresponds to \(x = L_0\) and \(B_0\) corresponds
+    to the radial velocity \(v_x(x = L)\). We now have to make numerically:
+    </p>
+
+$$\alpha = \beta = 1 = \omega$$
+
+    <p>
+    and then for the mooftochka problem we translate the equation from the armies problem:
+    </p>
+
+$$(a^2(b = 0) \equiv L_0^2) = (A_0^2 \equiv L^2) - (B_0^2 \equiv v_x^2)$$
+$$L_0^2 = L^2 - v_x^2$$
+$$v_x = \sqrt{L^2 - L_0^2}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasequiv.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

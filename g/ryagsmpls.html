@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Sample g Constructions by Roman Y. Andronov
+</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Sample g Constructions by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryagint.html">prev</a>
+     <a href="ryagshcuts.html">next</a>
+    </p>
+
+    <h1>Sample g Constructions</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Construct a straight line tangent to a given circle through a given point
+    not on that circle.
+    </p>
+
+    <p>
+    <br><strong>Analysis</strong>
+    </p>
+
+    <p>
+    The key to solving this problem is Euclid's <dfn>"Elements"</dfn> Book 3
+    Proposition 31:
+    </p>
+
+    <p class="center">
+    <dfn>in a circle the angle in the semicircle is right"</dfn>
+    </p>
+
+    <p>
+    Consequently, we have to construct a right triangle that has the vertex of
+    its right angle located on the circumference of the given circle and whose
+    remaining two vertexes are located at the given point and the center of the
+    given circle.
+    </p>
+
+    <p>
+    To locate the only remaining vertex of the right triangle we construct a
+    circle that has the line segment connecting the given point and the center
+    of the given circle as its diameter.
+    </p>
+    
+    <p>
+    Assuming that \(A\) is a given point and a circle with a center at the
+    point \(O\) and a radius \(r\) are given, we obtain:
+    </p>
+    
+    <img src="imgs/ttac.png" alt="Tangent" class="center">
+
+    <p>
+    <br><strong>Construction</strong>
+    </p>
+
+$$\begin{equation}
+O
+\end{equation}$$
+
+$$\begin{equation}
+Cir(O, r)
+\end{equation}$$
+
+$$\begin{equation}
+A \not\subset Cir(O, r)
+\end{equation}$$
+
+$$\begin{equation}
+Ln(A, O)
+\end{equation}$$
+
+$$\begin{equation}
+Cir(A, AO)
+\end{equation}$$
+
+$$\begin{equation}
+Cir(O, OA)
+\end{equation}$$
+
+$$\begin{equation}
+Cir(A, AO) \cap Cir(O, OA) = B, C
+\end{equation}$$
+
+$$\begin{equation}
+Ln(B, C)
+\end{equation}$$
+
+$$\begin{equation}
+Ln(B, C) \cap Ln(A, O) = D \colon AD = DO
+\end{equation}$$
+
+$$\begin{equation}
+Cir(D, DO)
+\end{equation}$$
+
+$$\begin{equation}
+Cir(D, DO) \cap Cir(O, r) = E, F
+\end{equation}$$
+
+$$\begin{equation}
+Ln(A, E)
+\end{equation}$$
+
+$$\begin{equation}
+Ln(A, F)
+\end{equation}$$
+
+$$\begin{equation}
+Ln(A, E) \bot Cir(O, r)
+\end{equation}$$
+
+$$\begin{equation}
+Ln(A, F) \bot Cir(O, r)
+\end{equation}$$
+
+    <p>
+    <br><strong>Explanation</strong>
+    </p>
+
+    <p>
+    First we construct the objects that are given - an arbitrary circle and an
+    arbitrary point not on that circle.
+    </p>
+
+    <p>
+    1) On this line we see the point \(O\) for the first time in the course of
+    this construction which means that we need to take action and pick an
+    arbitrary point on the plane and name it \(O\).
+    </p>
+
+    <p>
+    2) On this line we see:
+    </p>
+
+$$Cir(O, r)$$
+
+    <p>
+    for the first time which means that we need to take action and construct a
+    circle with a center at the point \(O\) and an arbitrary radius \(r\).
+    </p>
+
+    <p>
+    3) On this line we see:
+    </p>
+
+$$A \not\subset Cir(O, R)$$
+
+    <p>
+    Since all the objects referenced in that statement have been constructed
+    previously except for the point \(A\), we take action and construct it by
+    picking a point anywhere on a plane <dfn>not in</dfn> the circle and
+    <dfn>not on</dfn> the circumference of the circle and naming that point
+    \(A\).
+    </p>
+
+    <p>
+    Now that we have constructed all the given objects we proceed to the actual
+    solution.
+    </p>
+
+    <p>
+    4) On this line we see:
+    </p>
+
+$$Ln(A, O)$$
+
+    <p>
+    for the first time. The points \(A\) and \(O\) have been constructed previously
+    which means that all we have to do is construct a straight line passing through
+    \(A\) and \(B\).
+    </p>
+
+    <p>
+    5, 6) On these two lines we see:
+    </p>
+
+$$Cir(A, AO)$$
+$$Cir(O, OA)$$
+
+    <p>
+    for the first time and we also see that all the intermediate objects have
+    been constructed already which means that we have to take action and construct
+    the two circles mentioned.
+    </p>
+
+    <p>
+    7) On this line we see:
+    </p>
+
+$$Cir(A, AO) \cap Cir(O, OA) = B, C$$
+
+    <p>
+    All the objects referenced in that statement have been constructed already
+    except for the points \(B\) and \(C\). Since we see these objects for the
+    first time we take action and construct them - mark the intersections of
+    the two circles as \(B\) and \(C\).
+    </p>
+
+    <p>
+    8) On this line we see:
+    </p>
+
+$$Ln(B, C)$$
+
+    <p>
+    for the first time and we also see that all the intermediate objects have
+    been constructed already which means that we have to construct a straight
+    line passing through the points \(B\) and \(C\).
+    </p>
+
+    <p>
+    9) On this line we see:
+    </p>
+
+$$Ln(B, C) \cap Ln(A, O) = D \colon AD = DO$$
+
+    <p>
+    The straight lines \(BC\) and \(AO\) exist already and they intersect at a
+    point \(D\) such that \(D\) cuts the \(AO\) and \(BC\) line segments in half.
+    This statement is saying that we are constructing a perpendicular bisector of
+    \(AO\). Since the point of intersection of two straight lines is seen for the
+    first time, we construct it by naming it \(D\).
+    </p>
+
+    <p>
+    10) On this line we see:
+    </p>
+
+$$Cir(D, DO)$$
+
+    <p>
+    for the first time and we also see that all the intermediate objects have been
+    constructed already which means that we have to take action and construct that
+    circle.
+    </p>
+
+    <p>
+    11) On this line we see:
+    </p>
+
+$$Cir(D, DO) \cap Cir(O, R) = E, F$$
+
+    <p>
+    Both circles mentioned in that statement have been constructed in the previous
+    steps - all we have to do is name their intersection points \(E\) and \(F\).
+    </p>
+
+    <p>
+    12, 13) On these two lines we see:
+    </p>
+
+$$Ln(A, E)$$
+$$Ln(A, F)$$
+
+    <p>
+    for the first time and we also see that all the intermediate objects have been
+    constructed already. It means that we have to construct these two straight lines.
+    </p>
+
+    <p>
+    14, 15) On the next two lines we see:
+    </p>
+
+$$Ln(A, E) \bot Cir(O, R)$$
+$$Ln(A, F) \bot Cir(O, R)$$
+
+    <p>
+    and we also see that all the intermediate objects have been constructed
+    already. These statements are used to explicitly mention the fact that both
+    straight lines in question are tangent or <dfn>"perpendicular"</dfn> to the
+    given circle which marks the end of our construction.
+    </p>
+
+    <p>
+    We observe here that the above construction can also be compressed into
+    the following collection of compound statements:
+    </p>
+
+$$Ln(A \not\subset Cir(O, R), O)$$
+$$Cir(A, AO) \cap Cir(O, OA) = B, C$$
+$$Ln(B, C) \cap Ln(A, O) = D \colon AD = DO$$
+$$Cir(D, DO) \cap Cir(O, R) = E, F$$
+$$Ln(A, E) \bot Cir(O, R), Ln(A, F) \bot Cir(O, R)$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryagint.html">prev</a>
+     <a href="ryagshcuts.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryag.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

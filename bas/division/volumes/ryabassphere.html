@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Sphere
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Sphere</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabascones.html">prev</a>
+     <a href="ryabasellipsoid.html">next</a>
+    </p>
+
+    <h1>Sphere</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the volume of a sphere of radius \(r\).
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Choose thin right circular cylinders as primitive parts to model the volume
+    of a sphere with:
+    </p>
+
+    <img src="imgs/sphere3D.png" alt="Sphere 3D" class="center">
+
+    <p>
+    Please explain how the above primitive part was constructed.
+    </p>
+
+    <p>
+    Cut the sphere with an \(xOy\) plane and consider its resulting circular
+    cross section. The primitive cylinders are represented in the drawing below
+    as an \(ABCD\) rectangle:
+    </p>
+
+    <img src="imgs/sphere2D.png" alt="Sphere 2D" class="center">
+
+    <p>
+    Let:
+    </p>
+
+$$OH = OC = r$$
+
+    <p>
+    Cut \(OH\) into \(n\) line segments of equal length that will play the role
+    of heights of primitive cylinders which we number in the bottom to top
+    fashion:
+    </p>
+
+$$y_{i-1}y_i = \Delta y = \frac {r}{n}$$
+
+    <p>
+    Find the radius \(r_i\) of the \(i-\)th primitive cylinder from the right,
+    by construction, \(\triangle Oy_iC\) via Pythagorean theorem:
+    </p>
+
+$$r_i^2 = r^2 - \frac {r^2}{n^2}i^2$$
+
+    <p>
+    The volume of one primitive cylinder then is:
+    </p>
+
+$$V'_i = \pi \Big(r^2 - \frac {r^2}{n^2}i^2\Big) \frac {r}{n} =$$
+$$\frac {\pi r^3}{n^3}(n^2 - i^2)$$
+
+    <p>
+    The volume of the entire sphere is the sum of volumes of two hemispheres:
+    </p>
+
+$$V' = 2 \times \sum_{i = 1}^n V'_i =$$
+$$\frac {2\pi r^3}{n^3}\sum_{i = 1}^n(n^2 - i^2) =$$
+$$\frac {2\pi r^3}{n^3}\Big(\sum_{i = 1}^n n^2 -\sum_{i = 1}^n i^2\Big) =$$
+$$\frac {2\pi r^3}{n^3}\Bigg(n^3 - \frac {n(n + 1)(2n + 1)}{6}\Bigg) =$$
+$$\frac {2\pi r^3}{n^3}\Bigg(n^3 -
+ \frac {n^3(1 + \frac {1}{n})(2 + \frac {1}{n})}{6}\Bigg) =$$
+$$\frac {\pi r^3}{3}\Big(4 - \frac {3}{n} - \frac {1}{n^2}\Big)$$
+
+    <p>
+    where the index \(i\) runs to \(n\) and not \(n - 1\) since the height, and
+    hence the volume, of the \(n-\)th cylinder is zero:
+    </p>
+
+$$V = \lim_{n \to +\infty} V' =$$
+$$\lim_{n \to +\infty}\frac {\pi r^3}{3}\Big(4 - \frac {3}{n} - \frac {1}{n^2}\Big) =$$
+$$\frac {\pi r^3}{3}\Big(4 - \lim_{n \to +\infty}\frac {3}{n} -
+ \lim_{n \to +\infty} \frac {1}{n^2}\Big) =$$
+$$\frac {4\pi r^3}{3}$$
+
+    <p>
+    And hence:
+    </p>
+
+    $$\bbox[#e8e8e8,3pt]{V = \frac {4}{3} \pi r^3}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabascones.html">prev</a>
+     <a href="ryabasellipsoid.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionvolumes.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Cylinders
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Cylinders</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasdivisionvolumes.html">prev</a>
+     <a href="ryabascones.html">next</a>
+    </p>
+
+    <h1>Cylinders</h1>
+
+    <p>
+    <strong>Right Circular Cylinder</strong>
+    </p>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the volume of a right circular cylinder of radius \(r\) and height
+    \(h\).
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Let us use thin right rectangular prisms as primitive parts:
+    </p>
+
+    <img src="imgs/cylinder3D.png" alt="Cylinder 3D" class="center">
+
+    <p>
+    Position the given cylinder in such a way that its axis of rotation coincides
+    with the \(z\)-axis, for example, and consider one half of the cylinder cut
+    off by the \(xOz\) plane, see the drawing below.
+    </p>
+
+    <p>
+    Divide \(OF = r\) into \(n\) line segments of equal length producing \(n\)
+    points on \(Oy\):
+    </p>
+
+$$y_1, y_2, \dots, y_n$$
+$$y_1y_2 = y_2y_3 = \dots = y_{i - 1}y_i = \dots = y_{n - 1}y_n = \Delta y =
+\frac {r}{n}$$
+$$y_i = \frac {r}{n} \times i$$
+
+    <p>
+    Construct \(n\) planes perpendicular to \(Oy\) - one \(h_i\) plane through
+    the corresponding \(y_i\). Each \(h_i\) plane will cut the cylinder producing
+    two straight lines parallel to \(Oz\) - one such line is represented in the
+    drawing below via the \(P_i\) point.
+    </p>
+
+    <p>
+    Construct \(2n\) planes perpendicular to \(Ox\) - one \(v_i\) plane through
+    the corresponding \(P_i\) point. These planes, along with the planes
+    perpendicular to \(Oz\) that define the cylinder's height, fully delineate
+    two types of thin rectangular prisms - the ones that protrude beyond and the
+    ones that are fully contained within the cylinder. Let us work with the latter
+    ones represented as \(ABCD\) rectangle:
+    </p>
+
+    <img src="imgs/cylinder2D.png" alt="Cylinder 2D" class="center">
+
+    <p>
+    and numbered as shown above.
+    </p>
+
+    <p>
+    The height of each primitive right rectangular prism is:
+    </p>
+
+$$\frac {r}{n}$$
+
+    <p>
+    The width of the \(i-\)th prism is:
+    </p>
+
+$$2 \times y_iC$$
+
+    <p>
+    where \(y_iC\) is obtained from the right, by construction, triangle
+    \(\triangle Oy_iC\) via the Pythagorean theorem:
+    </p>
+
+$$y_iC = \sqrt{r^2 - Oy_i^2} =$$
+$$\sqrt{r^2 - \frac{r^2}{n^2}i^2} =$$
+$$\frac {r}{n}\sqrt{n^2 - i^2}$$
+
+    <p>
+    The volume of the \(i-\)th primitive prism is:
+    </p>
+
+$$V'_i = \frac {r}{n} \times 2\frac {r}{n}\sqrt{n^2 - i^2} \times h =$$
+$$2\frac {hr^2}{n^2}\sqrt{n^2 - i^2}$$
+
+    <p>
+    Sum the volumes of all the (\(n - 1\)) primitive prisms and multiply the
+    result by \(2\) to add the remaining half of the cylinder:
+    </p>
+
+$$V' = 2 \times 2 \frac {hr^2}{n^2}\sum_{n = 1}^{n - 1}\sqrt{n^2 - i^2}$$
+
+    <p>
+    Apply the limit to \(V'\) as \(n \to +\infty\):
+    </p>
+
+$$V = \lim_{n \to +\infty} V' =$$
+$$4\lim_{n \to +\infty} \frac {hr^2}{n^2}\sum_{n = 1}^{n - 1}\sqrt{n^2 - i^2} =$$
+$$4hr^2 \lim_{n \to +\infty} \frac {1}{n^2}\sum_{n = 1}^{n - 1}\sqrt{n^2 - i^2}$$
+
+    <p>
+    But in <strong>Circle</strong> chapter of <strong>Square Areas</strong>
+    section we have already calculated the magnitude of the above limit. The fact
+    that in our particular sum the index \(i\) runs till \(n - 1\) and not till
+    \(n\) does not affect the result because the last term in the previously
+    calculated limit, when \(i = n\), is zero which is the volume of the \(n-\)th
+    primitive prism in this particular configuration so we may add it to the sum
+    without ill effects:
+    </p>
+
+$$V = 4hr^2 \times \frac {\pi}{4} = \pi r^2 h$$
+
+$$\bbox[#e8e8e8,3pt]{V = \pi r^2 h}$$
+
+    <p>
+    <br><strong>Right Elliptic Cylinder</strong>
+    </p>
+
+    <p>
+    To find the volume of a right elliptic cylinder of height \(h\) with
+    semi-major axis \(a\) and semi-minor axis \(b\) the above right circular
+    cylinder calculations change only in the computation of the corresponding
+    height \(OF\) which is now:
+    </p>
+
+$$\frac {b}{n}$$
+
+    <p>
+    and width of the \(i-\) primitive prism, \(y_iC\). Since the point \(C\) is
+    now positioned on the perimeter of an ellipse, we have:
+    </p>
+
+$$\frac {y_iC^2}{a^2} + \frac {y_i^2}{b^2} = 1$$
+$$y_iC = a \sqrt{1 - \frac {y_i^2}{b^2}} =$$
+$$a \sqrt{1 - \frac {b^2i^2}{n^2b^2}} =$$
+$$a \sqrt{1 - \frac {i^2}{n^2}} =$$
+$$\frac {a}{n} \sqrt{n^2 - i^2}$$
+
+    <p>
+    The volume of the \(i-\)th primitive prism then is:
+    </p>
+
+$$V'_i = \frac {b}{n} \times 2\frac {a}{n}\sqrt{n^2 - i^2} \times h =$$
+$$2\frac {abh}{n^2}\sqrt{n^2 - i^2}$$
+
+    <p>
+    Two sums of all the volumes of the primitive prisms are:
+    </p>
+
+$$V' = 2 \times 2 \frac {abh}{n^2}\sum_{n = 1}^{n - 1}\sqrt{n^2 - i^2} =$$
+$$\frac {4abh}{n^2}\sum_{n = 1}^{n - 1}\sqrt{n^2 - i^2}$$
+
+    <p>
+    The limit of \(V'\) as \(n \to +\infty\) is:
+    </p>
+
+$$V = \lim_{n\to +\infty} \frac {4abh}{n^2} \sum_{i=1}^{n - 1}\sqrt {n^2 - i^2} =$$
+$$4abh \lim_{n\to +\infty} \frac {1}{n^2} \sum_{i=1}^{n - 1} \sqrt {N^2 - i^2} =$$
+$$4abh  \times\frac {\pi}{4}$$
+
+    <p>
+    And:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{V = \pi abh}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasdivisionvolumes.html">prev</a>
+     <a href="ryabascones.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionvolumes.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

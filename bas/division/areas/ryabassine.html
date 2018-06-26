@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Sine
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Sine</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasellipse.html">prev</a>
+     <a href="ryabasdivisionareas.html">next</a>
+    </p>
+
+    <h1>Sine</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the square area of a plane region trapped under the single span of the
+    graph of a sine function \(y = \sin(x)\) and the \(Ox\) axis in the first
+    quadrant where \(x \in [0, \pi]\).
+    </p>
+
+    <p>
+    <br><strong>Right Sum Solution</strong>
+    </p>
+
+    <p>
+    Let us construct Right Riemann Sum for the graph of \(y = \sin(x)\) located
+    in the first quadrant where \(x \in [0, \pi]\):
+    </p>
+
+    <img src="imgs/sine.png" alt="Sine" class="center">
+
+    <p>
+    Let:
+    </p>
+
+$$OB = \pi$$
+
+    <p>
+    The square area of the \(i-\)th primitive rectangle is:
+    </p>
+
+$$A'_{i, r} = \frac {\pi}{n} \times y_i =$$
+$$\frac {\pi}{n} \sin(x_i) =$$
+$$\frac {\pi}{n} \sin\Big(\frac{\pi}{n}i\Big)$$
+
+    <p>
+    Right Riemann Sum is:
+    </p>
+
+$$\begin{equation}
+A'_r = \frac {\pi}{n} \sum_{i=1}^n \sin\Big(\frac{\pi}{n}i\Big)
+\end{equation}$$
+
+    <p>
+    A way to compute the sum in (1) in closed form is explained in
+    <strong>Sums</strong> chapter of <strong>Rearrangement</strong> section under
+    <strong>Basic Approaches</strong> (go
+    Home, Basic Approaches, Rearrangement, Sums):
+    </p>
+
+$$\sum_{i=1}^n \sin\Big(\frac{\pi}{n}i\Big)=
+\frac {\sin \frac {\pi(n + 1)}{2n} \sin \frac {\pi n}{2n}}{\sin \frac {\pi}{2n}}=$$
+$$\begin{equation}
+\frac {\cos \frac {\pi}{2n}}{\sin \frac {\pi}{2n}}
+\end{equation}$$
+
+    <p>
+    because:
+    </p>
+
+$$\sin \frac {\pi n}{2n} = \sin \frac {\pi}{2} = 1$$
+$$\sin \frac {\pi(n + 1)}{2n} = \sin\Big(\frac {\pi}{2} + \frac {\pi}{2n}\Big)=
+ \cos \frac {\pi}{2n}$$
+
+    <p>
+    Put (2) into (1):
+    </p>
+
+$$A'_r = \frac {\pi}{n} \frac {\cos \frac {\pi}{2n}}{\sin \frac {\pi}{2n}} =$$
+$$2 \times \frac {\pi}{2n} \frac {\cos \frac {\pi}{2n}}{\sin \frac {\pi}{2n}} =$$
+$$2 \times \frac {\frac {\pi}{2n}}{\sin \frac {\pi}{2n}} \times \cos \frac {\pi}{2n}$$
+
+    <p>
+    Apply the limit to \(A'_r\) when \(n \to +\infty\):
+    </p>
+
+$$A_r = 2 \lim_{n \to +\infty} \frac {\frac {\pi}{2n}}{\sin \frac {\pi}{2n}}
+ \times \cos \frac {\pi}{2n} =$$
+$$2 \lim_{n \to +\infty} \frac {\frac {\pi}{2n}}{\sin \frac {\pi}{2n}}
+ \times \lim_{n \to +\infty} \cos \frac {\pi}{2n} =$$
+$$\begin{equation}
+2 \lim_{n \to +\infty} \frac {\frac {\pi}{2n}}{\sin \frac {\pi}{2n}}
+\end{equation}$$
+
+    <p>
+    because:
+    </p>
+
+$$\lim_{n \to +\infty} \cos \frac {\pi}{2n} = 1$$
+
+    <p>
+    since \(\cos(x)\) is a continuous function and its argument, in the above
+    case, approaches zero without bound.
+    </p>
+
+    <p>
+    The important limit in (3) is traditionally studied in an inverse form:
+    </p>
+
+$$\begin{equation}
+\lim_{n \to +\infty} \frac {\sin \frac {\pi}{2n}}{\frac {\pi}{2n}}
+\end{equation}$$
+
+    <p>
+    Since \(n \to +\infty\) we can perform the following substitution:
+    </p>
+
+$$\frac {\pi}{2n} = \alpha_n, \quad \alpha_n \to 0 \quad as \quad n \to +\infty$$
+
+    <p>
+    and (4) becomes:
+    </p>
+
+$$\begin{equation}
+\lim_{\alpha_n \to 0} \frac {\sin \alpha_n}{\alpha_n}
+\end{equation}$$
+
+    <p>
+    which is frequently written in a continuous form:
+    </p>
+
+$$\lim_{x \to 0} \frac {\sin(x)}{x}$$
+
+    <p>
+    To compute (5) let us use the following construction where \(q\) is a circle
+    with a center at \(O\) and a radius \(r\), \(\triangle OAC\) is an isosceles
+    triangle contained within the circular sector \(OApC\) which is contained
+    within the right triangle \(OAB\):
+    </p>
+
+    <img src="imgs/sinelimit.png" alt="Sine Limit" class="center">
+
+    <p>
+    From Euclid's <dfn>"Elements"</dfn> Book \(3\) Proposition \(16\) it follows
+    that the square areas of the above objects are sorted by size as follows:
+    </p>
+
+$$A_{\triangle OAC} < A_{OApC} < A_{\triangle OAB}$$
+
+    <p>
+    and then, measuring \(\alpha_n\) in radians:
+    </p>
+
+$$\frac {OA \times CH}{2} < \frac {\alpha_n \times r^2}{2} < \frac {OA \times AB}{2}$$
+$$r^2 \sin(\alpha_n) < \alpha_n \times r^2 < r^2 \tan(\alpha_n)$$
+$$\begin{equation}
+\sin(\alpha_n) < \alpha_n < \tan(\alpha_n)
+\end{equation}$$
+
+    <p>
+    Assuming that:
+    </p>
+
+$$0 < \alpha_n < \frac {\pi}{2}$$
+
+    <p>
+    divide (6) through by \(\sin(\alpha_n)\):
+    </p>
+
+$$\begin{equation}
+1 < \frac {\alpha_n}{\sin(\alpha_n)} < \frac {1}{\cos(\alpha_n)}
+\end{equation}$$
+
+    <p>
+    Since \(\cos(x)\) is an even function and \(\sin(x)\) is an odd function,
+    it follows that the reciprocal version of (7) is:
+    </p>
+
+$$\begin{equation}
+1 > \frac {\sin(\alpha_n)}{\alpha_n} > \cos(\alpha_n)
+\end{equation}$$
+
+    <p>
+    Multiply (8) by \(-1\):
+    </p>
+
+$$\begin{equation}
+-1 < - \frac {\sin(\alpha_n)}{\alpha_n} < - \cos(\alpha_n)
+\end{equation}$$
+
+    <p>
+    Add \(1\) to all the inequalities in (9):
+    </p>
+
+$$\begin{equation}
+0 < 1 - \frac {\sin(\alpha_n)}{\alpha_n} < 1 - \cos(\alpha_n)
+\end{equation}$$
+
+    <p>
+    but:
+    </p>
+
+$$1 - \cos(\alpha_n) = 2 \sin^2 \frac{\alpha_n}{2} < 2 \sin \frac{\alpha_n}{2}$$
+
+    <p>
+    and from (6) it follows that:
+    </p>
+
+$$1 - \cos(\alpha_n) = 2 \sin^2 \frac{\alpha_n}{2} < 2 \sin \frac{\alpha_n}{2} <
+ 2 \frac {\alpha_n}{2} = \alpha_n$$
+$$\begin{equation}
+1 - \cos(\alpha_n) < \alpha_n
+\end{equation}$$
+
+    <p>
+    Put (11) into (10):
+    </p>
+
+$$\begin{equation}
+0 < 1 - \frac {\sin(\alpha_n)}{\alpha_n} < \alpha_n
+\end{equation}$$
+
+    <p>
+    From (12) it follows that as long as \(\alpha_n \neq 0\) and
+    \(\alpha_n < \frac{\pi}{2}\)
+    then:
+    </p>
+
+$$\begin{equation}
+\Bigg|\frac {\sin(\alpha_n)}{\alpha_n} - 1 \Bigg| < |\alpha_n|
+\end{equation}$$
+
+    <p>
+    where (13) conforms to the definition of a limit: for an arbitrary
+    \(\epsilon > 0\) we choose \(\delta\) as follows:
+    </p>
+
+$$\delta = min( \epsilon, \frac {\pi}{2})$$
+
+    <p>
+    and:
+    </p>
+
+$$\Bigg|\frac {\sin(\alpha_n)}{\alpha_n} - 1 \Bigg| < |\alpha_n| =
+|\alpha_n - 0| < \delta$$
+$$\alpha_n = \frac {\pi}{2n} < \delta \leqslant \epsilon$$
+$$n > \frac {\pi}{2\epsilon}$$
+
+    <p>
+    which means that in terms of \(n\):
+    </p>
+
+$$\forall \epsilon > 0 \quad \exists N = \frac {\pi}{2\epsilon} : \quad
+\forall n > N \quad \Bigg|\frac {\sin(\alpha_n)}{\alpha_n} - 1 \Bigg| < \epsilon$$
+
+    <p>
+    Consequently:
+    </p>
+
+$$\begin{equation}
+\lim_{\alpha_n \to 0} \frac {\sin \alpha_n}{\alpha_n} = 1
+\end{equation}$$
+
+    <p>
+    Put (14) into (3) to obtain:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{A_r = 2}$$
+
+    <p>
+    As an exercise prove that the limit of the left Riemann sum \(A_l\) for this
+    case exists and it is equal to \(A_r\) making the magnitude of the square
+    area of the region in question equal to:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{A = A_l = A_r = 2}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasellipse.html">prev</a>
+     <a href="ryabasdivisionareas.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionareas.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

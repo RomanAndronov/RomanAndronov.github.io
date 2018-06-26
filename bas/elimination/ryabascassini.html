@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Elimination. Cassini Paradox
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Elimination. Cassini Paradox
+  </a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasalign4coins.html">prev</a>
+     <a href="ryabasfish.html">next</a>
+    </p>
+
+    <h1>Cassini (or Chessboard) Paradox</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    It is claimed that it is possible to rearrange four pieces comprising an
+    \(8 \times 8\) square-ruled board in such a way that, allegedly, the same
+    pieces form a \(5 \times 13\) rectangle:
+    </p>
+
+    <img src="imgs/cassini1.png" alt="Cassini Paradox 1" class="center">
+
+    <p>
+    Hence the paradox:
+    </p>
+
+$$8 \times 8 = 64 = 65 = 5 \times 13$$
+
+    <p>
+    How is this possible?
+    </p>
+
+    <p>
+    <br><strong>Solution I</strong>
+    </p>
+
+    <p>
+    is based on geometry since optical is always questionable.
+    </p>
+
+    <p>
+    Whether we are dealing with a one-, two- or three-dimensional figure the
+    common sense tells us that there could only be three possible outcomes of
+    any rearrangement of any parts making up the original whole. The new
+    formation can only be:
+
+    <ul>
+     <li>smaller than the original - parts must overlap</li>
+     <li>larger than the original - there must be holes</li>
+     <li>same in size - length, square area, volume</li>
+    </ul>
+    </p>
+
+    <p>
+    Since the new formation has \(65\) square units while the original has
+    \(64\), it follows that the new formation is larger than the original and it
+    is our job to prove that it contains a hole somewhere.
+    </p>
+
+    <p>
+    The original board is cut into two pairs of congruent objects - two congruent
+    right triangles and two congruent right trapezoids. We take that statement at
+    its face value by assuming that it is true.
+    </p>
+
+    <p>
+    The new formation seems to be an \(ABCD\) rectangle made up of the same
+    objects. However, for the new rectangle to be solid it must be comprised of
+    two congruent right triangles, \(\triangle ABC\) and \(\triangle ADC\), each
+    of which has one composite side and a common composite hypotenuse \(AFC\).
+    </p>
+
+    <p>
+    For a composite side \(AD\), for example, to be a straight line the angles at
+    \(E\) and \(D\) must be the same - which they are. As such, we eliminate the
+    composite sides of both triangles from our investigation.
+    </p>
+
+    <p>
+    The only other remaining composite object is the straight line \(AFC\).
+    However, for the points \(A, F\) and \(C\) to be collinear the angles
+    \(\angle EAF\) and \(\angle GFC\) must be equal.
+    </p>
+
+    <p>
+    Since the sides of the right triangles \(\triangle AEF\) and \(\triangle FGC\)
+    are known, we can compute the angles in question as follows:
+    </p>
+
+$$\tan(\angle EAF) = \frac {EF}{EA} = \frac {3}{8} = 0.375$$
+$$\angle EAF = 20.556^{\circ}$$
+$$\tan(\angle GFC) = \frac {GC}{GF} =\frac {2}{5} = 0.4$$
+$$\angle GFC = 21.801^{\circ}$$
+$$\angle EAF < \angle GFC$$
+
+    <p>
+    We see that:
+    </p>
+
+    <p>
+    - the angles in question are not identical
+    </p>
+
+    <p>
+    - the points \(A, F\) and \(C\) are not collinear
+    </p>
+
+    <p>
+    - the new rectangle \(ABCD\) is not solid - it has a diamond-shaped hole
+    along its diagonal with a square area of one unit
+    </p>
+
+    <p>
+    We conclude that there is no paradox after all and that, as expected:
+    </p>
+
+$$64 \neq 65$$
+
+    <p>
+    <br><strong>Solution II</strong>
+    </p>
+
+    <p>
+    is based on Fibonacci numbers or Fibonacci sequence since these positive
+    integers:
+    </p>
+
+$$2, 3, 5, 8, 13$$
+
+    <p>
+    are its first few terms.
+    </p>
+
+    <p>
+    The original claim that:
+    </p>
+
+$$8 \times 8 = 64 = 65 = 5 \times 13$$
+
+    <p>
+    can be recorded in terms of Fibonacci numbers then as follows:
+    </p>
+
+$$\begin{equation}
+F_n \times F_n = F_{n - 1} \times F_{n + 1}
+\end{equation}$$
+
+    <p>
+    where \(F_n\) stands for the \(n-\)th Fibonacci number for which we have the
+    following definition:
+    </p>
+
+$$\begin{equation}
+F_n = F_{n - 1} + F_{n - 2}
+\end{equation}$$
+
+    <p>
+    which, coupled with the initial numbers \(F_0 = 0\) and \(F_1 = 1\), fully
+    defines the sequence.
+    </p>
+
+    <p>
+    If we put (2) into the left hand side of (1) we will obtain:
+    </p>
+
+$$\begin{equation}
+F_n^2 = F_n \times (F_{n - 1} + F_{n - 2}) = F_n \times F_{n - 1} +
+ F_n \times F_{n - 2}
+\end{equation}$$
+
+    <p>
+    To compute \(F_{n+1}\) we put \(n + 1\) into (2):
+    </p>
+
+$$\begin{equation}
+F_{n + 1} = F_n + F_{n - 1}
+\end{equation}$$
+
+    <p>
+    If we put (4) into the right hand side of (1) then we will obtain:
+    </p>
+
+$$\begin{equation}
+F_{n - 1} \times F_{n + 1} = F_{n - 1} \times (F_n + F_{n - 1}) =
+ F_n \times F_{n - 1} + F_{n - 1}^2
+\end{equation}$$
+
+    <p>
+    Since it is clear that (1) is not true, let us compute the difference between
+    (5) and (3):
+    </p>
+
+$$F_{n - 1} \times F_{n + 1} - F_n^2 =$$
+$$F_n \times F_{n - 1} + F_{n - 1}^2 - F_n \times F_{n - 1} -
+ F_n \times F_{n - 2} =$$
+$$F_{n - 1}^2 - F_n \times F_{n - 2}$$
+
+    <p>
+    or:
+    </p>
+
+$$\begin{equation}
+D_n = F_{n - 1}^2 - F_n \times F_{n - 2}
+\end{equation}$$
+
+    <p>
+    We shall now prove that:
+    </p>
+
+$$\begin{equation}
+D_n = (-1)^1 \times D_{n-1}
+\end{equation}$$
+
+    <p>
+    Let us substitute \(F_n\) from (2) into (6):
+    </p>
+
+$$D_n = F_{n - 1}^2 - F_n \times F_{n - 2} =$$
+$$F_{n - 1}^2 - (F_{n - 1} + F_{n - 2}) \times F_{n - 2} =$$
+$$F_{n - 1}^2 - F_{n - 1} \times F_{n - 2} - F_{n - 2}^2 =$$
+$$\begin{equation}
+F_{n - 1}\times (F_{n - 1} - F_{n - 2}) - F_{n - 2}^2
+\end{equation}$$
+
+    <p>
+    But from (2) for the (\(n - 1\))st Fibonacci number we have:
+    </p>
+
+$$\begin{equation}
+F_{n - 1} = F_{n - 2} + F_{n - 3}
+\end{equation}$$
+
+    <p>
+    Carry the \(F_{n - 2}\) term in (9) to the left hand side of the equation:
+    </p>
+
+$$F_{n - 1} - F_{n - 2} = F_{n - 3}$$
+
+    <p>
+    and substitute it back into (8):
+    </p>
+
+$$D_n = F_{n - 1} \times F_{n - 3} - F_{n - 2}^2 =$$
+$$-(F_{n - 2}^2 - F_{n - 1} \times F_{n - 3}) =$$
+$$-(F_{(n - 1) - 1}^2 - F_{n - 1} \times F_{(n - 1) - 2}) =$$
+$$(-1)^1D_{n - 1}$$
+
+    <p>
+    what was required to prove.
+    </p>
+
+    <p>
+    Now if instead of applying the above logic to \(D_n\) we apply it to
+    \(D_{n - 1}\) we will obtain:
+    </p>
+
+$$D_{n - 1} = (-1)^1D_{n - 2}$$
+
+    <p>
+    or:
+    </p>
+
+$$D_n = (-1)^1D_{n - 1} =$$
+$$(-1)^2D_{n - 2}$$
+
+    <p>
+    It stands to reason that we can proceed in the above fashion until we come to
+    \(D_1\):
+    </p>
+
+$$D_n = (-1)^1D_{n - 1} =$$
+$$(-1)^2D_{n - 2} =$$
+$$(-1)^3D_{n - 3} =$$
+$$\dots$$
+$$(-1)^{n - 1}D_1$$
+
+    <p>
+    But according to (6):
+    </p>
+
+$$D_1 = F_0^2 - F_1 \times F_{-1} = 0 - 1 \times 1 = -1$$
+
+    <p>
+    And hence:
+    </p>
+
+$$\begin{equation}
+D_n = (-1)^n
+\end{equation}$$
+
+    <p>
+    Known as <dfn>Cassini Identity</dfn> (10) means that the difference that we
+    have set out to explore does not depend on the terms of the Fibonacci
+    sequence but rather depends only on the parity of \(n\) which can be
+    interpreted geometrically as follows:
+    </p>
+
+    <p>
+    - <dfn>if \(n\) is even then the difference is equal to \(+1\) securing a gap
+    in the rectangle \(ABCD\)</dfn>
+    </p>
+
+    <p>
+    - <dfn>if \(n\) is odd then the difference is equal to \(-1\) securing an
+    overlap in the rectangle \(ABCD\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Conclusion</strong>
+    </p>
+
+    <p>
+    By comparing the two solutions we conclude that even though both approaches
+    solve the problem the geometry-based solution does not contain a recipe for
+    generalization while the Fibonacci numbers-based solution does:
+    </p>
+
+    <p>
+    <dfn>starting with \(n = 3\) it is always possible to cut the
+    \(F_n \times F_n\) board into an \(F_{n - 1} \times F_{n + 1}\) rectangle
+    in such a way that the difference between their square areas is equal to
+    one</dfn>
+    </p>
+
+    <p>
+    In our case \(8 = F_6, n = 6\) and since six is of even parity there is a gap
+    in the rearranged rectangle.
+    </p>
+
+    <p>
+    For \(n = 3, F_3 = 2\) we have an overlap:
+    </p>
+
+    <img src="imgs/cassini2.png" alt="Cassini Paradox 2" class="center">
+
+    <p>
+    For \(n = 4, F_4 = 3\) we have a gap:
+    </p>
+
+    <img src="imgs/cassini3.png" alt="Cassini Paradox 3" class="center">
+
+    <p>
+    And so on.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasalign4coins.html">prev</a>
+     <a href="ryabasfish.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabaselimination.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

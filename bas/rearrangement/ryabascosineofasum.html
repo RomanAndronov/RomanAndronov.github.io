@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Rearrangement. Cosine of a Sum
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov.
+  Rearrangement. Cosine of a Sum</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabassineofasum.html">prev</a>
+     <a href="ryabastanofasum.html">next</a>
+    </p>
+
+    <h1>\(\cos (\alpha + \beta)\)</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Express the cosine of a composite angle \(\alpha + \beta\) in terms of
+    trigonometric functions of primitive angles \(\alpha\) and \(\beta\).
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    In the previous chapter we have made a modest attempt at showing how an
+    identity can be derived at via a series of trial and error geometric
+    constructions. However, in this chapter we will not be as verbose. Our
+    goal here is to see if the arrangement that worked for the sine will also
+    work for the cosine.
+    </p>
+
+    <p>
+    As such:
+    </p>
+
+    <img src="imgs/trigofsum5.png" alt="Cosine of a Sum" class="center">
+
+    <p>
+    By definition we have:
+    </p>
+
+$$\cos (\alpha + \beta) = \frac {AC}{AB} =$$
+$$\frac {AF - CF}{AB} =$$
+$$\frac {AF - GE}{AB} =$$
+$$\frac {AF}{AB} - \frac {GE}{AB}$$
+
+    <p>
+    \(AF\) is a side of the right triangle \(\triangle AFE\) and \(AB\) is a
+    hypotenuse of the right triangle \(\triangle AEB\) and these two right
+    triangles share \(AE\):
+    </p>
+
+$$\frac {AF}{AB} = \frac {AF}{AB} \times 1 =$$
+$$\frac {AF}{AB} \times \frac {AE}{AE} =$$
+$$\frac {AF}{AE} \times \frac {AE}{AB}$$
+
+    <p>
+    From \(\triangle AFE\) we have:
+    </p>
+
+$$\frac {AF}{AE} = \cos \alpha$$
+
+    <p>
+    From \(\triangle AEB\) we have:
+    </p>
+
+$$\frac {AE}{AB} = \cos \beta$$
+
+    <p>
+    Hence:
+    </p>
+
+$$\frac {AF}{AB} = \cos \alpha \cos \beta$$
+
+    <p>
+    \(GE\) is a side of the right triangle \(\triangle BGE\) and \(AB\) is a
+    hypotenuse of the right triangle \(\triangle AEB\) and these two right
+    triangles share \(BE\):
+    </p>
+
+$$\frac {GE}{AB} = \frac {GE}{AB} \times 1 =$$
+$$\frac {GE}{AB} \times \frac {BE}{BE} =$$
+$$\frac {BE}{AB} \times \frac {GE}{BE}$$
+
+    <p>
+    From \(\triangle AEB\) we have:
+    </p>
+
+$$\frac {BE}{AB} = \sin \beta$$
+
+    <p>
+    From \(\triangle BGE\) we have:
+    </p>
+
+$$\frac {GE}{BE} = \sin \alpha$$
+
+    <p>
+    Hence:
+    </p>
+
+$$\frac {GE}{AB} = \sin \alpha \sin \beta$$
+
+    <p>
+    and:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\cos (\alpha + \beta) = \cos \alpha \cos \beta -
+\sin \alpha \sin \beta}$$
+
+    <p>
+    or geometrically:
+    </p>
+
+    <img src="imgs/trigofsum6.png" alt="Cosine of a Sum 2" class="center">
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabassineofasum.html">prev</a>
+     <a href="ryabastanofasum.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrearrangement.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

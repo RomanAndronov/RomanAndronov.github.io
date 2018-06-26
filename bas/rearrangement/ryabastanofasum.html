@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Rearrangement. Tangent of a Sum
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Rearrangement. Tangent
+  of a Sum</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabascosineofasum.html">prev</a>
+     <a href="ryabassineofadiff.html">next</a>
+    </p>
+
+    <h1>\(\tan (\alpha + \beta)\)</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Express the tangent of a composite angle \(\alpha + \beta\) in terms of
+    trigonometric functions of primitive angles \(\alpha\) and \(\beta\).
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    In \(\sin (\alpha + \beta)\) chapter we have made an attempt at showing how an
+    identity can be derived at via a series of trial and error geometric
+    constructions. However, in this chapter we will not be as verbose. Our
+    goal here is to see if the arrangement that worked for the sine and the cosine
+    will also work for the tangent.
+    </p>
+
+    <p>
+    As such:
+    <p>
+
+    <img src="imgs/trigofsum5.png" alt="Tangent of a Sum" class="center">
+
+    <p>
+    By definition we have:
+    </p>
+
+$$\tan (\alpha + \beta) = \frac {BC}{AC} =$$
+$$\frac {BG + GC}{AC} =$$
+$$\frac {BG + GC}{AF - CF} =$$
+$$\frac {BG + EF}{AF - GE}$$
+
+    <p>
+    Divide both parts of the above fraction by \(AF\):
+    </p>
+
+$$\frac {BG + EF}{AF - GE} = \frac {\frac {BG + EF}{AF}}
+ {\frac {AF - GE}{AF}} =$$
+$$\frac {\frac {BG}{AF} + \frac {EF}{AF}}
+ {\frac {AF}{AF} - \frac {GE}{AF}} =$$
+$$\frac {\frac {BG}{AF} + \frac {EF}{AF}}
+ {1 - \frac {GE}{AF}}$$
+
+    <p>
+    From \(\triangle AFE\) we have:
+    </p>
+
+$$\frac {EF}{AF} = \tan \alpha$$
+
+    <p>
+    And hence:
+    </p>
+
+$$\tan (\alpha + \beta) = \frac {\frac {BG}{AF} + \tan \alpha}
+ {1 - \frac {GE}{AF}}$$
+
+    <p>
+    In \(\sin (\alpha + \beta)\) chapter we have proved already that:
+    </p>
+
+$$\angle CBE = \alpha$$
+
+    <p>
+    The angles at \(F\) and \(G\) are right by construction.
+    </p>
+
+    <p>
+    From Euclid's <dfn>"Elements"</dfn> Book 1 Proposition 32, the sum of internal
+    angles in any triangle is equal to two right angles, it follows that the
+    remaining angles, \(\angle AEF\) and \(\angle BEG\), are also equal.
+    </p>
+
+    <p>
+    By <strong>AAA</strong> \(\triangle AFE\) and \(\triangle BGE\) are similar
+    and from Book 6 Proposition 4, the sides about the equal angles of similar
+    triangles are in the same proportion, it follows that:
+    </p>
+
+$$\frac {BG}{BE} = \frac {AF}{AE}$$
+$$BG \times AE = AF \times BE$$
+$$\frac {BG}{AF} = \frac {BE}{AE} = \tan \beta$$
+
+    <p>
+    And hence:
+    </p>
+
+$$\tan (\alpha + \beta) = \frac {\tan \beta + \tan \alpha}
+ {1 - \frac {GE}{AF}}$$
+
+    <p>
+    To express the remaining fraction in the above formula in terms of
+    trigonometric functions of a primitive angle we observe that \(GE\) and
+    \(AF\) do not have an immediately useful connection - to find it we have
+    to go through one more level of inderection.
+    </p>
+
+    <p>
+    \(GE\) is a side of \(\triangle BGE\) with hypotenuse \(BE\). \(BE\) is
+    also a side of \(\triangle AEB\) with \(AE\) as its other side. \(AE\) is
+    also a hypotenuse of \(\triangle AFE\) of which \(AF\) is one side. So then
+    the connection between \(GE\) and \(AF\) goes from \(GE\) to \(BE\), from
+    \(BE\) to \(AE\), from \(AE\) to \(AF\).
+    </p>
+
+    <p>
+    Since we have identified two extra sides that create a connection between
+    \(GE\) and \(AF\) we work both of them into the fraction in a neutral but
+    useful way as the rearrangement approach prescribes:
+    </p>
+
+$$\frac {GE}{AF} = \frac {GE}{AF} \times 1 \times 1 =$$
+$$\frac {GE}{AF} \times \frac {BE}{BE} \times \frac {AE}{AE} =$$
+$$\frac {GE}{BE} \times \frac {BE}{AE} \times \frac {AE}{AF}$$
+
+    <p>
+    From \(\triangle BGE\) we have:
+    </p>
+
+$$\frac {GE}{BE} = \sin \alpha$$
+
+    <p>
+    From \(\triangle AEB\) we have:
+    </p>
+
+$$\frac {BE}{AE} = \tan \beta$$
+
+    <p>
+    From \(\triangle AFE\) we have:
+    </p>
+
+$$\frac {AE}{AF} = \frac {1}{\cos \alpha}$$
+
+    <p>
+    Hence:
+    </p>
+
+$$\frac {GE}{AF} = \frac {\sin \alpha}{\cos \alpha} \tan \beta =$$
+$$\tan \alpha \tan \beta$$
+
+    <p>
+    And finally:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\tan (\alpha + \beta) = \frac {\tan \alpha +
+\tan \beta}{1 - \tan \alpha \tan \beta}}$$
+
+    <p>
+    Now that we have found out that the arrangement of right triangles that
+    worked for the sine and cosine of a compound angle also works for the
+    tangent of a compound angle we can repurpose the drawing from the sine
+    and cosine chapter that demonstrates the identities in question without
+    words.
+    </p>
+
+    <p>
+    For the tangent, though, we have to reassign the magnitudes of the line
+    segments as follows: instead of \(AB\) being a unity we make \(AF\) to be
+    of length \(1\) and the magnitudes of lengths of the remaining line segments
+    follow automatically:
+    </p>
+
+    <img src="imgs/tanofsum.png" alt="Tangent of a Sum 2" class="center">
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabascosineofasum.html">prev</a>
+     <a href="ryabassineofadiff.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasrearrangement.js"></script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Roliding Bead 2 by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css"/>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Roliding Bead 2 by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasrlb1.html">prev</a>
+     <a href="ryabasequiv.html">next</a>
+    </p>
+
+    <h1>Roliding Bead 2</h1>
+
+    <p>
+    In this section we will consider the second option of the original
+    <strong>Roliding Bead</strong> problem. Namely, we will assume that there is
+    no external input into the system once the thread holding the bead in a fixed
+    position is cut.
+    </p>
+
+    <p>
+    Then, based on the law of conservation of angular momentum, as the distance
+    of the bead from the axis of rotation grows, the bead's and the rod's angular
+    velocity will diminish and the system will slow down. It means that the
+    angular velocity \(\omega\) of the system after the bead starts moving along
+    the rod is not constant but rather is a decreasing function of time.
+    </p>
+
+    <p>
+    Since the rod is massless, it has no moment of inertia and hence - no kinetic
+    energy. Since there is no friction in the system, the law of conservation of
+    energy is:
+    </p>
+
+$$\frac {J\omega_0^2}{2} = \frac{J\omega^2}{2} + \frac {mv^2}{2}$$
+$$\begin{equation}\frac {ml_0^2\omega_0^2}{2} = \frac{mx^2\omega^2}{2} +
+ \frac {mv^2}{2}
+\end{equation}$$
+
+    <p>
+    where \(\omega_0\) is the angular velocity of the system in the initial
+    (steady) state, \(v\) is the velocity of the bead relative to the rod,
+    \(\omega\) is the variable angular velocity of the system at any given time.
+    </p>
+
+    <p>
+    From the original <strong>Roliding Bead</strong> problem we can use the
+    Lagrangian-based equation (1) except that this time the angular velocity
+    is not constant:
+    </p>
+
+$$\begin{equation}
+\omega^2x = \ddot x = \frac {dv}{dt}
+\end{equation}$$
+
+    <p>
+    From (1):
+    </p>
+
+$$\begin{equation}
+\omega^2 = \frac {l_0^2\omega_0^2 - v^2}{x^2}
+\end{equation}$$
+
+    <p>
+    Put (3) into (2):
+    </p>
+
+$$\frac {dv}{dt} = \frac {l_0^2\omega_0^2 - v^2}{x}$$
+$$\frac {dv}{l_0^2\omega_0^2 - v^2} = \frac {dt}{x} = \frac {dx}{dx} \times
+ \frac {dt}{x} = \frac {dx}{x} \times \frac {dt}{dx} = \frac {dx}{x} \times
+ \frac {1}{v}$$
+$$\begin{equation}
+\frac {vdv}{l_0^2\omega_0^2 - v^2} = \frac {dx}{x}
+\end{equation}$$
+
+    <p>
+    Integrate both sides of (4), left - from zero to \(v\), right - from
+    \(l_0\) to \(x\):
+    </p>
+
+$$\begin{equation}
+\int_{l_0}^x {\frac {dx}{x}} = \ln x - \ln l_0 = \ln \Big( \frac {x}{l_0} \Big)
+\end{equation}$$
+
+$$\int_0^{v} {\frac {vdv}{l_0^2\omega_0^2 - v^2}} =
+
+\frac {1}{2} \int {\frac {dv^2}{l_0^2\omega_0^2 - v^2}} =$$
+
+$$- \frac {1}{2} \int \frac {d(l_0^2\omega_0^2 - v^2)}{l_0^2\omega_0^2 - v^2} =$$
+
+$$- \frac {1}{2} \ln (l_0^2\omega_0^2 - v^2)\Bigg|_0^{v} =
+ - \frac {1}{2} \ln (l_0^2\omega_0^2 - v^2) + \frac {1}{2} \ln (l_0^2\omega_0^2) =$$
+
+$$\begin{equation}
+\ln \Bigg( \frac {l_0\omega_0}{\sqrt {l_0^2\omega_0^2 - v^2}}\Bigg)
+\end{equation}$$
+
+    <p>
+    Equate (5) and (6):
+    </p>
+
+$$\ln \Bigg( \frac {l_0\omega_0}{\sqrt {l_0^2\omega_0^2 - v^2}}\Bigg) =
+ \ln \Bigg( \frac {x}{l_0} \Bigg)$$
+$$\begin{equation}
+\frac {l_0\omega_0}{\sqrt {l_0^2\omega_0^2 - v^2}} = \frac {x}{l_0}
+\end{equation}$$
+
+    <p>
+    Solve (7) for \(v\):
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{v(x) = l_0\omega_0 \sqrt{1 - \frac {l_0^2}{x^2}}}
+\end{equation}$$
+
+    <p>
+    Then:
+    </p>
+
+$$\begin{equation}
+v(x = l) = l_0\omega_0\sqrt{1 - \frac {l_0^2}{l^2}}
+\end{equation}$$
+
+    <p>
+    and from (3)
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\omega(x) = \omega_0 \frac {l_0^2}{x^2}}
+\end{equation}$$
+
+$$\omega(x = l) = \omega_0 \frac {l_0^2}{l^2}$$
+
+    <p>
+    To find \(x(t)\) put (10) into (2):
+    </p>
+
+$$\begin{equation}
+\omega^2(x)\times x = \frac {\omega_0^2l_0^4}{x^3} = \frac {d^2x}{dt^2}
+\end{equation}$$
+
+    <p>
+    Use the method of separation of variables to solve (11):
+    </p>
+
+$$k = \omega_0^2l_0^4$$
+$$\frac {k}{x^3} = \frac {d \dot x}{dt}$$
+$$k \frac {dt}{x^3} = d \dot x$$
+
+$$k \frac {dt}{x^3} \times \dot x = d \dot x \times \dot x$$
+$$k \frac {dt}{x^3} \times \frac {dx}{dt} = \dot x d \dot x$$
+$$k \frac {dx}{x^3} = \dot x d \dot x$$
+$$-\frac {k}{2x^2} + C = \frac {\dot x^2}{2}$$
+$$x(0) = l_0, \; \dot x(0) = 0$$
+$$C = \frac {k}{2l_0^2}$$
+$$\frac {k}{2l_0^2} - \frac {k}{2x^2} = \frac {\dot x^2}{2}$$
+$$\dot x^2 = k\Big(\frac {1}{l_0^2} - \frac {1}{x^2}\Big)$$
+$$\frac {dx}{\sqrt{\Big(\frac {1}{l_0^2} - \frac {1}{x^2}\Big)}} = \sqrt{k}dt$$
+$$\frac {l_0xdx}{\sqrt{x^2 - l_0^2}} = \sqrt{k}dt$$
+
+$$l_0 \int_{l_0}^x \frac {xdx}{\sqrt{x^2 - l_0^2}} = \sqrt{k} \int_0^tdt = \sqrt{k}t$$
+
+$$\int \frac {xdx}{\sqrt{x^2 - l_0^2}} =
+ \frac {1}{2} \int \frac {d(x^2 - l_0^2)}{\sqrt{x^2 - l_0^2}} = \sqrt{x^2 - l_0^2}$$
+
+    <p>
+    Consequently:
+    </p>
+
+$$l_0 \int_{l_0}^x \frac {xdx}{\sqrt{x^2 - l_0^2}} =
+ l_0 \sqrt{x^2 - l_0^2} \Bigg|_{l_0}^x = l_0 \sqrt{x^2 - l_0^2}$$
+
+    <p>
+    and:
+    </p>
+
+$$l_0 \sqrt{x^2 - l_0^2} = \sqrt{k}t$$
+$$l_0^2\Big(x^2 - l_0^2\Big) = \omega_0^2 l_0^4 t^2$$
+$$x^2 - l_0^2 = \omega_0^2 l_0^2 t^2$$
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{x(t) = l_0 \sqrt{\omega_0^2 t^2 + 1}}
+\end{equation}$$
+
+    <p>
+    And the time \(t_s\) till separation of the bead from the rod is:
+    </p>
+
+$$\begin{equation}
+t_s = \frac{1}{\omega_0}\sqrt{\frac {l^2}{l_0^2} - 1}
+\end{equation}$$
+
+    <p>
+    Putting (12) into (10) and into (8), we obtain:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{v(t) = \frac{\omega_0^2l_0t}{\sqrt{\omega_0^2t^2 + 1}}}
+\end{equation}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\omega(t) = \frac{\omega_0}{\omega_0^2t^2 + 1}}
+\end{equation}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasrlb1.html">prev</a>
+     <a href="ryabasequiv.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasequiv.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

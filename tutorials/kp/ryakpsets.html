@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Kombinatorix Primordial, Sets by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Kombinatorix Primordial, Sets by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryakpbasic5.html">prev</a>
+     <a href="ryakpmultisets.html">next</a>
+    </p>
+
+    <h1>Sets</h1>
+
+    <p>
+    4.1.1) Linear Permutations<br>
+    4.1.2) Circular Permutations<br>
+    4.1.3) Interbucket Distributions<br>
+    </p>
+
+    <p>
+    4.2.1) Combinations<br>
+    4.2.2) Symmetry Property<br>
+    4.2.3) Number of Subsets<br>
+    4.2.4) Interbucket Distributions<br>
+    </p>
+
+    <p>
+    <br>So far we have used various counting principles to solve various problems
+    by crafting a custom tailored chain of reasoning for each problem. Next we
+    will look at a number of situations that allow a sweeping generalization to
+    be made as long as it is possible to fold a problem into a prepackaged scenario.
+    We will mostly use <strong>MCP</strong> to deduce the formulas for these
+    scenarios. If it helps, you may think of them as follows - if the counting
+    principles are scalpels then the upcoming scenarios are hammers.
+    </p>
+
+    <p>
+    Let us also agree that from now on when we say <dfn>"input items"</dfn> or
+    <dfn>"input (multi)set"</dfn> we mean <dfn>"\(n\) items used to construct a
+    certain arrangement according to a prescribed rule"</dfn>. Let us name that
+    resulting arrangement an <dfn>"output arrangement/(multi)set"</dfn>.
+    </p>
+
+    <p>
+    When an output arrangement is order-sensitive then we will name it a
+    <dfn>permutation</dfn> - as a noun. When an output arrangement is
+    order-<strong>in</strong>sensitive then we will name it a
+    <dfn>combination</dfn> - also as a noun.
+    </p>
+
+    <p>
+    We may then think about the upcoming situations as rules or black boxes -
+    some number of input items goes in and a certain arrangement comes out.
+    Our objective then is:
+    </p>
+
+    <p id="dbg">
+    <dfn>find a closed-form formula which will make it possible to find the
+    total number of possible arrangements without generating their exhaustive
+    list and without calculating that list's size by hand</dfn>
+    </p>
+
+    <p>
+    If you stop and think about this for a while it should appear to be nothing
+    short of magic.
+    </p>
+
+    <p>
+    <br><strong>4.1.1) (Linear) Permutations of Sets</strong>
+    </p>
+
+    <p>
+    We defined a permutation (as a noun) to be such an arrangement of some finite
+    number of input items in which order matters. Using:
+    </p>
+
+$$S = 123, \; |S| = 3$$
+
+    <p>
+    as an example, a permutation (or \(3-\)permutation) of \(S\) is a list of all
+    of its items (taken \(n = 3\) at a time) in some order. There are six of those:
+    </p>
+
+$$123 \quad 132 \quad 213 \quad 231 \quad 312 \quad 321$$
+
+    <p>
+    where the individual subsets:
+    </p>
+
+$$123, \; 132, \; 213, \; \dots$$
+
+    <p>
+    are <dfn>output arrangements</dfn>.
+    </p>
+
+    <p>
+    There are six \(2-\)permutations of \(S\):
+    </p>
+
+$$12 \quad 21 \quad 13 \quad 31 \quad 23 \quad 32$$
+
+    <p>
+    There are three \(1-\)permutations of \(S\):
+    </p>
+
+$$1 \quad 2 \quad 3$$
+
+    <p>
+    And there is one \(0-\)permutation or an empty set of \(S\).
+    </p>
+
+    <p>
+    A single permutation of a set then is an output arrangement made up of
+    distinct input items in which:
+    </p>
+
+    <p>
+    - the order of input items matters
+    </p>
+
+    <p>
+    - no input item may appear more than once (no repetitions)
+    </p>
+
+    <p>
+    In an exhaustive list of all the permutations of a set:
+    </p>
+
+    <p>
+    - all the input items must eventually be used
+    </p>
+
+    <p>
+    - the sizes of the intermediate \(r-\)arrangements are identical - some finite
+    arbitrary given ahead of time positive integer \(r\) between zero and \(n
+    = |S|\)
+    </p>
+
+    <p>
+    <strong>Scenario:</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>given a set of three digits:
+
+$$1, 2, 3$$
+
+    how many different \(2-\)digit order-sensitive arrangements can be constructed
+    if each digit can appear in any single output arrangement only once?</dfn>
+    </p>
+
+    <p>
+    For example, arrangements like:
+    </p>
+
+$$23, \; 32$$
+
+    <p>
+    are allowed and are taken to be different while arrangements like:
+    </p>
+
+$$123, \; 11$$
+
+    <p>
+    are not allowed since the first one is of the wrong size and the second one
+    contains illegal duplicates.
+    </p>
+
+    <p>
+    Formally:
+    </p>
+
+    <p id="dbg">
+    <dfn>what is the number of \(r-\)permutations of a set of \(n\) items?</dfn>
+    </p>
+
+    <p>
+    If we were to construct a single permutation of the above set then with every
+    current selection of some item the number of choices for the next selection
+    will diminish by one.
+    </p>
+
+    <p>
+    If we first chose \(1\), for example, then we can not use it again within
+    this arrangement - to fill in the next position in a permutation we must choose
+    only between the remaining items, \(2\) or \(3\). Once we pick \(2\), for
+    example, then we can not use it again within this arrangement - to fill in
+    the next position we may now choose only \(3\) and so on.
+    </p>
+
+    <p>
+    In general then for the permutation's first position we choose from \(n\)
+    available items, for the permutation's second position we choose from the
+    remaining \((n - 1)\) available items, for the third position - from \((n -
+    2)\) available items and so on until we are left with \((n - (r - 1))\)
+    candidates to choose from for the permutation's \(r-\)th position. Verifying
+    that the independence requirement is met, by direct application of
+    <strong>MCP</strong>, after making \(r\) consecutive choices we obtain:
+    </p>
+
+$$P(n, r) = n \times (n - 1) \times (n - 2) \times \dots \times (n - r + 1)$$
+
+    <p>
+    To express \(P(n, r)\) in closed form we observe that it has the first \(r\)
+    diminishing by one terms starting from \(n\). To turn such an expression into
+    a full factorial of \(n\) we have to multiply it by the remaining \((n - r)\)
+    diminishing by one terms:
+    </p>
+
+$$(n - r) \times (n - r - 1) \times \dots \times 2 \times 1 = (n - r )!$$
+
+    <p>
+    To keep \(P(n, r)\) the same we also divide it by the same factor:
+    </p>
+
+    <p>
+$$P(n, r) = \frac {n \times (n - 1) \times \dots \times (n - r + 1) \times (n - r)
+ \times (n - r - 1) \times \dots \times 2 \times 1}{(n - r )!} =
+ \frac {n!}{(n - r )!}$$
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{P(n, r) = \frac {n!}{(n - r )!}}
+\end{equation}$$
+
+    <p>
+    \(P(n, r)\) is sometimes pronounced <dfn>"\(n\) permute \(r\)"</dfn> and
+    there are several alternative notations you may see:
+    </p>
+
+$$^nP_r, \; _nP_r, \; P_r^n$$
+
+    <p>
+    and the like.
+    </p>
+
+    <p>
+    For the record we note the edge conditions: 
+    </p>
+
+$$P(n, 0) = 1$$
+$$P(n, 1) = n$$
+$$P(n, n) = n!$$
+
+    <p>
+    <br><strong>Example E12</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>How many different \(|S|-\)sized "words", including the nonsensical ones,
+    can be made from a set of letters:</dfn>
+    </p>
+
+$$S = \{m, a, t, h \}$$
+
+    <p>
+    From (1) it follow that the answer is:
+    </p>
+
+$$P(4, 4) = 4! = 24$$
+
+    <p>
+    different 4-letter "words".
+    </p>
+
+    <p>
+    One way to create an exhaustive list of all such "words" is to interpret
+    <strong>MCP</strong> literally. After making the first choice, a letter
+    \(m\), \(3\) more letters remain. Write down as many \(m\)s as there are
+    remaining choices for the second letter:
+    </p>
+
+$$m \quad m \quad  m$$
+
+    <p>
+    For each \(m\) make a choice for the second letter:
+    </p>
+
+$$ma \quad mt \quad mh$$
+
+    <p>
+    Two choices remain for the third letter <dfn>for each ordered pair</dfn>
+    recorded so far - pick one such pair and add these choices to the list by
+    turning one ordered pair into two ordered \(3-\)tuples:
+    </p>
+
+$$\underbrace{mat \quad  mah} \quad mt \quad mh$$
+
+    <p>
+    pick the next pair:
+    </p>
+
+$$mat \quad mah \quad \underbrace{mta \quad mth} \quad mh$$
+
+    <p>
+    and the last one:
+    </p>
+
+$$mat \quad mah \quad mta \quad mth \quad \underbrace{mha \quad mht}$$
+
+    <p>
+    Now only one choice remains for the fourth letter:
+    </p>
+
+$$math \quad maht \quad mtah \quad mtha \quad mhat \quad mhta$$
+
+    <p>
+    which concludes the sequence of choices driven by the first letter. Since
+    three such choices remain - \(a, t, h\) - repeat the above process three
+    more times:
+    </p>
+
+$$math \quad maht \quad mtah \quad mtha \quad mhat \quad mhta$$
+$$amth \quad amht \quad atmh \quad athm \quad ahmt \quad ahtm$$
+$$tamh \quad tahm \quad tmah \quad tmha \quad tham \quad thma$$
+$$hamt \quad hatm \quad hmat \quad hmta \quad htam \quad htma$$
+
+    <p>
+    We thus construct \(4\) rows containing \(6\) columns each or a total of
+    \(24 = 4!\) \(4-\)letter "words".
+    </p>
+
+    <p>
+    <br><strong>Example E13</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>If we take a standard deck of cards to be our "alphabet" then how many
+    different \(52-\)card "words" can be made from it?</dfn>
+    </p>
+
+    <p>
+    From (1) it follow that the answer is:
+    </p>
+
+$$P(52, 52) = 52!$$
+
+    <p>
+    <br><strong>Example E14</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>How many different \(16-\)ball "words" can be made if all the \(16\)
+    billiard balls are used?</dfn>
+    </p>
+
+    <p>
+    Again:
+    </p>
+
+$$P(16, 16) = 16!$$
+
+    <p>
+    <br><strong>Example E15</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>How many different \(2-\)permutations of the set "\(math\)" are
+    possible?</dfn>
+    </p>
+
+$$P(4, 2) = \frac {4!}{(4 - 2)!} = 12$$
+
+    <p>
+    or:
+    </p>
+
+$$ma \quad mt \quad mh$$
+$$am \quad at \quad ah$$
+$$tm \quad ta \quad th$$
+$$hm \quad ha \quad ht$$
+
+    <p>
+    There should be \(4\) rows containing \(3\) columns each for a total of
+    \(12\) \(2-\)permutations.
+    </p>
+
+    <p>
+    <br><strong>4.1.2) Circular Permutations</strong>
+    </p>
+
+    <p>
+    If we bend our (normally) linear arrangement of items into a <dfn>circular</dfn>
+    arrangement - how many of these are possible if the circle must remain fixed
+    in its plane?
+    </p>
+
+    <p>
+    Fix an orthogonal \(xyz\) coordinate system in space. Pick the \(xOy\) plane.
+    In that plane fix a circle centered at the origin \(O\). Glue the items onto
+    the circumference of the circle and rotate that circle about the \(z\) axis.
+    Then even though the (absolute) \((x, y)\) coordinates of the items will
+    change from one rotation to the other their relative position with respect
+    to each other will not since the motion is rigid. As such, the new
+    arrangements will still be considered "the same" since the items' immediate
+    "left" and "right" neighbors will remain the same.
+    </p>
+
+    <p>
+    In other words two circular permutations are different if one can not be
+    obtained from the other via the rotation process described above. In the
+    drawing below the arrangements in Fig. <strong>A</strong> are the same
+    while the arrangements in Fig. <strong>B</strong> are different:
+    </p>
+
+    <img src="imgs/kp09.png" class="center">
+
+    <p>
+    To deduce the formula for this case we observe that many linear arrangements
+    correspond to one circular arrangement. If we pick any one linear arrangement
+    and keep shifting its items by just one position in some constant direction
+    until each item again occupies its original position then we will obtain all
+    the linear arrangements corresponding to one circular arrangement meaning that
+    we will find all the linear arrangements that will not compare "different"
+    when bent into a circle.
+    </p>
+
+    <p>
+    Using "\(math\)" linear arrangement, for example, let us always shift its
+    items Westward one at a time. When an item falls off one edge of the
+    \(4-\)position arrangement we grab it and place it into a position
+    corresponding to the opposite edge of the arrangement:
+    </p>
+
+$$math \quad athm \quad thma \quad hmat$$
+
+    <p>
+    We see that there will always be \(4 = n\) such arrangements. We now go back
+    to our original set of \(24\) linear permutations, partition it in such a
+    way that each subset contains exactly \(4\) linear permutations that will
+    not compare "different" if bent into a circle and by <strong>DCP</strong> we
+    obtain that:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{\frac {P(n, n)}{n} = (n - 1)!}
+\end{equation}$$
+
+    <p>
+    is the number of circular permutations of \(n\) distinct items. This informal
+    proof also provides a way to generate circular permutations: with our
+    permutations generation approach these will be the \(6\) items in Fig.
+    <strong>B</strong>.
+    </p>
+
+    <p>
+    If we look closely at Fig. <strong>B</strong> - which other combinatorial
+    reasoning can be suggested to prove the above formula?
+    </p>
+
+    <p>
+    Hint:
+    </p>
+
+    <p id="hint">
+    MCP
+    </p>
+
+    <p>
+    <br><strong>4.1.3) Interbucket Distributions</strong>
+    </p>
+
+    <p>
+    \(P(n, r)\) is applicable to the distribution of \(r\) distinct items among
+    \(n\) distinct buckets with the following restrictions:
+    </p>
+
+    <p>
+    <strong>4.1.3.1)</strong> each item must be in some bucket
+    </p>
+
+    <p>
+    <strong>4.1.3.1)</strong> at most one item per bucket is allowed
+    </p>
+
+    <p>
+    <strong>4.1.3.1)</strong> the order of items across the buckets matters;
+    </p>
+
+    <p>
+    For a proof we observe that we have \(n\) buckets to choose from for the
+    placement of the first item, \((n - 1)\) buckets to choose from for the
+    placement of the second item and so on until we have \((n - r + 1)\) buckets
+    left to choose from for the placement of the \(r-\)th item. By
+    <strong>MCP</strong> then the number of such distributions is \(P(n, r)\).
+    </p>
+
+    <p>
+    As an exercise write down all \(6\) distributions of two items, \(a\) and
+    \(c\), among \(3\) buckets: \(b_1, b_2, b_3\).
+    </p>
+
+    <p>
+    <br><strong>4.2.1) Combinations</strong>
+    </p>
+
+    <p>
+    We defined a combination (as a noun) to be such an arrangement of some finite
+    number of input items in which order does not matter. We can say then that a
+    combination is a permutation whose <dfn>order matters</dfn> requirement was
+    removed. Using:
+    </p>
+
+$$S = \{1, 2, 3 \}$$
+
+    <p>
+    as an example, there is only one \(3-\)combination of \(S\):
+    </p>
+
+$$123$$
+
+    <p>
+    There are three \(2-\)combinations of \(S\):
+    </p>
+
+$$12 \quad 13 \quad 23$$
+
+    <p>
+    There are three \(1-\)combinations of \(S\):
+    </p>
+
+$$1 \quad 2 \quad 3$$
+
+    <p>
+    And there is one \(0-\)combination or an empty set of \(S\).
+    </p>
+
+    <p>
+    The above \(r-\)combinations are generally taken to be the subsets of \(S\)
+    so instead of saying "\(r-\)combination" we may also say "\(r-\)subset" or
+    simply "subset".
+    </p>
+
+    <p>
+    A single combination of a set then is an output arrangement made up of
+    distinct input items in which:
+    </p>
+
+    <p>
+    - the order of items does not matter
+    </p>
+
+    <p>
+    - no input item may appear more than once (no repetitions)
+    </p>
+
+    <p>
+    In an exhaustive list of all the combinations of a set:
+    </p>
+
+    <p>
+    - all the input items must eventually be used
+    </p>
+
+    <p>
+    - the sizes of the intermediate \(r-\)arrangements are identical - some finite
+    arbitrary given ahead of time positive integer \(r\) between zero and \(n =
+    |S|\)
+    </p>
+
+    <p>
+    <strong>Scenario:</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>given a set of three digits:
+
+$$1, 2, 3$$
+
+    how many different \(2\)-digit order-<strong>in</strong>sensitive arrangements
+    can be constructed if each digit can appear in any one output arrangement
+    only once?</dfn>
+    </p>
+
+    <p>
+    For example, arrangements like:
+    </p>
+
+$$12 \quad 21$$
+
+    <p>
+    are allowed but are taken to be the same while arrangements like:
+    </p>
+
+$$11 \quad 123$$
+
+    <p>
+    are not allowed since the first one contains illegal duplicates and the
+    second one is of the wrong size.
+    </p>
+
+    <p>
+    Formally:
+    </p>
+
+    <p id="dbg">
+    <dfn>what is the number of \(r-\)subsets of a set of \(n\) items?</dfn>
+    </p>
+
+    <p>
+    To deduce the formula for this case we temporarily cancel the "order does not
+    matter" requirement - an approach popular in solving combinatorial problems.
+    Then the type of arrangements that we are dealing with is permutations and
+    by the previous scenario, permutations of sets, the number of possible
+    \(r-\)permutations of such items, from (1), is \(P(n, r)\).
+    </p>
+
+    <p>
+    We next observe that the construction of each such \(r-\)permutation can be
+    broken into two consecutive events:
+    </p>
+
+    <p>
+    1) choosing \(r\) items from \(n\) items
+    </p>
+
+    <p>
+    2) arranging the chosen items in some order
+    </p>
+
+    <p>
+    The number of outcomes of the first event is what we are after - let us name
+    it \(C(n, r)\). The number of outcomes of the second event we already know -
+    if we put:
+    </p>
+
+$$n = r$$
+
+    <p>
+    then from (1) it is:
+    </p>
+
+$$P(r, r) = r!$$
+
+    <p>
+    We verify the independence requirement and by <strong>MCP</strong> we obtain:
+    </p>
+
+$$P(n, r) = C(n, r) \times r!$$
+
+    <p>
+    or:
+    </p>
+
+$$\begin{equation}
+\bbox[#e8e8e8,3pt]{C(n, r) = \frac{P(n, r)}{r!} = \frac{n!}{r! (n - r)!}}
+\end{equation}$$
+
+    <p>
+    \(C(n, r)\) is sometimes pronounced <dfn>"\(n\) choose \(r\)"</dfn> and there
+    are several alternative notations you may see:
+    </p>
+
+$$^nC_r, \quad _nC_r, \quad C_r^n, \quad \Big(_r^n \Big)$$
+
+    <p>
+    and the like.
+    </p>
+
+    <p>
+    For the record we note the edge conditions:
+    </p>
+
+$$C(n, 0) = 1$$
+$$C(n, 1) = n$$
+$$C(n, n) = 1$$
+
+    <p>
+    We should have no problems figuring out how to generate an exhaustive list
+    of all the possible combinations of a set by hand. One way to do that is to
+    fall back on the previously solved problem of generating all the permutations
+    of a set and then reduce its solution set by throwing out all the duplicates.
+    For our sample \(\{1, 2, 3\}\) problem we obtain:
+    </p>
+
+$$12 \quad 13 \quad 23$$
+
+    <p>
+    or:
+    </p>
+
+$$C(3, 2) = \frac {3!}{2!(3 - 2)!} = 3$$
+
+    <p>
+    \(2-\)combinations.
+    </p>
+
+    <p>
+    <br><strong>Example E16</strong>
+    </p>
+
+    <p id="dbg">
+    <dfn>\(17\) points are sprinkled on a plane in such a way that no three are
+    collinear. How many straight lines can be drawn through these points?</dfn>
+    </p>
+
+    <p>
+    Since a straight line is uniquely determined by a pair of points regardless
+    of their order in the pair then the answer is the number of \(2-\)subsets of
+    \(17\) items:
+    </p>
+
+$$C(17, 2) = \frac{17!}{2!15!} = 136$$
+
+    <p>
+    straight lines.
+    </p>
+
+    <p>
+    What about the number of triangles?
+    </p>
+
+$$C(17, 3) = \frac{17!}{3! 14!} = 680$$
+
+    <p>
+    \(C(n, r)\)s are also known as <dfn>Binomial Coefficients</dfn> - they are
+    used in the expansion of the expressions of the following form:
+    </p>
+
+$$(x + y)^n$$
+
+    <p>
+    The values for various \(C(n, r)\)s can be found with <dfn>Pascal's
+    Triangle</dfn>. \(C(n, r)\)s show up in solutions of many seemingly unrelated
+    problems across many seemingly unrelated fields. See, for example, <strong>Two
+    Eggs</strong> problem in <strong>Reverse Order</strong> section under
+    <strong>Basic Approaches</strong>.
+    </p>
+
+    <p>
+    \(C(n, r)\)s have many interesting properties which you are encouraged to
+    investigate on your own. We will mention just two - the Symmetry Property
+    and the Number of Subsets.
+    </p>
+
+    <p>
+    <br><strong>4.2.2) Symmetry Property</strong>
+    </p>
+
+    <p>
+    Recall our complement sets discussion in <strong>SCP</strong> section where
+    we noted that a subset of \(S\) that contains all but \(r\) items is uniquely
+    determined by the very \(r\) items that are not in it. In fact nothing prevents
+    us from switching the notations around - we can claim \(A^c\) to be the
+    original set and \(A\) to be its complement, formally:
+    </p>
+
+$$(A^c)^c = A$$
+
+    <p>
+    It follows then that the number of ways in which \((n - r)\) items can be
+    chosen from a set of \(n\) is exactly the same as the number of ways in which
+    \(r\) items can be chosen from the same set:
+    </p>
+
+$$C(n, n - r) = \frac {n!}{(n - r)! (n - n + r)!} = \frac {n!}{r!(n - r)!} =
+ C(n, r)$$
+
+    <p>
+    The above property is sometimes called the <dfn>Symmetry Property of
+    \(C(n, r)\)</dfn> and we can rewrite it as follows:
+    </p>
+
+$$from \; \; n = a + b \; \Rightarrow \; C(n, a) = C(n, b)$$
+
+    <p>
+    <br><strong>4.2.3) Number of Subsets</strong>
+    </p>
+
+    <p>
+    Let us now ask ourselves - what is the total number of subsets of a set of
+    \(n\) items?
+    </p>
+
+    <p>
+    Here by subsets we mean all the possible subsets: \(0-\)subsets, \(1-\)subsets,
+    \(2-\)subsets and so on. On the one hand, we can answer that question via
+    <strong>MCP</strong>. Our first input item can either be in the output subset
+    or not - two choices only. Regardless of the previous choice the second input
+    item can either be in the output subset or not - again, two choices only. By
+    applying this logic to the remaining input items in the set, from
+    <strong>MCP</strong> it follows that:
+
+$$\underbrace{2 \times 2 \times 2 \times \dots \times 2}_{n} = 2^n$$
+
+    <p>
+    is the total number of all the subsets of a set.
+    </p>
+
+    <p>
+    On the other hand, we can always partition the output set of all the subsets
+    of the input set in such a way that each item of the output set represents
+    exactly one \(r-\)subset. For example:
+    </p>
+
+$$S_i = \{a, b, c \}$$
+$$S_o = \{\{\}, \{a\}, \{b\}, \{c\}, \{ab\}, \{ac\}, \{bc\}, \{abc\}\}$$
+
+    <p>
+    Since the number of such \(r-\)subsets is given by \(C(n, r)\), from
+    <strong>ACP</strong> it follows that the sum of \(C(n, r)\)s for all the
+    \(r\)s is also the answer to the above question:
+    </p>
+
+$$C(n, 0) + C(n, 1) + C(n, 2) + \dots + C(n, n) = 2^n = (1 + 1)^n$$
+
+    <p>
+    If we require the number of <dfn>non-empty</dfn> subsets then it is:
+    </p>
+
+$$2^n - 1$$
+
+    <p>
+    This task of counting the number of subsets in a set also opens the door
+    for <dfn>recurrence relations</dfn> and <dfn>generating functions</dfn> ideas
+    that are not discussed in this tutorial.
+    </p>
+
+    <p>
+    <br><strong>4.2.3) Interbucket Distributions</strong>
+    </p>
+
+    <p>
+    \(C(n, r)\) is applicable to the distribution of \(r\)
+    <dfn>indistinguishable</dfn> items among \(n\) distinct buckets with the
+    following restrictions:
+    </p>
+
+    <p>
+    <strong>4.2.3.1)</strong> each item must be in some bucket
+    </p>
+
+    <p>
+    <strong>4.2.3.2)</strong> at most one item per bucket is allowed
+    </p>
+
+    <p>
+    <strong>4.2.3.3)</strong> the concept of order of items across the buckets
+    does not apply
+    </p>
+
+    <p>
+    For a proof we observe that since all the input items are indistinguishable,
+    for a unique description of any given distribution all we need is bucket
+    numbers that have exactly one item in them because each bucket's number from
+    \(N\) is unique. We then throw out the original input items and make the
+    buckets' numbers our new input items. The problem then is rephrased as:
+    </p>
+
+    <p id="dbg">
+    <dfn>in how many ways \(r\) items can be chosen out of \(n\)?</dfn>
+    </p>
+
+    <p>
+    But we already know the answer to that question:
+    </p>
+
+$$C(n, r)$$
+
+    <p>
+    As an exercise write down all \(3\) distributions of two \(a\)s among \(3\)
+    buckets \(b_1, b_2, b_3\).
+    </p>
+
+    <p>
+    Before we conclude this section we note that when it comes to indistinguishable
+    input items the multifaceted \(C(n, r)\) has yet another interpretation, see
+    <strong>5.1.2</strong> section, permutations of multisets with finite supply.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryakpbasic5.html">prev</a>
+     <a href="ryakpmultisets.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryakp.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

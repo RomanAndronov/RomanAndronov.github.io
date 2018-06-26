@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Square Root
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Square Root</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabasparabola.html">prev</a>
+     <a href="ryabascircle.html">next</a>
+    </p>
+
+    <h1>Square Root</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the square area of a plane region delineated by the graph of a square
+    root function \(y=\sqrt x\), the \(x\)-axis and a perpendicular to \(Ox\)
+    through an arbitrary point B on the positive half of \(Ox\).
+    </p>
+
+    <p>
+    <br><strong>Right Sum Solution</strong>
+    </p>
+
+    <img src="imgs/squareroot.png" alt="Square Root" class="center">
+
+    <p>
+    The square are of the \(i-\)th primitive rectangle is:
+    </p>
+
+$$A'_{i, r} = \Delta x \times \sqrt x_i =$$
+$$\frac {l}{n} \times \sqrt {\frac {l}{n} \times i}$$
+$$\frac {l^{\frac{3}{2}}}{n^{\frac{3}{2}}} \sqrt i$$
+    </p>
+
+    <p>
+    Right Riemann Sum is:
+    </p>
+
+$$A'_r = \sum_{i = 1}^n A'_{i, r} =$$
+$$\frac {l^{\frac{3}{2}}}{n^{\frac{3}{2}}} \sum_{i=1}^n \sqrt {i}$$
+
+    <p>
+    and:
+    </p>
+
+$$A_r = \lim_{n\to +\infty} A'_r =$$
+$$\lim_{n\to +\infty} \frac {l^{\frac{3}{2}}}{n^{\frac{3}{2}}} \sum_{i=1}^N \sqrt i =$$
+$$l^{\frac{3}{2}} \lim_{n\to +\infty} \frac {1}{n^{\frac{3}{2}}} \sum_{i=1}^n \sqrt i$$
+    </p>
+
+    <p>
+    In <strong>Parabola</strong> chapter we have deduced the formula for the square
+    area of a plane region under the graph of a square root function:
+    </p>
+
+$$\begin{equation}
+A = \frac {2}{3}lh
+\end{equation}$$
+
+    <p>
+    It follows then that both limits, for left and right sums, exist and are
+    equal. Based on that observation we can equate \(A_r\) to (1).
+    </p>
+
+    <p>
+    Adjusting the magnitude of the square area in question to our case by swapping
+    the \(x\) and \(y\) axis and taking \(a = 1\), we obtain: 
+    </p>
+
+$$A = \frac {2}{3}lh$$
+$$h = \sqrt l$$
+$$A = \frac {2}{3}l^{\frac{3}{2}}$$
+
+    <p>
+    We can now equate the magnitudes of two square areas:
+    </p>
+
+$$\begin{equation}
+l^{\frac{3}{2}} \lim_{n\to +\infty} \frac {1}{n^{\frac{3}{2}}}
+ \sum_{i=1}^n \sqrt i = \frac {2}{3}l^{\frac{3}{2}}
+\end{equation}$$
+
+    <p>
+    or, after dividing both sides of (2) by \( l^{\frac{3}{2}} \):
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{\lim_{n\to +\infty} \frac {1}{n^{\frac{3}{2}}}
+ \sum_{i=1}^n \sqrt i = \frac {2}{3}}$$
+
+    <p>
+    We observe that even though we do not know how to compute the above sum and
+    (hence) the limit we still were able to find its value - an approach that we
+    will use again in <strong>Circle</strong> chapter.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabasparabola.html">prev</a>
+     <a href="ryabascircle.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionareas.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

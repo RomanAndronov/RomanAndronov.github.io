@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+
+<title>
+Basic Approaches by Roman Y. Andronov. Division. Cones
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../../rya.css" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Basic Approaches by Roman Y. Andronov. Division. Cones</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryabascylinders.html">prev</a>
+     <a href="ryabassphere.html">next</a>
+    </p>
+
+    <h1>Cones</h1>
+
+    <p>
+    <strong>Right Circular Cone</strong>
+    </p>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p>
+    Find the volume of a right circular cone of radius \(r\) and height
+    \(h\).
+    </p>
+
+    <p>
+    <br><strong>Solution</strong>
+    </p>
+
+    <p>
+    Now that in <strong>Cylinders</strong> chapter we have deduced the formulas
+    for the volumes of a right circular and elliptic cylinders we may use these
+    geometric objects as our primitive parts.
+    </p>
+
+    <p>
+    For a right circular cone let us use a thin right circular cylinder as a
+    primitive volume positioned as shown below, for example:
+    </p>
+
+    <img src="imgs/cone3D.png" alt="Cone 3D" class="center">
+
+    <p>
+    Please explain how the above primitive part was constructed.
+    </p>
+
+    <p>
+    Cut the cone with an \(xOz\) plane and consider its resulting triangular
+    cross section. The primitive cylinders are represented in the drawing below
+    as rectangles protruding beyond the surface of the cone:
+    </p>
+
+    <img src="imgs/cone2D.png" alt="Cone 2D" class="center">
+
+    <p>
+    Cut \(OC = h\) into \(n\) line segments of equal length that will play the
+    role of heights of primitive cylinders which we number in the top to bottom
+    fashion:
+    </p>
+
+$$z_{i - 1}z_{i} = \Delta z = \frac {h}{n}$$
+
+    <p>
+    Find the radius of the \(i-\)th primitive cylinder as follows. Consider the
+    triangles \(\triangle BOC\) and \(\triangle Gz_iC\) both of which are right
+    by construction and have a common angle at the vertex \(C\). From Euclid's
+    <dfn>"Elements"</dfn> Book 1 Proposition 32 (in any triangle the sum of
+    internal angles is equal to two right angles) it follows that all the internal
+    angles of \(\triangle BOC\) are equal to the corresponding internal angles
+    of \(\triangle Gz_iC\). Hence, by <strong>AAA</strong>, these triangles are
+    similar and from Book 6 Proposition 4 (the sides about equal angles in similar
+    triangles are in the same proportion) it follows that:
+    </p>
+
+$$\frac {z_iG}{OB} = \frac {Cz_i}{CO}$$
+$$\frac {r_i}{r} = \frac {\frac {h}{n}\times i}{h}$$
+$$r_i = \frac {r}{n} \times i$$
+
+    <p>
+    The volume of the \(i-\)th primitive cylinder then is:
+    </p>
+
+$$V'_i = \pi r_i^2 \frac {h}{n} =$$
+$$\frac {\pi r^2h}{n^3}i^2$$
+
+    <p>
+    Sum all the volumes of all the primitive cylinders:
+    </p>
+
+$$V' = \frac {\pi r^2h}{n^3} \sum_{i=1}^n i^2 =$$
+$$\frac {\pi r^2h}{n^3} \frac {n(n + 1)(2n + 1)}{6} =$$
+$$\frac {\pi r^2h}{n^3} \frac {n^3(1 + \frac {1}{n})(2 + \frac {1}{n})}{6}$$
+ 
+    <p>
+    Cancel out the \(n^3\)s:
+    </p>
+
+$$V' = \frac {\pi r^2h}{6}\Big(2 + \frac {3}{n} + \frac {1}{n^2}\Big)$$
+
+    <p>
+    Apply the limit to \(V'\) as \(n \to +\infty\):
+    </p>
+
+$$V = \lim_{n \to +\infty} V' =$$
+$$\lim_{n \to +\infty}\frac {\pi r^2h}{6}\Big(2 + \frac {3}{n} +
+\frac {1}{n^2}\Big) =$$
+$$\frac {\pi r^2h}{6}(\lim_{n \to +\infty} 2 +
+\lim_{n \to +\infty} \frac {3}{n} +
+\lim_{n \to +\infty} \frac {1}{n^2}\Big) =$$
+$$\begin{equation}
+\frac {\pi r^2h}{3}
+\end{equation}$$
+
+    <p>
+    We argue that the limit of the sum of volumes of primitive cylinders
+    fully contained with the cone is also equal to (1), prove it. Hence:
+    </p>
+
+$$\bbox[#e8e8e8,3pt]{V = \frac {\pi r^2h}{3}}$$
+
+    <p>
+    <br><strong>Right Elliptic Cone</strong>
+    </p>
+
+    <p>
+    To find the volume of a right elliptic cone of height \(h\) and semi-major
+    axis \(a\) and semi-minor axis \(b\) we choose right elliptic cylinders as
+    our primitive volumes.
+    </p>
+
+    <p>
+    The height of each such cylinder remains the same as above:
+    </p>
+
+$$\frac {h}{n}$$
+
+    <p>
+    The square area of the base of the \(i-\)th primitive cylinder is:
+    </p>
+
+$$\pi \times x_i \times y_i$$
+
+    <p>
+    where the \(y_i\) component is not shown in the two-dimensional rendering
+    above.
+    </p>
+
+    <p>
+    Based on the similarity of the right triangles demonstrated earlier we obtain:
+    </p>
+
+$$\begin{equation}
+x_i = \frac {a}{n} \times i
+\end{equation}$$
+$$\begin{equation}
+y_i = \frac {b}{n} \times i
+\end{equation}$$
+
+    <p>
+    As an exercise prove (2) and (3).
+    </p>
+
+$$V'_i = \pi \times x_i \times y_i \times \frac {h}{n} =$$
+$$\frac {\pi abh}{n^3}i^2$$
+$$V' = \frac {\pi abh}{n^3} \sum_{i=1}^n i^2 =$$
+$$\frac {\pi abh}{n^3} \frac {n(n + 1)(2n + 1)}{6} =$$
+$$\frac {\pi abh}{6}\Big(2 + \frac {3}{n} + \frac {1}{n^2}\Big)$$
+
+    <p>
+    And:
+    </p>
+
+$$V = \lim_{n \to +\infty} V' =$$
+$$\lim_{n \to +\infty}\frac {\pi abh}{6}\Big(2 + \frac {3}{n} +
+\frac {1}{n^2}\Big) =$$
+$$\frac {\pi abh}{6}(\lim_{n \to +\infty} 2 +
+\lim_{n \to +\infty} \frac {3}{n} +
+\lim_{n \to +\infty} \frac {1}{n^2}\Big) =$$
+$$\frac {\pi abh}{3}$$
+
+$$\bbox[#e8e8e8,3pt]{V = \frac {\pi abh}{3}}$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryabascylinders.html">prev</a>
+     <a href="ryabassphere.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryabasdivisionvolumes.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Triangle Constructions, saDOs by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../../rya.css" />
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Triangle Constructions, saDOs by Roman Y. Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+
+    <h1>saDOs: side, angle, Difference Of sides</h1>
+
+    <p>
+    <strong>Given</strong>
+    </p>
+
+    <p>
+    \(a\), \(\angle C\), \(b - c\) or \(c - b\) - one side, the included
+    angle and the difference of the remaining two sides
+    </p>
+
+    <p>
+    <br><strong>Analysis</strong>
+    </p>
+
+    <p>
+    Since a difference of two linear magnitudes is given, it follows that two
+    cases must be considered:
+    </p>
+
+$$c > b$$
+$$b > c$$
+
+    <p>
+    <strong>Case 1: \(c > b\)</strong>
+    </p>
+
+    <p>
+    The side opposite to the given angle is greater than the adjacent side.
+    </p>
+
+    <p>
+    Let us assume that the required triangle \(ABC\) has been constructed. From
+    <strong>ECons</strong> we know how to construct the difference between two
+    line segments. However, since the sides of the assumed triangle are known,
+    all we need to do is construct a \(Cir(A, c)\) which will intersect the
+    extended side \(AC\) at the point \(D\) marking the given linear difference
+    between \(c\) and \(b\):
+    </p>
+
+    <img src="imgs/sados1.png" alt="sados1" class="center">
+
+    <p>
+    Working in reverse order, given the points \(D\) and \(B\), how do we locate
+    the center of the \(Cir(A, c)\)?
+    </p>
+
+    <p>
+    By the definition of that circle:
+    </p>
+
+$$AD = AB = c$$
+
+    <p>
+    which means that the point \(A\) is equidistant from the points \(D\) and
+    \(B\). The locus of all such points is \(DB\)'s perpendicular bisector which
+    will intersect the side of the given angle \(C\) opposite to the given side
+    \(a\) at the remaining vertex, \(A\).
+    </p>
+
+    <p>
+    <br><strong>Construction Outline</strong>
+    </p>
+
+    <p>
+    <dfn>Construct the given side \(a\) at the vertexes \(C\) and \(B\).
+    Construct the given angle \(C\) with the vertex at the point \(C\). Cut the
+    given difference of the sides \(c - b\) at \(C\) and \(D\) on the
+    <strong>extension</strong> of the side of the given angle \(C\) opposite to
+    the given side \(a\). Bisect the line segment \(DB\). The intersection of
+    that bisector with the side of the given angle \(C\) opposite to the given
+    side \(a\) locates \(A\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Case 2: \(b > c\)</strong>
+    </p>
+
+    <p>
+    The side adjacent to the given angle is greater than the opposite side.
+    </p>
+
+    <p>
+    This case is almost identical to the previous one except that since \(b\) is
+    greater than \(c\) the \(Cir(A, c)\) will cut the linear difference between
+    them inside the line segment \(CA\) or within the side \(b\) itself - not
+    its extension as in the \(c > b\) case:
+    </p>
+
+    <img src="imgs/sados2.png" alt="sados2" class="center">
+
+    <p>
+    <br><strong>Construction Outline</strong>
+    </p>
+
+    <p>
+    <dfn>Construct the given side \(a\) at the vertexes \(C\) and \(B\).
+    Construct the given angle \(C\) with the vertex at the point \(C\). Cut the
+    given difference of the sides \(c - b\) at \(C\) and \(D\) on the side of
+    the given angle \(C\) opposite to the given side \(a\). Bisect the line
+    segment \(DB\). The intersection of that bisector with the side of the given
+    angle \(C\) opposite to the given side \(a\) locates \(A\)</dfn>
+    </p>
+
+    <p>
+    <br><strong>Sample Construction</strong>
+    </p>
+
+    <p>
+    Below is the \(b > c\) case construction. You are encouraged to do the
+    \(c > b\) case yourself:
+    </p>
+
+    <img src="imgs/sados3.png" alt="sados3" class="center">
+
+$$C, Z$$
+$$Ln(C, Z)$$
+$$Cir(C, a)$$
+$$Cir(C, a) \; \cap \; Ln(C, Z) = B \colon \quad CB = a$$
+$$Y \colon \quad \angle YCB = \angle C$$
+$$Ln(C, Y)$$
+$$Cir(C, b - c)$$
+$$Cir(C, b - c) \; \cap \; Ln(C, Y) = D \colon \quad CD = b - c$$
+$$Ln(D, B)$$
+$$K, L, M \colon \quad Ln(K, M) \; \cap \; Ln(D, B) = L \colon \quad LD = LB$$
+$$Ln(K, M) \; \cap \; Ln(C, Y) = A \colon \quad AC = b, AB = c$$
+$$Ln(A, B)$$
+$$\triangle ABC$$
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="../../index.html">Home</a>
+     <a href="../ryatria.html">Triangle</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryatriap1.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>
