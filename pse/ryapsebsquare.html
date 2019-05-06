@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Problem Solving Experiments, B Square by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Problem Solving Experiments, B Square by Roman Y.
+   Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapse12coins.html">prev</a>
+     <a href="ryapse.html">next</a>
+    </p>
+
+    <h1>B Square</h1>
+
+    <p>
+    This problem was given by Prof. Fowler of Ohio State University as part of
+    <strong>Calculus 1</strong> course available on <dfn>coursera.org</dfn>
+    </p>
+
+    <p>
+    <br><strong>Problem</strong>
+    </p>
+
+    <p id="dbg" class="center">
+    <dfn>given a square with a side length of \(\sqrt{n}, n = 2, 3, 4, \dots \)
+    find a method of cutting the square into some number of pieces which, when
+    assembled, form the corresponding \(1 \times n\) rectangle</dfn>
+    </p>
+
+    <p>
+    <br><strong>Process</strong>
+    </p>
+
+    <p>
+    A rectangle and a corresponding square instantly bring Euclid's
+    <strong>B2P14</strong>, to construct a square equal to a given rectilinear
+    figure, to mind. In that proposition Euclid transforms an arbitrary
+    rectilinear figure into a rectangle with the same square area and then he
+    transforms the latter rectangle into a corresponding square.
+    </p>
+
+    <p>
+    In our case, since we are given a square, it pays to construct the
+    corresponding rectangle assuming that a basic unit of measurement equal to
+    unity in length is given. Taking Euclid's construction quite literally we
+    obtain:
+    </p>
+
+    <img src="imgsbsquare/bsquare01.png" alt="bsquare01" class="center">
+
+    <p>
+    Since:
+    </p>
+
+$$PT = 1$$
+
+    <p>
+    is given, \(Circle( P, PT)\) will intersect the line segment \(PS\) at \(V\)
+    which, according to <strong>B2P14</strong>, together with \(Q\) must belong
+    to the circumference of a circle that delineates the long side of the
+    rectangle sought-after.
+    </p>
+
+    <p>
+    To locate the center of that circle, \(O\), we observe that the points \(Q\)
+    and \(V\) are equidistant from \(O\) by definition. The locus of all the
+    points equidistant from two given points is the perpendicular bisector of the
+    corresponding line segment. Consequently, the bisector \(b\) of the line
+    segment \(QV\) will intersect the straight line \(l\) passing through \(P\)
+    and \(S\) at \(O\).
+    </p>
+
+    <p>
+    Constructing \(Circle(O, OV = OQ)\) locates the point \(A\) on \(l\). A
+    perpendicular to \(l\) through \(A\) locates \(B\) via a perpendicular to the
+    side \(PQ\) through \(T\). The rectangle \(ABTP\) is the one sought-after.
+    </p>
+
+    <p>
+    By construction \(\triangle OPQ\) is right:
+    </p>
+
+$$OQ^2 = n + x^2$$
+
+    <p>
+    and:
+    </p>
+
+$$OQ = OV = x + 1$$
+
+    <p>
+    Solving the above two equations for \(x\) and \(OV\) we obtain:
+    </p>
+
+$$x = \frac {n - 1}{2}$$
+$$OV = \frac {n + 1}{2}$$
+
+    <p>
+    from where it follows that the long side \(AP\) of the rectangle \(ABTP\) is:
+    </p>
+
+$$AP = AO + x =$$
+$$OV + x = n$$
+
+    <p>
+    from where it follows that the square area of the rectangle \(ABTP\) is
+    equal to the square area of the given square \(PQRS\).
+    </p>
+
+    <p>
+    However, to solve this problem it pays to construct the \(1 \times n\)
+    rectangle in such a way that it is contained within the given square as much
+    as possible. In terms of the above drawing it means shifting or sliding the
+    rectangle \(ABTP\) along \(l\) until its side \(TP\) coincides with the side
+    of the given square \(RS\):
+    </p>
+
+    <img src="imgsbsquare/bsquare02.png" alt="bsquare02" class="center">
+
+    <p>
+    We now observe that the tree points \(A, V, R\), by construction, belong to
+    a circumference of \(Circle(O, OR = OV)\), that we already have two line
+    segments, \(AV\) and \(VR\), constructed and that the line segment \(AR\) is
+    begging to be drawn to complete the \(\triangle ARV\) which, according to
+    <strong>B3P31</strong> or <strong>Thales' Theorem</strong>, must be right:
+    </p>
+
+    <img src="imgsbsquare/bsquare03.png" alt="bsquare03" class="center">
+
+    <p>
+    We observe that the straight line \(p\), passing through \(A\) and \(R\), is
+    perpendicular to the line segment \(RV\) and that the bisector \(b\) is also
+    perpendicular to the line segment \(RV\). Since now we have a straight line
+    passing through \(R\) and \(V\) falling on two straight lines, \(p\) and
+    \(b\), in such a way that the corresponding alternate angles are equal because
+    they are right, from <strong>B1P27</strong> it follows that \(p\) and \(b\)
+    are, in fact, parallel.
+    </p>
+
+    <p>
+    However, we direct our attention to two pairs of triangles: \(\triangle APD\)
+    and \(\triangle ETR\) being the first pair and \(\triangle ABE\) and
+    \(\triangle DQR\) being the second pair.
+    </p>
+
+    <p>
+    Our suspicion is that pairwise these triangles are congruent. Namely,
+    \(\triangle APD\) and \(\triangle ETR\) are congruent and so are
+    \(\triangle ABE\) and \(\triangle DQR\).
+    </p>
+
+    <p>
+    By construction the triangles \(APD\) and \(ASR\) are right and they both
+    share a common vertex at \(A\). From <strong>B1P32</strong> it follows that
+    for the remaining angles of these triangles we have:
+    </p>
+
+$$\angle ADP = \angle ARS$$
+
+    <p>
+    and by <strong>AAA</strong> \(\triangle APD\) and \(\triangle ASR\) are
+    similar. From <strong>B6P4</strong> it follows that the sides about the
+    equal angles in these triangles are in the same proportion:
+    </p>
+
+$$\frac {PD}{PA} = \frac {SR}{SA}$$
+$$PD = PA \times \frac {SR}{SA} = $$
+$$(n - \sqrt{n}) \times \frac {\sqrt{n}}{n} =$$
+$$\sqrt{n} - 1 = TR$$
+
+    <p>
+    from where it follows that:
+    </p>
+
+$$QD = \sqrt{n} - PD =$$
+$$\sqrt{n} - \sqrt{n} + 1 =$$
+$$1 = AB$$
+
+    <p>
+    By similar argument we prove that the right, by construction, triangles
+    \(ETR\) and \(ASR\) are similar since they share a common vertex at \(R\)
+    and hence:
+    </p>
+
+$$\frac {TE}{TR} = \frac {SA}{SR}$$
+$$TE = TR \times \frac {SA}{SR} = $$
+$$(\sqrt{n} - 1) \times \frac {n}{\sqrt{n}} =$$
+$$n - \sqrt{n} = PA$$
+
+    <p>
+    from where it follows that:
+    </p>
+
+$$BE = n - TE =$$
+$$n - n + \sqrt{n} =$$
+$$\sqrt{n} = QR$$
+
+    <p>
+    We now have proven that for two similar right triangles \(APD\) and \(ETR\)
+    we have:
+    </p>
+
+$$PD = TR$$
+$$PA = TE$$
+
+    <p>
+    which means that by <strong>SAS</strong> principle these triangles are
+    congruent. Further, for two right triangles \(ABE\) and \(DQR\) we have:
+    </p>
+
+$$QD = BA$$
+$$QR = BE$$
+
+    <p>
+    which means that by <strong>SAS</strong> principle these triangles are
+    congruent also.
+    </p>
+
+    <p>
+    Mechanically the above two facts mean that if \(\triangle DQR\) is moved
+    down along \(p\) until its vertexes coincide with the corresponding vertexes
+    of \(\triangle ABE\) and if \(\triangle ETR\) is moved down \(p\) until its
+    vertexes coincide with the corresponding vertexes of \(\triangle APD\) then
+    our problem is solved:
+    </p>
+
+    <p>
+    <dfn>by cutting the given square in three pieces, \(\triangle DQR\),
+    \(\triangle ETR\) and a \(5-\)gon \(PDETS\), the corresponding \(1 \times n\)
+    rectangle can be tiled over with these pieces precisely - with no gaps and
+    no overlaps
+    </p>
+
+    <p>
+    <br>The above construction yields the following generic solution for any
+    \(n > 1\):
+    </p>
+
+    <p>
+    - construct the corresponding \(1 \times n\) rectangle in such a way that it
+    shares a common right angle at any of four vertexes of the given square
+    </p>
+
+    <p>
+    - connect the outer, not shared, vertex of the given square, \(R\), diagonally
+    with the outer, not shared, vertex of the \(1 \times n\) rectangle, \(A\),
+    via a straight line, \(p\)
+    </p>
+
+    <p>
+    - cut the given square into as many \(1 \times \sqrt{n}\) rectangles starting
+    from the side shared with the \(1 \times n\) rectangle as possible - these
+    \(1 \times \sqrt{n}\) rectangles will fill the the \(1 \times n\) rectangle
+    as much as possible
+    </p>
+
+    <p>
+    - the last portion of the given square that is not a \(1 \times \sqrt{n}\)
+    rectangle will be cut by \(p\) into three pieces that will cover the remaining
+    portion of the \(1 \times n\) rectangle
+    </p>
+
+    <p>
+    <br>For example, for \(\sqrt{2}\) we have:
+    </p>
+
+    <img src="imgsbsquare/bsquare04.png" alt="bsquare04" class="center">
+
+    <p>
+    For \(\sqrt{3}\) we have:
+    </p>
+
+    <img src="imgsbsquare/bsquare05.png" alt="bsquare05" class="center">
+
+    <p>
+    For \(\sqrt{4}\) we have:
+    </p>
+
+    <img src="imgsbsquare/bsquare06.png" alt="bsquare06" class="center">
+
+    <p>
+    For \(\sqrt{5}\) we have:
+    </p>
+
+    <img src="imgsbsquare/bsquare07.png" alt="bsquare07" class="center">
+
+    <p>
+    and so on.
+    </p>
+
+    <p>
+    We observe that as \(n\) grows the size of \(\triangle DQR\) diminishes while
+    the size of \(\triangle ETR\) increases. For:
+    </p>
+
+$$n = 4$$
+
+    <p>
+    these triangles become congruent and starting with:
+    </p>
+
+$$n = 5$$
+
+    <p>
+    this process repeats until \(n\) reaches the next perfect square, \(9\), and
+    so on.
+    </p>
+
+    <p>
+    For \(\sqrt{10}\), for example, we have:
+    </p>
+
+    <img src="imgsbsquare/bsquare08.png" alt="bsquare08" class="center">
+
+    <p>
+    We see that at an intuitive level the above procedure demonstrates that
+    only square roots of perfect squares of natural numbers can be rational.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapse12coins.html">prev</a>
+     <a href="ryapse.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapse.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>

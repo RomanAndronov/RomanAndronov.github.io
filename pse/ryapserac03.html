@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Problem Solving Experiments, Ruler and Compass 03 by Roman Y. Andronov
+</title>
+
+<link rel="stylesheet" type="text/css" href="../rya.css" />
+
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <a name="top">Problem Solving Experiments, Ruler and Compass 03 by Roman Y.
+   Andronov</a>
+ </div>
+
+ <div id="colorRight">
+  <div id="colorLeft">
+   <div id="textLeft">
+    <p id="pointer">
+     <a href="#bottom">bottom</a>
+     <a href="ryapserac02.html">prev</a>
+     <a href="ryapserac04.html">next</a>
+    </p>
+
+    <h1>Ruler and Compass Constructions 03</h1>
+
+    <p>
+    <strong>Problem</strong>
+    </p>
+
+    <p id="dbg" class="center">
+    <dfn>construct an equilateral triangle on the three given parallel straight
+    lines</dfn>
+    </p>
+
+    <p>
+    <br><strong>Process</strong>
+    </p>
+
+    <p>
+    1) Let us use the scope reduction approach. What are the simpler limiting
+    cases of the same problem? When the given parallel straight lines are equally
+    distanced from each other:
+    </p>
+
+    <img src="imgs03/pserac0301.png" alt="RaC0301" class="center">
+
+    <p>
+    The solution then is<strong>*</strong>:
+    </p>
+
+    <p>
+    - choose a point \(A\) at random on any given straight line
+    </p>
+
+    <p>
+    - construct a perpendicular \(AB\) to that straight line through \(A\)
+    </p>
+
+    <p>
+    - construct a \(Circle(A, AB) = q\) until it intersects the middle straight
+    line at \(C\)
+    </p>
+
+    <p>
+    - the equilateral triangle \(ABC\) is the one sought-after
+    </p>
+
+    <p>
+    What other properties of this construction are interesting? The perpendicular
+    bisectors to \(AD\) and \(DB\) cut through the middles of \(AC\) and \(CB\).
+    \(Circle(B, BD)\) and \(Circle(D, DB)\) intersect at \(E\) which cuts \(CB\)
+    in half and lies on \(DB\)'s bisector. Same behavior applies to the circles
+    built on the remaining sides \(AC\) and \(CB\).
+    </p>
+
+    <p>
+    <br>2) The second limiting case we have is when the middle parallel straight
+    line is moved until it coincides with one of the bounding parallel straight
+    lines resulting in a two-line formation. How do we construct an equilateral
+    triangle then? Here is one way:
+    </p>
+
+    <p>
+    - choose a point \(A\) on \(l\) at random
+    </p>
+
+    <p>
+    - construct a perpendicular to \(l\) through \(A\) to locate \(B\)
+    </p>
+
+    <p>
+    - construct a \(Circle(A, AB) = p\)
+    </p>
+
+    <p>
+    - construct a \(Circle(B, BA) = q\)
+    </p>
+
+    <p>
+    - \(p \cap q = C\)
+    </p>
+
+    <p>
+    - straight line through \(A\) and \(C\)
+    </p>
+
+    <p>
+    - \(\angle BAC = 60^{\circ}\)
+    </p>
+
+    <p>
+    - bisect \(\angle BAC\) to locate \(D\), the second vertex of the future
+    equilateral triangle
+    </p>
+
+    <p>
+    - \(Circle(A, AD) = s\)
+    </p>
+
+    <p>
+    - \(s \cap l = E\) - the third vertex of the equilateral triangle sought-after:
+    </p>
+
+    <img src="imgs03/pserac0302.png" alt="RaC0302" class="center">
+
+    <p>
+    <br>3) The above construction is rather complicated, \(10\) steps. The simpler
+    way would be to construct <dfn>any</dfn> equilateral triangle with two
+    arbitrary vertexes on \(l\):
+    </p>
+
+    <p>
+    - choose the points \(A\) and \(B\) on \(l\) at random
+    </p>
+
+    <p>
+    - using Euclid's <strong>B1P1</strong> construct an equilateral triangle on
+    \(AB\) using Euclid's to locate \(C\)
+    </p>
+
+    <p>
+    - straight line \(m\) through \(A\) and \(C\)
+    </p>
+
+    <p>
+    - \(m \cap l_2 = D\)
+    </p>
+
+    <p>
+    - construct a \(Circle(A, AD) = q\)
+    </p>
+
+    <p>
+    - \(q \cap l = E\)
+    </p>
+
+    <p>
+    - the equilateral triangle \(ADE\) is the one sought-after:
+    </p>
+
+    <img src="imgs03/pserac0303.png" alt="RaC0303" class="center">
+
+    <p>
+    This construction is a bit simpler - five steps only.
+    </p>
+
+    <p>
+    <br>4) Now it is more or less clear how to proceed:
+    </p>
+
+    <p>
+    - choose a point \(A\) on \(l\) at random
+    </p>
+
+    <p>
+    - construct a perpendicular to \(l\) through \(A\) to locate the points \(B\)
+    and \(C\):
+    </p>
+
+    <img src="imgs03/pserac0304.png" alt="RaC0304" class="center">
+
+    <p>
+    <br>Next:
+    </p>
+
+    <p>
+    - bisect \(AB\) with \(b_1\)
+    </p>
+
+    <p>
+    - bisect \(BC\) with \(b_2\)
+    </p>
+
+    <p>
+    We anticipate that the middles of the two sides of the future equilateral
+    triangle will be located somewhere on \(b_1\) and \(b_2\):
+    </p>
+
+    <img src="imgs03/pserac0305.png" alt="RaC0305" class="center">
+
+    <p>
+    <br>We can also:
+    </p>
+
+    <p>
+    - bisect \(AC\) with \(b_3\)
+    </p>
+
+    <p>
+    We anticipate that the middle of the future equilateral triangle's third side
+    should be somewhere on \(b_3\). But that does not seem to give us any advantage.
+    </p>
+
+    <p>
+    How do we locate any of these middles? Let us draw some more circles centered
+    at various points obtained so far and with various radii equal to obtained
+    distances:
+    </p>
+
+    <img src="imgs03/pserac0306.png" alt="RaC0306" class="center">
+
+    <p>
+    The new circles do not seem to add any new clues. Let us compare the last
+    construction with the first one. Stop. Wait a second. The two circles
+    intersecting at \(D\) look interesting now. The point \(D\) is on the
+    perpendicular bisector. This looks familiar. In the first drawing all the
+    smaller circles that we constructed cut the sides of the equilateral triangle
+    in half.
+    </p>
+
+    <p>
+    Now let us compare this drawing to our complicated triangle construction on
+    just two parallel straight lines. The hunch: the point \(D\) is the middle
+    of one of the sides of the future equilateral triangle. Not only that. Further,
+    the circles which are used to bisect the common perpendicular \(AB\) seem to
+    form an invariant of sort - their intersection always falls on the dead middle
+    of one of the sides of the future triangle.
+    </p>
+
+    <p>
+    Let us test this theory on a completely different arrangement of parallel
+    straight lines and an already constructed equilateral triangle (we are using
+    the reverse order problem-solving approach here):
+    </p>
+
+    <img src="imgs03/pserac0307.png" alt="RaC0307" class="center">
+
+    <p>
+    This looks plausible and it seems that the circles \(p = Circle(D, DE)\) and
+    \(q = Circle(E, ED)\) indeed form an invariant:
+    </p>
+
+    <p id="dbg">
+    <dfn>- choose a vertex of the equilateral triangle, \(A\), on any of the
+    given parallel straight lines, \(l\) <br>
+
+    <br>- a perpendicular to \(l\) through \(A\) will intersect the remaining
+    two given parallel straight lines at \(D\) and \(E\)<br>
+
+    <br>- construct a \(Circle(D, DE) = p\)<br>
+
+    <br>- construct a \(Circle(E, ED) = q\)<br>
+
+    <br>- \(p\) and \(q\) will intersect at the exact middle of the side of the
+    equilateral triangle opposite to its chosen vertex, \(A\)
+    </p>
+
+    <p>
+    <br>If \(D\) is the middle of one side of the future equilateral triangle
+    then we are almost done. Continuing with our process:
+    </p>
+
+    <p>
+    - construct a straight line \(s\) passing through \(A\) and \(D\):
+    </p>
+
+    <img src="imgs03/pserac0308.png" alt="RaC0308" class="center">
+
+    <p>
+    <br>- construct a perpendicular to \(s\) through \(D\) to locate the remaining
+    two vertexes of the equilateral triangle, \(E\) and \(F\):
+    </p>
+
+    <img src="imgs03/pserac0309.png" alt="RaC0309" class="center">
+
+    <p>
+    <br>Cleaning up the construction to contain only the lines that are needed,
+    we obtain:
+    </p>
+
+    <img src="imgs03/pserac0310.png" alt="RaC0310" class="center">
+
+$$A \in l$$
+$$Line(A) \; \bot \; l = B, C$$
+$$Circle(C, CB) = p$$
+$$Circle(B, BC) = q$$
+$$p \cap q = D$$
+$$Line(A, D) = s$$
+$$Line(D) \; \bot \; s = E, F$$
+$$Line(A, E)$$
+$$Line(A, F)$$
+$$\triangle AFE$$
+
+    <p>
+    From <strong>B3P10</strong>, a circle does not cut a circle at more than two
+    points, it follows that we will have the second point of intersection of \(p\)
+    and \(q\). Consequently, a full solution should include the second equilateral
+    triangle symmetrical to the first one about the perpendicular to \(l\) through
+    \(A\):
+    </p>
+
+    <img src="imgs03/pserac0311.png" alt="RaC0311" class="center">
+
+    <p>
+    Earlier we have noted that the two-circle invariant is applicable to the
+    remaining two given parallel straight lines - will the equilateral
+    triangles constructed on them be unique?
+    </p>
+
+    <p>
+    Here is the construction based on choosing the vertex on the middle given
+    parallel straight line, \(l_1\):
+    </p>
+
+    <img src="imgs03/pserac0312.png" alt="RaC0312" class="center">
+
+    <p>
+    Here is the construction based on choosing the vertex on the remaining given
+    parallel straight line, \(l_2\):
+    </p>
+
+    <img src="imgs03/pserac0313.png" alt="RaC0313" class="center">
+
+    <p>
+    We see that the resulting equilateral triangles are essentially identical.
+    </p>
+
+    <p>
+    <br><strong>Conclusions</strong>
+    </p>
+
+    <p>
+    - it took me about two hours of tinkering with the given arrangement of
+    parallel straight lines to work out the solution in several non-continuous
+    attempts
+    </p>
+
+    <p>
+    - I tried several different cases and constructed more lines than were needed
+    in the end
+    </p>
+
+    <p>
+    - the hunch that lead me to a solution was based not on a simpler but rather
+    on a more complex construction I did for an equilateral triangle built on two
+    parallel straight lines. However, to be perfectly honest, it is still not
+    clear to me as to where exactly did that hunch come from
+    </p>
+
+    <p>
+    <br><strong>Proofs, Explanations</strong>
+    </p>
+
+    <p>
+    1) From <strong>B1P1</strong> it follows that the only object needed to
+    construct an equilateral triangle on three evenly spaced parallel straight
+    lines is a perpendicular through a random point, \(A\), on any one of the
+    given straight lines:
+    </p>
+
+    <img src="imgs03/pserac0301.png" alt="RaC0301" class="center">
+
+    <p>
+    <br>2) Constructing an equilateral triangle on two parallel straight lines.
+    </p>
+
+    <p>
+    From <strong>B1P1</strong> it follows that by construction:
+    </p>
+
+$$\angle BAC = 60^{\circ}$$
+
+    <p>
+    and, by construction:
+    </p>
+
+$$\angle BAC = 60^{\circ}$$
+$$\angle DAC = \angle DAB = 30^{\circ}$$
+$$\angle BAE = 90^{\circ}$$
+
+    <p>
+    It follows then that:
+    </p>
+
+$$\angle EAC = \angle BAE - \angle BAC =$$
+$$90^{\circ} - 60^{\circ} = 30^{\circ}$$
+$$\angle EAD = \angle EAC + \angle DAC =$$
+$$30^{\circ} + 30^{\circ} = 60^{\circ}$$
+
+    <p>
+    But \(\triangle EAD\) is isosceles by construction and from
+    <strong>B1P5</strong> it follows that the internal angles at its base are
+    equal:
+    </p>
+
+$$\angle AED = \angle ADE = x$$
+
+    <p>
+    From <strong>B1P32</strong> we have:
+    </p>
+
+$$\angle EAD + 2x = 180^{\circ}$$
+$$x = 60^{\circ}$$
+
+    <p>
+    <strong>B1P6</strong> states that if in a triangle two angles equal one
+    another, then the sides opposite the equal angles also equal one another.
+    Applying this proposition to, for example, angles \(EAD\) and \(EDA\), we
+    obtain:
+    </p>
+
+$$AE = DE$$
+
+    <p>
+    but, by construction:
+    </p>
+
+$$AE = AD = r$$
+
+    <p>
+    and hence:
+    </p>
+
+$$AE = AD = r = DE$$
+
+    <p>
+    which means that and according to <strong>B1D20</strong> \(\triangle AED\)
+    is equilateral:
+    </p>
+
+    <img src="imgs03/pserac0302.png" alt="RaC0302" class="center">
+
+    <p>
+    <br>3) Constructing an equilateral triangle on two parallel straight lines.
+    </p>
+
+    <p>
+    The proof that \(\triangle AED\) is indeed equilateral for this, simpler,
+    \(10-\)step, construction is essentially the same as the proof above, just
+    shorter. By construction:
+    </p>
+
+$$\angle BAC = 60^{\circ}$$
+$$AE = AD = r$$
+
+    <p>
+    and hence \(\triangle ADE\) is isosceles. From <strong>B1P5</strong> it follows
+    that:
+    </p>
+
+$$\angle AED = ADE = x$$
+
+    <p>
+    and from <strong>B1P32</strong> it follows that:
+    </p>
+
+$$\angle EAD + 2x = 180^{\circ}$$
+$$x = \angle EAD = \angle BAC = 60^{\circ}$$
+
+    <p>
+    From <strong>B1P6</strong>, for angles \(EAD\) and \(EDA\), we obtain: 
+    </p>
+
+$$AE = DE$$
+
+    <p>
+    but:
+    </p>
+
+$$AE = AD = r$$
+
+    <p>
+    and hence:
+    </p>
+
+$$AE = AD = r = DE$$
+
+    <p>
+    and according to <strong>B1D20</strong> \(\triangle AED\) is equilateral:
+    </p>
+
+    <img src="imgs03/pserac0303.png" alt="RaC0303" class="center">
+
+    <p>
+    <br>4) To prove that the triangle that we have constructed on three arbitrarily
+    spaced parallel straight lines is equilateral we will follow the template from
+    the previous two proofs: we will first prove that the triangle is isosceles,
+    then we will prove that an angle at one of the vertexes is \(60^{\circ}\) and
+    then we will apply <strong>B1P6</strong> to appropriate angles to prove that
+    all three sides of the triangle are equal.
+    </p>
+
+    <p>
+    Before we deep dive into the proofs we observe that the angles \(BED\) and
+    \(BAD\) subtend the same line segment (chord?) \(BD\) while the angles
+    \(AEB\) and \(ADB\) subtend the same line segment (chord?) \(AB\). Could the
+    four points \(A, B, D, E\) be concyclic? Let us keep this in the back of our
+    minds.
+    </p>
+
+    <p>
+    Now let us prove that:
+    </p>
+
+$$DE = DF$$
+
+    <p>
+    From <strong>B1P10</strong> it follows that the point \(D\) is equally
+    distanced from \(l_2\) and \(l_3\) which means that if we construct a
+    perpendicular to, say, \(l_3\) through \(D\):
+    </p>
+
+    <img src="imgs03/pserac0314.png" alt="RaC0314" class="center">
+
+    <p>
+    then:
+    </p>
+
+$$DG = DH$$
+
+    <p>
+    Next, consider \(\triangle EGD\) and \(\triangle FHD\) in which, by
+    construction, the angles \(EGD\) and \(FHD\) are right and the angles \(EDG\)
+    and \(FDH\) are vertical. From <strong>B1P15</strong> it follows that:
+    </p>
+
+$$\angle EDG = \angle FDH$$
+
+    <p>
+    which means that based on <strong>ASA</strong> congruence principle
+    \(\triangle EGD\) and \(\triangle FHD\) are congruent from where it follows
+    that:
+    </p>
+
+$$EG = FH$$
+$$DE = DF$$
+
+    <p>
+    Next, let us prove that \(\triangle EAF\) is isosceles. Consider
+    \(\triangle ADE\) and \(\triangle ADF\). We just proved that:
+    </p>
+
+$$DE = DF$$
+
+    <p>
+    The angles \(ADE\) and \(ADF\) are right by construction and so are
+    \(\triangle ADE\) and \(\triangle ADF\) which share a common side, \(AD\).
+    From <strong>SAS</strong> congruence principle it follows that these two right
+    triangles are congruent and:
+    </p>
+
+$$AE = AF$$
+
+    <p>
+    Lastly, let us prove that:
+    </p>
+
+$$\angle AEF = 60^{\circ}$$
+
+    <p>
+    Being a composite angle by construction, we represent \(\angle AEF\) as a
+    sum of two angles:
+    </p>
+
+$$\angle AEF = \alpha + \beta$$
+
+    <p>
+    Our idea now is not to compute \(\alpha\) and \(\beta\) separately but rather
+    prove that their sum must be equal to \(60^{\circ}\):
+    </p>
+
+    <img src="imgs03/pserac0315.png" alt="RaC0315" class="center">
+
+    <p>
+    By construction from <strong>B1P1</strong> it follows that:
+    </p>
+
+$$\angle CBD = 60^{\circ}$$
+
+    <p>
+    The angle \(CBD\) is also an exterior angle for \(\triangle ABD\). From
+    <strong>B1P32</strong>, an exterior angle is the sum of two opposite interior
+    angles, we have:
+    </p>
+
+$$\angle BAD + \angle BDA = 60^{\circ}$$
+
+    <p>
+    What remains to be proven is that:
+    </p>
+
+$$\angle BAD = \alpha$$
+$$\angle BDA = \beta$$
+
+    <p>
+    and that is where our "\(A, B, D, E\) are concyclic" hunch comes in handy
+    rendering this proof trivial.
+    </p>
+
+    <p>
+    We observe that by construction \(\triangle ABE\) and \(\triangle ADE\) are
+    right and they also share a common hypotenuse, \(AE\). From
+    <strong>B3P31</strong> or <strong>Thales' Theorem</strong> it follows that
+    in order to locate the center of a circle whose circumference contains both
+    right angles, \(ABE\) and \(ADE\), all we have to do is bisect the line
+    segment \(AE\):
+    </p>
+
+    <img src="imgs03/pserac0316.png" alt="RaC0316" class="center">
+
+    <p>
+    This proves that the points \(A, B, D\) and \(E\) are indeed concyclic and
+    from <strong>B3P21</strong>, in a circle the angles in the same segment equal
+    one another, it follows that since the angles \(BED\) and \(BAD\) both subtend
+    the same line segment \(BD\) and the angles \(AEB\) and \(ADB\) both subtend
+    the same line segment \(AB\), we have:
+    </p>
+
+$$\angle BAD = \alpha$$
+$$\angle BDA = \beta$$
+
+    <p>
+    which, for the record, proves that:
+    </p>
+
+$$\angle AED = 60^{\circ}$$
+
+    <p>
+    But \(\triangle EAF\) was proven to be isosceles with:
+    </p>
+
+$$AE = AF$$
+
+    <p>
+    which means that:
+    </p>
+
+$$\angle AED = \angle AFE = 60^{\circ}$$
+
+    <p>
+    From <strong>B1P32</strong> it follows that:
+    </p>
+
+$$\angle EAF = 60^{\circ}$$
+
+    <p>
+    Applying <strong>B1P6</strong> to angles \(EAF\) and \(AFE\) we obtain that:
+    </p>
+
+$$AE = FE$$
+
+    <p>
+    rendering \(\triangle AEF\), according to <strong>B1D20</strong>, equilateral.
+    </p>
+
+    <p>
+    \(\blacksquare\)
+    </p>
+
+    <a name="bottom"></a>
+
+    <p id="pointer">
+     <a href="#top">top</a>
+     <a href="ryapserac02.html">prev</a>
+     <a href="ryapserac04.html">next</a>
+    </p>
+   </div> <!-- textLeft -->
+
+   <div id="textRight">
+    <script type="text/javascript" src="ryapse.js">
+    </script>
+   </div> <!-- textRight -->
+  </div> <!-- colorLeft -->
+ </div> <!-- colorRight -->
+
+ <div id="footer">
+  <a href="../ryalegal.html">Copyright Roman Y. Andronov, 2011</a>
+ </div>
+
+</body>
+</html>
