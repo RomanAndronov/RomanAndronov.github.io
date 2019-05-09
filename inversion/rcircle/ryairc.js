@@ -23,7 +23,7 @@ Entries[ 5 ] = "Circles";
 Files[ 6 ] = "ryairca.html";
 Entries[ 6 ] = "Angles";
 
-Files[ 7 ] = "ryairca.html";
+Files[ 7 ] = "ryairctp.html";
 Entries[ 7 ] = "Tangency, Power";
 
 Files[ 8 ] = "ryaircp01.html";
